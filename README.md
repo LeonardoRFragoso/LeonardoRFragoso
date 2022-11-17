@@ -1,4 +1,4 @@
-## Bem-vindo(a) ao perfil do LeonardoRFragoso 😁
+## Oi, eu sou o Leonardo Fragoso 😁
 
  <div>
    <a href="https://github.com/LeonardoRFragoso">
@@ -15,7 +15,7 @@
  
  <br>
  
-  ### Pra conteúdo sobre programação me segue a gente nas redes abaixo!
+  ###  Me segue a gente nas redes abaixo!
  
 <div> 
   <a href="https://www.youtube.com/LeonardoRFragoso" target="_blank"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" target="_blank"></a>
