@@ -1,5 +1,5 @@
 ## Oi, eu sou o Leonardo Fragoso 😁
-No momento procuro oportunidade para trabalhar como desenvolvedor, faço a formação em Desenvolvedor WEB Full Stack Node.js na Digital House e estou cursando Analise e Desenvolvimento de Sistemas na Estácio de Sá, gostaria de ter a minha primeira oportunidade nesse novo ramo.
+No momento procuro oportunidade para trabalhar como desenvolvedor, faço a formação em Desenvolvedor WEB Full Stack Node.js na Digital House e estou cursando Analise e Desenvolvimento de Sistemas na Estácio de Sá.
 
 Sou um desenvolvedor Front-end que constantemente estou aprendendo sobre a área e desenvolvendo habilidades através da prática. Também estudo programação através de plataformas que oferecem cursos gratuitos, como a Curso em Vídeo e a Rocketseat, e pratico criando projetos.
  
