@@ -1,8 +1,12 @@
 ## Oi, eu sou o Leonardo Fragoso 😁
-Sou graduado em Gestão de Tecnologia da Informação, tenho 29 anos e possuo larga experiência com suporte técnico e com montagem e manutenção de desktops e notebooks.
+No momento procuro oportunidade para trabalhar como desenvolvedor, faço a formação em Desenvolvedor WEB Full Stack Node.js na Digital House e estou cursando Analise e Desenvolvimento de Sistemas na Estácio de Sá, gostaria de ter a minha primeira oportunidade nesse novo ramo.
 
-Estudo na Digital House e faço a formação em Desenvolvedor WEB Full Stack Node.js e também estou cursando a graduação em Analise e Desenvolvimento de Sistemas, gostaria de ter a minha primeira oportunidade nesse novo ramo.
+Sou um desenvolvedor Front-end que constantemente estou aprendendo sobre a área e desenvolvendo habilidades através da prática. Também estudo programação através de plataformas que oferecem cursos gratuitos, como a Curso em Vídeo e a Rocketseat, e pratico criando projetos.
  
+Sou graduado em Gestão de Tecnologia da Informação
+
+Tecnologias HTML, CSS, JavaScript, Node.JS, React, Python , Git/Github...
+
 Eterno Estudante!
 
 
