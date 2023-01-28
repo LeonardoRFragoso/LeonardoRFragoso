@@ -5,7 +5,7 @@ Sou um desenvolvedor Front-end que constantemente estou aprendendo sobre a área
  
 Sou graduado em Gestão de Tecnologia da Informação
 
-Tecnologias HTML, CSS, JavaScript, Node.JS, React, Python , Git/Github...
+Tecnologias: HTML, CSS, JavaScript, Git/Github, PHP, React, Node.JS, Python...
 
 Eterno Estudante!
 
