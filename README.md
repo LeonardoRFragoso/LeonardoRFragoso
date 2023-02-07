@@ -32,8 +32,8 @@ Eterno Estudante!
 
 <a href="https://github.com/LeonardoRFragoso/LeonardoRFragoso">
   <div>
-    <img height="180px" src="https://github-readme-stats.vercel.app/api?username=rochajpp&show_icons=true&theme=tokyonight"/>
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=rochajpp&layout=compact&theme=tokyonight"/>
+    <img height="180px" src="https://github-readme-stats.vercel.app/api?username=leonardorfragoso&show_icons=true&theme=tokyonight"/>
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=leonardorfragoso&layout=compact&theme=tokyonight"/>
   </div>
 </a>
 
