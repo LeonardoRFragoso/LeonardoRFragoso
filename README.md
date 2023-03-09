@@ -9,6 +9,8 @@ Tecnologias: HTML, CSS, JavaScript, Git/Github, React, Node.JS, Python, PHP,...
 
 Eterno Estudante!
 
+https://sites.google.com/view/leonardorfragoso
+
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 <a href="https://github.com/rochajpp">
