@@ -9,7 +9,7 @@ Tecnologias: HTML, CSS, JavaScript, Git/Github, Node.JS, Python...
 
 Eterno Estudante!
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-<a href="https://github.com/rochajpp">
+<a href="https://github.com/LeonardoRFragoso">
   <div>
     <img width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" />
     <img width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />
