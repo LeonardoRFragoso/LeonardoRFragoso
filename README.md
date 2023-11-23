@@ -5,16 +5,16 @@ Sou um desenvolvedor Front-end que constantemente estou aprendendo sobre a área
  
 Sou graduado em Gestão de Tecnologia da Informação
 
-Tecnologias: HTML, CSS, JavaScript, Git/Github, Node.JS, Python...
+Tecnologias: , Python, HTML, CSS, JavaScript, Git/Github, Node.JS...
 
 Eterno Estudante!
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 <a href="https://github.com/LeonardoRFragoso">
   <div>
     <img width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" />
+    <img width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" />
     <img width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />
     <img width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" />
-    <img width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" />
     <img width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" />
   </div>
 </a>
