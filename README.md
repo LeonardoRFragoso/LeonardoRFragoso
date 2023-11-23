@@ -33,7 +33,10 @@ Eterno Estudante!
 <div>
   <a href="https://www.linkedin.com/in/leonardo-fragoso-921b166a/" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a>
   <a href="mailto:leonardorfragoso@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>
-  <a href="https://github.com/LeonardoRFragoso/Portfolio-Leonardo-Fragoso" target="_blank"><img src="https://img.shields.io/badge/-Portf%C3%B3lio-brown?style=for-the-badge&logo=true" target="_blank"></a>
 </div>
 
 <br>
+
+<div>
+  <img align="center" src="https://github.com/LeonardoRFragoso/LeonardoRFragoso/blob/output/github-contribution-grid-snake.svg">
+</div
