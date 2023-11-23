@@ -8,10 +8,6 @@ Sou graduado em Gestão de Tecnologia da Informação
 Tecnologias: HTML, CSS, JavaScript, Git/Github, Node.JS, Python...
 
 Eterno Estudante!
-
-https://sites.google.com/view/leonardorfragoso
-
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 <a href="https://github.com/rochajpp">
   <div>
