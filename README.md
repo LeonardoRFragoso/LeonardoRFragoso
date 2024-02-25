@@ -1,6 +1,6 @@
 ## Olá, eu sou o Leonardo Fragoso! 😁
 
-Sou um entusiasta da programação e estou constantemente aprimorando minhas habilidades por meio da prática e da busca contínua por conhecimento. Concluí a formação de Analista de Dados com Python na Cubos Academy e continuo aprendendo por meio de plataformas como Curso em Vídeo, YT e diversos cursos online gratuitos.
+Sou um entusiasta da programação e estou constantemente aprimorando minhas habilidades por meio da prática e da busca contínua por conhecimento. Concluí a formação de Analista de Dados com Python na Cubos Academy e continuo aprendendo por meio de plataformas como YT e diversos cursos online gratuitos.
 
 **Formação:** Bacharel em Gestão de Tecnologia da Informação pela Estácio de Sá.
 
