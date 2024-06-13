@@ -1,12 +1,33 @@
 ## Olá, eu sou o Leonardo Fragoso! 😁
 
-Sou um entusiasta da programação e estou constantemente aprimorando minhas habilidades por meio da prática e da busca contínua por conhecimento. Concluí a formação de Analista de Dados com Python na Cubos Academy e continuo aprendendo por meio de plataformas como YT e diversos cursos online gratuitos.
+Olá, eu sou o Leonardo Fragoso! 😁
+Sou um desenvolvedor apaixonado e estou constantemente aprimorando minhas habilidades através de prática contínua e busca incessante por conhecimento. Tenho uma formação sólida em Análise de Dados com Python pela Cubos Academy e uma graduação em Gestão de Tecnologia da Informação pela Estácio de Sá. Além disso, estou atualmente cursando a formação em Python da Rocketseat (100h) e o Curso Django Master da PyCodeBr. Mantenho-me atualizado com as últimas tendências e técnicas através de plataformas como YouTube e diversos cursos online.
 
-**Formação:** Bacharel em Gestão de Tecnologia da Informação pela Estácio de Sá.
+Formação:
 
-**Tecnologias que trabalho:** Python, HTML, CSS, JavaScript, Git/Github, Node.JS...
+Bacharel em Gestão de Tecnologia da Informação pela Estácio de Sá.
+Formação em Análise de Dados com Python pela Cubos Academy.
+Atualmente cursando a formação em Python da Rocketseat (100h).
+Atualmente cursando o Curso Django Master da PyCodeBr.
+Tecnologias com as quais trabalho:
 
-**Eterno Estudante!**
+Linguagens: Python, JavaScript, HTML, CSS, Node.js
+Ferramentas e Frameworks: Django, Flask, React, Git/GitHub, Tailwind CSS, UIKIT
+Outras Competências: SQL, Firebase, Selenium, Puppeteer
+O que eu posso fazer por você:
+Eu ofereço uma ampla gama de serviços de desenvolvimento, desde a criação de sites responsivos e intuitivos até a automação de processos empresariais com bots personalizados. Aqui estão alguns dos serviços que ofereço:
+
+Desenvolvimento Web: Criação de sites e aplicações web utilizando tecnologias modernas para garantir desempenho e uma excelente experiência de usuário.
+Desenvolvimento de Bots: Automação de tarefas repetitivas com bots feitos sob medida, integrando APIs e bancos de dados.
+Análise de Dados: Transformação de dados em insights acionáveis para apoiar a tomada de decisões empresariais.
+Consultoria Técnica: Auxílio na escolha e implementação de tecnologias que melhor atendam às necessidades do seu negócio.
+Se você está procurando um desenvolvedor dedicado e sempre em busca de novos desafios, vamos conversar!
+
+Contato:
+
+Email: leonardofragoso@gmail.com
+LinkedIn: [linkedin.com/in/leonardofragoso](https://www.linkedin.com/in/leonardo-fragoso-921b166a/)
+Eterno Estudante e entusiasta da tecnologia!!**
 
 <a href="https://github.com/LeonardoRFragoso">
   <div>
