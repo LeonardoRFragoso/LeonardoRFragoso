@@ -23,10 +23,6 @@ Análise de Dados: Transformação de dados em insights acionáveis para apoiar 
 Consultoria Técnica: Auxílio na escolha e implementação de tecnologias que melhor atendam às necessidades do seu negócio.
 Se você está procurando um desenvolvedor dedicado e sempre em busca de novos desafios, vamos conversar!
 
-Contato:
-
-Email: leonardofragoso@gmail.com
-LinkedIn: [linkedin.com/in/leonardofragoso](https://www.linkedin.com/in/leonardo-fragoso-921b166a/)
 Eterno Estudante e entusiasta da tecnologia!!**
 
 <a href="https://github.com/LeonardoRFragoso">
