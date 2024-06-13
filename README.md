@@ -14,7 +14,7 @@ Sou um desenvolvedor apaixonado e estou constantemente aprimorando minhas habili
 
 - **Linguagens**: Python, JavaScript, HTML, CSS, Node.js
 - **Ferramentas e Frameworks**: Django, Flask, React, Git/GitHub, Tailwind CSS, UIKIT
-- **Outras Competências**: SQL, Firebase, Selenium, Puppeteer
+- **Outras Competências**: SQL, Postgres, Firebase, Selenium, Puppeteer
 
 ### O que eu posso fazer por você:
 
