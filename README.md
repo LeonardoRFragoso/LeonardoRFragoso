@@ -9,6 +9,8 @@ Sou um desenvolvedor apaixonado e estou constantemente aprimorando minhas habili
 - Formação em Análise de Dados com Python pela Cubos Academy.
 - Atualmente cursando a formação em Python da Rocketseat (100h).
 - Atualmente cursando o Curso Django Master da PyCodeBr.
+- Formação Explorer Rocketseat (100h)
+- Formação Full Stack Rocketseat (100h)
 
 ### Tecnologias com as quais trabalho:
 
