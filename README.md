@@ -1,7 +1,7 @@
 ## Olá, me chamo Leonardo Fragoso! 😁
 
 Olá, eu sou o Leonardo Fragoso! 😁  
-Sou um desenvolvedor apaixonado e estou constantemente aprimorando minhas habilidades através de prática contínua e busca incessante por conhecimento. Tenho uma formação sólida em Análise de Dados com Python pela Cubos Academy e uma graduação em Gestão de Tecnologia da Informação pela Estácio de Sá. Além disso, estou atualmente cursando a formação em Python da Rocketseat (100h) e o Curso Django Master da PyCodeBr. Mantenho-me atualizado com as últimas tendências e técnicas através de plataformas como YouTube e diversos cursos online.
+Sou um desenvolvedor apaixonado e estou constantemente aprimorando minhas habilidades através de prática contínua e busca incessante por conhecimento. Tenho uma formação sólida em Análise de Dados com Python pela Cubos Academy ( 55h ) e uma graduação em Gestão de Tecnologia da Informação pela Estácio de Sá. Além disso, estou atualmente cursando a formação em Python da Rocketseat (100h), Formação Explorer Rocketseat (100h), Formação Full Stack Rocketseat (100h) e o Curso Django Master da PyCodeBr. Mantenho-me atualizado com as últimas tendências e técnicas através de plataformas como YouTube e diversos cursos online.
 
 ### Formação:
 
