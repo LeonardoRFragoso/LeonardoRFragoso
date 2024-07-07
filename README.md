@@ -6,7 +6,7 @@ Sou um desenvolvedor apaixonado e estou constantemente aprimorando minhas habili
 ### Formação:
 
 - Bacharel em Gestão de Tecnologia da Informação pela Estácio de Sá.
-- Formação em Análise de Dados com Python pela Cubos Academy.
+- Formação em Análise de Dados com Python pela Cubos Academy (55h).
 - Atualmente cursando a formação em Python da Rocketseat (100h).
 - Atualmente cursando o Curso Django Master da PyCodeBr.
 - Formação Explorer Rocketseat (100h)
