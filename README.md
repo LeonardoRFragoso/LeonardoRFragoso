@@ -1,6 +1,6 @@
-## Leonardo Fragoso - Desenvolvedor Web Júnior 🚀
+## Leonardo Fragoso - Desenvolvedor Web 🚀
 
-Olá! Eu sou Leonardo Fragoso, um desenvolvedor web júnior apaixonado por criar soluções digitais utilizando Python, especialmente com os frameworks Django e Flask. Meu foco é sempre entregar produtos de alta qualidade, com código limpo e eficiente. Estou em constante evolução, buscando aprender novas técnicas e aperfeiçoar minhas habilidades.
+Olá! Eu sou Leonardo Fragoso, um desenvolvedor web apaixonado por criar soluções digitais utilizando Python, especialmente com os frameworks Django e Flask. Meu foco é sempre entregar produtos de alta qualidade, com código limpo e eficiente. Estou em constante evolução, buscando aprender novas técnicas e aperfeiçoar minhas habilidades.
 
 ### 🎯 Objetivo
 Estou em busca de oportunidades para aplicar e expandir meu conhecimento em desenvolvimento web, com ênfase em projetos que utilizem Python, Django e Flask. Meu objetivo é contribuir com minhas habilidades em uma equipe dinâmica, focada em inovação e crescimento contínuo.
