@@ -1,9 +1,9 @@
-## Leonardo Fragoso - Desenvolvedor Web 🚀
+## Leonardo Fragoso - Desenvolvedor Full Stack 🚀
 
-Olá! Eu sou Leonardo Fragoso, um desenvolvedor web apaixonado por criar soluções digitais utilizando Python, especialmente com os frameworks Django e Flask. Meu foco é sempre entregar produtos de alta qualidade, com código limpo e eficiente. Estou em constante evolução, buscando aprender novas técnicas e aperfeiçoar minhas habilidades.
+Olá! Eu sou Leonardo Fragoso, um desenvolvedor Full Stack apaixonado por criar soluções digitais, com um foco especial no desenvolvimento back-end utilizando Python, Django e Flask. Minha experiência também se estende ao front-end, onde utilizo tecnologias como JavaScript e React para criar interfaces de usuário modernas e eficientes. Meu objetivo é entregar produtos de alta qualidade, com código limpo e eficiente, sempre buscando aprender e evoluir.
 
 ### 🎯 Objetivo
-Estou em busca de oportunidades para aplicar e expandir meu conhecimento em desenvolvimento web, com ênfase em projetos que utilizem Python, Django e Flask. Meu objetivo é contribuir com minhas habilidades em uma equipe dinâmica, focada em inovação e crescimento contínuo.
+Estou em busca de oportunidades que me permitam aplicar e expandir meu conhecimento em desenvolvimento web, tanto no back-end quanto no front-end. Com uma forte ênfase em projetos que utilizem Python, Django e Flask, procuro colaborar em equipes dinâmicas, focadas em inovação e crescimento contínuo.
 
 ### 🎓 Formação e Qualificações
 - **Bacharel em Gestão de Tecnologia da Informação** - Estácio de Sá
@@ -15,12 +15,12 @@ Estou em busca de oportunidades para aplicar e expandir meu conhecimento em dese
 
 ### 💻 Tecnologias e Ferramentas
 - **Linguagens:** Python, JavaScript, Node.js
-- **Frameworks:** Django, Flask, React
+- **Back-End:** Django, Flask, SQL, Postgres, Firebase
+- **Front-End:** React, Tailwind CSS, UIKIT
 - **APIs:** RESTful, GraphQL, OpenWeather, Google Maps, APIs de autenticação (OAuth)
 - **Bibliotecas para Gráficos:** Matplotlib, Seaborn, Plotly
 - **Interfaces Gráficas:** Tkinter, PyQt
-- **Ferramentas:** Git/GitHub, Tailwind CSS, UIKIT
-- **Bancos de Dados:** SQL, Postgres, Firebase
+- **Ferramentas:** Git/GitHub
 - **Outras Competências:** Selenium, Puppeteer
 
 ### 📈 Comprometimento com o Aprendizado Contínuo
