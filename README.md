@@ -2,8 +2,6 @@
 
 Olá! Eu sou Leonardo Fragoso, um desenvolvedor Full Stack apaixonado por criar soluções digitais, com um foco especial no desenvolvimento back-end utilizando Python, Django e Flask. Minha experiência também se estende ao front-end, onde utilizo tecnologias como JavaScript e React para criar interfaces de usuário modernas e eficientes. Meu objetivo é entregar produtos de alta qualidade, com código limpo e eficiente, sempre buscando aprender e evoluir.
 
-### 🎯 Objetivo
-Estou em busca de oportunidades que me permitam aplicar e expandir meu conhecimento em desenvolvimento web, tanto no back-end quanto no front-end. Com uma forte ênfase em projetos que utilizem Python, Django e Flask, procuro colaborar em equipes dinâmicas, focadas em inovação e crescimento contínuo.
 
 ### 🎓 Formação e Qualificações
 - **Bacharel em Gestão de Tecnologia da Informação** - Estácio de Sá
@@ -25,9 +23,6 @@ Estou em busca de oportunidades que me permitam aplicar e expandir meu conhecime
 
 ### 📈 Comprometimento com o Aprendizado Contínuo
 Sou um eterno estudante e entusiasta da tecnologia. Mantenho-me atualizado com as últimas tendências através de plataformas online e cursos, sempre buscando formas de aprimorar meu trabalho.
-
-### 🚀 Vamos trabalhar juntos?
-Se você está em busca de um desenvolvedor dedicado, com uma paixão por aprender e enfrentar novos desafios, estou pronto para colaborar! Vamos conversar e construir algo incrível juntos.
 
 <a href="https://github.com/LeonardoRFragoso">
   <div>
