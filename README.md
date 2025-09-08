@@ -6,10 +6,10 @@ Olá! Eu sou Leonardo Fragoso, um desenvolvedor Full Stack apaixonado por criar 
 ### 🎓 Formação e Qualificações
 - **Bacharel em Gestão de Tecnologia da Informação** - Estácio de Sá
 - **Formação em Análise de Dados com Python** (55h) - Cubos Academy
-- **Curso Django Master** - PyCodeBr (Em andamento)
-- **Formação em Python** (100h) - Rocketseat (Em andamento)
-- **Formação Explorer** (100h) - Rocketseat (Em andamento)
-- **Formação Full Stack** (100h) - Rocketseat (Em andamento)
+- **Curso Django Master** - PyCodeBr (Concluida)
+- **Formação em Python** (100h) - Rocketseat (Concluida)
+- **Formação Explorer** (100h) - Rocketseat (Concluida)
+- **Formação Full Stack** (100h) - Rocketseat (Concluida)/
 
 ### 💻 Tecnologias e Ferramentas
 - **Linguagens:** Python, JavaScript, Node.js
