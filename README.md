@@ -1,46 +1,119 @@
-## Leonardo Fragoso - Desenvolvedor Full Stack 🚀
+# 👋 Olá! Eu sou **Leonardo Fragoso**
+### Desenvolvedor Full Stack | Python & Django Specialist | Automação | APIs | Front-End Moderno 🚀  
 
-Olá! Eu sou Leonardo Fragoso, um desenvolvedor Full Stack apaixonado por criar soluções digitais, com um foco especial no desenvolvimento back-end utilizando Python, Django e Flask. Minha experiência também se estende ao front-end, onde utilizo tecnologias como JavaScript e React para criar interfaces de usuário modernas e eficientes. Meu objetivo é entregar produtos de alta qualidade, com código limpo e eficiente, sempre buscando aprender e evoluir.
+Sou um desenvolvedor full-stack apaixonado por criar soluções **eficientes, inteligentes e escaláveis** para problemas reais.  
+Atuo no desenvolvimento de **aplicações web completas, APIs robustas, automações avançadas e ferramentas internas**, sempre seguindo boas práticas de organização, performance e arquitetura limpa.
 
+Ao longo do meu último ano atuando na **iTracker/ICTSI – Porto do Rio de Janeiro**, evoluí minha visão sobre engenharia de software aplicada a operações reais, construindo **dashboards, bots, automações e integrações entre sistemas logísticos e corporativos**.
 
-### 🎓 Formação e Qualificações
-- **Bacharel em Gestão de Tecnologia da Informação** - Estácio de Sá
-- **Formação em Análise de Dados com Python** (55h) - Cubos Academy
-- **Curso Django Master** - PyCodeBr (Concluida)
-- **Formação em Python** (100h) - Rocketseat (Concluida)
-- **Formação Explorer** (100h) - Rocketseat (Concluida)
-- **Formação Full Stack** (100h) - Rocketseat (Concluida)/
+---
 
-### 💻 Tecnologias e Ferramentas
-- **Linguagens:** Python, JavaScript, Node.js
-- **Back-End:** Django, Flask, SQL, Postgres, Firebase
-- **Front-End:** React, Tailwind CSS, UIKIT
-- **APIs:** RESTful, GraphQL, OpenWeather, Google Maps, APIs de autenticação (OAuth)
-- **Bibliotecas para Gráficos:** Matplotlib, Seaborn, Plotly
-- **Interfaces Gráficas:** Tkinter, PyQt
-- **Ferramentas:** Git/GitHub
-- **Outras Competências:** Selenium, Puppeteer
+# ⚡ **💼 O que eu faço**
+- Desenvolvimento de aplicações completas (**back-end + front-end**)  
+- Criação de **APIs REST robustas** e integrações com serviços externos  
+- Automação de processos com Python, Selenium e Web APIs  
+- Construção de **dashboards corporativos**, sistemas internos e ferramentas analíticas  
+- Desenvolvimento de interfaces dinâmicas com Vue.js e JavaScript moderno  
+- Arquitetura, otimização de queries e boas práticas de código  
 
-### 📈 Comprometimento com o Aprendizado Contínuo
-Sou um eterno estudante e entusiasta da tecnologia. Mantenho-me atualizado com as últimas tendências através de plataformas online e cursos, sempre buscando formas de aprimorar meu trabalho.
+---
 
-<a href="https://github.com/LeonardoRFragoso">
-  <div>
-    <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" />
-    <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" />
-    <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />
-    <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" />
-    <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" />
-  </div>
-</a>
-### Estatísticas do GitHub:
-<a href="https://github.com/LeonardoRFragoso/LeonardoRFragoso">
-  <div>
-    <img height="180px" src="https://github-readme-stats.vercel.app/api?username=leonardorfragoso&show_icons=true&theme=tokyonight"/>
-    <img height="180px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=leonardorfragoso&layout=compact&theme=tokyonight"/>
-  </div>
-</a>
-### Contato:
+# 🛠️ **Stacks e Tecnologias**
+
+## 🔥 Back-End
+- **Python (Django, Flask, FastAPI)**  
+- **PHP + Laravel**  
+- **Node.js**  
+- Integrações externas (REST, OAuth, Webhooks)  
+- Automação & Scraping: **Selenium, Puppeteer**  
+
+## 🎨 Front-End
+- **Vue.js**  
+- **JavaScript / ES6+**  
+- **TypeScript**  
+- **React** (dashboards e interfaces internas)  
+- Tailwind CSS, UI Libraries, componentes responsivos  
+
+## 🗄️ Bancos de Dados
+- **PostgreSQL**  
+- **MariaDB**  
+- MySQL, SQLite  
+
+## 📊 Dados & Dashboards
+- Python: Pandas, NumPy  
+- Visualização: Plotly  
+- Dashboards modernos: **Streamlit, Vue.js, React**  
+
+## ⚙️ DevOps & Ferramentas
+- Git / GitHub  
+- Linux  
+- Ambientes virtuais (Pipenv, venv, Poetry)  
+- Google Cloud APIs / Firebase  
+- Automatização de planilhas (Google Sheets API / Excel Python)  
+
+---
+
+# ⭐ **Projetos em Destaque no GitHub**
+
+🔹 **Dashboard de Multas – Google Drive + Analytics + Geolocalização**  
+Sistema completo com indicadores dinâmicos, filtros automáticos e leitura diária de planilhas.
+
+🔹 **Bots Inteligentes para IQ Option (MHI, Torres Gêmeas, M5)**  
+Estratégias automáticas, gerenciamento de risco, catálogo e interface via Streamlit.
+
+🔹 **Automação Logcomex (Selenium + 2Captcha)**  
+Extrações complexas, filtros dinâmicos, download automatizado e relatório Excel com resumo.
+
+🔹 **Assistente Comercial IA (Python + Streamlit + OpenAI)**  
+Agente que analisa dados de budget, oportunidades e operações e gera insights automáticos.
+
+🔹 **Sistemas Django completos (admin, API REST, autenticação, dashboards internos)**  
+Projetos modernos seguindo boas práticas, arquitetura escalável e integração com serviços externos.
+
+---
+
+# 🎯 **Minha missão profissional**
+Ajudar empresas e equipes de tecnologia a construírem soluções:
+
+✔ Escaláveis  
+✔ Seguras  
+✔ Bem estruturadas  
+✔ Orientadas ao negócio real  
+
+Sempre unindo **boas práticas, automação inteligente e software de qualidade**.
+
+---
+
+# 🚀 Tecnologias que uso no dia a dia
+
+<p align="left">
+  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"/>
+  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg"/>
+  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"/>
+  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg"/>
+  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"/>
+  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"/>
+  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"/>
+  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"/>
+  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"/>
+  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"/>
+  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"/>
+  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"/>
+</p>
+
+---
+
+# 📊 Estatísticas do GitHub
+
+<div>
+  <img height="180px" src="https://github-readme-stats.vercel.app/api?username=LeonardoRFragoso&show_icons=true&theme=tokyonight"/>
+  <img height="180px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=LeonardoRFragoso&layout=compact&theme=tokyonight"/>
+</div>
+
+---
+
+# 📬 Contato
+
 <div>
   <a href="https://www.linkedin.com/in/leonardo-fragoso-921b166a/" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white">
@@ -49,7 +122,11 @@ Sou um eterno estudante e entusiasta da tecnologia. Mantenho-me atualizado com a
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white">
   </a>
 </div>
-### Atividade no GitHub:
+
+---
+
+# 🐍 Atividade no GitHub
+
 <div>
-  <img align="center" src="https://github.com/LeonardoRFragoso/LeonardoRFragoso/blob/output/github-contribution-grid-snake.svg">
+  <img src="https://github.com/LeonardoRFragoso/LeonardoRFragoso/blob/output/github-contribution-grid-snake.svg">
 </div>
