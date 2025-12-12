@@ -103,18 +103,6 @@ Sempre unindo **boas práticas, automação inteligente e software de qualidade*
 
 ---
 
-## 📊 Estatísticas do GitHub
-
-<p align="center">
-  <!-- Estatísticas por mirror estável (mostra enquanto a solução run-time pública cair) -->
-  <img height="180em" src="https://github-readme-stats-1w7s.onrender.com/api?username=LeonardoRFragoso&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true"/>
-  <img height="180em" src="https://github-readme-stats-1w7s.onrender.com/api/top-langs/?username=LeonardoRFragoso&layout=compact&theme=tokyonight"/>
-</p>
-
-> ⚠️ **Observação:** as imagens acima vêm de um mirror público estável.  
-> Para uma solução **definitiva e à prova de rate-limits**, siga as instruções abaixo para gerar essas imagens dentro do seu próprio repositório usando GitHub Actions (recomendado).
-
----
 
 # 📬 Contato
 
