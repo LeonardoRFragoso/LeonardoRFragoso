@@ -103,35 +103,30 @@ Sempre unindo **boas práticas, automação inteligente e software de qualidade*
 
 ---
 
+# 📊 Estatísticas do GitHub
 
-## 📊 Estatísticas do GitHub
-
-<div align="center">
-
+<p align="center">
   <img height="180em" src="https://github-readme-stats.vercel.app/api?username=LeonardoRFragoso&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true"/>
-  
   <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=LeonardoRFragoso&layout=compact&theme=tokyonight"/>
-
-</div>
-
+</p>
 
 ---
 
 # 📬 Contato
 
-<div>
+<p align="left">
   <a href="https://www.linkedin.com/in/leonardo-fragoso-921b166a/" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white">
   </a>
   <a href="mailto:leonardorfragoso@gmail.com">
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white">
   </a>
-</div>
+</p>
 
 ---
 
 # 🐍 Atividade no GitHub
 
-<div>
+<p align="center">
   <img src="https://github.com/LeonardoRFragoso/LeonardoRFragoso/blob/output/github-contribution-grid-snake.svg">
-</div>
+</p>
