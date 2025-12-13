@@ -116,9 +116,3 @@ Sempre unindo **boas práticas, automação inteligente e software de qualidade*
 </p>
 
 ---
-
-# 🐍 Atividade no GitHub
-
-<p align="center">
-  <img src="https://github.com/LeonardoRFragoso/LeonardoRFragoso/blob/output/github-contribution-grid-snake.svg">
-</p>
