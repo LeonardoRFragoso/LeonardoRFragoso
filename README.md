@@ -1,118 +1,204 @@
-# 👋 Olá! Eu sou **Leonardo Fragoso**
-### Desenvolvedor Full Stack | Python & Django Specialist | Automação | APIs | Front-End Moderno 🚀  
+# 👋 Leonardo Fragoso
+### Desenvolvedor Full Stack | Especialista em Soluções Empresariais & Automação
 
-Sou um desenvolvedor full-stack apaixonado por criar soluções **eficientes, inteligentes e escaláveis** para problemas reais.  
-Atuo no desenvolvimento de **aplicações web completas, APIs robustas, automações avançadas e ferramentas internas**, sempre seguindo boas práticas de organização, performance e arquitetura limpa.
+> **Transformando desafios de negócio em soluções tecnológicas escaláveis e eficientes**
 
-Ao longo do meu último ano atuando na **iTracker/ICTSI – Porto do Rio de Janeiro**, evoluí minha visão sobre engenharia de software aplicada a operações reais, construindo **dashboards, bots, automações e integrações entre sistemas logísticos e corporativos**.
+Desenvolvedor full-stack com foco em **sistemas empresariais completos**, **automação de processos** e **aplicações data-driven**. Experiência sólida construindo desde **CRMs SaaS** até **plataformas de monitoramento APM** e **dashboards analíticos**.
 
----
-
-# ⚡ **💼 O que eu faço**
-- Desenvolvimento de aplicações completas (**back-end + front-end**)  
-- Criação de **APIs REST robustas** e integrações com serviços externos  
-- Automação de processos com Python, Selenium e Web APIs  
-- Construção de **dashboards corporativos**, sistemas internos e ferramentas analíticas  
-- Desenvolvimento de interfaces dinâmicas com Vue.js e JavaScript moderno  
-- Arquitetura, otimização de queries e boas práticas de código  
+Último projeto: **iTracker/ICTSI – Porto do Rio de Janeiro**, desenvolvendo sistemas logísticos, automações e integrações corporativas de alto impacto.
 
 ---
 
-# 🛠️ **Stacks e Tecnologias**
+## 🎯 Diferenciais Técnicos
 
-## 🔥 Back-End
-- **Python (Django, Flask, FastAPI)**  
-- **PHP + Laravel**  
-- **Node.js**  
-- Integrações externas (REST, OAuth, Webhooks)  
-- Automação & Scraping: **Selenium, Puppeteer**  
-
-## 🎨 Front-End
-- **Vue.js**  
-- **JavaScript / ES6+**  
-- **TypeScript**  
-- **React** (dashboards e interfaces internas)  
-- Tailwind CSS, UI Libraries, componentes responsivos  
-
-## 🗄️ Bancos de Dados
-- **PostgreSQL**  
-- **MariaDB**  
-- MySQL, SQLite  
-
-## 📊 Dados & Dashboards
-- Python: Pandas, NumPy  
-- Visualização: Plotly  
-- Dashboards modernos: **Streamlit, Vue.js, React**  
-
-## ⚙️ DevOps & Ferramentas
-- Git / GitHub  
-- Linux  
-- Ambientes virtuais (Pipenv, venv, Poetry)  
-- Google Cloud APIs / Firebase  
-- Automatização de planilhas (Google Sheets API / Excel Python)  
+- ✅ **Arquitetura Full-Stack Completa** - Do banco de dados à interface do usuário
+- ✅ **Soluções Enterprise-Ready** - CRMs, APM, sistemas financeiros e logísticos
+- ✅ **Automação Inteligente** - Bots, scrapers e integrações que economizam horas de trabalho
+- ✅ **APIs Robustas** - RESTful, integração com serviços externos, documentação completa
+- ✅ **Foco em Negócio** - Código que resolve problemas reais, não apenas tecnologia pela tecnologia
 
 ---
 
-# ⭐ **Projetos em Destaque no GitHub**
+## 💼 Projetos em Destaque
 
-🔹 **Dashboard de Multas – Google Drive + Analytics + Geolocalização**  
-Sistema completo com indicadores dinâmicos, filtros automáticos e leitura diária de planilhas.
+### 🏆 **LogiFlow CRM** - Sistema SaaS para Transportadoras
+**Stack:** PHP • Python • Vue.js • FastAPI • MariaDB • Docker
+- CRM completo com gestão comercial, operacional e fiscal
+- Emissão integrada de CT-e/MDF-e e rastreamento em tempo real
+- Arquitetura microserviços com orquestrador FastAPI
+- 60-70% mais acessível que soluções enterprise tradicionais
+- Setup em 48h sem projetos demorados
 
-🔹 **Bots Inteligentes para IQ Option (MHI, Torres Gêmeas, M5)**  
-Estratégias automáticas, gerenciamento de risco, catálogo e interface via Streamlit.
-
-🔹 **Automação Logcomex (Selenium + 2Captcha)**  
-Extrações complexas, filtros dinâmicos, download automatizado e relatório Excel com resumo.
-
-🔹 **Assistente Comercial IA (Python + Streamlit + OpenAI)**  
-Agente que analisa dados de budget, oportunidades e operações e gera insights automáticos.
-
-🔹 **Sistemas Django completos (admin, API REST, autenticação, dashboards internos)**  
-Projetos modernos seguindo boas práticas, arquitetura escalável e integração com serviços externos.
+🔗 [Ver Projeto](https://github.com/LeonardoRFragoso/LogiFlow)
 
 ---
 
-# 🎯 **Minha missão profissional**
-Ajudar empresas e equipes de tecnologia a construírem soluções:
+### 📊 **Plataforma APM** - Monitoramento de Performance de Aplicações
+**Stack:** Java • Spring Boot • PostgreSQL • Grafana
+- Sistema completo de Application Performance Monitoring
+- Coleta de métricas, logs e traces em tempo real
+- Alertas automáticos e dashboards customizáveis
+- Arquitetura preparada para alto volume de dados
+- Solução enterprise para observabilidade
 
-✔ Escaláveis  
-✔ Seguras  
-✔ Bem estruturadas  
-✔ Orientadas ao negócio real  
-
-Sempre unindo **boas práticas, automação inteligente e software de qualidade**.
-
----
-
-# 🚀 Tecnologias que uso no dia a dia
-
-<p align="left">
-  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"/>
-  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg"/>
-  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"/>
-  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg"/>
-  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"/>
-  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"/>
-  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"/>
-  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"/>
-  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"/>
-  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"/>
-  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"/>
-  <img width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"/>
-</p>
+🔗 [Ver Projeto](https://github.com/LeonardoRFragoso/Plataforma-de-Monitoramento-de-Sistemas-e-APIs)
 
 ---
 
+### 💰 **FinanceControl** - Gestão Financeira Pessoal
+**Stack:** React • Django • REST API • PostgreSQL
+- Sistema full-stack com interface moderna e intuitiva
+- Gerenciamento completo de transações e categorias
+- Dashboard com análises e gráficos em tempo real
+- Relatórios customizáveis por período
+- 71 commits demonstrando evolução consistente
 
-# 📬 Contato
+🔗 [Ver Projeto](https://github.com/LeonardoRFragoso/gerenciador-financeiro)
+
+---
+
+### 📈 **API Analyze B3** - Análise de Ações e FIIs
+**Stack:** Python • Flask • Pandas • Plotly
+- API completa para análise de ativos da Bolsa Brasileira
+- Gráficos de preços e indicadores técnicos
+- Histórico de dividendos e proventos
+- Comparação entre múltiplos ativos
+- Integração com APIs do mercado financeiro
+
+🔗 [Ver Projeto](https://github.com/LeonardoRFragoso/API_Analyze)
+
+---
+
+### 🏢 **Base Corporativa** - Sistema de Gestão Empresarial
+**Stack:** JavaScript • Node.js • Express • MongoDB
+- Plataforma corporativa completa
+- Gestão de usuários, permissões e workflows
+- Interface responsiva e moderna
+- API REST bem estruturada
+- Arquitetura modular e escalável
+
+🔗 [Ver Projeto](https://github.com/LeonardoRFragoso/base-corporativa)
+
+---
+
+### 🤖 **Bot IQ Option** - Trading Automatizado
+**Stack:** Python • Selenium • IQ Option API
+- Estratégias automatizadas (MHI, Torres Gêmeas, M5)
+- Gerenciamento de risco inteligente
+- Interface Streamlit para controle
+- ⭐ 1 star • 🔀 2 forks (comunidade ativa)
+
+🔗 [Ver Projeto](https://github.com/LeonardoRFragoso/Bot_IqOption)
+
+---
+
+## 🛠️ Stack Tecnológico
+
+### **Back-End**
+```
+Python (Django • Flask • FastAPI)    PHP (Laravel)
+Node.js                              Java (Spring Boot)
+REST APIs • OAuth • Webhooks         Microserviços
+```
+
+### **Front-End**
+```
+Vue.js • React                       JavaScript ES6+ • TypeScript
+TailwindCSS                          Componentes Reutilizáveis
+UI/UX Moderno                        Responsivo
+```
+
+### **Banco de Dados**
+```
+PostgreSQL • MariaDB • MySQL         MongoDB
+SQLite                               Query Optimization
+```
+
+### **DevOps & Ferramentas**
+```
+Git/GitHub                           Docker • Docker Compose
+Linux                                CI/CD
+Nginx                                Cloud (AWS, GCP)
+```
+
+### **Data & Analytics**
+```
+Pandas • NumPy                       Plotly • Chart.js
+Streamlit                            Dashboards Interativos
+```
+
+### **Automação**
+```
+Selenium • Puppeteer                 Web Scraping
+APIs Integration                     Process Automation
+```
+
+---
+
+## 📊 GitHub Stats
+
+![Leonardo's GitHub stats](https://github-readme-stats.vercel.app/api?username=LeonardoRFragoso&show_icons=true&theme=dark)
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=LeonardoRFragoso&layout=compact&theme=dark)](https://github.com/LeonardoRFragoso)
+
+---
+
+## 💡 O Que Eu Entrego
+
+| Área | Expertise |
+|------|-----------|
+| 🏗️ **Arquitetura** | Sistemas escaláveis, microserviços, APIs RESTful |
+| 💼 **Soluções de Negócio** | CRMs, ERPs, plataformas SaaS, dashboards corporativos |
+| 🤖 **Automação** | Bots inteligentes, scrapers, integrações, RPA |
+| 📊 **Data-Driven** | Analytics, relatórios, visualizações, KPIs |
+| 🔒 **Segurança** | Autenticação, autorização, boas práticas, LGPD |
+| ⚡ **Performance** | Otimização de queries, caching, escalabilidade |
+
+---
+
+## 🎓 Formação & Experiência
+
+**iTracker/ICTSI – Porto do Rio de Janeiro**
+- Desenvolvimento de sistemas logísticos e automações
+- Dashboards corporativos e ferramentas analíticas
+- Integrações entre sistemas legados e modernos
+- Bots para otimização de processos operacionais
+
+---
+
+## 🚀 Por Que Trabalhar Comigo?
+
+✅ **Código Limpo** - Seguindo SOLID, DRY e boas práticas  
+✅ **Entrega Rápida** - Metodologias ágeis e entregas consistentes  
+✅ **Visão de Negócio** - Tecnologia alinhada aos objetivos da empresa  
+✅ **Documentação Completa** - READMEs detalhados, comentários úteis  
+✅ **Aprendizado Contínuo** - Sempre atualizando com as melhores tecnologias  
+✅ **Comunicação Clara** - Transparência e alinhamento constante  
+
+---
+
+## 📬 Vamos Conversar?
+
+Estou sempre aberto a **novos desafios**, **projetos interessantes** e **oportunidades de colaboração**.
 
 <p align="left">
   <a href="https://www.linkedin.com/in/leonardo-fragoso-921b166a/" target="_blank">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
   </a>
   <a href="mailto:leonardorfragoso@gmail.com">
-    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white">
+    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
+  </a>
+  <a href="https://portfolio-leonardo-fragoso-react.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=react&logoColor=white" alt="Portfolio">
   </a>
 </p>
 
 ---
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=LeonardoRFragoso&color=blue&style=flat-square" alt="Profile views">
+</p>
+
+<p align="center">
+  <em>"Código que resolve problemas reais, não apenas tecnologia pela tecnologia."</em>
+</p>
