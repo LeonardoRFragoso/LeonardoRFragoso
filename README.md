@@ -3,6 +3,8 @@
 
 > **Transformando desafios de negócio em soluções tecnológicas escaláveis e eficientes**
 
+🚀 **2 Projetos SaaS em PRODUÇÃO:** [ProFlow.pro](https://www.proflow.pro/) | [BaseCorporativa.store](https://basecorporativa.store/)
+
 Desenvolvedor full-stack com foco em **sistemas empresariais completos**, **automação de processos** e **aplicações data-driven**. Experiência sólida construindo desde **CRMs SaaS** até **plataformas de monitoramento APM** e **dashboards analíticos**.
 
 Último projeto: **iTracker/ICTSI – Porto do Rio de Janeiro**, desenvolvendo sistemas logísticos, automações e integrações corporativas de alto impacto.
@@ -11,8 +13,9 @@ Desenvolvedor full-stack com foco em **sistemas empresariais completos**, **auto
 
 ## 🎯 Diferenciais Técnicos
 
+- 🌐 **Projetos ONLINE em Produção** - 2 SaaS rodando com usuários reais
 - ✅ **Arquitetura Full-Stack Completa** - Do banco de dados à interface do usuário
-- ✅ **Soluções Enterprise-Ready** - CRMs, APM, sistemas financeiros e logísticos
+- ✅ **Soluções Enterprise-Ready** - CRMs, APM, e-commerce e plataformas SaaS
 - ✅ **Automação Inteligente** - Bots, scrapers e integrações que economizam horas de trabalho
 - ✅ **APIs Robustas** - RESTful, integração com serviços externos, documentação completa
 - ✅ **Foco em Negócio** - Código que resolve problemas reais, não apenas tecnologia pela tecnologia
@@ -57,38 +60,31 @@ Desenvolvedor full-stack com foco em **sistemas empresariais completos**, **auto
 
 ---
 
-### 📈 **API Analyze B3** - Análise de Ações e FIIs
-**Stack:** Python • Flask • Pandas • Plotly
-- API completa para análise de ativos da Bolsa Brasileira
-- Gráficos de preços e indicadores técnicos
-- Histórico de dividendos e proventos
-- Comparação entre múltiplos ativos
-- Integração com APIs do mercado financeiro
+### 🚀 **ProFlow** - Plataforma SaaS para Freelancers ⚡ ONLINE
+**Stack:** Vue.js • JavaScript • Node.js • Payments API • AI Integration  
+**🌐 Produção:** [proflow.pro](https://www.proflow.pro/)
 
-🔗 [Ver Projeto](https://github.com/LeonardoRFragoso/API_Analyze)
+- Plataforma completa para freelancers aumentarem ganhos em 3x
+- Sistema de pagamentos seguro integrado
+- IA para otimização de propostas e precificação
+- Dashboard de gestão de projetos e clientes
+- Gateway de pagamento e controle financeiro
 
----
-
-### 🏢 **Base Corporativa** - Sistema de Gestão Empresarial
-**Stack:** JavaScript • Node.js • Express • MongoDB
-- Plataforma corporativa completa
-- Gestão de usuários, permissões e workflows
-- Interface responsiva e moderna
-- API REST bem estruturada
-- Arquitetura modular e escalável
-
-🔗 [Ver Projeto](https://github.com/LeonardoRFragoso/base-corporativa)
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/ProFlow) | 🌐 [Ver Site](https://www.proflow.pro/)
 
 ---
 
-### 🤖 **Bot IQ Option** - Trading Automatizado
-**Stack:** Python • Selenium • IQ Option API
-- Estratégias automatizadas (MHI, Torres Gêmeas, M5)
-- Gerenciamento de risco inteligente
-- Interface Streamlit para controle
-- ⭐ 1 star • 🔀 2 forks (comunidade ativa)
+### 🛒 **Base Corporativa** - E-commerce de Roupas Corporativas ⚡ ONLINE
+**Stack:** JavaScript • Node.js • Express • MongoDB • Stripe/Payment Gateway  
+**🌐 Produção:** [basecorporativa.store](https://basecorporativa.store/)
 
-🔗 [Ver Projeto](https://github.com/LeonardoRFragoso/Bot_IqOption)
+- E-commerce completo para venda de uniformes e roupas corporativas
+- Sistema de carrinho, checkout e pagamentos integrados
+- Gestão de produtos, estoque e pedidos
+- Painel administrativo para controle total
+- Interface responsiva e otimizada para conversão
+
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/base-corporativa) | 🌐 [Ver Loja](https://basecorporativa.store/)
 
 ---
 
@@ -163,6 +159,19 @@ APIs Integration                     Process Automation
 - Dashboards corporativos e ferramentas analíticas
 - Integrações entre sistemas legados e modernos
 - Bots para otimização de processos operacionais
+
+---
+
+## 📌 Repositórios em Destaque (Pinned)
+
+Para melhor representar minhas habilidades, recomendo fixar estes **6 projetos**:
+
+1. **ProFlow** ⚡ - SaaS para freelancers (Vue.js) - 🌐 **ONLINE**
+2. **Base Corporativa** ⚡ - E-commerce (Node.js) - 🌐 **ONLINE**
+3. **LogiFlow** - CRM SaaS enterprise (PHP/Python/Vue)
+4. **Plataforma APM** - Monitoramento em Java
+5. **gerenciador-financeiro** - Full-stack React+Django
+6. **Portfolio-React** - Apresentação profissional
 
 ---
 
