@@ -3,9 +3,9 @@
 
 > **Transformando desafios de negócio em soluções tecnológicas escaláveis e eficientes**
 
-🚀 **2 Projetos SaaS em PRODUÇÃO:** [ProFlow.pro](https://www.proflow.pro/) | [BaseCorporativa.store](https://basecorporativa.store/)
+🚀 **Projetos em PRODUÇÃO:** [ProFlow.pro](https://www.proflow.pro/) | [BaseCorporativa.store](https://basecorporativa.store/)
 
-Desenvolvedor full-stack com foco em **sistemas empresariais completos**, **automação de processos** e **aplicações data-driven**. Experiência sólida construindo desde **CRMs SaaS** até **plataformas de monitoramento APM** e **dashboards analíticos**.
+Desenvolvedor full-stack com foco em **sistemas empresariais completos**, **automação de processos** e **aplicações data-driven**. Experiência sólida construindo desde **CRMs empresariais** até **plataformas de monitoramento APM** e **dashboards analíticos**.
 
 Último projeto: **iTracker/ICTSI – Porto do Rio de Janeiro**, desenvolvendo sistemas logísticos, automações e integrações corporativas de alto impacto.
 
@@ -13,9 +13,9 @@ Desenvolvedor full-stack com foco em **sistemas empresariais completos**, **auto
 
 ## 🎯 Diferenciais Técnicos
 
-- 🌐 **Projetos ONLINE em Produção** - 2 SaaS rodando com usuários reais
+- 🌐 **Projetos ONLINE em Produção** - Aplicações web rodando com usuários reais
 - ✅ **Arquitetura Full-Stack Completa** - Do banco de dados à interface do usuário
-- ✅ **Soluções Enterprise-Ready** - CRMs, APM, e-commerce e plataformas SaaS
+- ✅ **Soluções Enterprise-Ready** - CRMs, APM, e-commerce e plataformas web
 - ✅ **Automação Inteligente** - Bots, scrapers e integrações que economizam horas de trabalho
 - ✅ **APIs Robustas** - RESTful, integração com serviços externos, documentação completa
 - ✅ **Foco em Negócio** - Código que resolve problemas reais, não apenas tecnologia pela tecnologia
@@ -24,13 +24,13 @@ Desenvolvedor full-stack com foco em **sistemas empresariais completos**, **auto
 
 ## 💼 Projetos em Destaque
 
-### 🏆 **LogiFlow CRM** - Sistema SaaS para Transportadoras
+### 🏆 **LogiFlow CRM** - Sistema Empresarial para Transportadoras
 **Stack:** PHP • Python • Vue.js • FastAPI • MariaDB • Docker
 - CRM completo com gestão comercial, operacional e fiscal
 - Emissão integrada de CT-e/MDF-e e rastreamento em tempo real
 - Arquitetura microserviços com orquestrador FastAPI
-- 60-70% mais acessível que soluções enterprise tradicionais
-- Setup em 48h sem projetos demorados
+- Sistema modular e escalável para operações logísticas
+- Solução 60-70% mais acessível que ferramentas enterprise tradicionais
 
 🔗 [Ver Projeto](https://github.com/LeonardoRFragoso/LogiFlow)
 
@@ -54,37 +54,37 @@ Desenvolvedor full-stack com foco em **sistemas empresariais completos**, **auto
 - Gerenciamento completo de transações e categorias
 - Dashboard com análises e gráficos em tempo real
 - Relatórios customizáveis por período
-- 71 commits demonstrando evolução consistente
+- Desenvolvimento iterativo com 71 commits
 
 🔗 [Ver Projeto](https://github.com/LeonardoRFragoso/gerenciador-financeiro)
 
 ---
 
-### 🚀 **ProFlow** - Plataforma SaaS para Freelancers ⚡ ONLINE
+### 🚀 **ProFlow** - Plataforma para Freelancers ⚡ ONLINE
 **Stack:** Vue.js • JavaScript • Node.js • Payments API • AI Integration  
 **🌐 Produção:** [proflow.pro](https://www.proflow.pro/)
 
-- Plataforma completa para freelancers aumentarem ganhos em 3x
-- Sistema de pagamentos seguro integrado
-- IA para otimização de propostas e precificação
-- Dashboard de gestão de projetos e clientes
-- Gateway de pagamento e controle financeiro
+- Plataforma web completa para freelancers otimizarem seus negócios
+- Sistema de gestão de projetos e clientes
+- Integração com IA para otimização de propostas e precificação
+- Dashboard analítico com KPIs de desempenho
+- Interface moderna e responsiva
 
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/ProFlow) | 🌐 [Ver Site](https://www.proflow.pro/)
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/ProFlow) | 🌐 [Visitar Site](https://www.proflow.pro/)
 
 ---
 
 ### 🛒 **Base Corporativa** - E-commerce de Roupas Corporativas ⚡ ONLINE
-**Stack:** JavaScript • Node.js • Express • MongoDB • Stripe/Payment Gateway  
+**Stack:** JavaScript • Python • React • Django • PostgreSQL  
 **🌐 Produção:** [basecorporativa.store](https://basecorporativa.store/)
 
 - E-commerce completo para venda de uniformes e roupas corporativas
-- Sistema de carrinho, checkout e pagamentos integrados
-- Gestão de produtos, estoque e pedidos
-- Painel administrativo para controle total
-- Interface responsiva e otimizada para conversão
+- Sistema de carrinho de compras e checkout
+- Gestão de produtos, categorias e estoque
+- Painel administrativo para controle de pedidos
+- Interface responsiva otimizada para conversão
 
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/base-corporativa) | 🌐 [Ver Loja](https://basecorporativa.store/)
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/base-corporativa) | 🌐 [Visitar Loja](https://basecorporativa.store/)
 
 ---
 
@@ -94,39 +94,42 @@ Desenvolvedor full-stack com foco em **sistemas empresariais completos**, **auto
 ```
 Python (Django • Flask • FastAPI)    PHP (Laravel)
 Node.js                              Java (Spring Boot)
-REST APIs • OAuth • Webhooks         Microserviços
+REST APIs • OAuth • Webhooks         Arquitetura de Microserviços
 ```
 
 ### **Front-End**
 ```
 Vue.js • React                       JavaScript ES6+ • TypeScript
-TailwindCSS                          Componentes Reutilizáveis
-UI/UX Moderno                        Responsivo
+TailwindCSS • Bootstrap              Componentes Reutilizáveis
+UI/UX Moderno                        Design Responsivo
 ```
 
 ### **Banco de Dados**
 ```
 PostgreSQL • MariaDB • MySQL         MongoDB
-SQLite                               Query Optimization
+SQLite                               Otimização de Queries
+Modelagem de Dados                   Migrations & Seeds
 ```
 
 ### **DevOps & Ferramentas**
 ```
 Git/GitHub                           Docker • Docker Compose
-Linux                                CI/CD
-Nginx                                Cloud (AWS, GCP)
+Linux (Ubuntu/Debian)                CI/CD Pipelines
+Nginx                                Cloud Deploy (Railway, Vercel)
 ```
 
 ### **Data & Analytics**
 ```
 Pandas • NumPy                       Plotly • Chart.js
 Streamlit                            Dashboards Interativos
+Análise de Dados                     Visualização de Métricas
 ```
 
-### **Automação**
+### **Automação & Integrações**
 ```
-Selenium • Puppeteer                 Web Scraping
-APIs Integration                     Process Automation
+Selenium • Puppeteer                 Web Scraping (BeautifulSoup)
+APIs Integration                     Process Automation (RPA)
+Scheduled Tasks (Cron)               Webhooks & Event-Driven
 ```
 
 ---
@@ -144,7 +147,7 @@ APIs Integration                     Process Automation
 | Área | Expertise |
 |------|-----------|
 | 🏗️ **Arquitetura** | Sistemas escaláveis, microserviços, APIs RESTful |
-| 💼 **Soluções de Negócio** | CRMs, ERPs, plataformas SaaS, dashboards corporativos |
+| 💼 **Soluções de Negócio** | CRMs, ERPs, e-commerce, dashboards corporativos |
 | 🤖 **Automação** | Bots inteligentes, scrapers, integrações, RPA |
 | 📊 **Data-Driven** | Analytics, relatórios, visualizações, KPIs |
 | 🔒 **Segurança** | Autenticação, autorização, boas práticas, LGPD |
@@ -154,11 +157,17 @@ APIs Integration                     Process Automation
 
 ## 🎓 Formação & Experiência
 
-**iTracker/ICTSI – Porto do Rio de Janeiro**
-- Desenvolvimento de sistemas logísticos e automações
-- Dashboards corporativos e ferramentas analíticas
-- Integrações entre sistemas legados e modernos
-- Bots para otimização de processos operacionais
+**Desenvolvedor Full Stack - iTracker/ICTSI – Porto do Rio de Janeiro**
+- Desenvolvimento de sistemas logísticos e automações operacionais
+- Criação de dashboards corporativos e ferramentas analíticas
+- Integrações complexas entre sistemas legados e modernos
+- Desenvolvimento de bots para otimização de processos
+
+**Principais Realizações:**
+- Sistemas de monitoramento em tempo real para operações portuárias
+- Automações que reduziram tempo de processos manuais em até 70%
+- Dashboards executivos com métricas de performance operacional
+- APIs para integração entre múltiplos sistemas internos
 
 ---
 
@@ -166,23 +175,35 @@ APIs Integration                     Process Automation
 
 Para melhor representar minhas habilidades, recomendo fixar estes **6 projetos**:
 
-1. **ProFlow** ⚡ - SaaS para freelancers (Vue.js) - 🌐 **ONLINE**
-2. **Base Corporativa** ⚡ - E-commerce (Node.js) - 🌐 **ONLINE**
-3. **LogiFlow** - CRM SaaS enterprise (PHP/Python/Vue)
-4. **Plataforma APM** - Monitoramento em Java
-5. **gerenciador-financeiro** - Full-stack React+Django
-6. **Portfolio-React** - Apresentação profissional
+1. **ProFlow** ⚡ - Plataforma para freelancers (Vue.js) - 🌐 **ONLINE**
+2. **Base Corporativa** ⚡ - E-commerce (React/Django) - 🌐 **ONLINE**
+3. **LogiFlow** - CRM empresarial (PHP/Python/Vue)
+4. **Plataforma APM** - Monitoramento (Java/Spring Boot)
+5. **gerenciador-financeiro** - Full-stack (React/Django)
+6. **Portfolio-React** - Portfólio profissional
 
 ---
 
 ## 🚀 Por Que Trabalhar Comigo?
 
-✅ **Código Limpo** - Seguindo SOLID, DRY e boas práticas  
-✅ **Entrega Rápida** - Metodologias ágeis e entregas consistentes  
-✅ **Visão de Negócio** - Tecnologia alinhada aos objetivos da empresa  
-✅ **Documentação Completa** - READMEs detalhados, comentários úteis  
-✅ **Aprendizado Contínuo** - Sempre atualizando com as melhores tecnologias  
-✅ **Comunicação Clara** - Transparência e alinhamento constante  
+✅ **Código Limpo** - Seguindo SOLID, DRY e melhores práticas de desenvolvimento  
+✅ **Entrega Consistente** - Metodologias ágeis com foco em resultados mensuráveis  
+✅ **Visão de Negócio** - Tecnologia alinhada aos objetivos estratégicos da empresa  
+✅ **Documentação Completa** - READMEs detalhados, código bem comentado  
+✅ **Aprendizado Contínuo** - Sempre estudando e aplicando tecnologias modernas  
+✅ **Comunicação Clara** - Transparência e alinhamento constante com stakeholders  
+
+---
+
+## 🎯 Áreas de Interesse
+
+Estou particularmente interessado em projetos que envolvam:
+- 🏢 Sistemas empresariais complexos (CRM, ERP, Gestão)
+- 🤖 Automação e otimização de processos
+- 📊 Plataformas de análise de dados e dashboards
+- 🔗 Integrações entre sistemas e APIs
+- ⚙️ Arquitetura de microserviços
+- 🚀 Aplicações web modernas e escaláveis
 
 ---
 
