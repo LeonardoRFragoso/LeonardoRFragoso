@@ -44,18 +44,6 @@ Desenvolvedor Full Stack com foco em **sistemas empresariais completos**, **auto
 🔹 **Experiência:** Gerente de TI liderando equipes técnicas  
 🔹 **Especialização:** SaaS, E-commerce, CRM, TMS, Automação e IA  
 
-### 🎯 Diferenciais
-
-```
-✅ 4 Projetos ONLINE em Produção com usuários reais
-✅ Multi-Stack: Python, Go, Java, PHP, JavaScript/TypeScript, Flutter
-✅ Arquitetura Full-Stack Completa (DB → API → Frontend)
-✅ Soluções Enterprise-Ready (CRM, ERP, SaaS, E-commerce)
-✅ Automação Inteligente (RPA, ETL, Integrações)
-✅ APIs Robustas (REST, WebSocket, GraphQL)
-✅ Integração com IA (GPT-4, Claude, ML)
-```
-
 ---
 
 ## 💼 Projetos em Destaque
@@ -156,7 +144,28 @@ Desenvolvedor Full Stack com foco em **sistemas empresariais completos**, **auto
 </details>
 
 <details>
-<summary><b>📺 Digital Signage Platform - TV Corporativa</b></summary>
+<summary><b>� FlowTrack - Gestão de Operações Portuárias</b> 🏭 Em Produção</summary>
+
+<br>
+
+**Stack:** `Python` `Flask` `Bootstrap 5` `PostgreSQL` `JWT`
+
+**Contexto:** Sistema desenvolvido e implantado no **maior terminal portuário privado do Brasil** (operação ICTSI, Porto do Rio de Janeiro) — adotado imediatamente pela equipe operacional em múltiplos setores.
+
+**Funcionalidades:**
+- Workflow de aprovação multinível configurável
+- RBAC avançado (Admin, GR, Operador, Visualizador)
+- Auditoria imutável de todas as operações
+- Gestão de motoristas, veículos e módulo GR portuário
+- Dashboard com KPIs em tempo real + exportação Excel/PDF
+- 100% White Label — personalizável por cliente
+
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/FlowTrack)
+
+</details>
+
+<details>
+<summary><b>�📺 Digital Signage Platform - TV Corporativa</b></summary>
 
 <br>
 
