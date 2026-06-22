@@ -29,7 +29,7 @@
 
 [![ProFlow](https://img.shields.io/badge/🚀_ProFlow-ONLINE-00C853?style=for-the-badge&labelColor=1a1a1a)](https://proflow.pro/)
 [![LogiFlow](https://img.shields.io/badge/🚛_LogiFlow-ONLINE-00C853?style=for-the-badge&labelColor=1a1a1a)](https://logi-flow-wuhp.vercel.app)
-[![AgentesIA](https://img.shields.io/badge/🧠_AgentesIA-DEPLOY-7c3aed?style=for-the-badge&labelColor=1a1a1a)](https://github.com/LeonardoRFragoso/AgentesIA-Consultoria-de-Negocios-com-IA-Multi-Agentes)
+[![AgentesIA](https://img.shields.io/badge/🧠_AgentesIA-ONLINE-00C853?style=for-the-badge&labelColor=1a1a1a)](https://agentes-ia-consultoria-de-negocios.vercel.app)
 [![GNLink](https://img.shields.io/badge/🌐_GNLink-ONLINE-00C853?style=for-the-badge&labelColor=1a1a1a)](https://gn-link.vercel.app)
 
 </div>
@@ -46,6 +46,7 @@ Na **iTracker (ICTSI — Porto do Rio de Janeiro)**, fui o desenvolvedor único 
 - 📋 **FlowTrack** — Sistema enterprise de workflows e não-conformidades com RBAC multinível
 - 📺 **Digital Signage Platform** — TV corporativa (Python + WebSocket + Redis + FFmpeg + Chromecast)
 - 🤖 **RPA Bots** — Automação de processos financeiros com Selenium + PyAutoGUI
+- 📊 **Sistema GR** — Gestão de riscos empresariais com dashboard executivo e relatórios automatizados
 
 Desenvolvi de forma independente **4 produtos SaaS em produção** atualmente servindo clientes reais.
 
@@ -83,7 +84,7 @@ stack = {
 
 <br>
 
-**Stack:** `Vue.js 3` `TypeScript` `Node.js` `PostgreSQL` `OpenAI GPT-4` `Stripe` `PWA`
+**Stack:** `Vue.js 3` `Django` `PostgreSQL` `OpenAI GPT-4` `Mercado Pago` `WebSocket` `PWA`
 
 **Funcionalidades:**
 - IA consultiva que sugere preços e gera propostas automáticas (GPT-4)
@@ -109,7 +110,7 @@ stack = {
 - Suporte multi-tenant com planos Free, Pro e Enterprise
 - Deploy Railway (backend) + Vercel (frontend)
 
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/AgentesIA-Consultoria-de-Negocios-com-IA-Multi-Agentes)
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/AgentesIA-Consultoria-de-Negocios-com-IA-Multi-Agentes) | 🌐 [Demo ao Vivo](https://agentes-ia-consultoria-de-negocios.vercel.app)
 
 </details>
 
