@@ -1,36 +1,36 @@
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&duration=2800&pause=2000&color=2B4C7E&center=true&vCenter=true&width=940&lines=Leonardo+Fragoso;Full+Stack+Developer;4+Projetos+Online+em+Produ%C3%A7%C3%A3o+%F0%9F%9A%80" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=28&duration=2800&pause=2000&color=1d4ed8&center=true&vCenter=true&width=940&lines=Leonardo+Fragoso;Desenvolvedor+Python+Backend;Django+%C2%B7+FastAPI+%C2%B7+Sistemas+de+IA;4+SaaS+em+Produ%C3%A7%C3%A3o+%F0%9F%9A%80" alt="Typing SVG" />
 </div>
 
-<h3 align="center">Desenvolvedor Full Stack | Especialista em Soluções Empresariais & Automação</h3>
+<h3 align="center">Desenvolvedor Python Backend | Django · FastAPI · IA · REST APIs</h3>
 
 <p align="center">
-  <em>"Transformando desafios de negócio em soluções tecnológicas escaláveis e eficientes"</em>
+  <em>"Sistemas que resolvem problemas reais — de APIs a pipelines de IA."</em>
 </p>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/leonardo-fragoso-921b166a/" target="_blank">
+  <a href="https://linkedin.com/in/leonardorfragoso" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
   </a>
   <a href="mailto:leonardorfragoso@gmail.com">
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
   </a>
   <a href="https://leonardofragosodev.netlify.app/" target="_blank">
-    <img src="https://img.shields.io/badge/Portfolio-4A90E2?style=for-the-badge&logo=react&logoColor=white" alt="Portfolio">
+    <img src="https://img.shields.io/badge/Portfolio-1d4ed8?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Portfolio">
   </a>
-  <img src="https://komarev.com/ghpvc/?username=LeonardoRFragoso&color=2B4C7E&style=for-the-badge" alt="Profile views">
+  <img src="https://komarev.com/ghpvc/?username=LeonardoRFragoso&color=1d4ed8&style=for-the-badge" alt="Profile views">
 </p>
 
 ---
 
-## 🚀 Projetos em Produção
+## 🚀 Sistemas em Produção
 
 <div align="center">
 
-[![ProFlow](https://img.shields.io/badge/🚀_ProFlow-ONLINE-00C853?style=for-the-badge&labelColor=1a1a1a)](https://www.proflow.pro/)
-[![Base Corporativa](https://img.shields.io/badge/🛒_Base_Corporativa-ONLINE-00C853?style=for-the-badge&labelColor=1a1a1a)](https://basecorporativa.store/)
-[![LogiFlow CRM](https://img.shields.io/badge/🚛_LogiFlow_CRM-ONLINE-00C853?style=for-the-badge&labelColor=1a1a1a)](https://logi-flow-wuhp.vercel.app)
-[![Portfolio](https://img.shields.io/badge/💼_Portfolio-ONLINE-4A90E2?style=for-the-badge&labelColor=1a1a1a)](https://leonardofragosodev.netlify.app/)
+[![ProFlow](https://img.shields.io/badge/🚀_ProFlow-ONLINE-00C853?style=for-the-badge&labelColor=1a1a1a)](https://proflow.pro/)
+[![LogiFlow](https://img.shields.io/badge/🚛_LogiFlow-ONLINE-00C853?style=for-the-badge&labelColor=1a1a1a)](https://logi-flow-wuhp.vercel.app)
+[![AgentesIA](https://img.shields.io/badge/🧠_AgentesIA-DEPLOY-7c3aed?style=for-the-badge&labelColor=1a1a1a)](https://github.com/LeonardoRFragoso/AgentesIA-Consultoria-de-Negocios-com-IA-Multi-Agentes)
+[![GNLink](https://img.shields.io/badge/🌐_GNLink-ONLINE-00C853?style=for-the-badge&labelColor=1a1a1a)](https://gn-link.vercel.app)
 
 </div>
 
@@ -38,59 +38,146 @@
 
 ## 👨‍💻 Sobre Mim
 
-Desenvolvedor Full Stack com foco em **sistemas empresariais completos**, **automação de processos** e **aplicações data-driven**. 
+Desenvolvedor Python Backend focado em entregar **sistemas de nível produção** — REST APIs, plataformas SaaS, backends com IA e pipelines de automação.
 
-🔹 **Atualmente:** Desenvolvedor de Sistemas em empresa de logística  
-🔹 **Experiência:** Gerente de TI liderando equipes técnicas  
-🔹 **Especialização:** SaaS, E-commerce, CRM, TMS, Automação e IA  
+Na **iTracker (ICTSI — Porto do Rio de Janeiro)**, fui o desenvolvedor único responsável por 6 sistemas enterprise em produção:
+- 🧠 **GPTracker** — Dashboard executivo com IA e pipeline LLM/RAG (FastAPI + GPT-4 + PostgreSQL)
+- 🚢 **GateLog** — Sistema de controle de acesso portuário (Django 5 + DRF + Vue.js 3), implantado em múltiplos setores
+- 📋 **FlowTrack** — Sistema enterprise de workflows e não-conformidades com RBAC multinível
+- 📺 **Digital Signage Platform** — TV corporativa (Python + WebSocket + Redis + FFmpeg + Chromecast)
+- 🤖 **RPA Bots** — Automação de processos financeiros com Selenium + PyAutoGUI
+
+Desenvolvi de forma independente **4 produtos SaaS em produção** atualmente servindo clientes reais.
+
+```python
+stack = {
+    "core":          ["Python 3.x", "Django 5", "FastAPI", "Django REST Framework"],
+    "databases":     ["PostgreSQL", "Redis", "SQLite", "MySQL"],
+    "ai":            ["LLM/RAG", "OpenAI GPT-4", "Claude 3 (Anthropic)", "OpenSearch", "Langflow"],
+    "devops":        ["Docker", "Linux (Ubuntu)", "Nginx", "AWS (EC2/S3/RDS)", "CI/CD"],
+    "automation":    ["Selenium", "Celery", "PyAutoGUI", "BeautifulSoup", "Scrapy"],
+    "apis":          ["REST", "JWT", "WebSockets", "Stripe", "Mercado Pago"],
+    "frontend":      ["Vue.js 3", "React", "TypeScript", "TailwindCSS"],
+}
+```
 
 ---
 
-## 💼 Projetos em Destaque
+## 🏆 Conquistas em Destaque
+
+| | |
+|---|---|
+| 🏗️ | Entregou **6 sistemas enterprise** para a ICTSI como desenvolvedor único — da arquitetura à produção |
+| 🚀 | Desenvolveu **4 produtos SaaS do zero**, atualmente em produção com clientes reais |
+| 📉 | Reduziu custos operacionais em **60–70%** para transportadoras com o LogiFlow |
+| 🧠 | Implementou **pipeline LLM/RAG** (GPT-4 + busca vetorial) para consulta de dados em linguagem natural |
+| 🔐 | Projetou **arquiteturas SaaS multi-tenant** com JWT, RBAC e isolamento de dados por organização |
+| 🤖 | Construiu pipelines RPA que **eliminaram horas diárias** de processos financeiros manuais |
+
+---
+
+## � Projetos em Destaque
 
 <details open>
-<summary><b>🚀 ProFlow - Plataforma SaaS para Freelancers</b> ⚡ ONLINE</summary>
+<summary><b>🚀 ProFlow — SaaS para Freelancers</b> &nbsp;🟢 ONLINE</summary>
 
 <br>
 
-**Stack:** `Vue.js 3` `TypeScript` `Node.js` `PostgreSQL` `OpenAI GPT-4` `Stripe`
+**Stack:** `Vue.js 3` `TypeScript` `Node.js` `PostgreSQL` `OpenAI GPT-4` `Stripe` `PWA`
 
 **Funcionalidades:**
-- IA consultiva que sugere preços e gera propostas automáticas
+- IA consultiva que sugere preços e gera propostas automáticas (GPT-4)
 - Sistema de pagamento em custódia (proteção contra calotes)
 - ProFlow Score para verificação de identidade
 - Dashboard analítico com KPIs de desempenho
 
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/ProFlow) | 🌐 [Acessar Plataforma](https://www.proflow.pro/)
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/ProFlow) | 🌐 [Acessar Plataforma](https://proflow.pro/)
 
 </details>
 
 <details>
-<summary><b>🛒 Base Corporativa - E-commerce Completo</b> ⚡ ONLINE</summary>
+<summary><b>🧠 AgentesIA — SaaS de Consultoria Multi-Agente com IA</b> &nbsp;🟣 IA · SaaS</summary>
 
 <br>
 
-**Stack:** `React` `Django` `PostgreSQL` `Mercado Pago` `PWA`
+**Stack:** `Python` `FastAPI` `Claude 3 (Anthropic)` `PostgreSQL` `Redis` `JWT` `Multi-tenant` `Docker`
 
 **Funcionalidades:**
-- E-commerce completo para roupas corporativas
-- Checkout integrado com Mercado Pago
-- PWA para experiência mobile nativa
-- Analytics com Google Analytics e Meta Pixel
-- Painel administrativo para gestão de pedidos
+- 5 agentes de IA especializados trabalhando em paralelo (orquestração assíncrona)
+- Análise de problemas de negócio sob múltiplas perspectivas
+- Geração de relatórios em PDF, PPTX e Markdown
+- Suporte multi-tenant com planos Free, Pro e Enterprise
+- Deploy Railway (backend) + Vercel (frontend)
 
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/base-corporativa) | 🌐 [Visitar Loja](https://basecorporativa.store/)
+� [Ver Código](https://github.com/LeonardoRFragoso/AgentesIA-Consultoria-de-Negocios-com-IA-Multi-Agentes)
 
 </details>
 
 <details>
-<summary><b>🚛 LogiFlow CRM - Sistema Enterprise para Transportadoras</b> ⚡ ONLINE</summary>
+<summary><b>🚢 FlowTrack — Sistema de Operações Portuárias</b> &nbsp;🏢 ENTERPRISE</summary>
 
 <br>
 
-**Stack:** `Python` `FastAPI` `Vue.js 3` `PostgreSQL` `Redis` `Docker`
+**Stack:** `Python` `Flask` `Django 5` `DRF` `PostgreSQL` `JWT` `Docker` `RBAC`
 
-**Arquitetura:** 4 aplicações integradas (Microserviços)
+**Contexto:** Sistema desenvolvido e implantado no **maior terminal portuário privado do Brasil** (ICTSI, Porto do Rio de Janeiro) — adotado imediatamente pela equipe operacional em múltiplos setores.
+
+**Funcionalidades:**
+- Workflow de aprovação multinível configurável
+- RBAC avançado (Admin, Gerente, Operador, Visualizador)
+- Trilha de auditoria imutável de todas as operações
+- Gestão de motoristas, veículos e módulo GR portuário
+- Dashboard com KPIs em tempo real + exportação Excel/PDF
+- 100% White Label — personalizável por cliente
+
+� [Ver Código](https://github.com/LeonardoRFragoso/FlowTrack)
+
+</details>
+
+<details>
+<summary><b>📺 Digital Signage Platform — TV Corporativa</b> &nbsp;🏢 ENTERPRISE</summary>
+
+<br>
+
+**Stack:** `Python` `Flask` `React` `WebSocket` `Redis` `FFmpeg` `Chromecast` `Prometheus`
+
+**Funcionalidades:**
+- Gestão centralizada de TVs corporativas
+- Comunicação em tempo real via WebSocket
+- Compilação automática de vídeos (FFmpeg)
+- Integração nativa com Chromecast
+- Multi-empresa com métricas Prometheus
+
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/Digital-Signage-Platform)
+
+</details>
+
+<details>
+<summary><b>🔮 Oráculo — Consultor de IA para Decisões Estratégicas</b> &nbsp;🧠 OpenRAG · LLM</summary>
+
+<br>
+
+**Stack:** `Python` `OpenRAG` `OpenSearch` `Langflow` `Docling` `React` `Docker` `REST API`
+
+**Funcionalidades:**
+- Interface React estilo ChatGPT com pipeline OpenRAG completo
+- Análise preditiva e dashboard executivo
+- Gestão de budget, metas e OKRs
+- Integração universal com dados de nuvem (logístico e comercial)
+- Stack RAG mais moderna do mercado: OpenSearch + Langflow + Docling
+
+� [Ver Código](https://github.com/LeonardoRFragoso/Oraculo)
+
+</details>
+
+<details>
+<summary><b>🚛 LogiFlow — SaaS CRM/TMS para Transportadoras</b> &nbsp;🟢 ONLINE</summary>
+
+<br>
+
+**Stack:** `Python` `FastAPI` `Vue.js 3` `PostgreSQL` `Redis` `Docker` `Microsserviços`
+
+**Arquitetura:** 4 aplicações integradas (Microsserviços)
 - CRM Principal (gestão comercial e operacional)
 - App do Motorista (PWA offline-first)
 - Portal do Cliente (rastreamento real-time)
@@ -101,111 +188,9 @@ Desenvolvedor Full Stack com foco em **sistemas empresariais completos**, **auto
 - Rastreamento GPS em tempo real (API Telematics)
 - Integrações ERP (Omie, Bling, Tiny)
 - Multi-tenant com isolamento de dados
-- 60-70% mais acessível que concorrentes
+- **60–70% mais acessível que concorrentes**
 
 🔗 [Ver Código](https://github.com/LeonardoRFragoso/LogiFlow) | 🌐 [Acessar Sistema](https://logi-flow-wuhp.vercel.app)
-
-</details>
-
-<details>
-<summary><b>📋 TaskManager - Gestão de Projetos</b></summary>
-
-<br>
-
-**Stack:** `Go (Gin)` `Vue.js 3` `PostgreSQL` `Docker` `JWT`
-
-**Funcionalidades:**
-- Sistema estilo Trello com backend em Go
-- Kanban Board com drag-and-drop
-- Dashboard com gráficos Chart.js
-- Dark Mode e Internacionalização (PT-BR/EN)
-- Autenticação JWT com refresh tokens
-
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/Go-API-Gestao-de-Projetos-e-Tarefas)
-
-</details>
-
-<details>
-<summary><b>📊 APM Platform - Monitoramento de Performance</b></summary>
-
-<br>
-
-**Stack:** `Java 21` `Spring Boot` `WebSocket` `PostgreSQL` `Prometheus`
-
-**Funcionalidades:**
-- Application Performance Monitoring
-- Coleta automática de métricas (latência, CPU, memória)
-- Health checks com classificação UP/DEGRADED/DOWN
-- Alertas configuráveis e dashboard real-time
-- Clean Architecture para alto volume de dados
-
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/Plataforma-de-Monitoramento-de-Sistemas-e-APIs)
-
-</details>
-
-<details>
-<summary><b>� FlowTrack - Gestão de Operações Portuárias</b> 🏭 Em Produção</summary>
-
-<br>
-
-**Stack:** `Python` `Flask` `Bootstrap 5` `PostgreSQL` `JWT`
-
-**Contexto:** Sistema desenvolvido e implantado no **maior terminal portuário privado do Brasil** (operação ICTSI, Porto do Rio de Janeiro) — adotado imediatamente pela equipe operacional em múltiplos setores.
-
-**Funcionalidades:**
-- Workflow de aprovação multinível configurável
-- RBAC avançado (Admin, GR, Operador, Visualizador)
-- Auditoria imutável de todas as operações
-- Gestão de motoristas, veículos e módulo GR portuário
-- Dashboard com KPIs em tempo real + exportação Excel/PDF
-- 100% White Label — personalizável por cliente
-
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/FlowTrack)
-
-</details>
-
-<details>
-<summary><b>�📺 Digital Signage Platform - TV Corporativa</b></summary>
-
-<br>
-
-**Stack:** `Python` `Flask` `React` `Socket.IO` `Redis` `FFmpeg` `Chromecast`
-
-**Funcionalidades:**
-- Gestão centralizada de TVs corporativas
-- Comunicação real-time via WebSocket
-- Compilação automática de vídeos (FFmpeg)
-- Integração nativa com Chromecast
-- Multi-empresa com métricas Prometheus
-
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/Digital-Signage-Platform)
-
-</details>
-
-<details>
-<summary><b>Mais Projetos...</b></summary>
-
-<br>
-
-### 🏥 MedFlow Finance - Recuperação de Faturamento Médico
-**Stack:** `Laravel 11` `Vue 3` `PostgreSQL`  
-Recupera 10-20% do faturamento perdido por clínicas médicas  
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/MedFlow_Finance)
-
-### 💰 FinanceControl - Gestão Financeira Pessoal
-**Stack:** `Flutter` `Django REST` `Riverpod` `Mercado Pago`  
-App multiplataforma com IA assistente para insights financeiros  
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/gerenciador-financeiro)
-
-### 📈 BI-as-a-Service - Business Intelligence com IA
-**Stack:** `Python` `FastAPI` `React` `GPT-4` `Docker`  
-Plataforma SaaS de BI com análise automática via GPT-4  
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/SaaS)
-
-### 🌐 GNLink - Site Institucional
-**Stack:** `Next.js 14` `TypeScript` `Tailwind CSS` `Framer Motion`  
-Site moderno com internacionalização (PT/EN)  
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/GNLink) | 🌐 [Ver Site](https://gn-link.vercel.app)
 
 </details>
 
@@ -215,44 +200,41 @@ Site moderno com internacionalização (PT/EN)
 
 <div align="center">
 
-### Backend
+### Backend & Core
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 
-![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
-![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
-
-### Frontend
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-
-### Database & Cache
+### Banco de Dados & Cache
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
+
+### IA & Automação
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
+![Anthropic](https://img.shields.io/badge/Claude_3-D97757?style=for-the-badge&logoColor=white)
+![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
+![Celery](https://img.shields.io/badge/Celery-37814A?style=for-the-badge&logo=celery&logoColor=white)
 
 ### DevOps & Cloud
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
-![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
 ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Railway](https://img.shields.io/badge/Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white)
 
-### AI & Integrations
-![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
+### Frontend (Suporte)
+![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+
+### Integrações
 ![Stripe](https://img.shields.io/badge/Stripe-008CDD?style=for-the-badge&logo=stripe&logoColor=white)
 ![Mercado Pago](https://img.shields.io/badge/Mercado_Pago-00B1EA?style=for-the-badge&logo=mercadopago&logoColor=white)
 
@@ -264,7 +246,7 @@ Site moderno com internacionalização (PT/EN)
 
 <div align="center">
   <img height="180em" src="https://github-readme-stats.vercel.app/api?username=LeonardoRFragoso&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true"/>
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=LeonardoRFragoso&layout=compact&langs_count=8&theme=tokyonight"/>
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=LeonardoRFragoso&layout=compact&langs_count=6&theme=tokyonight&hide=html,css,javascript"/>
 </div>
 
 <div align="center">
@@ -277,80 +259,48 @@ Site moderno com internacionalização (PT/EN)
 
 ---
 
+## 💡 O Que Eu Entrego
+
+<div align="center">
+
+| Domínio | Capacidades |
+|--------|-------------|
+| 🔌 **APIs Backend** | Django REST Framework · FastAPI · JWT · SaaS Multi-tenant · Microsserviços |
+| 🧠 **Integração com IA** | Pipelines LLM/RAG · GPT-4 · Claude 3 · OpenSearch · Langflow · Análise preditiva |
+| 🤖 **Automação** | RPA com Selenium + PyAutoGUI + Celery · Pipelines ETL · Web Scraping |
+| 📊 **Dados & Analytics** | Dashboards Streamlit · Pandas · Plotly · KPIs · Analytics executivo |
+| ⚙️ **DevOps** | Docker Compose · Deploy Linux · Nginx · AWS · Prometheus · Grafana |
+| 🔗 **Integrações** | Stripe · Mercado Pago · GPS Telematics · WhatsApp Business API · ERP (Omie/Bling) |
+
+</div>
+
+---
+
 ## 🎓 Formação & Certificações
 
 **🎓 Graduação**
-- Gestão de Tecnologia da Informação - Estácio de Sá (2016-2019)
+- Tecnólogo em Gestão da Tecnologia da Informação
 
 **📜 Certificações (300h+)**
-- 🐍 Python Developer - Rocketseat (2024)
-- 💻 Full Stack (React, Node.js, TypeScript, Docker, AWS) - Rocketseat (2024)
-- 🎯 Django Master Bootcamp (DRF, Redis, Celery, WebSockets) - PyCode (140h)
-- 📊 Analista de Dados (Pandas, NumPy, ML) - Cubos Academy (2024)
+- 🐍 Python: APIs, Automação & Dados — Rocketseat (100h)
+- ⚡ Formação Full Stack (Django · React · Node.js) — Rocketseat (100h)
+- 🏗️ Django Master Bootcamp (DRF, Redis, Celery, WebSockets) — PyCode
+- 📊 Analista de Dados (Pandas, NumPy, Visualização) — Cubos Academy
 
 ---
 
-## 💡 O Que Eu Entrego
-
-<table>
-  <tr>
-    <td align="center" width="33%">
-      <h3>🏗️ Arquitetura</h3>
-      <p>Microserviços<br>APIs RESTful/GraphQL<br>Clean Architecture<br>WebSocket</p>
-    </td>
-    <td align="center" width="33%">
-      <h3>💼 Soluções de Negócio</h3>
-      <p>CRM • ERP • SaaS<br>E-commerce<br>Dashboards<br>TMS</p>
-    </td>
-    <td align="center" width="33%">
-      <h3>🤖 Automação & IA</h3>
-      <p>RPA • Bots<br>ETL • Scrapers<br>GPT-4 Integration<br>ML Básico</p>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="33%">
-      <h3>📊 Data & Analytics</h3>
-      <p>BI • Dashboards<br>Visualizações<br>KPIs • Relatórios<br>Power BI</p>
-    </td>
-    <td align="center" width="33%">
-      <h3>📱 Mobile</h3>
-      <p>Flutter<br>PWA<br>Cross-Platform<br>iOS • Android • Web</p>
-    </td>
-    <td align="center" width="33%">
-      <h3>⚡ Performance</h3>
-      <p>Otimização de Queries<br>Redis Caching<br>Escalabilidade<br>Monitoramento</p>
-    </td>
-  </tr>
-</table>
-
----
-
-## 🎯 Áreas de Interesse
-
-```
-🏢 Sistemas Empresariais (CRM, ERP, SaaS)
-🤖 Automação e IA (GPT, ML, RPA)
-📊 Plataformas de BI e Dashboards
-🔗 Integrações e APIs
-⚙️ Arquitetura de Microserviços
-📱 Apps Multiplataforma (Flutter)
-🚀 Aplicações Web Modernas e Escaláveis
-```
-
----
-
-## 🚀 Por Que Trabalhar Comigo?
+## 🎯 Por Que Trabalhar Comigo?
 
 <div align="center">
 
 | Diferencial | Descrição |
 |------------|-----------|
-| 🌐 **Multi-Stack** | Python, Go, Java, PHP, JavaScript/TypeScript, Flutter |
-| ✅ **Código Limpo** | SOLID, DRY, Clean Architecture |
-| 📦 **Entrega Consistente** | Metodologias ágeis com foco em resultados |
-| 💼 **Visão de Negócio** | Tecnologia alinhada aos objetivos estratégicos |
-| 🚀 **Projetos em Produção** | Experiência real com sistemas rodando |
-| 📚 **Aprendizado Contínuo** | Sempre expandindo o stack tecnológico |
+| ✅ **Código Limpo** | SOLID · DRY · Clean Architecture · RESTful |
+| 🚀 **Sistemas em Produção** | Experiência real com sistemas rodando e clientes reais |
+| 🧠 **IA Aplicada** | LLM/RAG, multi-agente, OpenSearch — não só teoria |
+| 🏗️ **Arquitetura** | Multi-tenant · Microsserviços · JWT · RBAC |
+| 💼 **Visão de Negócio** | Tecnologia alinhada a objetivos reais e métricas de impacto |
+| 📚 **Aprendizado Contínuo** | Sempre expandindo o stack com foco em Python e IA |
 
 </div>
 
@@ -360,17 +310,17 @@ Site moderno com internacionalização (PT/EN)
 
 <div align="center">
 
-Estou sempre aberto a **novos desafios**, **projetos interessantes** e **oportunidades de colaboração**.
+Aberto a novas oportunidades em **Python Backend / Django / FastAPI / AI Engineer**.
 
 <p>
-  <a href="https://www.linkedin.com/in/leonardo-fragoso-921b166a/" target="_blank">
+  <a href="https://linkedin.com/in/leonardorfragoso" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
   </a>
   <a href="mailto:leonardorfragoso@gmail.com">
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
   </a>
   <a href="https://leonardofragosodev.netlify.app/" target="_blank">
-    <img src="https://img.shields.io/badge/Portfolio-4A90E2?style=for-the-badge&logo=react&logoColor=white" alt="Portfolio">
+    <img src="https://img.shields.io/badge/Portfolio-1d4ed8?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Portfolio">
   </a>
 </p>
 
@@ -383,5 +333,5 @@ Estou sempre aberto a **novos desafios**, **projetos interessantes** e **oportun
 ---
 
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=2B4C7E&height=100&section=footer"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=1d4ed8&height=100&section=footer"/>
 </div>
