@@ -67,12 +67,12 @@ stack = {
 
 | | |
 |---|---|
-| 🏗️ | Entregou **6 sistemas enterprise** para a ICTSI como desenvolvedor único — da arquitetura à produção |
-| 🚀 | Desenvolveu **4 produtos SaaS do zero**, atualmente em produção com clientes reais |
-| 📉 | Reduziu custos operacionais em **60–70%** para transportadoras com o LogiFlow |
-| 🧠 | Implementou **pipeline LLM/RAG** (GPT-4 + busca vetorial) para consulta de dados em linguagem natural |
-| 🔐 | Projetou **arquiteturas SaaS multi-tenant** com JWT, RBAC e isolamento de dados por organização |
-| 🤖 | Construiu pipelines RPA que **eliminaram horas diárias** de processos financeiros manuais |
+| 🏗️ | Entreguei **6 sistemas enterprise** para a ICTSI como desenvolvedor único — da arquitetura à produção |
+| 🚀 | Desenvolvi **4 produtos SaaS do zero**, atualmente em produção com clientes reais |
+| 📉 | Reduzi custos operacionais em **60–70%** para transportadoras com o LogiFlow |
+| 🧠 | Implementei **pipeline LLM/RAG** (GPT-4 + busca vetorial) para consulta de dados em linguagem natural |
+| 🔐 | Projetei **arquiteturas SaaS multi-tenant** com JWT, RBAC e isolamento de dados por organização |
+| 🤖 | Construí pipelines RPA que **eliminaram horas diárias** de processos financeiros manuais |
 
 ---
 
