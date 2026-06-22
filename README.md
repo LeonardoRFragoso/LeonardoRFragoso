@@ -76,7 +76,7 @@ stack = {
 
 ---
 
-## � Projetos em Destaque
+## 🔥 Projetos em Destaque
 
 <details open>
 <summary><b>🚀 ProFlow — SaaS para Freelancers</b> &nbsp;🟢 ONLINE</summary>
@@ -109,7 +109,7 @@ stack = {
 - Suporte multi-tenant com planos Free, Pro e Enterprise
 - Deploy Railway (backend) + Vercel (frontend)
 
-� [Ver Código](https://github.com/LeonardoRFragoso/AgentesIA-Consultoria-de-Negocios-com-IA-Multi-Agentes)
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/AgentesIA-Consultoria-de-Negocios-com-IA-Multi-Agentes)
 
 </details>
 
@@ -130,7 +130,7 @@ stack = {
 - Dashboard com KPIs em tempo real + exportação Excel/PDF
 - 100% White Label — personalizável por cliente
 
-� [Ver Código](https://github.com/LeonardoRFragoso/FlowTrack)
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/FlowTrack)
 
 </details>
 
@@ -166,7 +166,7 @@ stack = {
 - Integração universal com dados de nuvem (logístico e comercial)
 - Stack RAG mais moderna do mercado: OpenSearch + Langflow + Docling
 
-� [Ver Código](https://github.com/LeonardoRFragoso/Oraculo)
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/Oraculo)
 
 </details>
 
