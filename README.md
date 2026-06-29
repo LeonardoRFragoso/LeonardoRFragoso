@@ -15,7 +15,7 @@
   <a href="mailto:leonardorfragoso@gmail.com">
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
   </a>
-  <a href="https://leonardofragosodev.netlify.app/" target="_blank">
+  <a href="https://portfolio-leonardo-fragoso-react.vercel.app/" target="_blank">
     <img src="https://img.shields.io/badge/Portfolio-1d4ed8?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Portfolio">
   </a>
   <img src="https://komarev.com/ghpvc/?username=LeonardoRFragoso&color=1d4ed8&style=for-the-badge" alt="Profile views">
@@ -80,7 +80,25 @@ stack = {
 ## 🔥 Projetos em Destaque
 
 <details open>
-<summary><b>🚀 ProFlow — SaaS para Freelancers</b> &nbsp;🟢 ONLINE</summary>
+<summary><b>� Oráculo IA — Consultor Estratégico com IA</b> &nbsp;🧠 OpenRAG · LLM</summary>
+
+<br>
+
+**Stack:** `Python` `FastAPI` `OpenRAG` `OpenSearch` `Langflow` `Docling` `React` `Docker` `REST API`
+
+**Funcionalidades:**
+- Interface React estilo ChatGPT com pipeline OpenRAG completo
+- Análise preditiva e dashboard executivo
+- Gestão de budget, metas e OKRs
+- Integração universal com dados de nuvem (logístico e comercial)
+- Stack RAG mais moderna do mercado: OpenSearch + Langflow + Docling
+
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/Oraculo)
+
+</details>
+
+<details>
+<summary><b>🚀 ProFlow — SaaS para Freelancers</b> &nbsp;� ONLINE</summary>
 
 <br>
 
@@ -97,82 +115,7 @@ stack = {
 </details>
 
 <details>
-<summary><b>🧠 AgentesIA — SaaS de Consultoria Multi-Agente com IA</b> &nbsp;🟣 IA · SaaS</summary>
-
-<br>
-
-**Stack:** `Python` `FastAPI` `Claude 3 (Anthropic)` `PostgreSQL` `Redis` `JWT` `Multi-tenant` `Docker`
-
-**Funcionalidades:**
-- 5 agentes de IA especializados trabalhando em paralelo (orquestração assíncrona)
-- Análise de problemas de negócio sob múltiplas perspectivas
-- Geração de relatórios em PDF, PPTX e Markdown
-- Suporte multi-tenant com planos Free, Pro e Enterprise
-- Deploy Railway (backend) + Vercel (frontend)
-
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/AgentesIA-Consultoria-de-Negocios-com-IA-Multi-Agentes) | 🌐 [Demo ao Vivo](https://agentes-ia-consultoria-de-negocios.vercel.app)
-
-</details>
-
-<details>
-<summary><b>🚢 FlowTrack — Sistema de Operações Portuárias</b> &nbsp;🏢 ENTERPRISE</summary>
-
-<br>
-
-**Stack:** `Python` `Flask` `Django 5` `DRF` `PostgreSQL` `JWT` `Docker` `RBAC`
-
-**Contexto:** Sistema desenvolvido e implantado no **maior terminal portuário privado do Brasil** (ICTSI, Porto do Rio de Janeiro) — adotado imediatamente pela equipe operacional em múltiplos setores.
-
-**Funcionalidades:**
-- Workflow de aprovação multinível configurável
-- RBAC avançado (Admin, Gerente, Operador, Visualizador)
-- Trilha de auditoria imutável de todas as operações
-- Gestão de motoristas, veículos e módulo GR portuário
-- Dashboard com KPIs em tempo real + exportação Excel/PDF
-- 100% White Label — personalizável por cliente
-
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/FlowTrack)
-
-</details>
-
-<details>
-<summary><b>📺 Digital Signage Platform — TV Corporativa</b> &nbsp;🏢 ENTERPRISE</summary>
-
-<br>
-
-**Stack:** `Python` `Flask` `React` `WebSocket` `Redis` `FFmpeg` `Chromecast` `Prometheus`
-
-**Funcionalidades:**
-- Gestão centralizada de TVs corporativas
-- Comunicação em tempo real via WebSocket
-- Compilação automática de vídeos (FFmpeg)
-- Integração nativa com Chromecast
-- Multi-empresa com métricas Prometheus
-
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/Digital-Signage-Platform)
-
-</details>
-
-<details>
-<summary><b>🔮 Oráculo — Consultor de IA para Decisões Estratégicas</b> &nbsp;🧠 OpenRAG · LLM</summary>
-
-<br>
-
-**Stack:** `Python` `OpenRAG` `OpenSearch` `Langflow` `Docling` `React` `Docker` `REST API`
-
-**Funcionalidades:**
-- Interface React estilo ChatGPT com pipeline OpenRAG completo
-- Análise preditiva e dashboard executivo
-- Gestão de budget, metas e OKRs
-- Integração universal com dados de nuvem (logístico e comercial)
-- Stack RAG mais moderna do mercado: OpenSearch + Langflow + Docling
-
-🔗 [Ver Código](https://github.com/LeonardoRFragoso/Oraculo)
-
-</details>
-
-<details>
-<summary><b>🚛 LogiFlow — SaaS CRM/TMS para Transportadoras</b> &nbsp;🟢 ONLINE</summary>
+<summary><b>� LogiFlow — SaaS CRM/TMS para Transportadoras</b> &nbsp;� ONLINE</summary>
 
 <br>
 
@@ -192,6 +135,60 @@ stack = {
 - **60–70% mais acessível que concorrentes**
 
 🔗 [Ver Código](https://github.com/LeonardoRFragoso/LogiFlow) | 🌐 [Acessar Sistema](https://logi-flow-wuhp.vercel.app)
+
+</details>
+
+<details>
+<summary><b>� PyScript.Tech — Site Institucional & Software House</b> &nbsp;� ONLINE</summary>
+
+<br>
+
+**Stack:** `React 18` `JavaScript` `CSS Modules` `EmailJS` `Framer Motion`
+
+**Funcionalidades:**
+- Website institucional premium para software house
+- Design moderno com glassmorphism e gradientes animados
+- Formulário de contato integrado com EmailJS
+- Carrossel de depoimentos e páginas de serviços/projetos
+
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/PyScriptTech_React) | 🌐 [Acessar Site](https://py-script-tech-react.vercel.app/)
+
+</details>
+
+<details>
+<summary><b>� Portfolio Leonardo Fragoso — Apresentação Profissional</b> &nbsp;🟢 ONLINE</summary>
+
+<br>
+
+**Stack:** `React 18` `TypeScript` `Vite` `Tailwind CSS` `Framer Motion` `SEO`
+
+**Funcionalidades:**
+- Portfólio otimizado para recrutadores com SEO e prerender
+- Internacionalização (PT/EN) e CTAs de WhatsApp/Email
+- Sitemap, robots.txt e meta tags para indexação
+- Apresentação unificada de projetos, stack e experiência
+
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/Portfolio-LeonardoFragoso-React) | 🌐 [Acessar Portfólio](https://portfolio-leonardo-fragoso-react.vercel.app/)
+
+</details>
+
+<details>
+<summary><b>� TVS iTracker — Digital Signage Platform</b> &nbsp;� ENTERPRISE</summary>
+
+<br>
+
+**Stack:** `Python` `Flask` `React` `WebSocket` `Redis` `FFmpeg` `Chromecast` `Prometheus`
+
+**Contexto:** TV Corporativa implantada no **maior terminal portuário privado do Brasil** (ICTSI — Porto do Rio de Janeiro).
+
+**Funcionalidades:**
+- Gestão centralizada de TVs corporativas
+- Comunicação em tempo real via WebSocket
+- Compilação automática de vídeos (FFmpeg)
+- Integração nativa com Chromecast
+- Multi-empresa com métricas Prometheus
+
+🔗 [Ver Código](https://github.com/LeonardoRFragoso/Digital-Signage-Platform)
 
 </details>
 
@@ -320,7 +317,7 @@ Aberto a novas oportunidades em **Python Backend / Django / FastAPI / AI Enginee
   <a href="mailto:leonardorfragoso@gmail.com">
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
   </a>
-  <a href="https://leonardofragosodev.netlify.app/" target="_blank">
+  <a href="https://portfolio-leonardo-fragoso-react.vercel.app/" target="_blank">
     <img src="https://img.shields.io/badge/Portfolio-1d4ed8?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Portfolio">
   </a>
 </p>
