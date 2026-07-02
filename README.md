@@ -40,7 +40,7 @@
 
 Desenvolvedor Python Backend focado em entregar **sistemas de nível produção** — REST APIs, plataformas SaaS, backends com IA e pipelines de automação.
 
-Na **iTracker (ICTSI — Porto do Rio de Janeiro)**, fui o desenvolvedor único responsável por 6 sistemas enterprise em produção:
+Atuei como responsável técnico pela arquitetura, desenvolvimento e evolução de 6 sistemas corporativos em produção na iTracker/ICTSI.
 - 🧠 **GPTracker** — Dashboard executivo com IA e pipeline LLM/RAG (FastAPI + GPT-4 + PostgreSQL)
 - 🚢 **GateLog** — Sistema de controle de acesso portuário (Django 5 + DRF + Vue.js 3), implantado em múltiplos setores
 - 📋 **FlowTrack** — Sistema enterprise de workflows e não-conformidades com RBAC multinível
