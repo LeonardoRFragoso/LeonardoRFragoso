@@ -37,7 +37,7 @@ Antes de atuar diretamente como desenvolvedor, construí uma base sólida em **o
 
 Atuei como responsável técnico pela **arquitetura, desenvolvimento e evolução de sistemas corporativos em produção** na iTracker/ICTSI, incluindo soluções para operação portuária, workflows internos, dashboards executivos, automações financeiras e TV corporativa.
 
-Atualmente mantenho projetos próprios em produção envolvendo **Django, FastAPI, PostgreSQL, Vue.js, React, Docker, integrações de pagamento e IA aplicada**.
+Atualmente mantenho projetos próprios em produção envolvendo **Django, FastAPI, PostgreSQL, Vue.js, React, Docker, integrações de pagamento, automação e IA aplicada**.
 
 ```python
 focus = {
@@ -65,11 +65,11 @@ focus = {
 
 ---
 
-## 🏆 Destaques profissionais
+## 🏆 Experiência e impacto técnico
 
 | Área | Resultado |
 |---|---|
-| 🏗️ Sistemas corporativos | Atuação na arquitetura, desenvolvimento e evolução de **6 sistemas enterprise** em produção |
+| 🏗️ Sistemas corporativos | Arquitetura, desenvolvimento e evolução de **6 sistemas enterprise** em produção |
 | 🚀 Produtos próprios | Desenvolvimento de plataformas SaaS e aplicações web publicadas em produção |
 | 🧠 IA aplicada | Implementação de pipelines LLM/RAG, busca semântica e análise de dados em linguagem natural |
 | 🔐 Arquitetura backend | APIs REST, JWT, RBAC, multi-tenant, WebSockets, filas assíncronas e integrações externas |
@@ -256,14 +256,9 @@ Site institucional para apresentação de serviços, projetos e posicionamento p
 
 ---
 
-## 📊 GitHub Stats
+## 📊 Atividade no GitHub
 
 <div align="center">
-
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=LeonardoRFragoso&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&hide_border=true" alt="GitHub stats" />
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=LeonardoRFragoso&layout=compact&langs_count=8&theme=tokyonight&hide_border=true&hide=html,css" alt="Top languages" />
-
-<br><br>
 
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=LeonardoRFragoso&theme=tokyonight&hide_border=true" alt="GitHub streak" />
 
