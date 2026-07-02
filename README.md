@@ -2,7 +2,7 @@
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=28&duration=2800&pause=2000&color=1d4ed8&center=true&vCenter=true&width=940&lines=Leonardo+Fragoso;Desenvolvedor+Python+Backend;Django+%C2%B7+FastAPI+%C2%B7+Sistemas+de+IA;4+SaaS+em+Produ%C3%A7%C3%A3o+%F0%9F%9A%80" alt="Typing SVG" />
 </div>
 
-<h3 align="center">Desenvolvedor Python Backend | Django · FastAPI · IA · REST APIs</h3>
+<h3 align="center">Desenvolvedor Backend Python | Software Engineer | Django · FastAPI · IA Aplicada</h3>
 
 <p align="center">
   <em>"Sistemas que resolvem problemas reais — de APIs a pipelines de IA."</em>
