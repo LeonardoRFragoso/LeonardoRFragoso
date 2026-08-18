@@ -39,6 +39,15 @@ EXPECTED_PRIVATE = 15
 EXPECTED_ACTIVE_CANDIDATES = 12  # do not hardcode if live evidence contradicts
 EXPECTED_CREDENTIAL_IDS = 41
 
+# Phase 2B current state (post-portfolio-curation execution)
+# These are the APPROVED post-execution visibility totals.
+# The Phase 2A values above (15/15) are the HISTORICAL baseline preserved
+# in HISTORY_SANITIZATION_PLAN.md. The values below reflect the CURRENT
+# live account state after Phase 2B.2 visibility changes were executed.
+PHASE_2B_EXPECTED_PUBLIC = 10
+PHASE_2B_EXPECTED_PRIVATE = 20
+PHASE_2B_EXPECTED_ARCHIVED = 1
+
 ALLOWED_REWRITE_REQUIRED = {"YES", "NO", "N/A_REPOSITORY_DELETED"}
 ALLOWED_REWRITE_READY = {"YES", "NO", "N/A", "COMPLETED"}
 
@@ -212,8 +221,40 @@ def check_live_github(candidates: set[str]) -> tuple[bool, list[str]]:
         return False, []
 
 
+def check_live_visibility_phase2b() -> tuple[bool, dict]:
+    """Check live GitHub visibility/archived counts against Phase 2B expected state.
+    Returns (all_ok, counts_dict)."""
+    try:
+        result = subprocess.run(
+            ["gh", "repo", "list", "LeonardoRFragoso", "--limit", "100",
+             "--json", "name,visibility,isArchived"],
+            capture_output=True, text=True, timeout=30,
+        )
+        if result.returncode != 0:
+            print(f"  gh repo list failed: {result.stderr.strip()}")
+            return False, {}
+        import json
+        repos = json.loads(result.stdout)
+        total = len(repos)
+        public = sum(1 for r in repos if r.get("visibility") == "PUBLIC")
+        private = sum(1 for r in repos if r.get("visibility") == "PRIVATE")
+        archived = sum(1 for r in repos if r.get("isArchived") is True)
+        counts = {"total": total, "public": public, "private": private, "archived": archived}
+        ok = (
+            total == EXPECTED_ACCOUNT_TOTAL
+            and public == PHASE_2B_EXPECTED_PUBLIC
+            and private == PHASE_2B_EXPECTED_PRIVATE
+            and archived == PHASE_2B_EXPECTED_ARCHIVED
+        )
+        return ok, counts
+    except Exception as e:
+        print(f"  Phase 2B live visibility check error: {e}")
+        return False, {}
+
+
 def validate(rows: list[dict], totals: dict, detailed: list[str], live: bool) -> bool:
     errors: list[str] = []
+    counts_2b: dict = {}
 
     # 1. No duplicate active repository rows
     repo_names = [r["REPOSITORY"] for r in rows]
@@ -302,6 +343,24 @@ def validate(rows: list[dict], totals: dict, detailed: list[str], live: bool) ->
         if not ok:
             errors.append(f"Active candidates not found on live GitHub: {missing_live}")
 
+    # 10b. Phase 2B live visibility check (only with --live)
+    # Validates CURRENT account state against approved Phase 2B post-execution
+    # visibility totals (10 public, 20 private, 1 archived). This is distinct
+    # from the Phase 2A historical baseline (15/15) documented in the plan.
+    if live:
+        ok_2b, counts_2b = check_live_visibility_phase2b()
+        if not ok_2b:
+            if counts_2b:
+                errors.append(
+                    f"Phase 2B live state mismatch: "
+                    f"PUBLIC={counts_2b.get('public')} (expected {PHASE_2B_EXPECTED_PUBLIC}), "
+                    f"PRIVATE={counts_2b.get('private')} (expected {PHASE_2B_EXPECTED_PRIVATE}), "
+                    f"ARCHIVED={counts_2b.get('archived')} (expected {PHASE_2B_EXPECTED_ARCHIVED}), "
+                    f"TOTAL={counts_2b.get('total')} (expected {EXPECTED_ACCOUNT_TOTAL})"
+                )
+            else:
+                errors.append("Phase 2B live visibility check failed (could not fetch counts)")
+
     # 11. Phase 2A.16 security closure fields (optional — won't fail if absent
     # for backward compatibility, but will validate values if present)
     plan_text = PLAN_PATH.read_text()
@@ -340,8 +399,14 @@ def validate(rows: list[dict], totals: dict, detailed: list[str], live: bool) ->
     print()
     if live:
         print("Live GitHub existence check: performed")
+        if counts_2b:
+            print(f"Phase 2B live state: PUBLIC={counts_2b.get('public')}, "
+                  f"PRIVATE={counts_2b.get('private')}, "
+                  f"ARCHIVED={counts_2b.get('archived')}, "
+                  f"TOTAL={counts_2b.get('total')}")
     else:
         print("Live GitHub existence check: skipped (use --live to enable)")
+        print("Phase 2B live state check: skipped (use --live to enable)")
     print()
 
     if errors:

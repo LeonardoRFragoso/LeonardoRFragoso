@@ -280,3 +280,133 @@ Fourth history rewrite phase. ProFlow is the ONLY repository in Leonardo's accou
 - PHASE_2B_ALLOWED = YES
 - Canonical security items = 41 (preserved — no renumbering, no deletion)
 - Unresolved former-employer items: #19, #20, #29, #30 (EXTERNAL_OWNER_DEFERRED)
+
+---
+
+## Phase 2B.2 — Portfolio Curation Execution (2026-08-18)
+
+**Operation:** Approved portfolio curation execution — visibility changes, archive, README rewrites, metadata updates, profile README rewrite.
+
+**Owner approval:** Explicit owner approval received for all actions listed in this section.
+
+### Visibility Changes (PUBLIC → PRIVATE)
+
+| Repository | Before | After | Reason |
+|---|---|---|---|
+| API_Analyze | PUBLIC | PRIVATE | Tutorial-level Streamlit app, no tests/CI/Docker — dilutes portfolio quality |
+| FragTech-Fintech | PUBLIC | PRIVATE | Claims "AI-powered" but no AI implementation — credibility risk |
+| PyScriptTech | PUBLIC | PRIVATE | Company marketing website, minimal code value |
+| Portfolio-LeonardoFragoso-React | PUBLIC | PRIVATE | Duplicates profile README function — Vercel deployment remains live |
+| MedFlow_Finance | PUBLIC | PRIVATE | PHP/Laravel outside primary stack, 20+ SPRINT files — dilutes Python positioning |
+
+### Archive
+
+| Repository | Archived | Reason |
+|---|---|---|
+| SaaS | YES | Abandoned project — only 1 of 6 planned products implemented |
+
+### Final Top 6 Showcase
+
+| Pin | Repository | Score | Description |
+|---|---|---|---|
+| #1 | PayFlow-AI | 84 | AI-enabled financial workflow platform (FastAPI, Next.js, 629 verified tests) |
+| #2 | Pagae | 79 | Django business platform with domain-oriented architecture |
+| #3 | Legal-AI-Copilot | 75 | AI legal contract analysis MVP (FastAPI, React, RBAC, 176 verified tests) |
+| #4 | Oraculo | 72 | AI analytics platform (NL2SQL, RAG, knowledge graphs) |
+| #5 | desafio-focon | 69 | Full Stack engineering challenge (React, Supabase, RLS, E2E) |
+| #6 | LogiFlow | 63 | Multi-tenant logistics SaaS (CRM, TMS, FastAPI, Vue) |
+
+### Public Supporting Repositories (4)
+
+| Repository | Role |
+|---|---|
+| LeonardoRFragoso | Profile README infrastructure |
+| Plataforma-de-Monitoramento-de-Sistemas-e-APIs | Java 21 + Spring Boot — language breadth |
+| Go-API-Gestao-de-Projetos-e-Tarefas | Go — language breadth (README corrected, not featured) |
+| vigil-ai | Multi-agent AI case study — supporting signal |
+
+### README PRs
+
+| Repository | PR # | Merge SHA | Classification |
+|---|---|---|---|
+| PayFlow-AI | #2 | `0d9bdf1875c9ddf2a2c3bee8aa530aab6c0fcc75` | MINOR_UPDATE |
+| Pagae | #1 | `f89f6745019d34412b92856254e0e57c41d0f164` | MINOR_UPDATE |
+| Legal-AI-Copilot | #1 | `76bc3631d57cc861da723dd30a499aa9f5a714e5` | MINOR_UPDATE |
+| Oraculo | #1 | `5077e8e66677d605db569553f8ee2b5b2bb4c926` | REWRITE |
+| desafio-focon | #33 | `cde0fd86f1ae87b3628111090854334b33695649` | MINOR_UPDATE |
+| LogiFlow | #2 | `128aa2cdaaafee72e88d81a8a8be79b83ca43983` | REWRITE |
+| Go-API-Gestao-de-Projetos-e-Tarefas | #1 | `fc008ba8416b14c37ebf608b47ba0de59bf80176` | MINOR_UPDATE (supporting) |
+
+### Profile README
+
+| Repository | PR # | Merge SHA |
+|---|---|---|
+| LeonardoRFragoso | #18 | `5eb4b655d70650b8f587daf986eb1b20a46df729` |
+
+### Metadata Updates (Top 6)
+
+| Repository | Description | Topics | Homepage |
+|---|---|---|---|
+| PayFlow-AI | YES | YES (9 topics) | NO (no verified public demo) |
+| Pagae | YES | YES (5 topics) | NO (no verified public demo) |
+| Legal-AI-Copilot | YES | YES (8 topics) | NO (no verified public demo) |
+| Oraculo | YES | YES (9 topics) | NO (no verified public demo) |
+| desafio-focon | YES | YES (6 topics) | YES (https://desafio-focon.vercel.app) |
+| LogiFlow | YES | YES (8 topics) | YES (https://logi-flow-wuhp.vercel.app) |
+
+### Demo Verification
+
+| Repository | Demo URL | HTTP Status | DEMO_VERIFIED |
+|---|---|---|---|
+| desafio-focon | https://desafio-focon.vercel.app | 200 | YES |
+| LogiFlow | https://logi-flow-wuhp.vercel.app | 200 | YES |
+| PayFlow-AI | N/A | N/A | NO |
+| Pagae | N/A | N/A | NO |
+| Legal-AI-Copilot | N/A | N/A | NO |
+| Oraculo | N/A | N/A | NO |
+
+### Portfolio Website Impact
+
+| Check | Result |
+|---|---|
+| WEBSITE_BEFORE | HTTP 200 (https://portfolio-leonardo-fragoso-react.vercel.app/) |
+| WEBSITE_AFTER | HTTP 200 (https://portfolio-leonardo-fragoso-react.vercel.app/) |
+| PORTFOLIO_DEPLOYMENT_IMPACT | NONE — Vercel deployment remains live after repo visibility change |
+
+### Pin Status
+
+| Field | Value |
+|---|---|
+| Currently pinned (3) | PayFlow-AI, Oraculo, LogiFlow |
+| Desired pin order (6) | PayFlow-AI, Pagae, Legal-AI-Copilot, Oraculo, desafio-focon, LogiFlow |
+| Pin status | MANUAL_ACTION_REQUIRED — GitHub API does not support pin mutations. See manual instructions below. |
+
+**Manual pin instructions for Leonardo:**
+1. Go to https://github.com/LeonardoRFragoso
+2. Click "Customize your pins" (or the pin icon)
+3. Remove current pins that are not in the desired set
+4. Add repos in this exact order: PayFlow-AI, Pagae, Legal-AI-Copilot, Oraculo, desafio-focon, LogiFlow
+5. Click "Save"
+
+### Case Studies (Deferred)
+
+| Project | Priority | Status |
+|---|---|---|
+| ProFlow | HIGH_PRIORITY_PUBLIC_CASE_STUDY | DEFERRED — do not create yet |
+| DevPro | MEDIUM_PRIORITY_PUBLIC_CASE_STUDY | DEFERRED — do not create yet |
+
+### Post-Execution Visibility Totals
+
+| Metric | Before (Phase 2A) | After (Phase 2B.2) |
+|---|---|---|
+| TOTAL | 30 | 30 |
+| PUBLIC | 15 | 10 |
+| PRIVATE | 15 | 20 |
+| ARCHIVED | 0 | 1 |
+
+### Validator Results (Post-Execution)
+
+| Validator | Result |
+|---|---|
+| validate_credential_matrix.py | PASS (41 IDs) |
+| validate_history_sanitization_plan.py --live | PASS (Phase 2A: 15/15 historical, Phase 2B: 10/20/1 live) |
