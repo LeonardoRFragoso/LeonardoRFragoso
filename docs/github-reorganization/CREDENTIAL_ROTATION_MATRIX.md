@@ -1,0 +1,188 @@
+# Credential Rotation Matrix — Phase 2A
+
+**Account:** LeonardoRFragoso
+**Phase 2A date:** 2026-08-17
+**Status:** ACTIVE — Leonardo must perform all rotations manually
+
+> **CRITICAL:** No credential values are listed in this document. All credentials committed to Git must be treated as COMPROMISED regardless of whether the repository is now private or the file was removed from the current tree. Removing a file, making a repo private, or rewriting history does NOT make a credential safe — rotation/revocation at the provider is required.
+
+## Rotation Priority Order
+
+- **P0 — Immediate:** Cloud/storage access keys, payment provider secrets, database credentials, private RSA/SSH keys, OAuth client secrets, OpenAI/Twilio/SendGrid API credentials
+- **P1 — High:** Application signing secrets (Django/JWT), webhook secrets, session secrets
+- **P2 — Medium:** Expired historical sessions/tokens, development-only keys, example-file leaks
+
+## Status Legend
+
+| Status | Meaning |
+|---|---|
+| NOT_STARTED | Rotation not yet attempted |
+| MANUAL_ACTION_REQUIRED | Leonardo must perform this rotation manually — no automated access available |
+| ROTATED | New credential created, old one replaced in deployment environment |
+| REVOKED | Old credential revoked/disabled at provider |
+| VALIDATED | Post-rotation health check confirmed application works with new credential |
+| NOT_APPLICABLE | Credential is not real or not in use |
+
+---
+
+## P0 — Immediate Rotation Required
+
+### ProFlow
+
+| # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Django | Application secret key (SECRET_KEY) | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `SECRET_KEY` | Verify Django session cookies invalidated; users re-login | Yes — generate new secret, update Railway env var, redeploy |
+| 2 | OpenAI | API key (sk-proj-...) | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `OPENAI_API_KEY` | Verify AI features still work | Yes — revoke key in OpenAI dashboard, create new key, update Railway env var |
+| 3 | Google | OAuth client secret (GOCSPX-...) | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `GOOGLE_OAUTH_CLIENT_SECRET` | Verify Google login still works | Yes — reset OAuth client secret in Google Cloud Console, update Railway env var |
+| 4 | GitHub | OAuth client secret | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `GITHUB_OAUTH_CLIENT_SECRET` | Verify GitHub login still works | Yes — generate new OAuth app secret in GitHub Developer Settings, update Railway env var |
+| 5 | Mercado Pago | Access token (APP_USR-...) | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue token in Mercado Pago developer dashboard, update Railway env var |
+| 6 | Mercado Pago | Client secret | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `MERCADOPAGO_CLIENT_SECRET` | Verify payment authentication works | Yes — rotate in Mercado Pago dashboard, update Railway env var |
+| 7 | Mercado Pago | Webhook secret | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `MERCADOPAGO_WEBHOOK_SECRET` | Verify webhook signature validation works | Yes — regenerate webhook secret in MP dashboard, update Railway env var |
+
+### base-corporativa
+
+| # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 8 | Cloudflare R2 / AWS-compatible | R2 access key | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway`, `backend/fix_product_images_r2.py`, `backend/list_r2_images.py`, `backend/upload_pdfs_to_r2.py`, `backend/upload_product_images_to_r2.py` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `R2_ACCESS_KEY` | Verify R2 storage operations still work | Yes — create new R2 API token in Cloudflare dashboard, revoke old token, update Railway env var |
+| 9 | Cloudflare R2 / AWS-compatible | R2 secret key | Same as above | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `R2_SECRET_KEY` | Verify R2 storage operations still work | Yes — rotate alongside R2 access key |
+| 10 | Mercado Pago | Access token | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue in MP dashboard, update Railway env var |
+| 11 | Mercado Pago | Public key | `RAILWAY_ENV_ATUALIZADO.txt` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `MERCADOPAGO_PUBLIC_KEY` | Verify frontend payment rendering works | Yes — rotate in MP dashboard, update Railway env var |
+| 12 | Melhor Envio | Client ID | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `MELHOR_ENVIO_CLIENT_ID` | Verify shipping quote flow works | Yes — check if client ID can be rotated or if app needs re-registration |
+| 13 | Melhor Envio | Client secret | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `MELHOR_ENVIO_CLIENT_SECRET` | Verify shipping auth works | Yes — rotate in Melhor Envio dashboard, update Railway env var |
+| 14 | Melhor Envio | API token | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `MELHOR_ENVIO_API_TOKEN` | Verify shipping API calls work | Yes — revoke and reissue in Melhor Envio dashboard, update Railway env var |
+| 15 | Database (PostgreSQL/external) | Database URL with credentials | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `DATABASE_URL` | Verify DB connections work with new password | Yes — rotate DB password in Railway/DB provider, update DATABASE_URL env var |
+| 16 | Django | Superuser password | `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `DJANGO_SUPERUSER_PASSWORD` | Verify admin login works with new password | Yes — change superuser password via Django admin or `manage.py changepassword` |
+| 17 | SendGrid | API key | `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `SENDGRID_API_KEY` | Verify email sending works | Yes — revoke key in SendGrid dashboard, create new key, update Railway env var |
+
+### FinanceControl
+
+| # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 18 | AWS EC2 | RSA private key (keypair) | `chave-EC2/Finance2.pem` (also `backend/chave-EC2/Finance2.pem` in history) | Yes | Yes | Yes — **keypair is permanently compromised** | NOT_STARTED | EC2 instance(s) accessible via this keypair | N/A (SSH key, not env var) | Verify new SSH access works; verify old key removed from authorized_keys | **YES — CRITICAL MANUAL ACTION:** 1) Check if EC2 instance(s) still active. 2) Generate new SSH key pair in AWS console. 3) Update `authorized_keys` on instance(s) with new public key (or use AWS SSM). 4) Validate new SSH access. 5) Remove old public key from `authorized_keys`. 6) Delete/retire compromised keypair in AWS console. **Deleting the .pem file does NOT rotate the key.** |
+
+### Digital-Signage-Platform
+
+| # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 19 | Database (MySQL) | DB credentials (DB name, user, password, root password) | `secrets/db_credentials.txt` (current tree — may be sanitized to template but still contains non-placeholder values); history commit `17f5403` had real values | Yes | Yes | Yes | NOT_STARTED | iTracker corporate DB (tvs_itracker) | `DATABASE_URL` / DB connection config | Verify DB connections work with new credentials | **YES — MANUAL ACTION:** 1) Rotate DB user password and root password in MySQL. 2) Update deployment config with new credentials. 3) Verify application connects. **Note:** This appears to be former-employer (iTracker) infrastructure. Confirm with iTracker IT before rotating if the DB is still under their control. |
+| 20 | Application | JWT secret key | `.env.tv` (current tree) | Yes | Yes | Yes | NOT_STARTED | TVS signage deployment | `JWT_SECRET_KEY` | Verify JWT token validation works with new secret; existing tokens invalidated | Yes — generate new strong JWT secret, update `.env.tv` (or better, use env var injection), redeploy |
+
+### Bot_IqOption
+
+| # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 21 | Mercado Pago | Production access token | `bot_iqoption_v2/backend/.env`, `RAILWAY_ENV_COMPLETE.txt` | Yes | Yes | Yes | NOT_STARTED | Railway (Bot_IqOption production) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue in MP dashboard, update Railway env var |
+| 22 | Mercado Pago | Production client secret | `.env`, `RAILWAY_ENV_COMPLETE.txt`, `.env.example` (real value!), `RAILWAY_ENV_TEMPLATE.md` (real value!) | Yes | Yes | Yes | NOT_STARTED | Railway (Bot_IqOption production) | `MERCADOPAGO_CLIENT_SECRET` | Verify payment auth works | Yes — rotate in MP dashboard, update Railway env var |
+| 23 | Mercado Pago | Public key | `.env` | Yes | Yes | Yes | NOT_STARTED | Railway (Bot_IqOption production) | `MERCADOPAGO_PUBLIC_KEY` | Verify frontend rendering works | Yes — rotate in MP dashboard, update Railway env var |
+| 24 | Mercado Pago | Client ID | `.env` | Yes | Yes | Likely | NOT_STARTED | Railway (Bot_IqOption production) | `MERCADOPAGO_CLIENT_ID` | Verify OAuth flow works | Yes — check if client ID needs rotation or just the secret |
+| 25 | Application | Django/app secret key | `RAILWAY_ENV_COMPLETE.txt` | Yes | Yes | Yes | NOT_STARTED | Railway (Bot_IqOption production) | `SECRET_KEY` | Verify session validation works | Yes — generate new secret, update Railway env var |
+| 26 | IQ Option API | JWT trading session tokens (197 tokens) | `bot_iqoption_v2/backend/bot_iqoption.log` | Yes | Yes | Yes — sessions are compromised | NOT_STARTED | IQ Option trading sessions | N/A (session tokens, not env vars) | Verify trading sessions terminated; new sessions require re-authentication | Yes — terminate all active IQ Option sessions. These are runtime session tokens, not static credentials. Re-authentication will create new tokens. |
+| 27 | Application | Per-user API key files | `bot_iqoption_v2/backend/keys/user_2_key.key`, `user_3_key.key`, `user_4_key.key` | Yes | Yes | Yes | NOT_STARTED | Per-user authentication | N/A (key files) | Verify user authentication still works after key regeneration | Yes — regenerate per-user keys if the authentication system supports it. If keys are derived from user passwords, password resets may be needed. |
+
+---
+
+## P1 — High Priority Rotation
+
+### PayFlow-AI
+
+| # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 28 | Twilio | Auth token (32-hex) | `Docs/CORRIGIR_TOKEN.txt` | Yes | Yes | Yes (if real — appears real) | NOT_STARTED | Twilio account / PayFlow-AI deployment | `TWILIO_AUTH_TOKEN` | Verify SMS/voice features work | Yes — revoke auth token in Twilio console, create new token, update deployment env var |
+
+### FlowTrack
+
+| # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 29 | Application | Weak fallback SECRET_KEY | `Backend/config.py` | Yes | Yes | Yes (weak default) | NOT_STARTED | ICTSI/FlowTrack deployment | `SECRET_KEY` | Verify app starts with new required env var | Yes — set a strong SECRET_KEY in the deployment environment. Remove the weak fallback from config.py (cleanup PR handles this). |
+| 30 | Application | Session/CSRF tokens (179 findings) | `nohup.out` (history only) | No | Yes | Yes — sessions compromised | NOT_STARTED | ICTSI operations system | N/A (runtime session tokens) | Verify old sessions invalidated | Yes — these are runtime session tokens from a production log. Invalidate active sessions if the system is still running. If the system is decommissioned, mark as NOT_APPLICABLE. |
+
+### MVP-linkedin-bot
+
+| # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 31 | Google Chrome | Browser session tokens (policy_recovery_token, receiver_id_hash_token, hex_encoded_hmac_key) | `Auto_job_applier_linkedIn/V1/chrome_profile_linkedin_bot/`, `V2-Completa/chrome_profile_linkedin_bot/` | Yes | Yes | Yes — Chrome/Google session compromised | NOT_STARTED | Chrome browser profile | N/A (browser session) | Verify Chrome sync/sign-in requires re-authentication | Yes — sign out of Chrome/Google in all sessions. Re-authenticate. The committed Chrome profile allows session hijacking. |
+| 32 | LinkedIn | Session data in logs | `Auto_job_applier_linkedIn/V1/logs/log.txt` | Yes | Yes | Yes — LinkedIn session data exposed | NOT_STARTED | LinkedIn account | N/A (session data) | Verify LinkedIn account security | Yes — sign out of all LinkedIn sessions (Settings → Security → Sessions). Change LinkedIn password if any auth tokens were exposed. Enable 2FA if not already. |
+| 33 | Personal | CPF (Brazilian national ID) | `cpf.pdf` | Yes | Yes | N/A — not a credential but PII | NOT_APPLICABLE | N/A | N/A | N/A | No rotation needed — document removed from tree. Consider identity monitoring. |
+
+### Bet-IA-BOT
+
+| # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 34 | API-Football | API key | `backend/test_new_api.py` (line 11) | Yes | Yes | Yes | NOT_STARTED | API-Football account | `API_FOOTBALL_KEY` | Verify API calls work with new key | Yes — revoke key in API-Football dashboard, create new key, update env var |
+
+---
+
+## P2 — Medium Priority / Review
+
+### Portfolio-LeonardoFragoso-React
+
+| # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 35 | Personal/Business | CNPJ card PDF | `public/Docs/cartao cnpj.pdf` | Yes | Yes | N/A — PII, not a credential | NOT_APPLICABLE | N/A | N/A | N/A | No rotation — document removed from tree. Monitor for identity misuse. |
+| 36 | Personal/Business | Articles of association PDF | `public/Docs/contrato-social-cnpj.pdf` | Yes | Yes | N/A — PII, not a credential | NOT_APPLICABLE | N/A | N/A | N/A | No rotation — document removed from tree. |
+
+### LogiFlow
+
+| # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 37 | Evolution API | API key (logiflow-evolution-key-2025) | Multiple docs files (8 occurrences) | Yes | Yes | Yes (appears real) | NOT_STARTED | Evolution API / LogiFlow | `EVOLUTION_API_KEY` | Verify WhatsApp integration works | Yes — rotate key in Evolution API dashboard, update env var, update docs with placeholder |
+
+### API_Analyze
+
+| # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 38 | News API | API key | `V2/backend/.env.example` | Yes | Yes | Yes (if real — 32-char hex, not placeholder) | NOT_STARTED | None (no deployment) | `NEWS_API_KEY` | N/A — no active deployment | Yes — rotate key in News API dashboard if real. Replace .env.example with placeholder. |
+| 39 | Alpha Vantage | API key | `V2/backend/.env.example` | Yes | Yes | Yes (if real — not placeholder pattern) | NOT_STARTED | None (no deployment) | `ALPHA_VANTAGE_API_KEY` | N/A — no active deployment | Yes — rotate key in Alpha Vantage dashboard if real. Replace .env.example with placeholder. |
+
+---
+
+## Summary
+
+| Priority | Count | Status |
+|---|---|---|
+| P0 — Immediate | 27 credentials across 5 repos | ALL NOT_STARTED / MANUAL_ACTION_REQUIRED |
+| P1 — High | 7 credentials across 4 repos | ALL NOT_STARTED / MANUAL_ACTION_REQUIRED |
+| P2 — Medium/Review | 5 items across 3 repos | NOT_STARTED or NOT_APPLICABLE |
+| **Total credentials requiring rotation** | **39** | **0 rotated** |
+
+### Critical Manual Actions for Leonardo
+
+**Before anything else — P0 credentials (do these FIRST):**
+
+1. **AWS EC2 (FinanceControl):** Check if the EC2 instance is still active. If so, generate a new SSH key, update authorized_keys, validate access, remove old key, delete compromised keypair.
+2. **Cloudflare R2 (base-corporativa):** Create new R2 API token, revoke old token, update Railway env vars for base-corporativa.
+3. **Mercado Pago (ProFlow + base-corporativa + Bot_IqOption):** Revoke and reissue ALL Mercado Pago tokens across 3 separate applications. Update Railway env vars for each.
+4. **OpenAI (ProFlow):** Revoke API key, create new key, update Railway env var.
+5. **Google OAuth (ProFlow):** Reset OAuth client secret in Google Cloud Console, update Railway env var.
+6. **GitHub OAuth (ProFlow):** Generate new OAuth app secret, update Railway env var.
+7. **Database credentials (base-corporativa + Digital-Signage-Platform):** Rotate DB passwords. For Digital-Signage-Platform, confirm with iTracker IT if DB is under their control.
+8. **SendGrid (base-corporativa):** Revoke API key, create new key, update Railway env var.
+9. **Melhor Envio (base-corporativa):** Rotate client secret and API token, update Railway env vars.
+10. **Django superuser (base-corporativa):** Change superuser password.
+11. **JWT secrets (Digital-Signage-Platform + Bot_IqOption):** Generate new strong secrets, update env vars.
+
+**Then P1:**
+
+12. **Twilio (PayFlow-AI):** Revoke auth token if real, create new token.
+13. **Chrome/Google session (MVP-linkedin-bot):** Sign out of all Chrome/Google sessions, re-authenticate.
+14. **LinkedIn session (MVP-linkedin-bot):** Sign out of all LinkedIn sessions, change password, enable 2FA.
+15. **IQ Option sessions (Bot_IqOption):** Terminate all active trading sessions.
+16. **API-Football (Bet-IA-BOT):** Revoke API key, create new key.
+17. **FlowTrack SECRET_KEY:** Set strong env var, remove weak fallback.
+
+**Then P2:**
+
+18. **Evolution API (LogiFlow):** Rotate key if real.
+19. **News API + Alpha Vantage (API_Analyze):** Rotate keys if real.
+
+### Post-Rotation Checklist
+
+For each production credential rotated:
+- [ ] New credential created at provider
+- [ ] Old credential revoked at provider
+- [ ] Deployment environment updated with new credential value
+- [ ] Application redeployed (if required)
+- [ ] Critical flow health-checked (login, payment, email, storage, etc.)
+- [ ] Status updated in this matrix to ROTATED → REVOKED → VALIDATED
+
+**Do NOT update this matrix with credential values. Only update the status field.**
