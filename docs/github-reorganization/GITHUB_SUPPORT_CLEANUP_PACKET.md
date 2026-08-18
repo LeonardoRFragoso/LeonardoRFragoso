@@ -396,6 +396,44 @@ The old commits reachable through `refs/pull/1/head` and `refs/pull/2/head` stil
 
 ---
 
+## Repository 10: ProFlow
+
+### Support Eligibility Packet
+
+| Field | Value |
+|---|---|
+| REPOSITORY | LeonardoRFragoso/ProFlow |
+| UPSTREAM_REWRITE_STATUS | COMPLETED (Phase 2A.15) |
+| FORK_COUNT | 0 |
+| AFFECTED_PR_COUNT | 8 (PR #2-#9; PR #1 ref updated by branch force-push) |
+| AFFECTED_PR_NUMBERS | #2, #3, #4, #5, #6, #7, #8, #9 |
+| STALE_GITHUB_MANAGED_REFS | `refs/pull/2/head` (old SHA `aa54292f621c380bef28a33a4ddea8ee4a59740f`) + `refs/pull/3/head` (old SHA `5120cf583eae64ab889d0b5a55784d0e4b15c751`) + `refs/pull/4/head` (old SHA `418b0c447d231e0f67020acc486e0d45b8eb7fb6`) + `refs/pull/5/head` (old SHA `ad492fa21561ee2b3d3d3bfffeca2743512e494e`) + `refs/pull/6/head` (old SHA `40725110c1930e7277974276c8191c72def3cbee`) + `refs/pull/7/head` (old SHA `3609f70214bdbba0cac23b9ada575678882da11d`) + `refs/pull/8/head` (old SHA `6639fc3a9c52152923e1a0829440d6589b9e7a28`) + `refs/pull/9/head` (old SHA `acf483cf2f9c413a9b0d96137a03428865f92f27`) |
+| PR_1_REF_STATUS | UPDATED — `refs/pull/1/head` now points to rewritten SHA `93a5fdd74a27c49af46cf68996d405eb332c73a7` (matches rewritten `copilot/eldest-turtle` branch) |
+| LFS_ORPHANED | NO |
+| CURRENT_OWNER_BRANCH_SCAN | PASS (all 4 gitleaks secrets + MP access token not reachable from main or any of 9 owner-managed branches) |
+| GLOBAL_ERASURE | NOT_YET_PROVEN |
+| SUPPORT_REQUEST_REQUIRED | YES |
+
+### Ref Map (from git-filter-repo)
+
+| Old SHA | New SHA | Ref |
+|---|---|---|
+| `390ea2b6ef2e44c0e548b4f4e4b60bee303b1a08` | `514aed8a38a3744d29860631400b707e1d0bb672` | refs/heads/main |
+| `4d7a463af94e36464cba10520479f3f0916ff325` | `93a5fdd74a27c49af46cf68996d405eb332c73a7` | refs/heads/copilot/eldest-turtle |
+| `aa54292f621c380bef28a33a4ddea8ee4a59740f` | `4ebfc9d35670fb3da4de3cb530ac2719af25fb1c` | refs/heads/copilot/add-mercado-pago-subscription |
+| `5120cf583eae64ab889d0b5a55784d0e4b15c751` | `e80b4de6f22f1d5645f2d5da2e21edb64c042396` | refs/heads/codex/refactor-onboarding-flow-and-landing-page |
+| `418b0c447d231e0f67020acc486e0d45b8eb7fb6` | `4c9a144dd24a04cfb2409d550bf2feb79effc61e` | refs/heads/codex/refactor-onboarding-flow-and-landing-page-r6pdkn |
+| `ad492fa21561ee2b3d3d3bfffeca2743512e494e` | `0a9993e2a89c82b3a4d0367c57816ebd5c014861` | refs/heads/codex/refactor-onboarding-flow-and-landing-page-y61xd0 |
+| `540e9c4459fb600da69dcce34cf2277f9c0874ae` | `631edd3cb4ce014fb940ba1465e8b2f2624cb69c` | refs/heads/cursor/fix-ai-enhance-validation |
+| `acf483cf2f9c413a9b0d96137a03428865f92f27` | `977904b6ba645f7d3d7ea1e057042d1ade95a42e` | refs/heads/security/remove-residual-creds-from-docs |
+| `6639fc3a9c52152923e1a0829440d6589b9e7a28` | `88db9fbf29c5527da7164ff27d7de4aa9ef772fe` | refs/heads/security/remove-versioned-secrets |
+
+### Sensitive material still reachable via stale PR refs
+
+The old commits reachable through `refs/pull/2-9/head` still contain the removed credential-bearing files (`RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md`, `MP_PRODUCTION_VALIDATION.md`) with the 4 real gitleaks secrets (Google OAuth secret, OpenAI API key, Django SECRET_KEY, MP webhook secret) and the MP access token (`APP_USR-<REDACTED_MP_TOKEN>-...`). PR #1's ref was updated by the branch force-push and is clean. No credential values are listed here.
+
+---
+
 ## Summary
 
 | Repository | Upstream Sanitized | Forks | Affected PRs | LFS | Owner Branch Scan | Global Erasure | Support Required |
@@ -409,6 +447,7 @@ The old commits reachable through `refs/pull/1/head` and `refs/pull/2/head` stil
 | API_Analyze | YES | 1 (kabann-1978/API_Analyze-B3) | 1 (#1) | NO | PASS | NOT_YET_PROVEN (fork risk) | YES |
 | Bot_IqOption | YES | 0 | 1 (#5) | NO | PASS | NOT_YET_PROVEN | YES |
 | MVP-linkedin-bot | YES | 0 | 2 (#1 closed, #2 merged) | NO | PASS | NOT_YET_PROVEN | YES |
+| ProFlow | YES | 0 | 8 (#2-#9; PR #1 ref updated) | NO | PASS | NOT_YET_PROVEN | YES |
 
 ### Post-Submission Tracking
 
@@ -423,5 +462,6 @@ The old commits reachable through `refs/pull/1/head` and `refs/pull/2/head` stil
 | API_Analyze | PENDING_OWNER_SUBMISSION | — | — | — |
 | Bot_IqOption | PENDING_OWNER_SUBMISSION | — | — | — |
 | MVP-linkedin-bot | PENDING_OWNER_SUBMISSION | — | — | — |
+| ProFlow | PENDING_OWNER_SUBMISSION | — | — | — |
 
 > **Note:** After GitHub Support confirms cleanup, update this table and change `GITHUB_SUPPORT_REQUEST` from `PENDING_OWNER_SUBMISSION` to `COMPLETED` in the central documentation. At that point, `GLOBAL_ERASURE` may be upgraded to `PROVEN` if GitHub confirms all stale objects have been garbage-collected.

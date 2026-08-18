@@ -1,4 +1,4 @@
-# Repository Disposition — Phase 2A.10 (Visibility totals corrected Phase 2A.10.1, runtime state updated Phase 2A.11, history rewrite Batch 1 Phase 2A.12, Batch 2 Phase 2A.13, Batch 3 Phase 2A.14)
+# Repository Disposition — Phase 2A.10 (Visibility totals corrected Phase 2A.10.1, runtime state updated Phase 2A.11, history rewrite Batch 1 Phase 2A.12, Batch 2 Phase 2A.13, Batch 3 Phase 2A.14, ProFlow Phase 2A.15)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
@@ -7,6 +7,7 @@
 **Phase 2A.12 Batch 1 update:** 2026-08-18 (history rewrite executed for Portfolio + AndaimesPini)
 **Phase 2A.13 Batch 2 update:** 2026-08-18 (history rewrite executed for FinanceControl, PayFlow-AI, LogiFlow, base-corporativa after owner attestation gate)
 **Phase 2A.14 Batch 3 update:** 2026-08-18 (history rewrite executed for API_Analyze, Bot_IqOption, MVP-linkedin-bot after owner attestation + session closure gate)
+**Phase 2A.15 update:** 2026-08-18 (ProFlow production-safe history rewrite executed after owner attestation + production redeploy authorization gate; Railway + Vercel redeploy triggered and healthy)
 **Operation:** Repository deletion batch (13 repositories deleted)
 
 > **CRITICAL:** This document records the intentional deletion of 13 repositories that no longer have strategic, portfolio, historical, or operational value. All 13 repositories were backed up locally (mirror clone + git bundle) before deletion. No credential values are listed.
@@ -217,6 +218,42 @@ Third history rewrite phase. Three repositories rewritten sequentially (API_Anal
 - UPSTREAM_HISTORY_SANITIZED = YES for all 9 completed repos
 - GLOBAL_ERASURE_UNPROVEN = YES for all 9 (GitHub-managed PR refs retain old history)
 - GITHUB_SUPPORT_CLEANUP_REQUIRED = YES for all 9
-- OWNER_ATTESTED_COMPLETED = YES for items #8-#17, #18, #21-#27, #28, #37, #38-#41 (NOT PROVIDER_VERIFIED)
+- OWNER_ATTESTED_COMPLETED = YES for items #1-#7, #8-#17, #18, #21-#27, #28, #37, #38-#41 (NOT PROVIDER_VERIFIED)
+- OWNER_ATTESTED_SESSION_INVALIDATED = YES for items #26, #31, #32 (NOT PROVIDER_VERIFIED)
+- FORK_RISK = YES for API_Analyze (1 fork: kabann-1978/API_Analyze-B3 — NOT modified, may retain old secrets)
+
+## Phase 2A.15 — ProFlow Production-Safe History Rewrite Record
+
+Fourth history rewrite phase. ProFlow is the ONLY repository in Leonardo's account currently deployed on Railway (env: independent-respect/production) AND Vercel (Production + Preview environments). Both platforms deploy from main branch HEAD. Force-pushing rewritten main triggered redeployment on both platforms. Owner explicitly authorized the force-push and possible production redeploy.
+
+| Repository | Pre-rewrite main SHA | Post-rewrite main SHA | Method | Backup | Bundle | Source Integrity | Test/Build | Post-rewrite scan | Production | Fork risk | GitHub support cleanup |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ProFlow | 390ea2b6ef2e44c0e548b4f4e4b60bee303b1a08 | 514aed8a38a3744d29860631400b707e1d0bb672 | --invert-paths (3 paths: RAILWAY_ENV_FINAL.txt, DEPLOY_CHECKLIST.md, MP_PRODUCTION_VALIDATION.md) + --replace-text (1 MP access token APP_USR-<REDACTED_MP_TOKEN> in dev.py + Docs/MP_PRODUCTION_VALIDATION.md history) | VERIFIED | VERIFIED | PASS (1012 files, identical blob SHAs; Docs/MP_PRODUCTION_VALIDATION.md preserved) | PASS (Django 4.2.7 syntax, frontend npm build SUCCESS) | PASS (18 false-positive findings) | Railway + Vercel redeploy triggered, HEALTHY before and after (www.proflow.pro HTTP 200) | NO (0 forks) | YES (refs/pull/2-9/head) |
+
+### Open PR gate resolution
+
+- PR #2 (copilot/add-mercado-pago-subscription) classified as STALE_EQUIVALENT_TO_MAIN (only 7 genuinely new files: task JSONs, test file, logos — no useful unique application work). Closed.
+- PR #1 (copilot/eldest-turtle) classified as UNIQUE_WORK_PRESERVED (92 genuinely new source files: MP subscription, badges, payments, AI engine, auth). Remained open. Branch force-pushed with all 92 new source files preserved.
+
+### Production safety
+
+- Deployed commit before: 390ea2b6ef (= main HEAD)
+- Deployed commit after: 514aed8a38 (= rewritten main HEAD)
+- Railway deploy triggered: YES (railway-app[bot], 514aed8a38, 2026-08-18T21:43:28Z)
+- Vercel Production deploy triggered: YES (vercel[bot], 514aed8a38, 2026-08-18T21:44:04Z)
+- Frontend health: www.proflow.pro HTTP 200 before and after (HEALTHY → HEALTHY)
+- API health: api.proflow.pro HTTP 404 before and after (normal — no root view)
+- CI workflow: failure before and after (pre-existing — not caused by rewrite)
+- Regression: NO
+
+### Lifecycle status (updated)
+
+- REWRITE_COMPLETED = 10 (Portfolio-LeonardoFragoso-React, AndaimesPini_Project, FinanceControl, PayFlow-AI, LogiFlow, base-corporativa, API_Analyze, Bot_IqOption, MVP-linkedin-bot, ProFlow)
+- REWRITE_PENDING = 2 (Digital-Signage-Platform, FlowTrack — former-employer scope, OUT OF SCOPE)
+- COMPLETED + READY + BLOCKED = 10 + 0 + 2 = 12 (= ACTIVE_REWRITE_CANDIDATES)
+- UPSTREAM_HISTORY_SANITIZED = YES for all 10 completed repos
+- GLOBAL_ERASURE_UNPROVEN = YES for all 10 (GitHub-managed PR refs retain old history)
+- GITHUB_SUPPORT_CLEANUP_REQUIRED = YES for all 10
+- OWNER_ATTESTED_COMPLETED = YES for items #1-#7, #8-#17, #18, #21-#27, #28, #37, #38-#41 (NOT PROVIDER_VERIFIED)
 - OWNER_ATTESTED_SESSION_INVALIDATED = YES for items #26, #31, #32 (NOT PROVIDER_VERIFIED)
 - FORK_RISK = YES for API_Analyze (1 fork: kabann-1978/API_Analyze-B3 — NOT modified, may retain old secrets)

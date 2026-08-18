@@ -12,7 +12,8 @@
 **Phase 2A.12.1 update:** 2026-08-18 (GitHub Support cleanup packet prepared for stale PR refs)
 **Phase 2A.13 Batch 2 update:** 2026-08-18 (second history rewrite executed — FinanceControl, PayFlow-AI, LogiFlow, base-corporativa; owner attestation gate passed; GitHub Support cleanup packet extended)
 **Phase 2A.14 Batch 3 update:** 2026-08-18 (third history rewrite executed — API_Analyze, Bot_IqOption, MVP-linkedin-bot; owner attestation + session closure gate passed; GitHub Support cleanup packet extended)
-**Status:** PARTIALLY EXECUTED — Batch 1 + Batch 2 + Batch 3 complete (9 repos). Remaining 3 repos still PLAN ONLY. GitHub Support cleanup PENDING_OWNER_SUBMISSION.
+**Phase 2A.15 update:** 2026-08-18 (ProFlow production-safe history rewrite executed — owner attestation + production redeploy authorization gate passed; Railway + Vercel redeploy triggered and healthy; GitHub Support cleanup packet extended)
+**Status:** PARTIALLY EXECUTED — Batch 1 + Batch 2 + Batch 3 + ProFlow complete (10 repos). Remaining 2 repos still PLAN ONLY (former-employer scope). GitHub Support cleanup PENDING_OWNER_SUBMISSION.
 
 > **CRITICAL:** History rewriting is DESTRUCTIVE and irreversible. It rewrites all commit SHAs, breaks forks, breaks open PRs, and requires force-push. This document is a PLAN only. No history rewrite has been performed or will be performed without explicit authorization.
 
@@ -57,7 +58,7 @@ Allowed values:
 
 | REPOSITORY | VISIBILITY_NOW | PUBLIC_WHEN_EXPOSED | CURRENT_TREE | SENSITIVE_HISTORY_TYPE | OWNER | OWNER_ATTESTATION | SESSION_STATUS | OWNER_HANDOFF | RUNTIME_GATE | OPEN_PR_GATE | FORK_RISK | REWRITE_REQUIRED | REWRITE_READY | BLOCKER |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| ProFlow | PRIVATE | YES | CLEAN | CREDENTIALS (items 1-7) | Leonardo | PENDING | N/A | N/A | N/A | OPEN (PR #1, #2) | LOW (0 forks; was public) | YES | NO | OWNER_ATTESTATION_BLOCKER, OPEN_PR_GATE |
+| ProFlow | PRIVATE | YES | CLEAN | CREDENTIALS (items 1-7) | Leonardo | OWNER_ATTESTED_COMPLETED | N/A | N/A | CLEARED (ACTIVE_RAILWAY_DEPLOYMENT_OWNER_AUTHORIZED_PROCEED — Railway + Vercel redeploy accepted by owner) | NONE (PR #2 closed STALE_EQUIVALENT_TO_MAIN Phase 2A.15; PR #1 preserved — unique work retained through branch rewrite) | LOW (0 forks; was public) | YES | **COMPLETED** | NONE — **HISTORY REWRITTEN Phase 2A.15** — path removal (3 paths: RAILWAY_ENV_FINAL.txt, DEPLOY_CHECKLIST.md, MP_PRODUCTION_VALIDATION.md) + replace-text (MP access token APP_USR-<REDACTED_MP_TOKEN> in backend/config/settings/dev.py history + Docs/MP_PRODUCTION_VALIDATION.md history) — DEPLOYMENT_RISK: ACTIVE_RAILWAY+VERCEL_DEPLOYMENT_OWNER_AUTHORIZED_PROCEED (redeploy triggered, production healthy before and after) — UPSTREAM_HISTORY_SANITIZED=YES, GITHUB_MANAGED_STALE_REFS=YES (refs/pull/2-9/head; PR #1 ref updated by branch force-push), GITHUB_SUPPORT_REQUEST=PENDING_OWNER_SUBMISSION, GLOBAL_ERASURE_PROVEN=NO, POST_REWRITE_SCAN=PASS (18 remaining gitleaks findings are false positives: YOUR_TOKEN/abc123def456/token_user_a/seu-token placeholders, truncated JWT examples, OPENSSH key header documentation example with ... truncation) |
 | base-corporativa | PRIVATE | YES | CLEAN (PR #1 merged Phase 2A.11) | CREDENTIALS (items 8-17) | Leonardo | OWNER_ATTESTED_COMPLETED | N/A | N/A | CLEARED (NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED) | NONE (PR #1 merged) | LOW (0 forks; was public) | YES | **COMPLETED** | NONE — **HISTORY REWRITTEN Phase 2A.13 Batch 2** — path removal (RAILWAY_ENV_ATUALIZADO.txt, backend/.env.railway, backend/.env) + replace-text (R2 access key, R2 secret key, 3 env-file secrets, SendGrid API key) — UPSTREAM_HISTORY_SANITIZED=YES, GITHUB_MANAGED_STALE_REFS=YES (refs/pull/1/head), GITHUB_SUPPORT_REQUEST=PENDING_OWNER_SUBMISSION, GLOBAL_ERASURE_PROVEN=NO, POST_REWRITE_SCAN=PASS (3 remaining gitleaks findings are current-tree placeholders: abc123/xyz789/TEST- in example docs) |
 | FinanceControl | PRIVATE | YES | CLEAN | CREDENTIALS (item 18) + PII | Leonardo | OWNER_ATTESTED_COMPLETED | N/A | N/A | N/A | NONE | LOW (0 forks; was public) | YES | **COMPLETED** | NONE — **HISTORY REWRITTEN Phase 2A.13 Batch 2** — path removal (chave-EC2/Finance2.pem, backend/chave-EC2/Finance2.pem, backend/db.sqlite3, backend/backend/db.sqlite3, ReciboDePagamento PDF) — UPSTREAM_HISTORY_SANITIZED=YES, GITHUB_MANAGED_STALE_REFS=YES (refs/pull/1/head), GITHUB_SUPPORT_REQUEST=PENDING_OWNER_SUBMISSION, GLOBAL_ERASURE_PROVEN=NO, POST_REWRITE_SCAN=PASS (1 remaining gitleaks finding is a historical README placeholder SECRET_KEY example, not a real secret) |
 | Digital-Signage-Platform | PRIVATE | YES | CLEAN | CREDENTIALS (items 19-20) | ICTSI/iTracker | N/A | N/A | PENDING | N/A | OPEN (PR #4, head 1f96647) | LOW (0 forks; was public) | YES | NO | OWNER_HANDOFF_BLOCKER, OPEN_PR_GATE |
@@ -70,14 +71,14 @@ Allowed values:
 | LogiFlow | PUBLIC | YES (is public) | CLEAN | CREDENTIAL (item 37, Evolution API key) | Leonardo | OWNER_ATTESTED_COMPLETED | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | **COMPLETED** | NONE — **HISTORY REWRITTEN Phase 2A.13 Batch 2** — replace-text redaction of 1 real Evolution API key (logifl..., 27 chars) from 7 historical files — DEPLOYMENT_RISK: ACTIVE_VERCEL_DEPLOYMENT_OWNER_AUTHORIZED_PROCEED (4 Vercel projects, redeploy accepted by owner) — UPSTREAM_HISTORY_SANITIZED=YES, GITHUB_MANAGED_STALE_REFS=YES (refs/pull/1/head), GITHUB_SUPPORT_REQUEST=PENDING_OWNER_SUBMISSION, GLOBAL_ERASURE_PROVEN=NO, POST_REWRITE_SCAN=PASS (305 remaining gitleaks findings are false positives: SuiteCRM DB record IDs, 32-hex hashes, UUIDs, git SHAs, 1 expired third-party Facebook SDK test token, and 27 current-tree documentation placeholders — no real Leonardo-owned secrets remain) |
 | API_Analyze | PUBLIC | YES (is public) | CLEAN | CREDENTIALS (items 38-39, News API + Alpha Vantage keys) | Leonardo | OWNER_ATTESTED_COMPLETED | N/A | N/A | N/A | NONE | HIGH (1 fork: kabann-1978/API_Analyze-B3) | YES | **COMPLETED** | NONE — **HISTORY REWRITTEN Phase 2A.14 Batch 3** — replace-text redaction of 2 API key values (News API key 16-char, Alpha Vantage key 32-hex) from V2/backend/.env.example history (file preserved with REDACTED_SECRET placeholders) — FORK_RISK=YES (1 fork: kabann-1978/API_Analyze-B3 — fork NOT modified, may retain old secrets) — UPSTREAM_HISTORY_SANITIZED=YES, GITHUB_MANAGED_STALE_REFS=YES (refs/pull/1/head), GITHUB_SUPPORT_REQUEST=PENDING_OWNER_SUBMISSION, GLOBAL_ERASURE_PROVEN=NO, POST_REWRITE_SCAN=PASS (0 gitleaks findings) |
 
-### Readiness counts (computed from the canonical table — Phase 2A.14 Batch 3 updated)
+### Readiness counts (computed from the canonical table — Phase 2A.15 updated)
 
 | Metric | Value |
 |---|---|
 | ACTIVE_REWRITE_CANDIDATES | 12 |
-| REWRITE_COMPLETED | 9 (Portfolio-LeonardoFragoso-React, AndaimesPini_Project, FinanceControl, PayFlow-AI, LogiFlow, base-corporativa, API_Analyze, Bot_IqOption, MVP-linkedin-bot) |
+| REWRITE_COMPLETED | 10 (Portfolio-LeonardoFragoso-React, AndaimesPini_Project, FinanceControl, PayFlow-AI, LogiFlow, base-corporativa, API_Analyze, Bot_IqOption, MVP-linkedin-bot, ProFlow) |
 | REWRITE_READY | 0 |
-| REWRITE_BLOCKED | 3 (ProFlow, Digital-Signage-Platform, FlowTrack) |
+| REWRITE_BLOCKED | 2 (Digital-Signage-Platform, FlowTrack) |
 | COMPLETED + READY + BLOCKED | 12 (= ACTIVE_REWRITE_CANDIDATES) |
 | DELETED_REWRITE_NA | 1 (Bet-IA-BOT — see audit record) |
 
@@ -85,15 +86,15 @@ Allowed values:
 
 | Blocker | Repositories | Count |
 |---|---|---|
-| OWNER_ATTESTATION_BLOCKER | ProFlow | 1 (Bot_IqOption, MVP-linkedin-bot, API_Analyze cleared by OWNER_ATTESTED_COMPLETED Phase 2A.14 Batch 3; base-corporativa, FinanceControl, PayFlow-AI, LogiFlow cleared Phase 2A.13 Batch 2) |
+| OWNER_ATTESTATION_BLOCKER | NONE | 0 (ProFlow cleared by OWNER_ATTESTED_COMPLETED Phase 2A.15; Bot_IqOption, MVP-linkedin-bot, API_Analyze cleared Phase 2A.14 Batch 3; base-corporativa, FinanceControl, PayFlow-AI, LogiFlow cleared Phase 2A.13 Batch 2) |
 | SESSION_BLOCKER | FlowTrack | 1 (Bot_IqOption and MVP-linkedin-bot cleared by OWNER_ATTESTED_SESSION_INVALIDATED Phase 2A.14 Batch 3) |
 | OWNER_HANDOFF_BLOCKER | Digital-Signage-Platform, FlowTrack | 2 |
 | CURRENT_TREE_BLOCKER | NONE (base-corporativa and Bot_IqOption cleared by PR merges Phase 2A.11) | 0 |
-| RUNTIME_BLOCKER | NONE (base-corporativa and Bot_IqOption cleared by OWNER_ATTESTED_RUNTIME_STATE Phase 2A.11) | 0 |
-| OPEN_PR_GATE | ProFlow, Digital-Signage-Platform, FlowTrack | 3 (MVP-linkedin-bot PR #1 closed by owner authorization Phase 2A.14; base-corporativa and Bot_IqOption PRs merged) |
+| RUNTIME_BLOCKER | NONE (ProFlow cleared by OWNER_AUTHORIZED_REDEPLOY Phase 2A.15; base-corporativa and Bot_IqOption cleared by OWNER_ATTESTED_RUNTIME_STATE Phase 2A.11) | 0 |
+| OPEN_PR_GATE | Digital-Signage-Platform, FlowTrack | 2 (ProFlow PR #2 closed STALE_EQUIVALENT_TO_MAIN Phase 2A.15, PR #1 preserved through branch rewrite; MVP-linkedin-bot PR #1 closed by owner authorization Phase 2A.14; base-corporativa and Bot_IqOption PRs merged) |
 | FORK_RISK | API_Analyze (1 fork: kabann-1978/API_Analyze-B3 — upstream rewrite complete, fork NOT modified, may retain old secrets) | 1 |
 
-> **OWNER_ATTESTATION Phase 2A.14 Batch 3:** Leonardo explicitly attested (2026-08-18) that the old exposed credentials under his ownership for Bot_IqOption, MVP-linkedin-bot and API_Analyze were revoked, invalidated, replaced, or otherwise made unusable, that the compromised IQ Option/browser/LinkedIn sessions were invalidated or expired, and that passwords were changed where required. This upgrades the evidence classification for items #21-#27, #31-#33, #38-#41 from OWNER_REPORTED to **OWNER_ATTESTED_COMPLETED** and session items to **OWNER_ATTESTED_SESSION_INVALIDATED** (NOT PROVIDER_VERIFIED — no provider dashboard was independently checked). The remaining 1 credential-bearing repo (ProFlow) still has OWNER_ATTESTATION_BLOCKER pending.
+> **OWNER_ATTESTATION Phase 2A.15:** Leonardo explicitly attested (2026-08-18) that the old exposed credentials under his ownership for ProFlow were revoked, invalidated, replaced, or otherwise made unusable, and that the replacement credentials required by the current ProFlow production deployment are already configured in Railway and the production application is operating with the replacement credentials. This upgrades the evidence classification for items #1-#7 from OWNER_REPORTED to **OWNER_ATTESTED_COMPLETED** (NOT PROVIDER_VERIFIED — no provider dashboard was independently checked). Leonardo also explicitly authorized the force-push and possible Railway/Vercel production redeploy. All Leonardo-owned credential-bearing repos now have OWNER_ATTESTED_COMPLETED status.
 
 ### Live PR gate reconciliation (Phase 2A.11 updated — base-corporativa #1 and Bot_IqOption #5 MERGED)
 
