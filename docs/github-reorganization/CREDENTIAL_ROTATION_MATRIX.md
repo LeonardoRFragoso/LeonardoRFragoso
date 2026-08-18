@@ -4,7 +4,8 @@
 **Phase 2A date:** 2026-08-17
 **Phase 2A.7 update:** 2026-08-18
 **Phase 2A.11 update:** 2026-08-18 (runtime gate closure, cleanup PR integration)
-**Status:** ACTIVE — Leonardo must perform all rotations manually
+**Phase 2A.13 Batch 2 update:** 2026-08-18 (owner attestation gate passed; items #8-#17, #18, #28, #37 upgraded OWNER_REPORTED → OWNER_ATTESTED_COMPLETED; history rewritten for base-corporativa, FinanceControl, PayFlow-AI, LogiFlow)
+**Status:** ACTIVE — Leonardo must perform all rotations manually. OWNER_ATTESTED_COMPLETED items have owner attestation that old credentials are unusable, but provider dashboards were NOT independently verified (NOT PROVIDER_VERIFIED).
 
 > **CRITICAL:** No credential values are listed in this document. All credentials committed to Git must be treated as COMPROMISED regardless of whether the repository is now private or the file was removed from the current tree. Removing a file, making a repo private, or rewriting history does NOT make a credential safe — rotation/revocation at the provider is required.
 
@@ -24,6 +25,7 @@
 | REVOKED | Old credential revoked/disabled at provider |
 | VALIDATED | Post-rotation health check confirmed application works with new credential |
 | NOT_APPLICABLE | Credential is not real or not in use |
+| OWNER_ATTESTED_COMPLETED | Leonardo explicitly attested the old exposed credential was revoked, invalidated, replaced, or otherwise made unusable. This is owner attestation ONLY — it is NOT PROVIDER_VERIFIED (no provider dashboard was independently checked). |
 
 ---
 
@@ -45,22 +47,22 @@
 
 | # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 8 | Cloudflare R2 / AWS-compatible | R2 access key | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway`, `backend/fix_product_images_r2.py`, `backend/list_r2_images.py`, `backend/upload_pdfs_to_r2.py`, `backend/upload_product_images_to_r2.py` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `R2_ACCESS_KEY` | Verify R2 storage operations still work | Yes — create new R2 API token in Cloudflare dashboard, revoke old token, update Railway env var |
-| 9 | Cloudflare R2 / AWS-compatible | R2 secret key | Same as above | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `R2_SECRET_KEY` | Verify R2 storage operations still work | Yes — rotate alongside R2 access key |
-| 10 | Mercado Pago | Access token | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue in MP dashboard, update Railway env var |
-| 11 | Mercado Pago | Public key | `RAILWAY_ENV_ATUALIZADO.txt` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `MERCADOPAGO_PUBLIC_KEY` | Verify frontend payment rendering works | Yes — rotate in MP dashboard, update Railway env var |
-| 12 | Melhor Envio | Client ID | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `MELHOR_ENVIO_CLIENT_ID` | Verify shipping quote flow works | Yes — check if client ID can be rotated or if app needs re-registration |
-| 13 | Melhor Envio | Client secret | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `MELHOR_ENVIO_CLIENT_SECRET` | Verify shipping auth works | Yes — rotate in Melhor Envio dashboard, update Railway env var |
-| 14 | Melhor Envio | API token | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `MELHOR_ENVIO_API_TOKEN` | Verify shipping API calls work | Yes — revoke and reissue in Melhor Envio dashboard, update Railway env var |
-| 15 | Database (PostgreSQL/external) | Database URL with credentials | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `DATABASE_URL` | Verify DB connections work with new password | Yes — rotate DB password in Railway/DB provider, update DATABASE_URL env var |
-| 16 | Django | Superuser password | `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `DJANGO_SUPERUSER_PASSWORD` | Verify admin login works with new password | Yes — change superuser password via Django admin or `manage.py changepassword` |
-| 17 | SendGrid | API key | `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `SENDGRID_API_KEY` | Verify email sending works | Yes — revoke key in SendGrid dashboard, create new key, update Railway env var |
+| 8 | Cloudflare R2 / AWS-compatible | R2 access key | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway`, `backend/fix_product_images_r2.py`, `backend/list_r2_images.py`, `backend/upload_pdfs_to_r2.py`, `backend/upload_product_images_to_r2.py` | No | No | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged; history rewritten Phase 2A.13 Batch 2) | `R2_ACCESS_KEY` | Verify R2 storage operations still work | Yes — create new R2 API token in Cloudflare dashboard, revoke old token, update Railway env var |
+| 9 | Cloudflare R2 / AWS-compatible | R2 secret key | Same as above | No | No | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged; history rewritten Phase 2A.13 Batch 2) | `R2_SECRET_KEY` | Verify R2 storage operations still work | Yes — rotate alongside R2 access key |
+| 10 | Mercado Pago | Access token | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged; history rewritten Phase 2A.13 Batch 2) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue in MP dashboard, update Railway env var |
+| 11 | Mercado Pago | Public key | `RAILWAY_ENV_ATUALIZADO.txt` | No | No | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged; history rewritten Phase 2A.13 Batch 2) | `MERCADOPAGO_PUBLIC_KEY` | Verify frontend payment rendering works | Yes — rotate in MP dashboard, update Railway env var |
+| 12 | Melhor Envio | Client ID | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged; history rewritten Phase 2A.13 Batch 2) | `MELHOR_ENVIO_CLIENT_ID` | Verify shipping quote flow works | Yes — check if client ID can be rotated or if app needs re-registration |
+| 13 | Melhor Envio | Client secret | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged; history rewritten Phase 2A.13 Batch 2) | `MELHOR_ENVIO_CLIENT_SECRET` | Verify shipping auth works | Yes — rotate in Melhor Envio dashboard, update Railway env var |
+| 14 | Melhor Envio | API token | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged; history rewritten Phase 2A.13 Batch 2) | `MELHOR_ENVIO_API_TOKEN` | Verify shipping API calls work | Yes — revoke and reissue in Melhor Envio dashboard, update Railway env var |
+| 15 | Database (PostgreSQL/external) | Database URL with credentials | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged; history rewritten Phase 2A.13 Batch 2) | `DATABASE_URL` | Verify DB connections work with new password | Yes — rotate DB password in Railway/DB provider, update DATABASE_URL env var |
+| 16 | Django | Superuser password | `backend/.env.railway` | No | No | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged; history rewritten Phase 2A.13 Batch 2) | `DJANGO_SUPERUSER_PASSWORD` | Verify admin login works with new password | Yes — change superuser password via Django admin or `manage.py changepassword` |
+| 17 | SendGrid | API key | `backend/.env.railway` | No | No | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged; history rewritten Phase 2A.13 Batch 2) | `SENDGRID_API_KEY` | Verify email sending works | Yes — revoke key in SendGrid dashboard, create new key, update Railway env var |
 
 ### FinanceControl
 
 | # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 18 | AWS EC2 | RSA private key (keypair) | `chave-EC2/Finance2.pem` (also `backend/chave-EC2/Finance2.pem` in history) | Yes | Yes | Yes — **keypair is permanently compromised** | NOT_STARTED | EC2 instance(s) accessible via this keypair | N/A (SSH key, not env var) | Verify new SSH access works; verify old key removed from authorized_keys | **YES — CRITICAL MANUAL ACTION:** 1) Check if EC2 instance(s) still active. 2) Generate new SSH key pair in AWS console. 3) Update `authorized_keys` on instance(s) with new public key (or use AWS SSM). 4) Validate new SSH access. 5) Remove old public key from `authorized_keys`. 6) Delete/retire compromised keypair in AWS console. **Deleting the .pem file does NOT rotate the key.** |
+| 18 | AWS EC2 | RSA private key (keypair) | `chave-EC2/Finance2.pem` (also `backend/chave-EC2/Finance2.pem` in history) | Yes | Yes | Yes — **keypair is permanently compromised** | OWNER_ATTESTED_COMPLETED | EC2 instance(s) accessible via this keypair (history rewritten Phase 2A.13 Batch 2) | N/A (SSH key, not env var) | Verify new SSH access works; verify old key removed from authorized_keys | **YES — CRITICAL MANUAL ACTION:** 1) Check if EC2 instance(s) still active. 2) Generate new SSH key pair in AWS console. 3) Update `authorized_keys` on instance(s) with new public key (or use AWS SSM). 4) Validate new SSH access. 5) Remove old public key from `authorized_keys`. 6) Delete/retire compromised keypair in AWS console. **Deleting the .pem file does NOT rotate the key.** |
 
 ### Digital-Signage-Platform
 
@@ -89,7 +91,7 @@
 
 | # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 28 | Twilio | Auth token (32-hex) | `Docs/CORRIGIR_TOKEN.txt` | Yes | Yes | Yes (if real — appears real) | NOT_STARTED | Twilio account / PayFlow-AI deployment | `TWILIO_AUTH_TOKEN` | Verify SMS/voice features work | Yes — revoke auth token in Twilio console, create new token, update deployment env var |
+| 28 | Twilio | Auth token (32-hex) | `Docs/CORRIGIR_TOKEN.txt` | Yes | Yes | Yes (if real — appears real) | OWNER_ATTESTED_COMPLETED | Twilio account / PayFlow-AI deployment (history rewritten Phase 2A.13 Batch 2) | `TWILIO_AUTH_TOKEN` | Verify SMS/voice features work | Yes — revoke auth token in Twilio console, create new token, update deployment env var |
 
 ### FlowTrack
 
@@ -127,7 +129,7 @@
 
 | # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 37 | Evolution API | API key (logiflow-evolution-key-2025) | Multiple docs files (8 occurrences) | Yes | Yes | Yes (appears real) | NOT_STARTED | Evolution API / LogiFlow | `EVOLUTION_API_KEY` | Verify WhatsApp integration works | Yes — rotate key in Evolution API dashboard, update env var, update docs with placeholder |
+| 37 | Evolution API | API key (logiflow-evolution-key-2025) | Multiple docs files (8 occurrences) | Yes | Yes | Yes (appears real) | OWNER_ATTESTED_COMPLETED | Evolution API / LogiFlow (history rewritten Phase 2A.13 Batch 2) | `EVOLUTION_API_KEY` | Verify WhatsApp integration works | Yes — rotate key in Evolution API dashboard, update env var, update docs with placeholder |
 
 ### API_Analyze
 

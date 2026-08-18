@@ -1,10 +1,11 @@
-# Repository Disposition — Phase 2A.10 (Visibility totals corrected Phase 2A.10.1, runtime state updated Phase 2A.11, history rewrite Batch 1 Phase 2A.12)
+# Repository Disposition — Phase 2A.10 (Visibility totals corrected Phase 2A.10.1, runtime state updated Phase 2A.11, history rewrite Batch 1 Phase 2A.12, Batch 2 Phase 2A.13)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
 **Phase 2A.10.1 update:** 2026-08-18 (visibility totals reconciled against live GitHub metadata)
 **Phase 2A.11 update:** 2026-08-18 (Railway runtime state reconciled — only ProFlow active)
 **Phase 2A.12 Batch 1 update:** 2026-08-18 (history rewrite executed for Portfolio + AndaimesPini)
+**Phase 2A.13 Batch 2 update:** 2026-08-18 (history rewrite executed for FinanceControl, PayFlow-AI, LogiFlow, base-corporativa after owner attestation gate)
 **Operation:** Repository deletion batch (13 repositories deleted)
 
 > **CRITICAL:** This document records the intentional deletion of 13 repositories that no longer have strategic, portfolio, historical, or operational value. All 13 repositories were backed up locally (mirror clone + git bundle) before deletion. No credential values are listed.
@@ -164,3 +165,31 @@ First actual history rewrite phase. Two repositories rewritten sequentially with
 - UPSTREAM_HISTORY_SANITIZED = YES for both completed repos
 - GLOBAL_ERASURE_UNPROVEN = YES for both (GitHub-managed PR refs retain old history)
 - GITHUB_SUPPORT_CLEANUP_REQUIRED = YES for both
+
+## Phase 2A.13 Batch 2 — History Rewrite Record
+
+Second history rewrite phase. Four repositories rewritten sequentially (FinanceControl → PayFlow-AI → LogiFlow → base-corporativa) after the owner attestation gate passed. Immutable backups, pre-push integrity checks, and fresh-clone verification performed for each. No secret values printed in any report, PR, or commit.
+
+| Repository | Pre-rewrite main SHA | Post-rewrite main SHA | Method | Backup | Bundle | Source Integrity | Post-rewrite scan | Fork risk | GitHub support cleanup |
+|---|---|---|---|---|---|---|---|---|---|
+| FinanceControl | feb1ffdc97ef3971193248ee9b61dc1d8dbcd031 | 3a1c40d5881acd046e3ba1551dd66d9084ada37a | --invert-paths (5 paths: RSA key, 2 SQLite DBs, PDF) | VERIFIED | VERIFIED | PASS (341 files, identical blob SHAs) | PASS (1 benign historical README placeholder) | 0 forks | YES (refs/pull/1/head) |
+| PayFlow-AI | afdcb7b58b187c146e15848659192205c08a882b | 003291b613b85ad90fb005810d5290aa79ed69ac | --replace-text (2 Twilio auth token values, 32-hex) | VERIFIED | VERIFIED | PASS (375 files, identical blob SHAs) | PASS (1 benign README placeholder SECRET_KEY) | 0 forks | YES (refs/pull/1/head) |
+| LogiFlow | 90df4b0b727c37e9840f7002d394080f63086e08 | b82451f612d7043367e3789489a36073dff4531c | --replace-text (1 Evolution API key, 27 chars) | VERIFIED | VERIFIED | PASS (715 files, identical blob SHAs) | PASS (305 false positives only) | 0 forks | YES (refs/pull/1/head) |
+| base-corporativa | e40c90fe5e98609509ad6cf0d00406a3f92bbe60 | 33f7d1999cfd56fc2a09f362ea859ec074b064e7 | --invert-paths (3 env files) + --replace-text (6 secrets: 2 R2 keys, 3 env-file secrets, SendGrid key) | VERIFIED | VERIFIED | PASS (584 files, identical blob SHAs) | PASS (3 current-tree placeholders in example docs) | 0 forks | YES (refs/pull/1/head) |
+
+### Deployment-risk decisions (owner-authorized)
+
+- base-corporativa: Railway deployment records present but owner-attested inactive (PROCEED)
+- FinanceControl: no deployment integration (PROCEED)
+- PayFlow-AI: active Vercel production deployment — owner explicitly authorized force-push accepting Vercel redeploy (PROCEED)
+- LogiFlow: 4 active Vercel production deployments — owner explicitly authorized force-push accepting Vercel redeploy (PROCEED)
+
+### Lifecycle status (updated)
+
+- REWRITE_COMPLETED = 6 (Portfolio-LeonardoFragoso-React, AndaimesPini_Project, FinanceControl, PayFlow-AI, LogiFlow, base-corporativa)
+- REWRITE_PENDING = 6 (ProFlow, Digital-Signage-Platform, FlowTrack, Bot_IqOption, MVP-linkedin-bot, API_Analyze)
+- COMPLETED + READY + BLOCKED = 6 + 0 + 6 = 12 (= ACTIVE_REWRITE_CANDIDATES)
+- UPSTREAM_HISTORY_SANITIZED = YES for all 6 completed repos
+- GLOBAL_ERASURE_UNPROVEN = YES for all 6 (GitHub-managed PR refs retain old history)
+- GITHUB_SUPPORT_CLEANUP_REQUIRED = YES for all 6
+- OWNER_ATTESTED_COMPLETED = YES for items #8-#17, #18, #28, #37 (NOT PROVIDER_VERIFIED)
