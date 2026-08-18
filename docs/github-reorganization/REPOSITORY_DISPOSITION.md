@@ -1,8 +1,9 @@
-# Repository Disposition — Phase 2A.10 (Visibility totals corrected Phase 2A.10.1)
+# Repository Disposition — Phase 2A.10 (Visibility totals corrected Phase 2A.10.1, runtime state updated Phase 2A.11)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
 **Phase 2A.10.1 update:** 2026-08-18 (visibility totals reconciled against live GitHub metadata)
+**Phase 2A.11 update:** 2026-08-18 (Railway runtime state reconciled — only ProFlow active)
 **Operation:** Repository deletion batch (13 repositories deleted)
 
 > **CRITICAL:** This document records the intentional deletion of 13 repositories that no longer have strategic, portfolio, historical, or operational value. All 13 repositories were backed up locally (mirror clone + git bundle) before deletion. No credential values are listed.
@@ -125,3 +126,23 @@ All 13 repositories were backed up before deletion:
 - **Directory:** `github-deletion-backups/phase-2a-10/`
 - **Format:** git mirror clone + git bundle
 - **Manifest:** `DELETE_MANIFEST.md` in backup directory
+
+## Railway Runtime State (Phase 2A.11 — OWNER_ATTESTED_RUNTIME_STATE)
+
+Leonardo explicitly confirms that **the only project currently deployed on Railway is ProFlow**. This attestation applies ONLY to Railway deployment state. It does NOT prove credential revocation, provider-side key invalidation, session invalidation, password changes, or ICTSI owner authorization.
+
+| Repository | Railway Deployment | Evidence |
+|---|---|---|
+| ProFlow | ACTIVE_PRODUCTION | OWNER_ATTESTED_RUNTIME_STATE — only active Railway project |
+| base-corporativa | NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED | Leonardo confirms not deployed on Railway |
+| Bot_IqOption | NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED | Leonardo confirms not deployed on Railway |
+| Digital-Signage-Platform | NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED | Leonardo confirms not deployed on Railway (also ICTSI-owned) |
+| FlowTrack | NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED | Leonardo confirms not deployed on Railway (also ICTSI-owned) |
+| MVP-linkedin-bot | NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED | Leonardo confirms not deployed on Railway |
+
+### Phase 2A.11 Cleanup PR Merges
+
+| Repository | PR | Pre-merge head | Merge SHA | Current Tree |
+|---|---|---|---|---|
+| base-corporativa | #1 | e1655bb3166fa120ecaffa8e8f35dfaf33b717ca | e40c90fe5e98609509ad6cf0d00406a3f92bbe60 | CLEAN |
+| Bot_IqOption | #5 | d3a248eee8be3979a6b96b784393f0a3b629bc69 | f26b29496dbb7e9c302d65252b1fdc0f956291a7 | CLEAN |

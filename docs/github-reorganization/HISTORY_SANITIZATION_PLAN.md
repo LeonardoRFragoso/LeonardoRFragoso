@@ -1,4 +1,4 @@
-# Git History Sanitization Plan — Phase 2A (Canonicalized Phase 2A.10.1)
+# Git History Sanitization Plan — Phase 2A (Canonicalized Phase 2A.10.1, updated Phase 2A.11)
 
 **Account:** LeonardoRFragoso
 **Phase 2A date:** 2026-08-17
@@ -7,6 +7,7 @@
 **Phase 2A.9 update:** 2026-08-18
 **Phase 2A.10 update:** 2026-08-18
 **Phase 2A.10.1 update:** 2026-08-18 (history-sanitization plan canonicalization & pre-rewrite gate)
+**Phase 2A.11 update:** 2026-08-18 (runtime gate closure, cleanup PR integration, pre-history-rewrite readiness)
 **Status:** PLAN ONLY — **DO NOT EXECUTE without Leonardo's explicit per-repo authorization**
 
 > **CRITICAL:** History rewriting is DESTRUCTIVE and irreversible. It rewrites all commit SHAs, breaks forks, breaks open PRs, and requires force-push. This document is a PLAN only. No history rewrite has been performed or will be performed without explicit authorization.
@@ -53,11 +54,11 @@ Allowed values:
 | REPOSITORY | VISIBILITY_NOW | PUBLIC_WHEN_EXPOSED | CURRENT_TREE | SENSITIVE_HISTORY_TYPE | OWNER | OWNER_ATTESTATION | SESSION_STATUS | OWNER_HANDOFF | RUNTIME_GATE | OPEN_PR_GATE | FORK_RISK | REWRITE_REQUIRED | REWRITE_READY | BLOCKER |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | ProFlow | PRIVATE | YES | CLEAN | CREDENTIALS (items 1-7) | Leonardo | PENDING | N/A | N/A | N/A | OPEN (PR #1, #2) | LOW (0 forks; was public) | YES | NO | OWNER_ATTESTATION_BLOCKER, OPEN_PR_GATE |
-| base-corporativa | PRIVATE | YES | EXPOSED (PR #1 open) | CREDENTIALS (items 8-17) | Leonardo | PENDING | N/A | N/A | PENDING (Railway) | OPEN (PR #1, head e1655bb) | LOW (0 forks; was public) | YES | NO | CURRENT_TREE_BLOCKER, OWNER_ATTESTATION_BLOCKER, RUNTIME_BLOCKER, OPEN_PR_GATE |
+| base-corporativa | PRIVATE | YES | CLEAN (PR #1 merged Phase 2A.11) | CREDENTIALS (items 8-17) | Leonardo | PENDING | N/A | N/A | CLEARED (NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED) | NONE (PR #1 merged) | LOW (0 forks; was public) | YES | NO | OWNER_ATTESTATION_BLOCKER |
 | FinanceControl | PRIVATE | YES | CLEAN | CREDENTIALS (item 18) + PII | Leonardo | PENDING | N/A | N/A | N/A | NONE | LOW (0 forks; was public) | YES | NO | OWNER_ATTESTATION_BLOCKER |
 | Digital-Signage-Platform | PRIVATE | YES | CLEAN | CREDENTIALS (items 19-20) | ICTSI/iTracker | N/A | N/A | PENDING | N/A | OPEN (PR #4, head 1f96647) | LOW (0 forks; was public) | YES | NO | OWNER_HANDOFF_BLOCKER, OPEN_PR_GATE |
 | FlowTrack | PRIVATE | YES | CLEAN | SESSIONS (item 30) + LOCAL_APP_SECRET (item 29) | ICTSI/iTracker | N/A | PENDING | PENDING | N/A | OPEN (PR #1, head bb1c040) | LOW (0 forks; was public) | YES | NO | OWNER_HANDOFF_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE |
-| Bot_IqOption | PRIVATE | NO (always private) | EXPOSED (PR #5 open) | CREDENTIALS (items 21-25, 27) + SESSIONS (item 26) | Leonardo | PENDING | PENDING | N/A | PENDING (Railway) | OPEN (PR #5, head d3a248e) | NONE (private, 0 forks) | YES | NO | CURRENT_TREE_BLOCKER, OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER, RUNTIME_BLOCKER, OPEN_PR_GATE |
+| Bot_IqOption | PRIVATE | NO (always private) | CLEAN (PR #5 merged Phase 2A.11) | CREDENTIALS (items 21-25, 27) + SESSIONS (item 26) | Leonardo | PENDING | PENDING | N/A | CLEARED (NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED) | NONE (PR #5 merged) | NONE (private, 0 forks) | YES | NO | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER |
 | MVP-linkedin-bot | PRIVATE | NO (always private) | CLEAN | SESSIONS (items 31, 32, 41) + CREDENTIAL (item 40) + PII (item 33) | Leonardo | PENDING | PENDING | N/A | N/A | OPEN (PR #1, head 8acdcc3) | NONE (private, 0 forks) | YES | NO | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE |
 | Portfolio-LeonardoFragoso-React | PUBLIC | YES (is public) | CLEAN | PII (items 35-36) | Leonardo | N/A (PII) | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | YES | NONE — PII removal IS the remediation |
 | AndaimesPini_Project | PRIVATE | YES | CLEAN | CLIENT_BUSINESS_DATA (SQLite DB; not in credential matrix) | Leonardo | N/A (data, not credentials) | N/A | N/A | N/A | NONE | LOW (0 forks; was public) | YES | YES | NONE — data artifact removal IS the remediation; PR #1 merged, current tree clean |
@@ -65,7 +66,7 @@ Allowed values:
 | LogiFlow | PUBLIC | YES (is public) | CLEAN | CREDENTIAL (item 37, Evolution API key) | Leonardo | PENDING | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | NO | OWNER_ATTESTATION_BLOCKER |
 | API_Analyze | PUBLIC | YES (is public) | CLEAN | CREDENTIALS (items 38-39, News API + Alpha Vantage keys) | Leonardo | PENDING | N/A | N/A | N/A | NONE | HIGH (1 fork: kabann-1978/API_Analyze-B3) | YES | NO | OWNER_ATTESTATION_BLOCKER, FORK_RISK |
 
-### Readiness counts (computed from the canonical table)
+### Readiness counts (computed from the canonical table — Phase 2A.11 updated)
 
 | Metric | Value |
 |---|---|
@@ -75,32 +76,32 @@ Allowed values:
 | READY + BLOCKED | 12 (= ACTIVE_REWRITE_CANDIDATES) |
 | DELETED_REWRITE_NA | 1 (Bet-IA-BOT — see audit record) |
 
-### Blocker counts (repositories; a repo may carry multiple blockers)
+### Blocker counts (repositories; a repo may carry multiple blockers — Phase 2A.11 updated)
 
 | Blocker | Repositories | Count |
 |---|---|---|
 | OWNER_ATTESTATION_BLOCKER | ProFlow, base-corporativa, FinanceControl, Bot_IqOption, MVP-linkedin-bot, PayFlow-AI, LogiFlow, API_Analyze | 8 |
 | SESSION_BLOCKER | Bot_IqOption, MVP-linkedin-bot, FlowTrack | 3 |
 | OWNER_HANDOFF_BLOCKER | Digital-Signage-Platform, FlowTrack | 2 |
-| CURRENT_TREE_BLOCKER | base-corporativa, Bot_IqOption | 2 |
-| RUNTIME_BLOCKER | base-corporativa, Bot_IqOption | 2 |
-| OPEN_PR_GATE | ProFlow, base-corporativa, Digital-Signage-Platform, FlowTrack, Bot_IqOption, MVP-linkedin-bot | 6 |
+| CURRENT_TREE_BLOCKER | NONE (base-corporativa and Bot_IqOption cleared by PR merges Phase 2A.11) | 0 |
+| RUNTIME_BLOCKER | NONE (base-corporativa and Bot_IqOption cleared by OWNER_ATTESTED_RUNTIME_STATE Phase 2A.11) | 0 |
+| OPEN_PR_GATE | ProFlow, Digital-Signage-Platform, FlowTrack, MVP-linkedin-bot | 4 (base-corporativa and Bot_IqOption PRs merged) |
 | FORK_RISK | API_Analyze | 1 |
 
 > **OWNER_ATTESTATION remains PENDING for all credential-bearing repos.** Leonardo previously reported credentials were changed (OWNER_REPORTED). This has NOT been upgraded to OWNER_ATTESTED_COMPLETED. No provider dashboard access is required for OWNER_ATTESTED_COMPLETED, but explicit Leonardo attestation per item is mandatory (see Part G / POST_ROTATION_RECONCILIATION.md).
 
-### Live PR gate reconciliation (re-fetched 2026-08-18)
+### Live PR gate reconciliation (Phase 2A.11 updated — base-corporativa #1 and Bot_IqOption #5 MERGED)
 
 Force-pushing rewritten history can invalidate open PRs. Live PR state for every candidate:
 
 | Repository | Open PRs | Head SHA | Mergeable | Gate impact |
 |---|---|---|---|---|
 | ProFlow | PR #1, PR #2 (copilot feature branches) | 4d7a463 / aa54292 | UNKNOWN | Close or merge before rewrite |
-| base-corporativa | PR #1 (security/remove-versioned-secrets) | e1655bb3166fa120ecaffa8e8f35dfaf33b717ca | MERGEABLE | Current-tree gate — DO NOT merge automatically (WAITING_OWNER_RUNTIME_ATTESTATION) |
+| base-corporativa | NONE (PR #1 MERGED Phase 2A.11, merge SHA e40c90f) | — | — | None — current tree CLEAN |
 | FinanceControl | none | — | — | None |
 | Digital-Signage-Platform | PR #4 (security/remove-versioned-secrets) | 1f9664713c681af83a92ad4647719ab070608a57 | MERGEABLE | OWNER_HANDOFF_BEFORE_MERGE — DO NOT merge |
 | FlowTrack | PR #1 (security/remove-sensitive-artifacts) | bb1c040cf241607e6aa02b30cd67d9d87fc7725b | MERGEABLE | OWNER_HANDOFF_BEFORE_MERGE — DO NOT merge |
-| Bot_IqOption | PR #5 (security/remove-versioned-secrets) | d3a248eee8be3979a6b96b784393f0a3b629bc69 | MERGEABLE | Current-tree gate — DO NOT merge automatically (NEEDS_MANUAL_CONFIRMATION) |
+| Bot_IqOption | NONE (PR #5 MERGED Phase 2A.11, merge SHA f26b294) | — | — | None — current tree CLEAN |
 | MVP-linkedin-bot | PR #1 (devin bot fix, NOT the merged security PR #2) | 8acdcc36980d27a4684d62d7b5ff81582588c333 | UNKNOWN | Close or merge before rewrite |
 | Portfolio-LeonardoFragoso-React | none | — | — | None |
 | AndaimesPini_Project | none (security PR #1 already merged) | — | — | None |
@@ -108,7 +109,7 @@ Force-pushing rewritten history can invalidate open PRs. Live PR state for every
 | LogiFlow | none (security PR #1 already merged) | — | — | None |
 | API_Analyze | none (security PR #1 already merged) | — | — | None |
 
-> Stale statements such as "0 open PRs" for base-corporativa / Bot_IqOption have been corrected: both have an open security PR that is a current-tree gate.
+> **Phase 2A.11:** base-corporativa PR #1 and Bot_IqOption PR #5 were merged after Leonardo confirmed neither is deployed on Railway (OWNER_ATTESTED_RUNTIME_STATE). Both current trees are now CLEAN.
 
 ## DELETED_REPOSITORY_AUDIT_RECORD (Tombstone)
 
@@ -290,23 +291,23 @@ git push --force --mirror
 | Field | Value |
 |---|---|
 | **Visibility** | Now PRIVATE |
-| **Public when leaked** | Yes — was PUBLIC. Secrets are in CURRENT TREE (not just history). |
+| **Public when leaked** | Yes — was PUBLIC. Secrets were in CURRENT TREE (now cleaned by PR #1 merge Phase 2A.11). |
 | **Forks possible** | Yes — was public. Live check: 0 forks. |
-| **Paths to purge** | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` |
-| **Literal replacement also necessary?** | Yes — R2 keys hardcoded in `backend/fix_product_images_r2.py`, `backend/list_r2_images.py`, `backend/upload_pdfs_to_r2.py`, `backend/upload_product_images_to_r2.py`. Use `--replace-text` with `SECRET_VALUE_REFERENCE_REQUIRED` (R2 access key + R2 secret key values from secure audit evidence). |
+| **Paths to purge** | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` (both removed from current tree by PR #1; still in history) |
+| **Literal replacement also necessary?** | Yes — R2 keys were hardcoded in `backend/fix_product_images_r2.py`, `backend/list_r2_images.py`, `backend/upload_pdfs_to_r2.py`, `backend/upload_product_images_to_r2.py`. PR #1 replaced them with `os.getenv()`. Historical values still need `--replace-text` with `SECRET_VALUE_REFERENCE_REQUIRED` (R2 access key + R2 secret key values from secure audit evidence). |
 | **Branches affected** | All branches |
 | **Tags affected** | Check `git tag` |
-| **Open PRs** | PR #1 (head e1655bb3166fa120ecaffa8e8f35dfaf33b717ca, MERGEABLE) — security cleanup, current-tree gate. DO NOT merge automatically. |
+| **Open PRs** | NONE (PR #1 MERGED Phase 2A.11, merge SHA e40c90f) |
 | **Force-push required** | Yes |
 | **Collaborator impact** | Local clones need re-clone |
-| **Deployment integration** | Railway — deploys from branch HEAD, not history |
-| **Worthwhile?** | **YES** — was public, contains R2/payment/email/DB credentials in current tree. |
+| **Deployment integration** | None — NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED (Leonardo confirms not deployed on Railway) |
+| **Worthwhile?** | **YES** — was public, contains R2/payment/email/DB credentials in history. |
 | **Prerequisite** | All 10 credentials (items #8-#17 in rotation matrix) must be ROTATED first |
 | **Recommended command** | `git filter-repo --invert-paths --path RAILWAY_ENV_ATUALIZADO.txt --path backend/.env.railway` then `git filter-repo --replace-text` with the R2 key values (SECRET_VALUE_REFERENCE_REQUIRED) |
 | **Backup strategy** | `git clone --mirror` to local backup |
 | **Authorization required** | Leonardo must explicitly approve |
-| **Current blockers** | CURRENT_TREE_BLOCKER (PR #1 open), OWNER_ATTESTATION_BLOCKER, RUNTIME_BLOCKER (Railway), OPEN_PR_GATE |
-| **Classification** | WAITING_OWNER_RUNTIME_ATTESTATION — Leonardo must confirm: (1) replacement Railway env vars configured, (2) application functioning, (3) old credentials revoked/inactivated. Then merge PR #1. |
+| **Current blockers** | OWNER_ATTESTATION_BLOCKER |
+| **Classification** | RUNTIME_GATE CLEARED (NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED). CURRENT_TREE CLEAN (PR #1 merged). Remaining blocker: OWNER_ATTESTATION_BLOCKER (credential revocation not yet explicitly attested). |
 
 ### 3. FinanceControl
 
@@ -383,21 +384,21 @@ git push --force --mirror
 | **Visibility** | PRIVATE (was already private) |
 | **Public when leaked** | No — was always private. Lower risk of external scraping. |
 | **Forks possible** | Unlikely (private repo). Live check: 0 forks. |
-| **Paths to purge** | `bot_iqoption_v2/backend/.env`, `bot_iqoption_v2/backend/RAILWAY_ENV_COMPLETE.txt`, `bot_iqoption_v2/backend/bot_iqoption.log`, `bot_iqoption_v2/backend/keys/` (entire directory), `bot_iqoption_v2/backend/db.sqlite3`, `bot_iqoption_v2/backend/venv/` (entire directory) |
-| **Literal replacement also necessary?** | Yes — real MERCADOPAGO_CLIENT_SECRET values in historical versions of `.env.example` and `RAILWAY_ENV_TEMPLATE.md`. Use `--replace-text` with `SECRET_VALUE_REFERENCE_REQUIRED`. |
+| **Paths to purge** | `bot_iqoption_v2/backend/.env`, `bot_iqoption_v2/backend/RAILWAY_ENV_COMPLETE.txt`, `bot_iqoption_v2/backend/bot_iqoption.log`, `bot_iqoption_v2/backend/keys/` (entire directory), `bot_iqoption_v2/backend/db.sqlite3`, `bot_iqoption_v2/backend/venv/` (entire directory) — all removed from current tree by PR #5 merge Phase 2A.11; still in history |
+| **Literal replacement also necessary?** | Yes — real MERCADOPAGO_CLIENT_SECRET values in historical versions of `.env.example` and `RAILWAY_ENV_TEMPLATE.md`. PR #5 replaced them with placeholders. Historical values still need `--replace-text` with `SECRET_VALUE_REFERENCE_REQUIRED`. |
 | **Branches affected** | All branches (5 branches) |
 | **Tags affected** | Check `git tag` |
-| **Open PRs** | PR #5 (head d3a248eee8be3979a6b96b784393f0a3b629bc69, MERGEABLE) — security cleanup, current-tree gate. DO NOT merge automatically. |
+| **Open PRs** | NONE (PR #5 MERGED Phase 2A.11, merge SHA f26b294) |
 | **Force-push required** | Yes |
 | **Collaborator impact** | Local clones need re-clone |
-| **Deployment integration** | Railway — deploys from branch HEAD |
-| **Worthwhile?** | **MODERATE** — was always private, but contains production MercadoPago credentials and 197 JWT tokens. Worthwhile for hygiene but lower urgency than public repos. |
+| **Deployment integration** | None — NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED (Leonardo confirms not deployed on Railway) |
+| **Worthwhile?** | **MODERATE** — was always private, but contains production MercadoPago credentials and 197 JWT tokens in history. Worthwhile for hygiene but lower urgency than public repos. |
 | **Prerequisite** | All MercadoPago credentials (items #21-#24), SECRET_KEY (#25), session tokens (#26), user keys (#27) must be ROTATED first |
 | **Recommended command** | `git filter-repo --invert-paths --path bot_iqoption_v2/backend/.env --path bot_iqoption_v2/backend/RAILWAY_ENV_COMPLETE.txt --path bot_iqoption_v2/backend/bot_iqoption.log --path bot_iqoption_v2/backend/keys --path bot_iqoption_v2/backend/db.sqlite3 --path bot_iqoption_v2/backend/venv` then `git filter-repo --replace-text` with MERCADOPAGO_CLIENT_SECRET values (SECRET_VALUE_REFERENCE_REQUIRED) |
 | **Backup strategy** | `git clone --mirror` to local backup |
 | **Authorization required** | Leonardo must explicitly approve |
-| **Current blockers** | CURRENT_TREE_BLOCKER (PR #5 open), OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER, RUNTIME_BLOCKER (Railway), OPEN_PR_GATE |
-| **Classification** | NEEDS_MANUAL_CONFIRMATION — Railway state remains unresolved unless evidence proves: Railway project deleted, OR service disabled, OR GitHub auto-deploy disabled, OR deployment branch is not main. |
+| **Current blockers** | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER |
+| **Classification** | RAILWAY_RUNTIME_GATE CLEARED (NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED). CURRENT_TREE CLEAN (PR #5 merged). Remaining blockers: OWNER_ATTESTATION_BLOCKER (credential revocation not yet explicitly attested) + SESSION_BLOCKER (IQ Option session invalidation not yet confirmed). |
 
 ### 7. MVP-linkedin-bot
 
@@ -618,7 +619,7 @@ If forks exist, the fork owners would need to delete their forks or have their h
 **Blocked: 10**
 **History rewrites performed in Phase 2A: 0** (PLAN ONLY — awaiting authorization)
 
-### Account-level totals (live, 2026-08-18)
+### Account-level totals (live, Phase 2A.11 updated)
 
 | Metric | Value |
 |---|---|
@@ -632,5 +633,6 @@ If forks exist, the fork owners would need to delete their forks or have their h
 | OWNER_ATTESTATION_BLOCKED (repos) | 8 |
 | SESSION_BLOCKED (repos) | 3 |
 | OWNER_HANDOFF_BLOCKED (repos) | 2 |
-| CURRENT_TREE_BLOCKED (repos) | 2 |
-| RUNTIME_BLOCKED (repos) | 2 |
+| CURRENT_TREE_BLOCKED (repos) | 0 (cleared Phase 2A.11 — base-corporativa PR #1 + Bot_IqOption PR #5 merged) |
+| RUNTIME_BLOCKED (repos) | 0 (cleared Phase 2A.11 — OWNER_ATTESTED_RUNTIME_STATE: only ProFlow on Railway) |
+| RAILWAY_ACTIVE_REPOSITORIES | 1 (ProFlow only — OWNER_ATTESTED_RUNTIME_STATE) |

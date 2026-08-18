@@ -1,10 +1,11 @@
-# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.10.1)
+# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.11)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
 **Phase 2A.9 update:** 2026-08-18
 **Phase 2A.10 update:** 2026-08-18
 **Phase 2A.10.1 update:** 2026-08-18 (history-sanitization plan canonicalization & pre-rewrite gate)
+**Phase 2A.11 update:** 2026-08-18 (runtime gate closure, cleanup PR integration, pre-history-rewrite readiness)
 **Status:** READ-ONLY AUDIT — No credentials rotated by Devin. No history rewritten. No provider dashboards accessed.
 
 > **CRITICAL:** Leonardo reports that exposed credentials have been manually changed. Devin cannot independently verify provider-side revocation or runtime validation. This document separates owner-reported actions from independently verified evidence. No credential values are listed.
@@ -65,8 +66,8 @@ No new credentials were committed during manual remediation. All findings were p
 
 | Category | Repos | Status |
 |---|---|---|
-| Current tree CLEAN (security PR merged) | ProFlow, FinanceControl, Digital-Signage-Platform, PayFlow-AI, MVP-linkedin-bot, Portfolio-LeonardoFragoso-React, AndaimesPini_Project, LogiFlow, API_Analyze | 9 repos clean |
-| Current tree has credentials (PR open, not merged) | base-corporativa, Bot_IqOption | 2 repos blocked |
+| Current tree CLEAN (security PR merged) | ProFlow, base-corporativa (PR #1 merged Phase 2A.11), FinanceControl, Digital-Signage-Platform, PayFlow-AI, MVP-linkedin-bot, Portfolio-LeonardoFragoso-React, AndaimesPini_Project, LogiFlow, API_Analyze, Bot_IqOption (PR #5 merged Phase 2A.11) | 11 repos clean |
+| Current tree has credentials (PR open, not merged) | NONE | 0 repos blocked |
 | Repository deleted (not executable) | Bet-IA-BOT | 1 repo — NOT_APPLICABLE_REPOSITORY_DELETED (see HISTORY_SANITIZATION_PLAN.md DELETED_REPOSITORY_AUDIT_RECORD) |
 
 ---
@@ -225,17 +226,18 @@ Phase 2A.8 erroneously reported "5 items waiting session invalidation" but the u
 
 ## Env-Dependent PR Re-Evaluation
 
-### base-corporativa PR #1
+### base-corporativa PR #1 — MERGED Phase 2A.11
 
 | Field | Value |
 |---|---|
-| Head SHA | `e1655bb3166fa120ecaffa8e8f35dfaf33b717ca` |
-| State | OPEN, MERGEABLE, CLEAN |
-| Current tree | Still contains all 10 credentials |
-| Leonardo reports rotation done | YES (OWNER_REPORTED) |
-| Env vars configured in Railway? | UNKNOWN — Devin cannot verify Railway dashboard |
-| **Classification** | **WAITING_OWNER_RUNTIME_ATTESTATION** — Leonardo reports credentials changed (OWNER_REPORTED) but has not provided explicit OWNER_ATTESTED_COMPLETED stating replacement env vars are configured in Railway AND production application works AND old credentials were revoked/inactivated. |
-| **Action needed** | Leonardo must provide explicit attestation: (1) replacement env vars set in Railway, (2) production application works, (3) old credentials revoked. Then merge PR #1. |
+| Pre-merge head SHA | `e1655bb3166fa120ecaffa8e8f35dfaf33b717ca` |
+| Merge SHA | `e40c90fe5e98609509ad6cf0d00406a3f92bbe60` |
+| Post-merge main SHA | `e40c90fe5e98609509ad6cf0d00406a3f92bbe60` |
+| State | MERGED (squash, 2026-08-18) |
+| Current tree | CLEAN — all 10 credentials removed from current tree |
+| Runtime gate | CLEARED — NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED (Leonardo confirms not deployed on Railway) |
+| **Classification** | **RUNTIME_GATE_CLEARED, CURRENT_TREE_CLEAN** — PR #1 merged after Leonardo confirmed no active Railway deployment. Remaining blocker: OWNER_ATTESTATION_BLOCKER (credential revocation not yet explicitly attested). |
+| **Action needed** | Leonardo must provide explicit OWNER_ATTESTED_COMPLETED: old credentials revoked/inactivated. History rewrite can then proceed (assuming no other blockers). |
 
 ### Digital-Signage-Platform PR #4
 
@@ -259,37 +261,38 @@ Phase 2A.8 erroneously reported "5 items waiting session invalidation" but the u
 | **Classification** | **OWNER_HANDOFF_BEFORE_MERGE** (unchanged) — former employer system; notify ICTSI before merging |
 | **Action needed** | Leonardo notifies ICTSI. If ICTSI confirms decommissioned or authorizes merge, PR #1 can be merged. |
 
-### Bot_IqOption PR #5
+### Bot_IqOption PR #5 — MERGED Phase 2A.11
 
 | Field | Value |
 |---|---|
-| Head SHA | `d3a248eee8be3979a6b96b784393f0a3b629bc69` |
-| State | OPEN, MERGEABLE, UNSTABLE |
-| Current tree | Still contains all credentials and session tokens |
-| Railway auto-deploy state | UNCONFIRMED |
-| **Classification** | **NEEDS_MANUAL_CONFIRMATION** (unchanged) — Railway deployments stale but auto-deploy state unconfirmed |
-| **Action needed** | Leonardo must confirm: (1) Railway project deleted/disabled, OR (2) GitHub auto-deploy disabled, OR (3) production branch is not main. Then merge PR #5. |
+| Pre-merge head SHA | `d3a248eee8be3979a6b96b784393f0a3b629bc69` |
+| Merge SHA | `f26b29496dbb7e9c302d65252b1fdc0f956291a7` |
+| Post-merge main SHA | `f26b29496dbb7e9c302d65252b1fdc0f956291a7` |
+| State | MERGED (squash, 2026-08-18) |
+| Current tree | CLEAN — all credentials, session tokens, key files, venv, pycache, logs, db removed from current tree |
+| Source integrity | VERIFIED — 295 source files remain (209 Python, 5 frontend, 8 config, 7 docs, 7 project-meta); all source directories (accounts, billing, bot_iqoption, iqoptionapi, trading) preserved; migrations preserved; .env.example and RAILWAY_ENV_TEMPLATE.md are placeholder-only; .gitignore correct |
+| Runtime gate | CLEARED — NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED (Leonardo confirms not deployed on Railway) |
+| **Classification** | **RAILWAY_RUNTIME_GATE_CLEARED, CURRENT_TREE_CLEAN** — PR #5 merged after Leonardo confirmed no active Railway deployment and source integrity was verified. Remaining blockers: OWNER_ATTESTATION_BLOCKER (credential revocation not yet explicitly attested) + SESSION_BLOCKER (IQ Option session invalidation not yet confirmed). |
+| **Action needed** | Leonardo must provide explicit OWNER_ATTESTED_COMPLETED for credential revocation AND confirm IQ Option sessions invalidated. History rewrite can then proceed. |
 
-### Phase 2A.10.1 — Live PR Gate Re-Verification (all 12 candidates)
+### Phase 2A.11 — Live PR Gate Update (base-corporativa #1 and Bot_IqOption #5 MERGED)
 
-PR states were re-fetched live on 2026-08-18 for every active rewrite candidate. Force-pushing rewritten history can invalidate open PRs, so live PR state is a rewrite gate.
+PR states updated 2026-08-18 after Phase 2A.11 merges. base-corporativa PR #1 and Bot_IqOption PR #5 were merged (squash) after Leonardo confirmed neither is deployed on Railway.
 
 | Repository | Open PRs | Head SHA | Mergeable | Gate impact |
 |---|---|---|---|---|
-| ProFlow | PR #1, PR #2 (copilot feature branches) | 4d7a463 / aa54292 | UNKNOWN | Close or merge before rewrite (NEW — not previously documented) |
-| base-corporativa | PR #1 (security) | e1655bb3166fa120ecaffa8e8f35dfaf33b717ca | MERGEABLE | Confirmed live — current-tree gate, DO NOT merge automatically |
+| ProFlow | PR #1, PR #2 (copilot feature branches) | 4d7a463 / aa54292 | UNKNOWN | Close or merge before rewrite |
+| base-corporativa | NONE (PR #1 MERGED Phase 2A.11, merge SHA e40c90f) | — | — | None — current tree CLEAN |
 | FinanceControl | none | — | — | None |
-| Digital-Signage-Platform | PR #4 (security) | 1f9664713c681af83a92ad4647719ab070608a57 | MERGEABLE | Confirmed live — OWNER_HANDOFF_BEFORE_MERGE |
-| FlowTrack | PR #1 (security) | bb1c040cf241607e6aa02b30cd67d9d87fc7725b | MERGEABLE | Confirmed live — OWNER_HANDOFF_BEFORE_MERGE |
-| Bot_IqOption | PR #5 (security) | d3a248eee8be3979a6b96b784393f0a3b629bc69 | MERGEABLE | Confirmed live — current-tree gate, DO NOT merge automatically |
-| MVP-linkedin-bot | PR #1 (devin bot fix) | 8acdcc36980d27a4684d62d7b5ff81582588c333 | UNKNOWN | Close or merge before rewrite (NEW — not previously documented; this is NOT the merged security PR #2) |
+| Digital-Signage-Platform | PR #4 (security) | 1f9664713c681af83a92ad4647719ab070608a57 | MERGEABLE | OWNER_HANDOFF_BEFORE_MERGE — DO NOT merge |
+| FlowTrack | PR #1 (security) | bb1c040cf241607e6aa02b30cd67d9d87fc7725b | MERGEABLE | OWNER_HANDOFF_BEFORE_MERGE — DO NOT merge |
+| Bot_IqOption | NONE (PR #5 MERGED Phase 2A.11, merge SHA f26b294) | — | — | None — current tree CLEAN |
+| MVP-linkedin-bot | PR #1 (devin bot fix) | 8acdcc36980d27a4684d62d7b5ff81582588c333 | UNKNOWN | Close or merge before rewrite |
 | Portfolio-LeonardoFragoso-React | none | — | — | None |
 | AndaimesPini_Project | none (security PR #1 merged) | — | — | None |
 | PayFlow-AI | none (security PR #1 merged) | — | — | None |
 | LogiFlow | none (security PR #1 merged) | — | — | None |
 | API_Analyze | none (security PR #1 merged) | — | — | None |
-
-> **Correction:** Stale statements such as "0 open PRs" for base-corporativa and Bot_IqOption were wrong — both have an open security PR that is a current-tree gate. ProFlow (#1, #2) and MVP-linkedin-bot (#1) open PRs were not previously documented and are now recorded as OPEN_PR_GATE blockers.
 
 ---
 
@@ -312,10 +315,10 @@ PR states were re-fetched live on 2026-08-18 for every active rewrite candidate.
 | Repository | CURRENT_TREE | OWNER_ATTESTATION | SESSION | OWNER_HANDOFF | RUNTIME | HISTORY_READY | Blockers |
 |---|---|---|---|---|---|---|---|
 | ProFlow | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER, OPEN_PR_GATE (PR #1, #2) |
-| base-corporativa | EXPOSED (PR #1 open) | PENDING | N/A | N/A | PENDING | **NO** | CURRENT_TREE_BLOCKER, OWNER_ATTESTATION_BLOCKER, RUNTIME_BLOCKER, OPEN_PR_GATE (PR #1) |
+| base-corporativa | CLEAN (PR #1 merged Phase 2A.11) | PENDING | N/A | N/A | CLEARED | **NO** | OWNER_ATTESTATION_BLOCKER |
 | FinanceControl | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
 | Digital-Signage-Platform | CLEAN | N/A | N/A | PENDING | N/A | **NO** | OWNER_HANDOFF_BLOCKER, OPEN_PR_GATE (PR #4) |
-| Bot_IqOption | EXPOSED (PR #5 open) | PENDING | PENDING | N/A | PENDING | **NO** | CURRENT_TREE_BLOCKER, OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER, RUNTIME_BLOCKER, OPEN_PR_GATE (PR #5) |
+| Bot_IqOption | CLEAN (PR #5 merged Phase 2A.11) | PENDING | PENDING | N/A | CLEARED | **NO** | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER |
 | PayFlow-AI | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
 | FlowTrack | CLEAN | N/A | N/A | PENDING | N/A | **NO** | OWNER_HANDOFF_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE (PR #1) |
 | MVP-linkedin-bot | CLEAN | PENDING | PENDING | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE (PR #1) |
@@ -333,10 +336,10 @@ PR states were re-fetched live on 2026-08-18 for every active rewrite candidate.
 ### Blocked Repositories: 10 of 12
 
 All other repositories are BLOCKED. The most common blocker is OWNER_ATTESTATION_BLOCKER — Leonardo has stated credentials were changed (OWNER_REPORTED) but has not yet provided explicit per-item attestation of revocation (OWNER_ATTESTED_COMPLETED). When Leonardo provides explicit attestation, the following repos would become READY (assuming no other blockers):
-- **ProFlow, FinanceControl, PayFlow-AI, LogiFlow, API_Analyze** — would become READY with OWNER_ATTESTED_COMPLETED (current tree already clean; ProFlow also needs OPEN_PR_GATE resolved)
-- **MVP-linkedin-bot** — would need OWNER_ATTESTED_COMPLETED + SESSION_BLOCKER resolved + OPEN_PR_GATE resolved
-- **base-corporativa** — would need OWNER_ATTESTED_COMPLETED + CURRENT_TREE_BLOCKER (PR #1 merge) + RUNTIME_BLOCKER resolved
-- **Bot_IqOption** — would need OWNER_ATTESTED_COMPLETED + CURRENT_TREE_BLOCKER (PR #5 merge) + SESSION_BLOCKER + RUNTIME_BLOCKER resolved
+- **base-corporativa, FinanceControl, PayFlow-AI, LogiFlow, API_Analyze** — would become READY with OWNER_ATTESTED_COMPLETED (current tree already clean, runtime gate cleared, no other blockers; API_Analyze also has FORK_RISK to document)
+- **ProFlow** — would need OWNER_ATTESTED_COMPLETED + OPEN_PR_GATE resolved (PR #1, #2)
+- **MVP-linkedin-bot** — would need OWNER_ATTESTED_COMPLETED + SESSION_BLOCKER resolved + OPEN_PR_GATE resolved (PR #1)
+- **Bot_IqOption** — would need OWNER_ATTESTED_COMPLETED + SESSION_BLOCKER resolved (current tree clean, runtime gate cleared)
 - **Digital-Signage-Platform, FlowTrack** — would need OWNER_HANDOFF_BLOCKER resolved (ICTSI confirmation)
 
 ---

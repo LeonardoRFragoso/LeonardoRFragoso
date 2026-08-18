@@ -1,8 +1,9 @@
-# Credential Rotation Matrix — Phase 2A (Updated Phase 2A.7)
+# Credential Rotation Matrix — Phase 2A (Updated Phase 2A.11)
 
 **Account:** LeonardoRFragoso
 **Phase 2A date:** 2026-08-17
 **Phase 2A.7 update:** 2026-08-18
+**Phase 2A.11 update:** 2026-08-18 (runtime gate closure, cleanup PR integration)
 **Status:** ACTIVE — Leonardo must perform all rotations manually
 
 > **CRITICAL:** No credential values are listed in this document. All credentials committed to Git must be treated as COMPROMISED regardless of whether the repository is now private or the file was removed from the current tree. Removing a file, making a repo private, or rewriting history does NOT make a credential safe — rotation/revocation at the provider is required.
@@ -44,16 +45,16 @@
 
 | # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 8 | Cloudflare R2 / AWS-compatible | R2 access key | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway`, `backend/fix_product_images_r2.py`, `backend/list_r2_images.py`, `backend/upload_pdfs_to_r2.py`, `backend/upload_product_images_to_r2.py` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `R2_ACCESS_KEY` | Verify R2 storage operations still work | Yes — create new R2 API token in Cloudflare dashboard, revoke old token, update Railway env var |
-| 9 | Cloudflare R2 / AWS-compatible | R2 secret key | Same as above | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `R2_SECRET_KEY` | Verify R2 storage operations still work | Yes — rotate alongside R2 access key |
-| 10 | Mercado Pago | Access token | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue in MP dashboard, update Railway env var |
-| 11 | Mercado Pago | Public key | `RAILWAY_ENV_ATUALIZADO.txt` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `MERCADOPAGO_PUBLIC_KEY` | Verify frontend payment rendering works | Yes — rotate in MP dashboard, update Railway env var |
-| 12 | Melhor Envio | Client ID | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `MELHOR_ENVIO_CLIENT_ID` | Verify shipping quote flow works | Yes — check if client ID can be rotated or if app needs re-registration |
-| 13 | Melhor Envio | Client secret | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `MELHOR_ENVIO_CLIENT_SECRET` | Verify shipping auth works | Yes — rotate in Melhor Envio dashboard, update Railway env var |
-| 14 | Melhor Envio | API token | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `MELHOR_ENVIO_API_TOKEN` | Verify shipping API calls work | Yes — revoke and reissue in Melhor Envio dashboard, update Railway env var |
-| 15 | Database (PostgreSQL/external) | Database URL with credentials | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `DATABASE_URL` | Verify DB connections work with new password | Yes — rotate DB password in Railway/DB provider, update DATABASE_URL env var |
-| 16 | Django | Superuser password | `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `DJANGO_SUPERUSER_PASSWORD` | Verify admin login works with new password | Yes — change superuser password via Django admin or `manage.py changepassword` |
-| 17 | SendGrid | API key | `backend/.env.railway` | Yes | No | Yes | NOT_STARTED | Railway (base-corporativa production) | `SENDGRID_API_KEY` | Verify email sending works | Yes — revoke key in SendGrid dashboard, create new key, update Railway env var |
+| 8 | Cloudflare R2 / AWS-compatible | R2 access key | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway`, `backend/fix_product_images_r2.py`, `backend/list_r2_images.py`, `backend/upload_pdfs_to_r2.py`, `backend/upload_product_images_to_r2.py` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `R2_ACCESS_KEY` | Verify R2 storage operations still work | Yes — create new R2 API token in Cloudflare dashboard, revoke old token, update Railway env var |
+| 9 | Cloudflare R2 / AWS-compatible | R2 secret key | Same as above | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `R2_SECRET_KEY` | Verify R2 storage operations still work | Yes — rotate alongside R2 access key |
+| 10 | Mercado Pago | Access token | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue in MP dashboard, update Railway env var |
+| 11 | Mercado Pago | Public key | `RAILWAY_ENV_ATUALIZADO.txt` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `MERCADOPAGO_PUBLIC_KEY` | Verify frontend payment rendering works | Yes — rotate in MP dashboard, update Railway env var |
+| 12 | Melhor Envio | Client ID | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `MELHOR_ENVIO_CLIENT_ID` | Verify shipping quote flow works | Yes — check if client ID can be rotated or if app needs re-registration |
+| 13 | Melhor Envio | Client secret | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `MELHOR_ENVIO_CLIENT_SECRET` | Verify shipping auth works | Yes — rotate in Melhor Envio dashboard, update Railway env var |
+| 14 | Melhor Envio | API token | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `MELHOR_ENVIO_API_TOKEN` | Verify shipping API calls work | Yes — revoke and reissue in Melhor Envio dashboard, update Railway env var |
+| 15 | Database (PostgreSQL/external) | Database URL with credentials | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `DATABASE_URL` | Verify DB connections work with new password | Yes — rotate DB password in Railway/DB provider, update DATABASE_URL env var |
+| 16 | Django | Superuser password | `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `DJANGO_SUPERUSER_PASSWORD` | Verify admin login works with new password | Yes — change superuser password via Django admin or `manage.py changepassword` |
+| 17 | SendGrid | API key | `backend/.env.railway` | No | No | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #1 merged) | `SENDGRID_API_KEY` | Verify email sending works | Yes — revoke key in SendGrid dashboard, create new key, update Railway env var |
 
 ### FinanceControl
 
@@ -72,13 +73,13 @@
 
 | # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 21 | Mercado Pago | Production access token | `bot_iqoption_v2/backend/.env`, `RAILWAY_ENV_COMPLETE.txt` | Yes | Yes | Yes | NOT_STARTED | Railway (Bot_IqOption production) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue in MP dashboard, update Railway env var |
-| 22 | Mercado Pago | Production client secret | `.env`, `RAILWAY_ENV_COMPLETE.txt`, `.env.example` (real value!), `RAILWAY_ENV_TEMPLATE.md` (real value!) | Yes | Yes | Yes | NOT_STARTED | Railway (Bot_IqOption production) | `MERCADOPAGO_CLIENT_SECRET` | Verify payment auth works | Yes — rotate in MP dashboard, update Railway env var |
-| 23 | Mercado Pago | Public key | `.env` | Yes | Yes | Yes | NOT_STARTED | Railway (Bot_IqOption production) | `MERCADOPAGO_PUBLIC_KEY` | Verify frontend rendering works | Yes — rotate in MP dashboard, update Railway env var |
-| 24 | Mercado Pago | Client ID | `.env` | Yes | Yes | Likely | NOT_STARTED | Railway (Bot_IqOption production) | `MERCADOPAGO_CLIENT_ID` | Verify OAuth flow works | Yes — check if client ID needs rotation or just the secret |
-| 25 | Application | Django/app secret key | `RAILWAY_ENV_COMPLETE.txt` | Yes | Yes | Yes | NOT_STARTED | Railway (Bot_IqOption production) | `SECRET_KEY` | Verify session validation works | Yes — generate new secret, update Railway env var |
-| 26 | IQ Option API | JWT trading session tokens (197 tokens) | `bot_iqoption_v2/backend/bot_iqoption.log` | Yes | Yes | Yes — sessions are compromised | NOT_STARTED | IQ Option trading sessions | N/A (session tokens, not env vars) | Verify trading sessions terminated; new sessions require re-authentication | Yes — terminate all active IQ Option sessions. These are runtime session tokens, not static credentials. Re-authentication will create new tokens. |
-| 27 | Application | Per-user API key files | `bot_iqoption_v2/backend/keys/user_2_key.key`, `user_3_key.key`, `user_4_key.key` | Yes | Yes | Yes | NOT_STARTED | Per-user authentication | N/A (key files) | Verify user authentication still works after key regeneration | Yes — regenerate per-user keys if the authentication system supports it. If keys are derived from user passwords, password resets may be needed. |
+| 21 | Mercado Pago | Production access token | `bot_iqoption_v2/backend/.env`, `RAILWAY_ENV_COMPLETE.txt` | No | Yes | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue in MP dashboard, update Railway env var |
+| 22 | Mercado Pago | Production client secret | `.env`, `RAILWAY_ENV_COMPLETE.txt`, `.env.example` (real value!), `RAILWAY_ENV_TEMPLATE.md` (real value!) | No | Yes | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | `MERCADOPAGO_CLIENT_SECRET` | Verify payment auth works | Yes — rotate in MP dashboard, update Railway env var |
+| 23 | Mercado Pago | Public key | `.env` | No | Yes | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | `MERCADOPAGO_PUBLIC_KEY` | Verify frontend rendering works | Yes — rotate in MP dashboard, update Railway env var |
+| 24 | Mercado Pago | Client ID | `.env` | No | Yes | Likely | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | `MERCADOPAGO_CLIENT_ID` | Verify OAuth flow works | Yes — check if client ID needs rotation or just the secret |
+| 25 | Application | Django/app secret key | `RAILWAY_ENV_COMPLETE.txt` | No | Yes | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | `SECRET_KEY` | Verify session validation works | Yes — generate new secret, update Railway env var |
+| 26 | IQ Option API | JWT trading session tokens (197 tokens) | `bot_iqoption_v2/backend/bot_iqoption.log` | No | Yes | Yes — sessions are compromised | NOT_STARTED | IQ Option trading sessions (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | N/A (session tokens, not env vars) | Verify trading sessions terminated; new sessions require re-authentication | Yes — terminate all active IQ Option sessions. These are runtime session tokens, not static credentials. Re-authentication will create new tokens. |
+| 27 | Application | Per-user API key files | `bot_iqoption_v2/backend/keys/user_2_key.key`, `user_3_key.key`, `user_4_key.key` | No | Yes | Yes | NOT_STARTED | Per-user authentication (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | N/A (key files) | Verify user authentication still works after key regeneration | Yes — regenerate per-user keys if the authentication system supports it. If keys are derived from user passwords, password resets may be needed. |
 
 ---
 
@@ -232,26 +233,26 @@ Each item now has the following additional classifications:
 | 5 | ProFlow | Mercado Pago | Access token | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke and reissue in MP dashboard |
 | 6 | ProFlow | Mercado Pago | Client secret | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Rotate in MP dashboard |
 | 7 | ProFlow | Mercado Pago | Webhook secret | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Regenerate in MP dashboard |
-| 8 | base-corporativa | Cloudflare R2 | Access key | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Create new R2 token, revoke old, update Railway |
-| 9 | base-corporativa | Cloudflare R2 | Secret key | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Rotate alongside access key |
-| 10 | base-corporativa | Mercado Pago | Access token | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke and reissue in MP dashboard |
-| 11 | base-corporativa | Mercado Pago | Public key | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Rotate in MP dashboard |
-| 12 | base-corporativa | Melhor Envio | Client ID | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Check if rotatable or needs re-registration |
-| 13 | base-corporativa | Melhor Envio | Client secret | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Rotate in Melhor Envio dashboard |
-| 14 | base-corporativa | Melhor Envio | API token | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke and reissue in Melhor Envio dashboard |
-| 15 | base-corporativa | PostgreSQL | Database URL | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Rotate DB password in Railway |
-| 16 | base-corporativa | Django | Superuser password | CREDENTIAL | ACTIVE_PRODUCTION | CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS | Leonardo | YES | Change via manage.py changepassword |
-| 17 | base-corporativa | SendGrid | API key | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke old, create new, update Railway |
+| 8 | base-corporativa | Cloudflare R2 | Access key | CREDENTIAL | INACTIVE | ROTATE_AND_REDEPLOY | Leonardo | NO | Create new R2 token, revoke old (no active Railway deployment — OWNER_ATTESTED Phase 2A.11) |
+| 9 | base-corporativa | Cloudflare R2 | Secret key | CREDENTIAL | INACTIVE | ROTATE_AND_REDEPLOY | Leonardo | NO | Rotate alongside access key |
+| 10 | base-corporativa | Mercado Pago | Access token | CREDENTIAL | INACTIVE | ROTATE_AND_REDEPLOY | Leonardo | NO | Revoke and reissue in MP dashboard |
+| 11 | base-corporativa | Mercado Pago | Public key | CREDENTIAL | INACTIVE | ROTATE_AND_REDEPLOY | Leonardo | NO | Rotate in MP dashboard |
+| 12 | base-corporativa | Melhor Envio | Client ID | CREDENTIAL | INACTIVE | ROTATE_AND_REDEPLOY | Leonardo | NO | Check if rotatable or needs re-registration |
+| 13 | base-corporativa | Melhor Envio | Client secret | CREDENTIAL | INACTIVE | ROTATE_AND_REDEPLOY | Leonardo | NO | Rotate in Melhor Envio dashboard |
+| 14 | base-corporativa | Melhor Envio | API token | CREDENTIAL | INACTIVE | ROTATE_AND_REDEPLOY | Leonardo | NO | Revoke and reissue in Melhor Envio dashboard |
+| 15 | base-corporativa | PostgreSQL | Database URL | CREDENTIAL | INACTIVE | ROTATE_AND_REDEPLOY | Leonardo | NO | Rotate DB password (no active Railway deployment) |
+| 16 | base-corporativa | Django | Superuser password | CREDENTIAL | INACTIVE | CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS | Leonardo | NO | Change via manage.py changepassword |
+| 17 | base-corporativa | SendGrid | API key | CREDENTIAL | INACTIVE | ROTATE_AND_REDEPLOY | Leonardo | NO | Revoke old, create new (no active Railway deployment) |
 | 18 | FinanceControl | AWS EC2 | RSA private key | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | NO | Check if EC2 active; if not, no action |
 | 19 | Digital-Signage | MySQL | DB credentials | CREDENTIAL | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI/iTracker | NO | Notify ICTSI IT/security |
 | 20 | Digital-Signage | Application | JWT secret | LOCAL_APP_SECRET | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI/iTracker | NO | Notify ICTSI; if decommissioned: no action; if running: handoff |
-| 21 | Bot_IqOption | Mercado Pago | Access token | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | STALE | Revoke in MP dashboard |
-| 22 | Bot_IqOption | Mercado Pago | Client secret | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | STALE | Revoke in MP dashboard |
-| 23 | Bot_IqOption | Mercado Pago | Public key | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | STALE | Revoke in MP dashboard |
-| 24 | Bot_IqOption | Mercado Pago | Client ID | CREDENTIAL | INACTIVE | UNKNOWN_REQUIRES_MANUAL_CHECK | Leonardo | STALE | Check if client ID needs rotation |
-| 25 | Bot_IqOption | Django/App | SECRET_KEY | LOCAL_APP_SECRET | INACTIVE | GENERATE_NEW_LOCAL_SECRET | Leonardo | STALE | Generate new if redeploying |
-| 26 | Bot_IqOption | IQ Option | JWT session tokens (197) | SESSION | INACTIVE | INVALIDATE_SESSION | Leonardo | STALE | Terminate all IQ Option sessions |
-| 27 | Bot_IqOption | Application | Per-user API key files | CREDENTIAL | INACTIVE | UNKNOWN_REQUIRES_MANUAL_CHECK | Leonardo | STALE | Regenerate if auth system supports it |
+| 21 | Bot_IqOption | Mercado Pago | Access token | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | NO | Revoke in MP dashboard (no active Railway deployment — OWNER_ATTESTED Phase 2A.11) |
+| 22 | Bot_IqOption | Mercado Pago | Client secret | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | NO | Revoke in MP dashboard |
+| 23 | Bot_IqOption | Mercado Pago | Public key | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | NO | Revoke in MP dashboard |
+| 24 | Bot_IqOption | Mercado Pago | Client ID | CREDENTIAL | INACTIVE | UNKNOWN_REQUIRES_MANUAL_CHECK | Leonardo | NO | Check if client ID needs rotation |
+| 25 | Bot_IqOption | Django/App | SECRET_KEY | LOCAL_APP_SECRET | INACTIVE | GENERATE_NEW_LOCAL_SECRET | Leonardo | NO | Generate new if redeploying |
+| 26 | Bot_IqOption | IQ Option | JWT session tokens (197) | SESSION | INACTIVE | INVALIDATE_SESSION | Leonardo | NO | Terminate all IQ Option sessions (no active Railway deployment — OWNER_ATTESTED Phase 2A.11) |
+| 27 | Bot_IqOption | Application | Per-user API key files | CREDENTIAL | INACTIVE | UNKNOWN_REQUIRES_MANUAL_CHECK | Leonardo | NO | Regenerate if auth system supports it |
 | 28 | PayFlow-AI | Twilio | Auth token | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke in Twilio console, create new |
 | 29 | FlowTrack | Application | SECRET_KEY | LOCAL_APP_SECRET | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI/iTracker | NO | Notify ICTSI/iTracker; if decommissioned: no action |
 | 30 | FlowTrack | Application | Session/CSRF tokens (179) | SESSION | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI/iTracker | NO | Notify ICTSI/iTracker; if decommissioned: sessions expired |
@@ -301,8 +302,8 @@ Each item now has the following additional classifications:
 
 | Runtime Status | Total Items | Credentials | Sessions | Local App Secrets | PII |
 |---|---|---|---|---|---|
-| ACTIVE_PRODUCTION | 21 | 19 | 0 | 0 | 2 |
-| INACTIVE | 16 | 12 | 2 | 1 | 1 |
+| ACTIVE_PRODUCTION | 11 | 9 | 0 | 0 | 2 |
+| INACTIVE | 26 | 22 | 2 | 1 | 1 |
 | ARCHIVED_IN_PRACTICE | 4 | 1 | 1 | 2 | 0 |
 | **Total** | **41** | **31** | **4** | **3** | **3** |
 
@@ -334,26 +335,26 @@ Each item now has the following additional classifications:
 | 5 | OWNER_REPORTED | CLEAN (PR #9 merged — MP creds removed) | WAITING_OWNER_ATTESTATION |
 | 6 | OWNER_REPORTED | CLEAN (PR #8 + #9 merged) | WAITING_OWNER_ATTESTATION |
 | 7 | OWNER_REPORTED | CLEAN (PR #8 + #9 merged) | WAITING_OWNER_ATTESTATION |
-| 8 | OWNER_REPORTED | EXPOSURE (PR #1 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 9 | OWNER_REPORTED | EXPOSURE (PR #1 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 10 | OWNER_REPORTED | EXPOSURE (PR #1 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 11 | OWNER_REPORTED | EXPOSURE (PR #1 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 12 | OWNER_REPORTED | EXPOSURE (PR #1 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 13 | OWNER_REPORTED | EXPOSURE (PR #1 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 14 | OWNER_REPORTED | EXPOSURE (PR #1 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 15 | OWNER_REPORTED | EXPOSURE (PR #1 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 16 | OWNER_REPORTED | EXPOSURE (PR #1 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 17 | OWNER_REPORTED | EXPOSURE (PR #1 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
+| 8 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 9 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 10 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 11 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 12 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 13 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 14 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 15 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 16 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 17 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
 | 18 | OWNER_REPORTED | CLEAN (PR #1 merged) | WAITING_OWNER_ATTESTATION |
 | 19 | NOT_APPLICABLE (ICTSI-owned) | CLEAN | WAITING_OWNER_HANDOFF |
 | 20 | NOT_APPLICABLE (ICTSI-owned) | CLEAN | WAITING_OWNER_HANDOFF |
-| 21 | OWNER_REPORTED | EXPOSURE (PR #5 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 22 | OWNER_REPORTED | EXPOSURE (PR #5 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 23 | OWNER_REPORTED | EXPOSURE (PR #5 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 24 | OWNER_REPORTED | EXPOSURE (PR #5 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 25 | OWNER_REPORTED | EXPOSURE (PR #5 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
-| 26 | OWNER_REPORTED | EXPOSURE (PR #5 not merged) | CURRENT_TREE_BLOCKER + WAITING_SESSION_INVALIDATION |
-| 27 | OWNER_REPORTED | EXPOSURE (PR #5 not merged) | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION |
+| 21 | OWNER_REPORTED | CLEAN (PR #5 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 22 | OWNER_REPORTED | CLEAN (PR #5 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 23 | OWNER_REPORTED | CLEAN (PR #5 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 24 | OWNER_REPORTED | CLEAN (PR #5 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 25 | OWNER_REPORTED | CLEAN (PR #5 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
+| 26 | OWNER_REPORTED | CLEAN (PR #5 merged Phase 2A.11) | WAITING_SESSION_INVALIDATION |
+| 27 | OWNER_REPORTED | CLEAN (PR #5 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
 | 28 | OWNER_REPORTED | CLEAN (PR #1 merged) | WAITING_OWNER_ATTESTATION |
 | 29 | NOT_APPLICABLE (ICTSI-owned) | CLEAN | WAITING_OWNER_HANDOFF |
 | 30 | NOT_APPLICABLE (ICTSI-owned) | CLEAN | WAITING_OWNER_HANDOFF |
@@ -382,20 +383,63 @@ Each item now has the following additional classifications:
 
 | Current Tree Status | Count |
 |---|---|
-| CLEAN | 23 |
+| CLEAN | 40 |
 | DELETED (repository deleted Phase 2A.10) | 1 |
-| EXPOSURE (PR #1 not merged — base-corporativa) | 10 |
-| EXPOSURE (PR #5 not merged — Bot_IqOption) | 7 |
+| EXPOSURE (PR #1 not merged — base-corporativa) | 0 (PR #1 merged Phase 2A.11) |
+| EXPOSURE (PR #5 not merged — Bot_IqOption) | 0 (PR #5 merged Phase 2A.11) |
 
 | Primary Readiness State | Count |
 |---|---|
 | READY_FOR_HISTORY_SANITIZATION | 3 |
-| WAITING_OWNER_ATTESTATION | 13 |
-| CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION | 16 |
-| CURRENT_TREE_BLOCKER + WAITING_SESSION_INVALIDATION | 1 |
-| WAITING_SESSION_INVALIDATION | 3 |
+| WAITING_OWNER_ATTESTATION | 29 |
+| CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION | 0 |
+| CURRENT_TREE_BLOCKER + WAITING_SESSION_INVALIDATION | 0 |
+| WAITING_SESSION_INVALIDATION | 4 |
 | WAITING_OWNER_HANDOFF | 4 |
 | NOT_APPLICABLE_REPOSITORY_DELETED | 1 |
 | **Total** | **41** |
 
 > **Invariant:** SUM(PRIMARY_READINESS_COUNTS) == 41. Each canonical ID 1..41 has exactly ONE primary readiness state.
+
+---
+
+## Phase 2A.11 Update — Runtime Gate Closure & Cleanup PR Integration
+
+**Date:** 2026-08-18
+
+### Owner-Attested Runtime State (Railway)
+
+Leonardo explicitly confirms:
+
+> **THE ONLY PROJECT CURRENTLY DEPLOYED ON RAILWAY IS LeonardoRFragoso/ProFlow**
+
+This attestation applies ONLY to Railway deployment state. It does NOT automatically prove credential revocation, provider-side key invalidation, session invalidation, password changes, or ICTSI owner authorization.
+
+| Repository | Railway Deployment | Evidence |
+|---|---|---|
+| ProFlow | ACTIVE_PRODUCTION | OWNER_ATTESTED_RUNTIME_STATE — only active Railway project |
+| base-corporativa | NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED | Leonardo confirms not deployed on Railway |
+| Bot_IqOption | NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED | Leonardo confirms not deployed on Railway |
+| Digital-Signage-Platform | NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED | Leonardo confirms not deployed on Railway (also ICTSI-owned) |
+| FlowTrack | NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED | Leonardo confirms not deployed on Railway (also ICTSI-owned) |
+| MVP-linkedin-bot | NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED | Leonardo confirms not deployed on Railway |
+
+### Cleanup PR Merges
+
+| Repository | PR | Pre-merge head | Merge SHA | Post-merge main SHA | Current Tree |
+|---|---|---|---|---|---|
+| base-corporativa | #1 | e1655bb3166fa120ecaffa8e8f35dfaf33b717ca | e40c90fe5e98609509ad6cf0d00406a3f92bbe60 | e40c90fe5e98609509ad6cf0d00406a3f92bbe60 | CLEAN |
+| Bot_IqOption | #5 | d3a248eee8be3979a6b96b784393f0a3b629bc69 | f26b29496dbb7e9c302d65252b1fdc0f956291a7 | f26b29496dbb7e9c302d65252b1fdc0f956291a7 | CLEAN |
+
+### Changes Applied
+
+- Items 8-17 (base-corporativa): Current Tree changed from EXPOSURE to CLEAN (PR #1 merged). PROJECT_RUNTIME_STATUS changed from ACTIVE_PRODUCTION to INACTIVE. ACTIVE_DEPLOYMENT changed from YES to NO. CURRENT_TREE_BLOCKER removed — primary readiness state is now WAITING_OWNER_ATTESTATION.
+- Items 21-27 (Bot_IqOption): Current Tree changed from EXPOSURE to CLEAN (PR #5 merged). ACTIVE_DEPLOYMENT changed from STALE to NO. CURRENT_TREE_BLOCKER removed — items 21-25, 27 primary readiness is now WAITING_OWNER_ATTESTATION; item 26 primary readiness is now WAITING_SESSION_INVALIDATION.
+- RUNTIME_BLOCKER cleared for base-corporativa and Bot_IqOption (NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED).
+
+### What Did NOT Change
+
+- OWNER_ATTESTATION remains PENDING (OWNER_REPORTED) for all credential-bearing items. PR merges, file deletions, Railway inactivity, and new placeholders do NOT prove credential revocation.
+- SESSION_INVALIDATION remains PENDING for items 26, 31, 32, 41.
+- OWNER_HANDOFF remains pending for items 19, 20, 29, 30 (ICTSI/iTracker).
+- No credential was rotated, no session was invalidated, no history was rewritten.
