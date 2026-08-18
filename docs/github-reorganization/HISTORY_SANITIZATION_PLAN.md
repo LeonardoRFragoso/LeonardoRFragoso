@@ -1,4 +1,4 @@
-# Git History Sanitization Plan — Phase 2A (Updated Phase 2A.10)
+# Git History Sanitization Plan — Phase 2A (Canonicalized Phase 2A.10.1)
 
 **Account:** LeonardoRFragoso
 **Phase 2A date:** 2026-08-17
@@ -6,11 +6,133 @@
 **Phase 2A.8 update:** 2026-08-18
 **Phase 2A.9 update:** 2026-08-18
 **Phase 2A.10 update:** 2026-08-18
+**Phase 2A.10.1 update:** 2026-08-18 (history-sanitization plan canonicalization & pre-rewrite gate)
 **Status:** PLAN ONLY — **DO NOT EXECUTE without Leonardo's explicit per-repo authorization**
 
 > **CRITICAL:** History rewriting is DESTRUCTIVE and irreversible. It rewrites all commit SHAs, breaks forks, breaks open PRs, and requires force-push. This document is a PLAN only. No history rewrite has been performed or will be performed without explicit authorization.
 
-## Phase 2A.10 Update — Repository Deletion Batch
+> **Phase 2A.10.1 scope:** This phase is DOCUMENTATION ONLY. It reconciles the history-sanitization plan after the Phase 2A.10 deletion batch. It does NOT delete repositories, rotate credentials, invalidate sessions, rewrite history, force-push, merge any PR, or start Phase 2B.
+
+## Phase 2A.10.1 Update — History-Sanitization Plan Canonicalization
+
+### Why this update exists
+
+After Phase 2A.10, the history-sanitization plan contained stale contradictions: Bet-IA-BOT (deleted in Phase 2A.10) still appeared as an executable rewrite target in the detailed plan, the tier ordering, the summary table, and the rewrite total, even though its lifecycle header correctly stated `DELETED_BY_OWNER` / `NOT_APPLICABLE_REPOSITORY_DELETED`. In addition, three repositories with real credential material in history (PayFlow-AI, LogiFlow, API_Analyze) had current-tree cleanup merged in Phase 2A.9 but were never given detailed history-sanitization sections, and AndaimesPini_Project was present in the detailed plan but missing from the readiness table.
+
+Phase 2A.10.1 corrects all of these by establishing ONE canonical history-rewrite repository set and ONE canonical rewrite table. The historical phase-update audit trail (2A.7 / 2A.8 / 2A.9 / 2A.10) is preserved verbatim below for traceability.
+
+### Canonical history-rewrite repository set (12 active candidates)
+
+Reconstructed from all security findings across Phases 1 through 2A.10 — NOT derived from the old numbered sections. Every candidate was verified against live GitHub metadata and audit evidence on 2026-08-18.
+
+| # | Repository | Evidence source |
+|---|---|---|
+| 1 | ProFlow | Items #1-#7 (Django/OpenAI/Google OAuth/GitHub OAuth/Mercado Pago) — was PUBLIC |
+| 2 | base-corporativa | Items #8-#17 (R2/Mercado Pago/Melhor Envio/PostgreSQL/Django superuser/SendGrid) — was PUBLIC |
+| 3 | FinanceControl | Item #18 (AWS EC2 RSA private key) + PII (paycheck PDF, sqlite3) — was PUBLIC |
+| 4 | Digital-Signage-Platform | Items #19-#20 (MySQL DB credentials, JWT secret) — was PUBLIC, ICTSI-owned |
+| 5 | FlowTrack | Items #29-#30 (weak SECRET_KEY, 179 session/CSRF tokens) — was PUBLIC, ICTSI-owned |
+| 6 | Bot_IqOption | Items #21-#27 (Mercado Pago/SECRET_KEY/user keys) + #26 (197 JWT session tokens) — was PRIVATE |
+| 7 | MVP-linkedin-bot | Items #31-#33, #40-#41 (Chrome/LinkedIn sessions, Telegram token, LinkedIn password, CPF PII) — was PRIVATE |
+| 8 | Portfolio-LeonardoFragoso-React | Items #35-#36 (CNPJ card PDF, articles of association PDF) — PII, is PUBLIC |
+| 9 | AndaimesPini_Project | Client/business data in SQLite DB (not in credential matrix — data artifact) — was PUBLIC |
+| 10 | PayFlow-AI | Item #28 (Twilio auth token) — real Twilio credential existed in history — was PUBLIC |
+| 11 | LogiFlow | Item #37 (Evolution API key) — real Evolution API credential material committed before current-tree cleanup — was PUBLIC |
+| 12 | API_Analyze | Items #38-#39 (News API key, Alpha Vantage key) — real keys previously committed — was PUBLIC |
+
+**ACTIVE_REWRITE_CANDIDATES = 12.** Bet-IA-BOT is NOT in this set (see DELETED_REPOSITORY_AUDIT_RECORD below).
+
+### Canonical Rewrite Table (Phase 2A.10.1)
+
+One canonical table. Every non-deleted candidate occurs exactly once. Bet-IA-BOT occurs only in the deleted-repository audit record, not in the executable target count.
+
+Allowed values:
+- `REWRITE_REQUIRED`: YES | NO | N/A_REPOSITORY_DELETED
+- `REWRITE_READY`: YES | NO | N/A
+
+| REPOSITORY | VISIBILITY_NOW | PUBLIC_WHEN_EXPOSED | CURRENT_TREE | SENSITIVE_HISTORY_TYPE | OWNER | OWNER_ATTESTATION | SESSION_STATUS | OWNER_HANDOFF | RUNTIME_GATE | OPEN_PR_GATE | FORK_RISK | REWRITE_REQUIRED | REWRITE_READY | BLOCKER |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| ProFlow | PRIVATE | YES | CLEAN | CREDENTIALS (items 1-7) | Leonardo | PENDING | N/A | N/A | N/A | OPEN (PR #1, #2) | LOW (0 forks; was public) | YES | NO | OWNER_ATTESTATION_BLOCKER, OPEN_PR_GATE |
+| base-corporativa | PRIVATE | YES | EXPOSED (PR #1 open) | CREDENTIALS (items 8-17) | Leonardo | PENDING | N/A | N/A | PENDING (Railway) | OPEN (PR #1, head e1655bb) | LOW (0 forks; was public) | YES | NO | CURRENT_TREE_BLOCKER, OWNER_ATTESTATION_BLOCKER, RUNTIME_BLOCKER, OPEN_PR_GATE |
+| FinanceControl | PRIVATE | YES | CLEAN | CREDENTIALS (item 18) + PII | Leonardo | PENDING | N/A | N/A | N/A | NONE | LOW (0 forks; was public) | YES | NO | OWNER_ATTESTATION_BLOCKER |
+| Digital-Signage-Platform | PRIVATE | YES | CLEAN | CREDENTIALS (items 19-20) | ICTSI/iTracker | N/A | N/A | PENDING | N/A | OPEN (PR #4, head 1f96647) | LOW (0 forks; was public) | YES | NO | OWNER_HANDOFF_BLOCKER, OPEN_PR_GATE |
+| FlowTrack | PRIVATE | YES | CLEAN | SESSIONS (item 30) + LOCAL_APP_SECRET (item 29) | ICTSI/iTracker | N/A | PENDING | PENDING | N/A | OPEN (PR #1, head bb1c040) | LOW (0 forks; was public) | YES | NO | OWNER_HANDOFF_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE |
+| Bot_IqOption | PRIVATE | NO (always private) | EXPOSED (PR #5 open) | CREDENTIALS (items 21-25, 27) + SESSIONS (item 26) | Leonardo | PENDING | PENDING | N/A | PENDING (Railway) | OPEN (PR #5, head d3a248e) | NONE (private, 0 forks) | YES | NO | CURRENT_TREE_BLOCKER, OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER, RUNTIME_BLOCKER, OPEN_PR_GATE |
+| MVP-linkedin-bot | PRIVATE | NO (always private) | CLEAN | SESSIONS (items 31, 32, 41) + CREDENTIAL (item 40) + PII (item 33) | Leonardo | PENDING | PENDING | N/A | N/A | OPEN (PR #1, head 8acdcc3) | NONE (private, 0 forks) | YES | NO | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE |
+| Portfolio-LeonardoFragoso-React | PUBLIC | YES (is public) | CLEAN | PII (items 35-36) | Leonardo | N/A (PII) | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | YES | NONE — PII removal IS the remediation |
+| AndaimesPini_Project | PRIVATE | YES | CLEAN | CLIENT_BUSINESS_DATA (SQLite DB; not in credential matrix) | Leonardo | N/A (data, not credentials) | N/A | N/A | N/A | NONE | LOW (0 forks; was public) | YES | YES | NONE — data artifact removal IS the remediation; PR #1 merged, current tree clean |
+| PayFlow-AI | PUBLIC | YES (is public) | CLEAN | CREDENTIAL (item 28, Twilio auth token) | Leonardo | PENDING | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | NO | OWNER_ATTESTATION_BLOCKER |
+| LogiFlow | PUBLIC | YES (is public) | CLEAN | CREDENTIAL (item 37, Evolution API key) | Leonardo | PENDING | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | NO | OWNER_ATTESTATION_BLOCKER |
+| API_Analyze | PUBLIC | YES (is public) | CLEAN | CREDENTIALS (items 38-39, News API + Alpha Vantage keys) | Leonardo | PENDING | N/A | N/A | N/A | NONE | HIGH (1 fork: kabann-1978/API_Analyze-B3) | YES | NO | OWNER_ATTESTATION_BLOCKER, FORK_RISK |
+
+### Readiness counts (computed from the canonical table)
+
+| Metric | Value |
+|---|---|
+| ACTIVE_REWRITE_CANDIDATES | 12 |
+| REWRITE_READY | 2 (Portfolio-LeonardoFragoso-React, AndaimesPini_Project) |
+| REWRITE_BLOCKED | 10 |
+| READY + BLOCKED | 12 (= ACTIVE_REWRITE_CANDIDATES) |
+| DELETED_REWRITE_NA | 1 (Bet-IA-BOT — see audit record) |
+
+### Blocker counts (repositories; a repo may carry multiple blockers)
+
+| Blocker | Repositories | Count |
+|---|---|---|
+| OWNER_ATTESTATION_BLOCKER | ProFlow, base-corporativa, FinanceControl, Bot_IqOption, MVP-linkedin-bot, PayFlow-AI, LogiFlow, API_Analyze | 8 |
+| SESSION_BLOCKER | Bot_IqOption, MVP-linkedin-bot, FlowTrack | 3 |
+| OWNER_HANDOFF_BLOCKER | Digital-Signage-Platform, FlowTrack | 2 |
+| CURRENT_TREE_BLOCKER | base-corporativa, Bot_IqOption | 2 |
+| RUNTIME_BLOCKER | base-corporativa, Bot_IqOption | 2 |
+| OPEN_PR_GATE | ProFlow, base-corporativa, Digital-Signage-Platform, FlowTrack, Bot_IqOption, MVP-linkedin-bot | 6 |
+| FORK_RISK | API_Analyze | 1 |
+
+> **OWNER_ATTESTATION remains PENDING for all credential-bearing repos.** Leonardo previously reported credentials were changed (OWNER_REPORTED). This has NOT been upgraded to OWNER_ATTESTED_COMPLETED. No provider dashboard access is required for OWNER_ATTESTED_COMPLETED, but explicit Leonardo attestation per item is mandatory (see Part G / POST_ROTATION_RECONCILIATION.md).
+
+### Live PR gate reconciliation (re-fetched 2026-08-18)
+
+Force-pushing rewritten history can invalidate open PRs. Live PR state for every candidate:
+
+| Repository | Open PRs | Head SHA | Mergeable | Gate impact |
+|---|---|---|---|---|
+| ProFlow | PR #1, PR #2 (copilot feature branches) | 4d7a463 / aa54292 | UNKNOWN | Close or merge before rewrite |
+| base-corporativa | PR #1 (security/remove-versioned-secrets) | e1655bb3166fa120ecaffa8e8f35dfaf33b717ca | MERGEABLE | Current-tree gate — DO NOT merge automatically (WAITING_OWNER_RUNTIME_ATTESTATION) |
+| FinanceControl | none | — | — | None |
+| Digital-Signage-Platform | PR #4 (security/remove-versioned-secrets) | 1f9664713c681af83a92ad4647719ab070608a57 | MERGEABLE | OWNER_HANDOFF_BEFORE_MERGE — DO NOT merge |
+| FlowTrack | PR #1 (security/remove-sensitive-artifacts) | bb1c040cf241607e6aa02b30cd67d9d87fc7725b | MERGEABLE | OWNER_HANDOFF_BEFORE_MERGE — DO NOT merge |
+| Bot_IqOption | PR #5 (security/remove-versioned-secrets) | d3a248eee8be3979a6b96b784393f0a3b629bc69 | MERGEABLE | Current-tree gate — DO NOT merge automatically (NEEDS_MANUAL_CONFIRMATION) |
+| MVP-linkedin-bot | PR #1 (devin bot fix, NOT the merged security PR #2) | 8acdcc36980d27a4684d62d7b5ff81582588c333 | UNKNOWN | Close or merge before rewrite |
+| Portfolio-LeonardoFragoso-React | none | — | — | None |
+| AndaimesPini_Project | none (security PR #1 already merged) | — | — | None |
+| PayFlow-AI | none (security PR #1 already merged) | — | — | None |
+| LogiFlow | none (security PR #1 already merged) | — | — | None |
+| API_Analyze | none (security PR #1 already merged) | — | — | None |
+
+> Stale statements such as "0 open PRs" for base-corporativa / Bot_IqOption have been corrected: both have an open security PR that is a current-tree gate.
+
+## DELETED_REPOSITORY_AUDIT_RECORD (Tombstone)
+
+This section preserves the historical audit trail for repositories that participated in the canonical security audit but were deleted by owner. These repositories are NOT executable rewrite targets. They appear here only for traceability.
+
+### Bet-IA-BOT — DELETED_BY_OWNER
+
+| Field | Value |
+|---|---|
+| Canonical item | #34 (API-Football API key) |
+| Remediation class | REVOKE_ONLY |
+| OWNER_REPORTED | Yes — Leonardo reported the credential was changed |
+| REPOSITORY_LIFECYCLE | DELETED_BY_OWNER (deleted in Phase 2A.10) |
+| History sanitization | NOT_APPLICABLE_REPOSITORY_DELETED (GitHub repository no longer exists) |
+| REWRITE_REQUIRED | N/A_REPOSITORY_DELETED |
+| REWRITE_READY | N/A |
+| Evidence state | OWNER_REPORTED (unchanged) |
+| Key principle | **Repository deletion does NOT prove credential revocation.** The API-Football key (item #34) still requires explicit owner attestation of revocation. |
+
+> Bet-IA-BOT must NOT appear as an executable rewrite target anywhere in this plan. It is excluded from ACTIVE_REWRITE_CANDIDATES, from the detailed per-repository sanitization sections, from the execution-order tiers, and from the rewrite total. The git-filter-repo instructions that previously appeared here have been removed because the repository no longer exists.
+
+---
+
+## Phase 2A.10 Update — Repository Deletion Batch (preserved)
 
 13 repositories were deleted by owner (see `REPOSITORY_DISPOSITION.md`). One of these (Bet-IA-BOT) participated in the canonical security audit:
 
@@ -18,7 +140,7 @@
 
 The remaining 11 repositories in the history sanitization plan are unchanged.
 
-## Phase 2A.9 Update — Current-Tree Final Closure & Evidence Model Correction
+## Phase 2A.9 Update — Current-Tree Final Closure & Evidence Model Correction (preserved)
 
 ### Phase 2A.9 Cleanup Merges
 - **ProFlow PR #9** (merge SHA: `390ea2b6`): Removed real MP credentials and user email PII from `MP_PRODUCTION_VALIDATION.md`
@@ -28,12 +150,12 @@ The remaining 11 repositories in the history sanitization plan are unchanged.
 ### Evidence Model Correction
 Phase 2A.9 corrects the evidence model. Absence of PROVIDER_VERIFIED is NOT a blocker by itself. When Leonardo provides explicit OWNER_ATTESTED_COMPLETED (confirming old credential revoked/replaced) and current tree is clean and no contrary evidence exists, history sanitization can proceed. See `POST_ROTATION_RECONCILIATION.md` for full evidence model.
 
-### Corrected Readiness Counts
+### Corrected Readiness Counts (Phase 2A.9 model — superseded by the Phase 2A.10.1 canonical table above)
 - **3 of 41 items READY** (PII items: 33, 35, 36)
 - **38 of 41 items BLOCKED** — primary blocker is WAITING_OWNER_ATTESTATION (Leonardo has not yet provided explicit per-item attestation)
 - **Session invalidation count corrected:** 4 unique items (26, 31, 32, 41) — not 5 as Phase 2A.8 erroneously reported
 
-### Per-Repository History Sanitization Readiness (Phase 2A.9 Model)
+### Per-Repository History Sanitization Readiness (Phase 2A.9 model — preserved for traceability; the authoritative table is the Phase 2A.10.1 Canonical Rewrite Table above)
 
 | Repository | CURRENT_TREE | OWNER_ATTESTATION | SESSION | OWNER_HANDOFF | RUNTIME | HISTORY_READY | Blockers |
 |---|---|---|---|---|---|---|---|
@@ -45,17 +167,19 @@ Phase 2A.9 corrects the evidence model. Absence of PROVIDER_VERIFIED is NOT a bl
 | PayFlow-AI | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
 | FlowTrack | CLEAN | N/A | N/A | PENDING | N/A | **NO** | OWNER_HANDOFF_BLOCKER |
 | MVP-linkedin-bot | CLEAN | PENDING | PENDING | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER |
-| Bet-IA-BOT | DELETED | N/A | N/A | N/A | N/A | **N/A** | NOT_APPLICABLE_REPOSITORY_DELETED — repository deleted by owner in Phase 2A.10 |
-| Portfolio | CLEAN | N/A (PII) | N/A | N/A | N/A | **YES** | None — PII removal IS the remediation |
+| Portfolio-LeonardoFragoso-React | CLEAN | N/A (PII) | N/A | N/A | N/A | **YES** | None — PII removal IS the remediation |
+| AndaimesPini_Project | CLEAN | N/A (data) | N/A | N/A | N/A | **YES** | None — data artifact removal IS the remediation (added in Phase 2A.10.1) |
 | LogiFlow | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
 | API_Analyze | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
 
-### Ready Repositories: 1 of 11 (Bet-IA-BOT excluded — deleted)
+> **Phase 2A.10.1 correction:** The Phase 2A.9 table originally omitted AndaimesPini_Project and included Bet-IA-BOT as a DELETED/N/A row. Bet-IA-BOT has been moved to the DELETED_REPOSITORY_AUDIT_RECORD. AndaimesPini_Project has been added (data artifact, current tree clean after PR #1 merge, no credential rotation dependency → READY). This raises READY repositories from 1 to 2.
 
-Only **Portfolio-LeonardoFragoso-React** is READY for history sanitization.
+### Ready Repositories: 2 of 12 (Phase 2A.10.1 corrected)
+
+**Portfolio-LeonardoFragoso-React** and **AndaimesPini_Project** are READY for history sanitization (PII/data-only, current tree clean, no credential rotation dependency).
 
 ### Repositories that would become READY with OWNER_ATTESTED_COMPLETED:
-- ProFlow, FinanceControl, PayFlow-AI, LogiFlow, API_Analyze (current tree clean, no other blockers)
+- ProFlow, FinanceControl, PayFlow-AI, LogiFlow, API_Analyze (current tree clean, no other blockers — assuming open PR gates are resolved first where applicable)
 
 ### Phase 2A.8 Update — Post-Rotation Reconciliation (preserved)
 
@@ -63,7 +187,7 @@ Leonardo reports exposed credentials have been manually changed. Post-rotation r
 
 1. **3 of 41 items READY for history sanitization** (PII items: 33, 35, 36 — removal IS the remediation)
 2. **38 of 41 items still BLOCKED** — primary blocker is OWNER_ATTESTATION_BLOCKER
-3. **Only Portfolio-LeonardoFragoso-React is READY** for history sanitization (PII-only, current tree clean)
+3. **Only Portfolio-LeonardoFragoso-React is READY** for history sanitization (PII-only, current tree clean) — Phase 2A.10.1 adds AndaimesPini_Project as a second READY repo
 4. **11 of 12 repositories are BLOCKED** — see per-repository table above
 
 ### Phase 2A.7 Update — Factual Dependency Changes (preserved)
@@ -135,7 +259,9 @@ git push --force --mirror
 
 ---
 
-## Per-Repository Sanitization Plan
+## Per-Repository Sanitization Plan (12 active candidates)
+
+> For `--replace-text` planning, secret values are NEVER printed in this document. Where literal replacement is required, the plan states `SECRET_VALUE_REFERENCE_REQUIRED` — the operator must obtain the historical secret value from the secure audit evidence (not from this document) at execution time.
 
 ### 1. ProFlow
 
@@ -143,11 +269,12 @@ git push --force --mirror
 |---|---|
 | **Visibility** | Now PRIVATE |
 | **Public when leaked** | Yes — was PUBLIC when secrets were committed |
-| **Forks possible** | Yes — was public. Check `gh api repos/LeonardoRFragoso/ProFlow/forks` |
+| **Forks possible** | Yes — was public. Live check: 0 forks. Document fork history but low risk. |
 | **Paths to purge** | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` |
+| **Literal replacement also necessary?** | No — secrets are in the two files above; file removal suffices. |
 | **Branches affected** | All branches containing these files in history |
 | **Tags affected** | Check `git tag` — likely none |
-| **Open PR impact** | PR #1 and #2 (both stale, close candidates) — will need force-update or close first |
+| **Open PRs** | PR #1 (head 4d7a463, mergeable UNKNOWN), PR #2 (head aa54292, mergeable UNKNOWN) — both copilot feature branches. Close or merge before rewrite. |
 | **Force-push required** | Yes — `git push --force --mirror` |
 | **Collaborator impact** | Any local clones will need re-clone |
 | **Deployment integration** | Railway — no direct integration with git history (deploys from branch HEAD) |
@@ -156,6 +283,7 @@ git push --force --mirror
 | **Recommended command** | `git filter-repo --invert-paths --path RAILWAY_ENV_FINAL.txt --path DEPLOY_CHECKLIST.md` |
 | **Backup strategy** | `git clone --mirror` to local backup before rewrite |
 | **Authorization required** | Leonardo must explicitly approve |
+| **Current blockers** | OWNER_ATTESTATION_BLOCKER, OPEN_PR_GATE (PR #1, #2) |
 
 ### 2. base-corporativa
 
@@ -163,20 +291,22 @@ git push --force --mirror
 |---|---|
 | **Visibility** | Now PRIVATE |
 | **Public when leaked** | Yes — was PUBLIC. Secrets are in CURRENT TREE (not just history). |
-| **Forks possible** | Yes — was public |
+| **Forks possible** | Yes — was public. Live check: 0 forks. |
 | **Paths to purge** | `RAILWAY_ENV_ATUALIZADO.txt`, `backend/.env.railway` |
-| **Also purge from source** | R2 keys hardcoded in `backend/fix_product_images_r2.py`, `backend/list_r2_images.py`, `backend/upload_pdfs_to_r2.py`, `backend/upload_product_images_to_r2.py` — use `--replace-text` to redact the key values from all historical versions |
+| **Literal replacement also necessary?** | Yes — R2 keys hardcoded in `backend/fix_product_images_r2.py`, `backend/list_r2_images.py`, `backend/upload_pdfs_to_r2.py`, `backend/upload_product_images_to_r2.py`. Use `--replace-text` with `SECRET_VALUE_REFERENCE_REQUIRED` (R2 access key + R2 secret key values from secure audit evidence). |
 | **Branches affected** | All branches |
 | **Tags affected** | Check `git tag` |
-| **Open PR impact** | None (0 open PRs) |
+| **Open PRs** | PR #1 (head e1655bb3166fa120ecaffa8e8f35dfaf33b717ca, MERGEABLE) — security cleanup, current-tree gate. DO NOT merge automatically. |
 | **Force-push required** | Yes |
 | **Collaborator impact** | Local clones need re-clone |
 | **Deployment integration** | Railway — deploys from branch HEAD, not history |
 | **Worthwhile?** | **YES** — was public, contains R2/payment/email/DB credentials in current tree. |
 | **Prerequisite** | All 10 credentials (items #8-#17 in rotation matrix) must be ROTATED first |
-| **Recommended command** | `git filter-repo --invert-paths --path RAILWAY_ENV_ATUALIZADO.txt --path backend/.env.railway` then `git filter-repo --replace-text` with the R2 key values to redact them from Python script history |
+| **Recommended command** | `git filter-repo --invert-paths --path RAILWAY_ENV_ATUALIZADO.txt --path backend/.env.railway` then `git filter-repo --replace-text` with the R2 key values (SECRET_VALUE_REFERENCE_REQUIRED) |
 | **Backup strategy** | `git clone --mirror` to local backup |
 | **Authorization required** | Leonardo must explicitly approve |
+| **Current blockers** | CURRENT_TREE_BLOCKER (PR #1 open), OWNER_ATTESTATION_BLOCKER, RUNTIME_BLOCKER (Railway), OPEN_PR_GATE |
+| **Classification** | WAITING_OWNER_RUNTIME_ATTESTATION — Leonardo must confirm: (1) replacement Railway env vars configured, (2) application functioning, (3) old credentials revoked/inactivated. Then merge PR #1. |
 
 ### 3. FinanceControl
 
@@ -184,11 +314,12 @@ git push --force --mirror
 |---|---|
 | **Visibility** | Now PRIVATE |
 | **Public when leaked** | Yes — was PUBLIC. RSA key in current tree AND history. |
-| **Forks possible** | Yes — was public |
+| **Forks possible** | Yes — was public. Live check: 0 forks. |
 | **Paths to purge** | `chave-EC2/Finance2.pem`, `backend/chave-EC2/Finance2.pem` (historical path), `backend/db.sqlite3`, `ReciboDePagamento_3_01122025173256_408_b479a41d.pdf` |
+| **Literal replacement also necessary?** | No — file removal suffices. |
 | **Branches affected** | All branches |
 | **Tags affected** | Check `git tag` |
-| **Open PR impact** | None (0 open PRs) |
+| **Open PRs** | None (0 open PRs) |
 | **Force-push required** | Yes |
 | **Collaborator impact** | Local clones need re-clone |
 | **Deployment integration** | None identified |
@@ -197,6 +328,7 @@ git push --force --mirror
 | **Recommended command** | `git filter-repo --invert-paths --path chave-EC2/Finance2.pem --path backend/chave-EC2/Finance2.pem --path backend/db.sqlite3 --path "ReciboDePagamento_3_01122025173256_408_b479a41d.pdf"` |
 | **Backup strategy** | `git clone --mirror` to local backup |
 | **Authorization required** | Leonardo must explicitly approve |
+| **Current blockers** | OWNER_ATTESTATION_BLOCKER |
 
 ### 4. Digital-Signage-Platform
 
@@ -204,20 +336,22 @@ git push --force --mirror
 |---|---|
 | **Visibility** | Now PRIVATE |
 | **Public when leaked** | Yes — was PUBLIC. DB credentials in history. |
-| **Forks possible** | Yes — was public |
+| **Forks possible** | Yes — was public. Live check: 0 forks. |
 | **Paths to purge** | `secrets/db_credentials.txt`, `.env.tv`, `.env.production` |
-| **Also purge** | Historical DB credentials in `backend/app.py`, `backend/tools/migrate_sqlite_to_mysql.py`, `backend/.env.production.example` — use `--replace-text` to redact the `tvs_itracker` DB URL and password values |
+| **Literal replacement also necessary?** | Yes — historical DB credentials in `backend/app.py`, `backend/tools/migrate_sqlite_to_mysql.py`, `backend/.env.production.example`. Use `--replace-text` with `SECRET_VALUE_REFERENCE_REQUIRED` (tvs_itracker DB URL + password values from secure audit evidence). |
 | **Branches affected** | All branches (2 branches) |
 | **Tags affected** | Check `git tag` |
-| **Open PR impact** | None (0 open PRs) |
+| **Open PRs** | PR #4 (head 1f9664713c681af83a92ad4647719ab070608a57, MERGEABLE) — security cleanup. DO NOT merge (OWNER_HANDOFF_BEFORE_MERGE). |
 | **Force-push required** | Yes |
 | **Collaborator impact** | Local clones need re-clone |
 | **Deployment integration** | Former employer (iTracker) — confirm no active CI/CD integration |
 | **Worthwhile?** | **YES** — was public, contains former employer DB credentials. Legal review recommended. |
 | **Prerequisite** | DB credentials (item #19) and JWT secret (item #20) must be ROTATED first. **Confirm with iTracker IT if DB is under their control.** |
-| **Recommended command** | `git filter-repo --invert-paths --path secrets/db_credentials.txt --path .env.tv --path .env.production` then `git filter-repo --replace-text` with DB URL/password values |
+| **Recommended command** | `git filter-repo --invert-paths --path secrets/db_credentials.txt --path .env.tv --path .env.production` then `git filter-repo --replace-text` with DB URL/password values (SECRET_VALUE_REFERENCE_REQUIRED) |
 | **Backup strategy** | `git clone --mirror` to local backup |
 | **Authorization required** | Leonardo must explicitly approve. **Legal review recommended due to former employer IP.** |
+| **Current blockers** | OWNER_HANDOFF_BLOCKER, OPEN_PR_GATE (PR #4) |
+| **Constraint** | Former-employer repo. DO NOT modify infrastructure, rotate secrets, or force-push until owner handoff/authorization is documented. REWRITE_READY = NO. |
 
 ### 5. FlowTrack
 
@@ -225,11 +359,12 @@ git push --force --mirror
 |---|---|
 | **Visibility** | Now PRIVATE |
 | **Public when leaked** | Yes — was PUBLIC. Session tokens in history. |
-| **Forks possible** | Yes — was public |
+| **Forks possible** | Yes — was public. Live check: 0 forks. |
 | **Paths to purge** | `nohup.out` |
+| **Literal replacement also necessary?** | No — file removal suffices. |
 | **Branches affected** | All branches |
 | **Tags affected** | Check `git tag` |
-| **Open PR impact** | None (0 open PRs) |
+| **Open PRs** | PR #1 (head bb1c040cf241607e6aa02b30cd67d9d87fc7725b, MERGEABLE) — security cleanup. DO NOT merge (OWNER_HANDOFF_BEFORE_MERGE). |
 | **Force-push required** | Yes |
 | **Collaborator impact** | Local clones need re-clone |
 | **Deployment integration** | Client (ICTSI) — confirm no active CI/CD |
@@ -238,6 +373,8 @@ git push --force --mirror
 | **Recommended command** | `git filter-repo --invert-paths --path nohup.out` |
 | **Backup strategy** | `git clone --mirror` to local backup |
 | **Authorization required** | Leonardo must explicitly approve. **Legal review recommended due to client IP.** |
+| **Current blockers** | OWNER_HANDOFF_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE (PR #1) |
+| **Constraint** | Former-employer repo. DO NOT modify infrastructure, rotate secrets, or force-push until owner handoff/authorization is documented. REWRITE_READY = NO. |
 
 ### 6. Bot_IqOption
 
@@ -245,20 +382,22 @@ git push --force --mirror
 |---|---|
 | **Visibility** | PRIVATE (was already private) |
 | **Public when leaked** | No — was always private. Lower risk of external scraping. |
-| **Forks possible** | Unlikely (private repo) |
+| **Forks possible** | Unlikely (private repo). Live check: 0 forks. |
 | **Paths to purge** | `bot_iqoption_v2/backend/.env`, `bot_iqoption_v2/backend/RAILWAY_ENV_COMPLETE.txt`, `bot_iqoption_v2/backend/bot_iqoption.log`, `bot_iqoption_v2/backend/keys/` (entire directory), `bot_iqoption_v2/backend/db.sqlite3`, `bot_iqoption_v2/backend/venv/` (entire directory) |
-| **Also purge** | Real MERCADOPAGO_CLIENT_SECRET values in historical versions of `.env.example` and `RAILWAY_ENV_TEMPLATE.md` — use `--replace-text` |
+| **Literal replacement also necessary?** | Yes — real MERCADOPAGO_CLIENT_SECRET values in historical versions of `.env.example` and `RAILWAY_ENV_TEMPLATE.md`. Use `--replace-text` with `SECRET_VALUE_REFERENCE_REQUIRED`. |
 | **Branches affected** | All branches (5 branches) |
 | **Tags affected** | Check `git tag` |
-| **Open PR impact** | None (0 open PRs) |
+| **Open PRs** | PR #5 (head d3a248eee8be3979a6b96b784393f0a3b629bc69, MERGEABLE) — security cleanup, current-tree gate. DO NOT merge automatically. |
 | **Force-push required** | Yes |
 | **Collaborator impact** | Local clones need re-clone |
 | **Deployment integration** | Railway — deploys from branch HEAD |
 | **Worthwhile?** | **MODERATE** — was always private, but contains production MercadoPago credentials and 197 JWT tokens. Worthwhile for hygiene but lower urgency than public repos. |
 | **Prerequisite** | All MercadoPago credentials (items #21-#24), SECRET_KEY (#25), session tokens (#26), user keys (#27) must be ROTATED first |
-| **Recommended command** | `git filter-repo --invert-paths --path bot_iqoption_v2/backend/.env --path bot_iqoption_v2/backend/RAILWAY_ENV_COMPLETE.txt --path bot_iqoption_v2/backend/bot_iqoption.log --path bot_iqoption_v2/backend/keys --path bot_iqoption_v2/backend/db.sqlite3 --path bot_iqoption_v2/backend/venv` then `git filter-repo --replace-text` with MERCADOPAGO_CLIENT_SECRET values |
+| **Recommended command** | `git filter-repo --invert-paths --path bot_iqoption_v2/backend/.env --path bot_iqoption_v2/backend/RAILWAY_ENV_COMPLETE.txt --path bot_iqoption_v2/backend/bot_iqoption.log --path bot_iqoption_v2/backend/keys --path bot_iqoption_v2/backend/db.sqlite3 --path bot_iqoption_v2/backend/venv` then `git filter-repo --replace-text` with MERCADOPAGO_CLIENT_SECRET values (SECRET_VALUE_REFERENCE_REQUIRED) |
 | **Backup strategy** | `git clone --mirror` to local backup |
 | **Authorization required** | Leonardo must explicitly approve |
+| **Current blockers** | CURRENT_TREE_BLOCKER (PR #5 open), OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER, RUNTIME_BLOCKER (Railway), OPEN_PR_GATE |
+| **Classification** | NEEDS_MANUAL_CONFIRMATION — Railway state remains unresolved unless evidence proves: Railway project deleted, OR service disabled, OR GitHub auto-deploy disabled, OR deployment branch is not main. |
 
 ### 7. MVP-linkedin-bot
 
@@ -266,11 +405,12 @@ git push --force --mirror
 |---|---|
 | **Visibility** | PRIVATE (was already private) |
 | **Public when leaked** | No — was always private |
-| **Forks possible** | Unlikely (private repo) |
+| **Forks possible** | Unlikely (private repo). Live check: 0 forks. |
 | **Paths to purge** | `Auto_job_applier_linkedIn/V1/chrome_profile_linkedin_bot/` (entire directory), `Auto_job_applier_linkedIn/V2-Completa/chrome_profile_linkedin_bot/` (entire directory), `Auto_job_applier_linkedIn/V1/logs/` (entire directory), `cpf.pdf`, `perguntas.csv`, any `venv/` directories |
+| **Literal replacement also necessary?** | No — file/directory removal suffices. |
 | **Branches affected** | All branches (2 branches) |
 | **Tags affected** | Check `git tag` |
-| **Open PR impact** | PR #1 (devin bot fix) — will need force-update or close first |
+| **Open PRs** | PR #1 (head 8acdcc36980d27a4684d62d7b5ff81582588c333, mergeable UNKNOWN) — devin bot fix (NOT the merged security PR #2). Close or merge before rewrite. |
 | **Force-push required** | Yes |
 | **Collaborator impact** | Local clones need re-clone |
 | **Deployment integration** | None identified |
@@ -279,89 +419,145 @@ git push --force --mirror
 | **Recommended command** | `git filter-repo --invert-paths --path Auto_job_applier_linkedIn/V1/chrome_profile_linkedin_bot --path Auto_job_applier_linkedIn/V2-Completa/chrome_profile_linkedin_bot --path Auto_job_applier_linkedIn/V1/logs --path cpf.pdf --path perguntas.csv` |
 | **Backup strategy** | `git clone --mirror` to local backup (will be large) |
 | **Authorization required** | Leonardo must explicitly approve. **Note:** PR #1 should be reviewed/merged or closed before rewrite. |
+| **Current blockers** | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE (PR #1) |
 
-### 8. Bet-IA-BOT
-
-| Field | Value |
-|---|---|
-| **Visibility** | PRIVATE (was already private) |
-| **Public when leaked** | No |
-| **Forks possible** | Unlikely |
-| **Paths to purge** | N/A — the API key is hardcoded in `backend/test_new_api.py` (not a separate file). Use `--replace-text` to redact the key value from all historical versions. |
-| **Branches affected** | All branches |
-| **Tags affected** | Check `git tag` |
-| **Open PR impact** | None (0 open PRs) |
-| **Force-push required** | Yes |
-| **Collaborator impact** | Local clones need re-clone |
-| **Deployment integration** | None identified |
-| **Worthwhile?** | **LOW** — single API key in a private repo. Lower priority. Can be deferred. |
-| **Prerequisite** | API-Football key (#34) must be ROTATED first |
-| **Recommended command** | `git filter-repo --replace-text <(echo 'ACTUAL_API_KEY_VALUE==>REDACTED')` (the cleanup PR already replaces it with env var loading) |
-| **Backup strategy** | `git clone --mirror` to local backup |
-| **Authorization required** | Leonardo must explicitly approve. **Low priority — can defer.** |
-
-### 9. Portfolio-LeonardoFragoso-React
+### 8. Portfolio-LeonardoFragoso-React
 
 | Field | Value |
 |---|---|
 | **Visibility** | PUBLIC (stays public) |
 | **Public when leaked** | Yes — is PUBLIC |
-| **Forks possible** | Yes — is public |
+| **Forks possible** | Yes — is public. Live check: 0 forks. |
 | **Paths to purge** | `public/Docs/cartao cnpj.pdf`, `public/Docs/contrato-social-cnpj.pdf` |
+| **Literal replacement also necessary?** | No — file removal suffices. |
 | **Branches affected** | All branches |
 | **Tags affected** | Check `git tag` |
-| **Open PR impact** | None (0 open PRs) |
+| **Open PRs** | None (0 open PRs) |
 | **Force-push required** | Yes |
-| **Collaborator impact** | Local clones need re-clone |
+| **Collaborator impact** | Local clones will need re-clone |
 | **Deployment integration** | Vercel/Netlify — deploys from branch HEAD |
 | **Worthwhile?** | **YES** — is public, contains personal/business registration documents. PII exposure. |
 | **Prerequisite** | None — these are PII documents, not credentials. No rotation needed. |
 | **Recommended command** | `git filter-repo --invert-paths --path "public/Docs/cartao cnpj.pdf" --path "public/Docs/contrato-social-cnpj.pdf"` |
 | **Backup strategy** | `git clone --mirror` to local backup |
 | **Authorization required** | Leonardo must explicitly approve |
+| **Current blockers** | NONE — READY (PII removal IS the remediation) |
 
-### 10. AndaimesPini_Project
+### 9. AndaimesPini_Project
 
 | Field | Value |
 |---|---|
 | **Visibility** | Now PRIVATE |
 | **Public when leaked** | Yes — was PUBLIC. SQLite DB with client data was in current tree. |
-| **Forks possible** | Yes — was public |
+| **Forks possible** | Yes — was public. Live check: 0 forks. |
 | **Paths to purge** | `database/db.sqlite3`, all `*.sqlite_backup` files |
+| **Literal replacement also necessary?** | No — file removal suffices. |
 | **Branches affected** | All branches |
 | **Tags affected** | Check `git tag` |
-| **Open PR impact** | None (0 open PRs) |
+| **Open PRs** | None (security PR #1 already merged) |
 | **Force-push required** | Yes |
 | **Collaborator impact** | Local clones need re-clone |
 | **Deployment integration** | Railway + Vercel — deploys from branch HEAD |
 | **Worthwhile?** | **YES** — was public, contains client business data in SQLite DB. |
-| **Prerequisite** | None — these are data artifacts, not credentials. |
+| **Prerequisite** | None — these are data artifacts, not credentials. No rotation needed. |
 | **Recommended command** | `git filter-repo --invert-paths --path database/db.sqlite3 --use-base-name --path '*.sqlite_backup'` |
 | **Backup strategy** | `git clone --mirror` to local backup |
 | **Authorization required** | Leonardo must explicitly approve |
+| **Current blockers** | NONE — READY (data artifact removal IS the remediation; current tree clean after PR #1 merge) |
+| **Note** | Not represented in the canonical 41-item credential matrix because its issue is client/business data, not credentials. It remains in the history-cleanup plan. |
+
+### 10. PayFlow-AI
+
+| Field | Value |
+|---|---|
+| **Visibility** | PUBLIC (stays public) |
+| **Public when leaked** | Yes — is PUBLIC. Real Twilio credential existed in history. |
+| **Forks possible** | Yes — is public. Live check: 0 forks. |
+| **Paths to purge** | `Docs/CORRIGIR_TOKEN.txt` (contained the Twilio auth token), `README.md` (historical generic-api-key finding at L122) |
+| **Literal replacement also necessary?** | Yes — the Twilio auth token value (32-hex) was committed in `Docs/CORRIGIR_TOKEN.txt`. Current tree was cleaned by PR #1 (Twilio token removed), but the value persists in history. Use `--replace-text` with `SECRET_VALUE_REFERENCE_REQUIRED` (Twilio auth token value from secure audit evidence). |
+| **Branches affected** | All branches |
+| **Tags affected** | Check `git tag` |
+| **Open PRs** | None (security PR #1 already merged) |
+| **Force-push required** | Yes |
+| **Collaborator impact** | Local clones need re-clone |
+| **Deployment integration** | Railway — deploys from branch HEAD |
+| **Worthwhile?** | **YES** — is public, real Twilio auth token was committed to history. |
+| **Prerequisite** | Twilio auth token (item #28 in rotation matrix) must be ROTATED/REVOKED first |
+| **Recommended command** | `git filter-repo --invert-paths --path Docs/CORRIGIR_TOKEN.txt` then `git filter-repo --replace-text` with the Twilio auth token value (SECRET_VALUE_REFERENCE_REQUIRED) to redact it from `README.md` and any other historical occurrences |
+| **Backup strategy** | `git clone --mirror` to local backup |
+| **Authorization required** | Leonardo must explicitly approve |
+| **Current blockers** | OWNER_ATTESTATION_BLOCKER |
+| **Audit evidence** | Item #28 (Twilio, ROTATE_AND_REDEPLOY). PR #1 (merged) removed the token from current tree. History rewrite required because the real credential value was committed. |
+
+### 11. LogiFlow
+
+| Field | Value |
+|---|---|
+| **Visibility** | PUBLIC (stays public) |
+| **Public when leaked** | Yes — is PUBLIC. Real Evolution API credential material was committed before current-tree cleanup. |
+| **Forks possible** | Yes — is public. Live check: 0 forks. |
+| **Paths to purge** | Evolution API key occurrences across docs + `docker-compose.yml`; MP app ID occurrences across docs + tasks file. Affected paths (under `LogiFlow CRM/`): `docs/MODULO_WHATSAPP.md`, `docs/WHATSAPP_SETUP.md`, `docs/COMPLETE_SETUP_GUIDE.md`, `docs/GPS_INTEGRATION_GUIDE.md`, `docs/guides/SETUP_EVOLUTION_API.md`, `docs/guides/CONFIGURAR_OAUTH2_SUITECRM.md`, `docs/guides/PROXIMOS_PASSOS_SUITECRM.md`, `docs/guides/SETUP_FOCUSNFE.md`, `evolution-api/README.md`, `docker-compose.yml`, plus MP app ID docs (`docs/MERCADOPAGO_SETUP.md`, `docs/guides/MERCADOPAGO_CREDENCIAIS.md`, `docs/guides/SETUP_MERCADOPAGO.md`, tasks file). |
+| **Literal replacement also necessary?** | Yes — the Evolution API key value was committed in multiple docs and `docker-compose.yml`. Current tree was cleaned by PR #1 (merge SHA `90df4b0b`), but the value persists in history. Use `--replace-text` with `SECRET_VALUE_REFERENCE_REQUIRED` (Evolution API key value + MP app ID value from secure audit evidence). File removal is NOT appropriate here (docs files are legitimate and still useful) — only the secret values must be redacted from history. |
+| **Branches affected** | All branches |
+| **Tags affected** | Check `git tag` |
+| **Open PRs** | None (security PR #1 already merged) |
+| **Force-push required** | Yes |
+| **Collaborator impact** | Local clones need re-clone |
+| **Deployment integration** | Render/Railway — deploys from branch HEAD |
+| **Worthwhile?** | **YES** — is public, real Evolution API credential material was committed. |
+| **Prerequisite** | Evolution API key (item #37 in rotation matrix) must be ROTATED/REVOKED first |
+| **Recommended command** | `git filter-repo --replace-text` with the Evolution API key value and MP app ID value (SECRET_VALUE_REFERENCE_REQUIRED). Do NOT use `--invert-paths` on the docs files (they are legitimate documentation). |
+| **Backup strategy** | `git clone --mirror` to local backup |
+| **Authorization required** | Leonardo must explicitly approve |
+| **Current blockers** | OWNER_ATTESTATION_BLOCKER |
+| **Audit evidence** | Item #37 (Evolution API, ROTATE_AND_REDEPLOY). PR #1 (merge SHA `90df4b0b`) removed the key from current tree. History rewrite required because real Evolution API credential material was committed. |
+
+### 12. API_Analyze
+
+| Field | Value |
+|---|---|
+| **Visibility** | PUBLIC (stays public) |
+| **Public when leaked** | Yes — is PUBLIC. Real News API / Alpha Vantage keys were previously committed. |
+| **Forks possible** | Yes — is public. **Live check: 1 fork (`kabann-1978/API_Analyze-B3`).** Fork risk is HIGH — the fork may retain the historical secret values even after the upstream history is rewritten. The fork owner would need to delete the fork or rewrite its history; in practice this cannot be forced. |
+| **Paths to purge** | `V2/backend/.env.example` (contained real News API key at L10 and Alpha Vantage key at L11) |
+| **Literal replacement also necessary?** | Yes — the News API key and Alpha Vantage key values were committed in `V2/backend/.env.example`. Current tree was cleaned by PR #1 (merge SHA `e521658a`, keys replaced with placeholders, `.gitignore` added), but the real values persist in history. Use `--replace-text` with `SECRET_VALUE_REFERENCE_REQUIRED` (News API key value + Alpha Vantage key value from secure audit evidence). |
+| **Branches affected** | All branches |
+| **Tags affected** | Check `git tag` |
+| **Open PRs** | None (security PR #1 already merged) |
+| **Force-push required** | Yes |
+| **Collaborator impact** | Local clones need re-clone; the existing fork (`kabann-1978/API_Analyze-B3`) will diverge and may retain secrets. |
+| **Deployment integration** | None identified (inactive project) |
+| **Worthwhile?** | **YES** — is public, real API keys were committed. Fork risk elevates urgency. |
+| **Prerequisite** | News API key (#38) and Alpha Vantage key (#39) must be REVOKED first |
+| **Recommended command** | `git filter-repo --replace-text` with the News API key value and Alpha Vantage key value (SECRET_VALUE_REFERENCE_REQUIRED). |
+| **Backup strategy** | `git clone --mirror` to local backup |
+| **Authorization required** | Leonardo must explicitly approve |
+| **Current blockers** | OWNER_ATTESTATION_BLOCKER, FORK_RISK (1 fork: kabann-1978/API_Analyze-B3) |
+| **Audit evidence** | Items #38 (News API, REVOKE_ONLY) and #39 (Alpha Vantage, REVOKE_ONLY). PR #1 (merge SHA `e521658a`) replaced real keys with placeholders. History rewrite required because real keys were previously committed. |
 
 ---
 
 ## Execution Order (When Authorized)
 
-### Tier 1 — Was PUBLIC + Contains Credentials (Highest Risk)
+### Tier 1 — Was PUBLIC + Contains Credentials/PII (Highest Risk)
 
 1. **ProFlow** — payment/OAuth/OpenAI credentials, was public
 2. **base-corporativa** — R2/payment/email/DB credentials, was public, in current tree
 3. **FinanceControl** — RSA EC2 key, was public, in current tree
-4. **Digital-Signage-Platform** — DB credentials + JWT secret, was public
+4. **Digital-Signage-Platform** — DB credentials + JWT secret, was public (former employer — handoff required)
 5. **Portfolio-LeonardoFragoso-React** — PII documents, is public
-6. **AndaimesPini_Project** — client data, was public
-7. **FlowTrack** — session tokens, was public
+6. **AndaimesPini_Project** — client business data, was public
+7. **FlowTrack** — session tokens, was public (former employer — handoff required)
+8. **PayFlow-AI** — Twilio auth token, is public
+9. **LogiFlow** — Evolution API key, is public
+10. **API_Analyze** — News API + Alpha Vantage keys, is public (fork risk)
 
-### Tier 2 — Was PRIVATE + Contains Credentials (Moderate Risk)
+### Tier 2 — Was PRIVATE + Contains Credentials/Sessions (Moderate Risk)
 
-8. **Bot_IqOption** — MercadoPago + JWT + user keys, was private
-9. **MVP-linkedin-bot** — Chrome/LinkedIn sessions + PII, was private
+11. **Bot_IqOption** — MercadoPago + JWT + user keys, was private
+12. **MVP-linkedin-bot** — Chrome/LinkedIn sessions + PII, was private
 
-### Tier 3 — Low Priority
-
-10. **Bet-IA-BOT** — single API key, was private, can defer
+> Bet-IA-BOT was previously listed in a "Tier 3 — Low Priority" section. It has been removed from the execution order because the repository was deleted in Phase 2A.10 (see DELETED_REPOSITORY_AUDIT_RECORD).
 
 ---
 
@@ -405,15 +601,36 @@ gh api repos/LeonardoRFragoso/<repo>/forks --jq '.[].full_name'
 
 If forks exist, the fork owners would need to delete their forks or have their history rewritten too. In practice, most forks of personal projects are abandoned. Document fork count but don't attempt to force-rewrite forks.
 
+**Live fork status (2026-08-18):** Only **API_Analyze** has a fork (`kabann-1978/API_Analyze-B3`). All other 11 active candidates have 0 forks. The API_Analyze fork elevates its risk and is recorded as a blocker/FORK_RISK in the canonical table.
+
 ---
 
 ## Summary
 
 | Tier | Repos | Risk | Action |
 |---|---|---|---|
-| Tier 1 (was public + credentials) | ProFlow, base-corporativa, FinanceControl, Digital-Signage-Platform, Portfolio-LeonardoFragoso-React, AndaimesPini_Project, FlowTrack | HIGH | Rewrite after credential rotation |
-| Tier 2 (was private + credentials) | Bot_IqOption, MVP-linkedin-bot | MODERATE | Rewrite after credential rotation |
-| Tier 3 (low priority) | Bet-IA-BOT | LOW | Can defer |
+| Tier 1 (was public + credentials/PII) | ProFlow, base-corporativa, FinanceControl, Digital-Signage-Platform, Portfolio-LeonardoFragoso-React, AndaimesPini_Project, FlowTrack, PayFlow-AI, LogiFlow, API_Analyze | HIGH | Rewrite after credential rotation / handoff |
+| Tier 2 (was private + credentials/sessions) | Bot_IqOption, MVP-linkedin-bot | MODERATE | Rewrite after credential rotation / session invalidation |
+| Deleted (not executable) | Bet-IA-BOT | N/A | NOT_APPLICABLE_REPOSITORY_DELETED — see DELETED_REPOSITORY_AUDIT_RECORD |
 
-**Total repos requiring history rewrite: 10**
+**Total active repos requiring history rewrite: 12**
+**Ready for history rewrite: 2** (Portfolio-LeonardoFragoso-React, AndaimesPini_Project)
+**Blocked: 10**
 **History rewrites performed in Phase 2A: 0** (PLAN ONLY — awaiting authorization)
+
+### Account-level totals (live, 2026-08-18)
+
+| Metric | Value |
+|---|---|
+| ACCOUNT_TOTAL_REPOS | 30 |
+| PUBLIC_REPOS | 15 |
+| PRIVATE_REPOS | 15 |
+| ACTIVE_REWRITE_CANDIDATES | 12 |
+| DELETED_REWRITE_NA | 1 (Bet-IA-BOT) |
+| REWRITE_READY | 2 |
+| REWRITE_BLOCKED | 10 |
+| OWNER_ATTESTATION_BLOCKED (repos) | 8 |
+| SESSION_BLOCKED (repos) | 3 |
+| OWNER_HANDOFF_BLOCKED (repos) | 2 |
+| CURRENT_TREE_BLOCKED (repos) | 2 |
+| RUNTIME_BLOCKED (repos) | 2 |
