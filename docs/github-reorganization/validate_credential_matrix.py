@@ -345,6 +345,39 @@ def validate(items: list[dict], typed_totals: dict) -> bool:
             print(f"  {status} {section}.{label}: typed={typed_count}, computed={computed_count}")
     print()
 
+    # Phase 2A.9: PRIMARY_READINESS_COUNTS invariant — sum must equal 41
+    readiness_sum = 0
+    in_readiness_table = False
+    matrix_content = Path(__file__).parent.joinpath("CREDENTIAL_ROTATION_MATRIX.md").read_text()
+    for line in matrix_content.split("\n"):
+        stripped = line.strip()
+        # Look for the totals table header (2-column: "Primary Readiness State" | "Count")
+        if stripped == "| Primary Readiness State | Count |":
+            in_readiness_table = True
+            continue
+        if in_readiness_table:
+            if stripped.startswith("|---|"):
+                continue
+            if not stripped.startswith("|"):
+                break
+            cells = [c.strip() for c in stripped.split("|")[1:-1]]
+            if len(cells) == 2 and cells[0] not in ("Primary Readiness State", "**Total**"):
+                try:
+                    count = int(cells[1])
+                    readiness_sum += count
+                except ValueError:
+                    pass
+    print("--- Primary Readiness Counts Invariant ---")
+    if readiness_sum == EXPECTED_ITEM_COUNT:
+        print(f"  ✓ SUM(PRIMARY_READINESS_COUNTS) = {readiness_sum} == {EXPECTED_ITEM_COUNT}")
+    else:
+        print(f"  ✗ SUM(PRIMARY_READINESS_COUNTS) = {readiness_sum} != {EXPECTED_ITEM_COUNT}")
+        errors.append(
+            f"PRIMARY_READINESS_COUNTS invariant failed: sum is {readiness_sum}, "
+            f"expected {EXPECTED_ITEM_COUNT}"
+        )
+    print()
+
     if errors:
         print("=" * 60)
         print("VALIDATION ERRORS:")
