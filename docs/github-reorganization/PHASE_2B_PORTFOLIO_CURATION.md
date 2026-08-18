@@ -601,3 +601,330 @@ If all proposed changes are executed:
 - No READMEs modified: YES
 - No topics/descriptions changed: YES
 - No profile README modified: YES
+
+---
+
+## Phase 2B.1 — Final Showcase Reconciliation & Execution Readiness
+
+**Date:** 2026-08-18
+**Phase:** 2B.1 (Evidence-Based Reconciliation)
+**Status:** READ-ONLY — No mutations executed
+**Baseline:** Merged main `04b5cd9241328bde31051882d8dba57d12d877b3` (PR #16)
+
+> This section reconciles the Phase 2B audit with execution-ready evidence. All test suites were run locally in isolated environments. No repository mutations were performed.
+
+---
+
+### 1. Top 6 Slot #6 — Mandatory Re-Evaluation
+
+#### Head-to-Head: Go-API vs Legal-AI-Copilot vs vigil-ai
+
+| Dimension | Go-API | Legal-AI-Copilot | vigil-ai |
+|---|---|---|---|
+| Architecture | Clean layered (handler→service→repository→models), 10 modules | FastAPI + RAG + agent router + state machine + RBAC + automation | FastAPI + multi-agent system (LeadHunter, Enrichment, Engagement, Sales, Orchestrator) |
+| Implementation completeness | PHASE_1_* files in root reveal incomplete status | Complete MVP with explicit limitations documented in README | Single-day project (2 commits), hackathon-level |
+| Source depth | 10 handlers, 10 services, 10 repositories, 11 models | 24 Python modules (agent_router, agent_executor, legal_agent, rag_service, embedding_service, chunker, ai_validator, risk_analysis, analysis_record_service, automation_service, webhook_service, auth, validators, etc.) | 7 models, 7 API routes, agents directory |
+| Test evidence | **ZERO test files** | **176 tests passed, 0 failed, 0 skipped** (18.13s) | 29 tests passed, 0 failed (7.10s) |
+| Ability to execute tests | **CANNOT COMPILE** — go.mod requires Go 1.26, only Go 1.22.2 available | All tests pass with argon2-cffi installed | All tests pass |
+| CI health | NO CI | FAILING — DEPENDENCY_VERSION_FAILURE (pyjwt==2.8.1 yanked) | NO CI |
+| Build health | Frontend builds (4.61s); **backend cannot build** | Frontend builds (2.42s); backend tests pass | Frontend builds (1.85s); backend tests pass |
+| README honesty | Claims "real-time notifications" (FALSE — no WebSocket/SSE), "scalable/robust" (unverified) | Lists MVP limitations explicitly; claims "166 tests" (actual: 176 — understated) | Honest about being a Pareto case study |
+| Business relevance | Project management SaaS (common domain) | Legal contract analysis with AI (unique domain) | B2B event management (niche) |
+| Recruiter clarity | Generic project management app | Clear AI + legal domain with RBAC and guardrails | Clear case study context |
+| Uniqueness vs Top 5 | Go language breadth (only differentiator) | AI + legal + RBAC + state machine — unique combination | Multi-agent autonomous system — unique |
+| AI relevance | NONE | RAG, embeddings, agent router, guardrails, confidence validation — meaningful AI | Agno + Claude multi-agent orchestration — meaningful AI |
+| Full-stack breadth | Go backend + Vue 3 frontend | FastAPI backend + React/TypeScript frontend | FastAPI backend + Vue 3 frontend |
+| Portfolio credibility | Weakened by zero tests, can't compile, false claims | Strengthened by 176 tests, verified implementation, honest README | Moderate — single-day project looks like hackathon |
+
+#### Decision: Legal-AI-Copilot WINS Slot #6
+
+**Rationale:** QUALITY > LANGUAGE BREADTH. Legal-AI-Copilot has 176 passing tests, verified RBAC/agent-router/state-machine/RAG implementation, meaningful AI beyond API wrapping, and an honest README. Go-API has zero tests, cannot compile with available toolchain, and makes false "real-time notifications" claims. Go's language breadth is not worth sacrificing quality for.
+
+**vigil-ai eliminated:** 29 tests is decent but the project is a single-day hackathon-level effort (2 commits). Not strong enough for Top 6.
+
+---
+
+### 2. Go-API Verification Results
+
+| Field | Value |
+|---|---|
+| GO_TEST_RESULT | **CANNOT EXECUTE** — go.mod requires go >= 1.26, only Go 1.22.2 available. ZERO test files found (`find . -name "*_test.go"` returns 0 results). |
+| GO_FRONTEND_BUILD_RESULT | **SUCCESS** — Vue 3 frontend builds in 4.61s with Vite. All assets generated. |
+| GO_IMPLEMENTATION_COMPLETENESS | **INCOMPLETE** — PHASE_1_CLOSURE.md and PHASE_1_SUMMARY.md in root reveal the project is in "Phase 1" state. escopo.txt in root. No demo URL. No CI. |
+| GO_README_OVERCLAIMS | 1. "Notificações em tempo real" (Real-time notifications) — **FALSE**: no WebSocket, SSE, or EventSource found in backend code. Notifications are DB-stored models with no push mechanism. 2. "Solução robusta, escalável" — **UNVERIFIED**: no load testing, no scaling architecture, no evidence of robustness beyond standard GORM+Gin stack. |
+| GO_FINAL_PORTFOLIO_SCORE | **45/100** (downgraded from 58 due to: zero tests, cannot compile, false real-time claim, incomplete status) |
+
+---
+
+### 3. Legal-AI-Copilot Verification Results
+
+| Field | Value |
+|---|---|
+| LEGAL_TEST_RESULT | **176 passed, 0 failed, 0 skipped** in 18.13s. README claims "166 tests passed, 0 failed" — actual count is HIGHER (176 > 166). All tests pass after installing argon2-cffi (missing from requirements.txt). |
+| LEGAL_FRONTEND_BUILD_RESULT | **SUCCESS** — React + TypeScript + Vite frontend builds in 2.42s. 1512 modules transformed. |
+| LEGAL_CI_CLASSIFICATION | **DEPENDENCY_VERSION_FAILURE** — `pyjwt==2.8.1` was yanked/never existed on PyPI (available: 2.8.0, 2.9.0). CI "Install dependencies" step fails. Trivial fix: change to `pyjwt>=2.8.0` or `pyjwt==2.9.0`. NOT a product failure. |
+| LEGAL_IMPLEMENTATION_COMPLETENESS | **COMPLETE MVP** — Verified: RBAC (5 roles: ADMIN, LAWYER, ASSISTANT, CLIENT, VIEWER with role checks), agent router (intent classification: SUMMARIZE, EXTRACT, IDENTIFY_RISKS, COMPARE, UNKNOWN), human review state machine (validate_transition with APPROVED as terminal state), automation/webhook (webhook_service.py + automation_service.py with status tracking), risk analysis (severity, category, confidence_score), AI beyond API wrapping (RAG via rag_service.py, embeddings via embedding_service.py, chunking via chunker.py, guardrails via ai_validator.py with confidence validation). |
+| LEGAL_README_OVERCLAIMS | **NONE** — README is honest. Lists MVP limitations explicitly. Test count claim (166) is actually understated (actual: 176). Only issue: 40+ report MD files clutter the root directory. |
+| LEGAL_FINAL_PORTFOLIO_SCORE | **75/100** (upgraded from 63 due to: 176 verified passing tests, complete implementation, honest README, meaningful AI) |
+
+---
+
+### 4. Final Slot #6 Decision
+
+**WINNER: Legal-AI-Copilot**
+
+**Exact reason:** Legal-AI-Copilot has 176 passing tests (vs Go-API's 0), a verified complete implementation with RBAC/agent-router/state-machine/RAG/guardrails (vs Go-API's false "real-time" claims), a trivial CI fix (vs Go-API's inability to compile), and meaningful AI beyond API wrapping (vs Go-API's no AI). Go's language breadth does not compensate for its quality deficits. QUALITY > LANGUAGE BREADTH.
+
+---
+
+### 5. PayFlow-AI — 629 Test Claim Verification
+
+| Field | Value |
+|---|---|
+| COLLECTED_TESTS | **629** |
+| PASSED | **629** |
+| FAILED | **0** |
+| SKIPPED | **0** |
+| DURATION | **65.37s** |
+
+**VERIFIED: YES** — The README badge claim "629 backend tests" is exactly correct. 629 tests collected, 629 passed, 0 failed, 0 skipped. The claim may remain unchanged.
+
+#### PayFlow-AI CI Classification
+
+| CI Job | Status | Classification |
+|---|---|---|
+| backend-tests | SUCCESS | All 629 tests pass in CI |
+| docker-compose-check | FAILURE | **STALE_CI_CONFIG** — uses `docker-compose` (v1 hyphenated) but GitHub Actions runners only have `docker compose` (v2 plugin). Exit code 127 (command not found). |
+| frontend-build | FAILURE | **TOOLCHAIN_VERSION_FAILURE** — CI uses Node.js 18 but Next.js 16 requires Node.js >=20.9.0. Frontend builds successfully locally with Node 24. |
+| e2e-tests | SKIPPED | Only runs on workflow_dispatch |
+
+**Summary:** Both CI failures are configuration issues, NOT product failures. The backend (actual product code) passes all 629 tests. Fixes: (1) change `docker-compose` to `docker compose` in CI, (2) change Node.js version from 18 to 20 in CI.
+
+---
+
+### 6. desafio-focon Provenance/Positioning Check
+
+| Check | Result |
+|---|---|
+| Proprietary company material | **BRAND LOGOS PRESENT** — 3 Fócon Engenharia logo files in `public/brand/` (focon-logo-horizontal.png, focon-logo-white.png, focon-colorida.jpeg). These are publicly visible corporate logos, not proprietary data. |
+| Confidential data | **NONE** — No PDFs, DOCX, or XLSX files found. No CNPJ, CPF, phone, or salary data. |
+| Real company data | **NONE** — Seed data uses fictional project names ("Residencial Aurora", "Edifício Horizonte") with standard test UUIDs. Migration comments explicitly say "Seed demo data", "demo users", "demo projects". |
+| Employment/affiliation claims | **NONE** — No claims of employment, affiliation, or endorsement by Fócon found in README or source. |
+| README positioning | Named "FoconFlow" — references Fócon Engenharia brand assets but does not claim to be Fócon's official product. |
+
+**Classification:** TECHNICAL_CHALLENGE_CASE_STUDY
+
+**Top-6 Eligibility:** **RETAIN** — No provenance problem exists. The repository is a technical challenge case study with demo data only. Brand logos are publicly visible corporate logos used in the context of a hiring challenge.
+
+**Required README update:** Add explicit positioning statement clarifying this is a technical challenge/hiring case study, not Fócon's official product, and that Leonardo is not affiliated with Fócon. Example: "> **Contexto:** Projeto desenvolvido como desafio técnico. Não é um produto oficial da Fócon Engenharia e não há vínculo empregatício ou comercial."
+
+---
+
+### 7. Professional Experience Claim
+
+**Classification:** OWNER_VERIFIABLE_CAREER_FACT
+
+The "3+ years of experience" claim in the profile README is a career-experience fact that cannot be verified from Git repositories alone. This is normal — career experience is verified through LinkedIn, resumes, and professional references, not through code commits.
+
+**Decision:** Do NOT remove "3+ years" from the profile README. Mark as PENDING_OWNER_PROFILE_CONFIRMATION. Leonardo should confirm this is accurate based on his actual professional history.
+
+**Do not fabricate experience.** If Leonardo confirms the claim is accurate, it may remain. If it is inaccurate, it should be corrected to the actual figure.
+
+---
+
+### 8. Visibility Plan Reconfirmation
+
+#### 5 PUBLIC_TO_PRIVATE Reconfirmations
+
+| Repository | One-sentence reason for making private |
+|---|---|
+| API_Analyze | Tutorial-level Streamlit app with no tests, no CI, and no Docker — its presence as a public repo dilutes the portfolio's perceived engineering quality. |
+| FragTech-Fintech | Claims "AI-powered" but has no AI implementation visible in code — the unsupported claim creates a credibility risk for reviewers who inspect the source. |
+| PyScriptTech | A company marketing website with minimal code value — it does not demonstrate engineering depth and is better represented by the ProFlow case study in the profile README. |
+| Portfolio-LeonardoFragoso-React | Duplicates the profile README's portfolio function — maintaining two portfolio surfaces (profile README + portfolio site) creates inconsistency and the React portfolio adds no unique engineering signal. |
+| MedFlow_Finance | A PHP/Laravel project outside Leonardo's primary Python stack with 20+ SPRINT report files cluttering the root — it dilutes the Python/backend positioning and does not demonstrate Leonardo's strongest skills. |
+
+#### Portfolio Website Impact Assessment
+
+**Question:** If Portfolio-LeonardoFragoso-React is made private, can its deployed website remain available?
+
+**Answer:** YES. Vercel deployments are independent of repository visibility. Making a GitHub repository private does NOT affect already-deployed Vercel sites. The Vercel project remains connected to the GitHub account and can still access private repos through its GitHub integration. The portfolio site at `https://portfolio-leonardo-fragoso-react.vercel.app/` will remain live (confirmed: HTTP 200).
+
+**Question:** Does the profile README fully replace the portfolio website function?
+
+**Answer:** PARTIALLY. The profile README provides the GitHub-facing portfolio function (name, title, positioning, ProFlow case study, project table, stack, contact links). The portfolio website provides a visual experience (animations, project cards, contact form) that the text-based README cannot replicate. However, for GitHub-first discovery (recruiters browsing GitHub profiles), the profile README is the primary surface. The portfolio website can remain live at its Vercel URL even with the repo private.
+
+**Recommendation:** Making Portfolio-LeonardoFragoso-React private is SAFE. The Vercel deployment remains live. The profile README handles GitHub-facing discovery. If Leonardo wants to fully retire the portfolio site, that requires a separate Vercel project deletion (not part of this plan).
+
+---
+
+### 9. Case Study Strategy
+
+#### ProFlow — HIGH_PRIORITY_PUBLIC_CASE_STUDY
+
+**Proposed case-study outline:**
+
+1. **Business Problem** — Freelancers manage proposals, deliveries, communication, and payments in separate tools, increasing manual work and reducing project visibility.
+2. **Solution Overview** — SaaS platform centralizing the commercial and operational freelance workflow with AI assistance for proposals and pricing.
+3. **High-Level Architecture** — Vue.js frontend + Django REST Framework backend + PostgreSQL + Redis + Celery + Django Channels (WebSockets).
+4. **Backend Architecture** — Django REST Framework with JWT auth (access + refresh with rotation), OAuth (Google, GitHub), Celery async workers, Django Channels for real-time, payment webhooks with idempotency and validation.
+5. **Frontend Architecture** — Vue.js 3 with reactive state management, real-time updates via WebSocket subscription.
+6. **Data Layer** — PostgreSQL for relational data, Redis for caching and Celery queue.
+7. **Integrations** — OpenAI (AI proposals/pricing), Mercado Pago (payments), OAuth providers (Google, GitHub).
+8. **Testing Strategy** — pytest backend tests (9 test files covering AI engine, payments, security, state machine, signals, consent mode, hero render, resilient throttles, score history).
+9. **Deployment Architecture** — Railway (backend, worker, beat, Postgres, Redis) + Vercel (frontend). Separate deploy pipelines.
+10. **Engineering Decisions** — JWT rotation, OAuth, async processing, real-time updates, webhook idempotency, rate limiting, OpenAPI/Swagger documentation.
+11. **Safe Screenshots** — UI screenshots with demo/fictional data only.
+12. **Lessons Learned** — Production scaling insights, security hardening (Phase 2A), monitoring.
+
+**Do NOT disclose:** Source code, production secrets, real customer data, private operational data, environment variables, deployment URLs with sensitive paths.
+
+#### DevPro — MEDIUM_PRIORITY_PUBLIC_CASE_STUDY
+
+**Proposed case-study outline:**
+
+1. **Problem** — Coordinating autonomous software development cycles across multiple AI agents and tools requires orchestration, state management, and validation.
+2. **Solution** — Autonomous Software Development Orchestrator coordinating OpenAI (Tech Lead/reviewer), Devin (executor), GitHub (source of truth), and local OS (Git, tests, build, lint).
+3. **Orchestrator Architecture** — Modular, persistent, testable core running autonomous loop: OpenAI → DevPro → Devin → GitHub → Validation → OpenAI review → FIX/APPROVE.
+4. **CodingExecutor Abstraction** — Abstraction layer for code execution agents (Devin integration via v3 API, polling for completion).
+5. **Multi-Executor Design** — Architecture supports multiple executor backends (Devin, OpenAI-local fallback).
+6. **Devin/OpenAI-local Provider Architecture** — OpenAI as structured reviewer (Tech Lead/Code/Architecture/Security/QA) with APPROVED/FIX_REQUIRED/REPLAN_REQUIRED/BLOCKED decisions. Devin as executor via v3 API.
+7. **Resilience/Reconciliation** — Crash recovery via persistent state transitions, idempotent prompt sending (deduplication), resume interrupted workflows.
+8. **Testing** — 16 test files covering actions, API, autonomous loop, CI validation, Devin client, Devin polling, Git client, GitHub client, idempotency, max iterations, OpenAI client, restart recovery, SHA validation, state machine, validation, workspace.
+9. **Guardrails** — No GPT-generated shell, allowlisted semantic actions, path-traversal protection, secret sanitization, destructive actions disabled by default.
+
+**Do NOT disclose:** Source code, API keys, Devin API details beyond public documentation, local project paths, production environment details.
+
+**Do NOT create either case study yet — requires Leonardo's approval.**
+
+---
+
+### 10. Final Top 6 (Evidence-Backed)
+
+| Pin | Repository | Revised Score | Primary Signal |
+|---|---|---|---|
+| #1 | PayFlow-AI | **84/100** (unchanged — 629 tests verified, CI failures are config-only) | FastAPI + AI + payments + 629 verified tests + Docker + Railway |
+| #2 | Pagae | **79/100** (unchanged — CI passing, architecture verified) | Django 5 + 10 domain apps + repository pattern + CI passing |
+| #3 | Oraculo | **72/100** (unchanged — deepest AI engineering) | NL2SQL + RAG + knowledge graph — deepest AI engineering |
+| #4 | desafio-focon | **69/100** (unchanged — provenance clear, E2E verified) | React 19 + Supabase RLS + E2E tests + live on Vercel |
+| #5 | LogiFlow | **63/100** (unchanged — domain complexity verified) | Logistics SaaS + multi-tenant + fiscal + GPS — domain complexity |
+| #6 | **Legal-AI-Copilot** | **75/100** (upgraded from 63 — 176 tests verified, implementation verified, honest README) | AI + legal + RBAC + agent router + state machine + RAG + 176 tests |
+
+**Go-API-Gestao-de-Projetos-e-Tarefas REMOVED from Top 6** — Score revised to 45/100 (zero tests, cannot compile, false real-time claim). Moved to KEEP_PUBLIC_SUPPORTING.
+
+---
+
+### 11. Final Action Plan
+
+#### A. FINAL_TOP_6
+1. PayFlow-AI (84)
+2. Pagae (79)
+3. Oraculo (72)
+4. desafio-focon (69)
+5. LogiFlow (63)
+6. Legal-AI-Copilot (75)
+
+#### B. FINAL_PIN_ORDER
+1. PayFlow-AI
+2. Pagae
+3. Legal-AI-Copilot
+4. Oraculo
+5. desafio-focon
+6. LogiFlow
+
+> Pin order adjusted: Legal-AI-Copilot (75) moves to #3 pin position (higher score than Oraculo at 72 and desafio-focon at 69). Pin order follows score ranking.
+
+#### C. PUBLIC_TO_PRIVATE (5)
+1. API_Analyze
+2. FragTech-Fintech
+3. PyScriptTech
+4. Portfolio-LeonardoFragoso-React
+5. MedFlow_Finance
+
+#### D. ARCHIVE (1)
+1. SaaS
+
+#### E. KEEP_PUBLIC_SUPPORTING (4)
+1. Plataforma-de-Monitoramento-de-Sistemas-e-APIs (Java 21 + Spring Boot — language breadth)
+2. LeonardoRFragoso (profile README infrastructure)
+3. Go-API-Gestao-de-Projetos-e-Tarefas (Go — language breadth, but downgraded to supporting due to quality deficits)
+4. vigil-ai (multi-agent AI case study — supporting signal)
+
+#### F. PRIVATE_STRATEGIC (2)
+1. ProFlow (HIGH_PRIORITY_PUBLIC_CASE_STUDY)
+2. DevPro (MEDIUM_PRIORITY_PUBLIC_CASE_STUDY)
+
+#### G. CASE_STUDY_CREATE (2 — do NOT create yet)
+1. ProFlow case study (high priority)
+2. DevPro case study (medium priority)
+
+#### H. README_REWRITE (3)
+1. Oraculo — remove "Palantir competitor" claim, clean root (5 status report files)
+2. LogiFlow — remove "60-70%" marketing claim, remove fake CI/CD badges, clean root
+3. Go-API-Gestao-de-Projetos-e-Tarefas — remove false "real-time notifications" claim, remove "scalable/robust" claims, clean root (PHASE_1_*, escopo.txt)
+
+#### I. README_MINOR_UPDATE (4)
+1. PayFlow-AI — 629 test claim VERIFIED, no change needed to badge; fix CI config (docker-compose→docker compose, Node 18→20)
+2. Pagae — add architecture diagram, demo/staging URL
+3. desafio-focon — add technical challenge positioning statement, clean root report files
+4. Legal-AI-Copilot — clean root (40+ report MD files), fix pyjwt version in requirements.txt, update test count from 166 to 176
+
+#### J. METADATA_UPDATE (6 — all Top 6)
+1. PayFlow-AI — add description, topics, homepage
+2. Pagae — add description, topics
+3. Legal-AI-Copilot — add description, topics
+4. Oraculo — add description, topics
+5. desafio-focon — add description, topics, homepage
+6. LogiFlow — add description, topics, homepage
+
+#### K. PROFILE_README_CHANGES
+1. Remove Digital-Signage-Platform from "Outros projetos em destaque" (private, 404)
+2. Add PayFlow-AI, Pagae, Legal-AI-Copilot to projects table
+3. Replace Go-API with Legal-AI-Copilot in Top 6 references
+4. Keep "3+ anos de experiência" (PENDING_OWNER_PROFILE_CONFIRMATION — do not remove)
+5. Keep "6 sistemas corporativos" claim (refers to former-employer work — PENDING_OWNER_PROFILE_CONFIRMATION)
+6. Keep ProFlow case study section (strongest signal)
+7. Add DevPro as brief mention (case study candidate)
+8. Ensure all linked repos are PUBLIC
+
+#### Projected Counts
+
+| Metric | Current | Projected |
+|---|---|---|
+| PUBLIC_AFTER | 15 | 10 (6 showcase + 4 supporting) |
+| PRIVATE_AFTER | 15 | 20 (15 current private + 5 made private) |
+| ARCHIVED_AFTER | 0 | 1 (SaaS) |
+| TOTAL | 30 | 30 |
+
+---
+
+### 12. Security Invariants
+
+| Validator | Result |
+|---|---|
+| validate_credential_matrix.py | **PASS** — Total items: 41, ALL VALIDATIONS PASSED |
+| validate_history_sanitization_plan.py --live | **PASS** — COMPLETED=10, READY=0, BLOCKED=2, PUBLIC=15, PRIVATE=15, TOTAL=30 |
+
+No Phase 2A state regressed.
+
+---
+
+### Phase 2B.1 Safety Confirmations
+
+- No repository history rewritten: YES
+- No force push: YES
+- Former-employer repositories untouched: YES
+- ProFlow production untouched: YES
+- No credentials modified: YES
+- No sessions modified: YES
+- No secret values printed: YES
+- No GitHub Support ticket submitted: YES
+- No Phase 2B mutations executed: YES — audit and reconciliation only
+- No repository visibility changed: YES
+- No repositories archived: YES
+- No READMEs modified: YES
+- No topics/descriptions changed: YES
+- No profile README modified: YES
+- No case studies created: YES
+- No pins modified: YES
+- Local test environments created in /tmp and cleaned up: YES
