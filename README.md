@@ -37,13 +37,17 @@ Secondary focus: SaaS / Product Engineering — turning business requirements in
 
 ### ProFlow — Private production SaaS
 
-Production SaaS platform for freelancers: centralizes projects, proposals, clients, payments, and AI-assisted features. Source is private. Live product: [proflow.pro](https://www.proflow.pro/)
+Production SaaS platform for freelancers: centralizes projects, proposals, clients, payments, and AI-assisted features. Source is private.
+
+[Case Study](https://github.com/LeonardoRFragoso/proflow-case-study) · [Live Product](https://www.proflow.pro/)
 
 Architecture: Django REST Framework · Vue.js · PostgreSQL · Redis · Celery · Django Channels (WebSockets) · OpenAI · Mercado Pago · OAuth
 
 ### DevPro — Private R&D project
 
-Autonomous software development orchestrator coordinating multiple AI agents (OpenAI as reviewer, Devin as executor, GitHub as source of truth). Source is private. Case study planned for future portfolio polish.
+Autonomous software development orchestrator coordinating multiple AI agents (OpenAI as reviewer, Devin as executor, GitHub as source of truth). Source is private.
+
+[Case Study](https://github.com/LeonardoRFragoso/devpro-case-study)
 
 ---
 
