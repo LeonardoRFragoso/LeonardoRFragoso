@@ -156,6 +156,10 @@ def parse_typed_totals(filepath: str) -> dict[str, dict[str, int]]:
             continue
 
         if current_section:
+            # Stop parsing current section if we hit a new header
+            if line.startswith("#"):
+                current_section = None
+                continue
             if line.startswith("|---|"):
                 continue
             if not line.startswith("|"):
@@ -163,7 +167,9 @@ def parse_typed_totals(filepath: str) -> dict[str, dict[str, int]]:
                 continue
             raw_cells = line.split("|")
             cells = [c.strip() for c in raw_cells[1:-1]]
-            if len(cells) >= 2 and cells[0] not in ("Type", "Remediation Class", "Runtime Status", "Owner", "**Total**"):
+            # Only parse tables with exactly 2 columns (label + count) to avoid
+            # picking up reconciliation tables with different structures
+            if len(cells) == 2 and cells[0] not in ("Type", "Remediation Class", "Runtime Status", "Owner", "**Total**"):
                 try:
                     count = int(cells[1])
                     typed[current_section][cells[0]] = count
@@ -337,6 +343,39 @@ def validate(items: list[dict], typed_totals: dict) -> bool:
             if typed_count != computed_count:
                 typed_ok = False
             print(f"  {status} {section}.{label}: typed={typed_count}, computed={computed_count}")
+    print()
+
+    # Phase 2A.9: PRIMARY_READINESS_COUNTS invariant — sum must equal 41
+    readiness_sum = 0
+    in_readiness_table = False
+    matrix_content = Path(__file__).parent.joinpath("CREDENTIAL_ROTATION_MATRIX.md").read_text()
+    for line in matrix_content.split("\n"):
+        stripped = line.strip()
+        # Look for the totals table header (2-column: "Primary Readiness State" | "Count")
+        if stripped == "| Primary Readiness State | Count |":
+            in_readiness_table = True
+            continue
+        if in_readiness_table:
+            if stripped.startswith("|---|"):
+                continue
+            if not stripped.startswith("|"):
+                break
+            cells = [c.strip() for c in stripped.split("|")[1:-1]]
+            if len(cells) == 2 and cells[0] not in ("Primary Readiness State", "**Total**"):
+                try:
+                    count = int(cells[1])
+                    readiness_sum += count
+                except ValueError:
+                    pass
+    print("--- Primary Readiness Counts Invariant ---")
+    if readiness_sum == EXPECTED_ITEM_COUNT:
+        print(f"  ✓ SUM(PRIMARY_READINESS_COUNTS) = {readiness_sum} == {EXPECTED_ITEM_COUNT}")
+    else:
+        print(f"  ✗ SUM(PRIMARY_READINESS_COUNTS) = {readiness_sum} != {EXPECTED_ITEM_COUNT}")
+        errors.append(
+            f"PRIMARY_READINESS_COUNTS invariant failed: sum is {readiness_sum}, "
+            f"expected {EXPECTED_ITEM_COUNT}"
+        )
     print()
 
     if errors:
