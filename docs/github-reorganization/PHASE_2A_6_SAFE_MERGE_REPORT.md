@@ -174,6 +174,62 @@ MVP-linkedin-bot PR #2 was reclassified from MERGE_READY to **NEEDS_REVIEW** per
 | Gitleaks | CLEAN |
 | **Classification** | **MERGE_READY** (awaiting Leonardo's approval — NOT merged in this phase) |
 
+---
+
+## CORRECTION — Phase 2A.6.1 (MVP-linkedin-bot Residual Secret Reconciliation)
+
+### Audit Trail Correction
+
+The initial Phase 2A.6 report classified MVP-linkedin-bot PR #2 as **MERGE_READY** after the first residual cleanup (head SHA `9a3896c3`). **This classification was INCORRECT.**
+
+Independent verification of the PR diff found residual sensitive material that Phase 2A.6 missed. The error occurred because Phase 2A.6 relied on gitleaks alone, which does not detect all credential patterns or PII.
+
+**INITIAL_RESULT** = incorrectly classified MERGE_READY (gitleaks-only verification)
+**INDEPENDENT_REVIEW** = residual credentials and PII found via targeted credential audit + PII audit
+**FINAL_RESULT** = MERGE_READY after second cleanup (three-scan verification: gitleaks + targeted + PII)
+
+This correction is preserved in the audit trail as useful security-audit evidence: gitleaks alone is insufficient for repositories containing personal configuration files, encrypted credential blobs, and PII in non-standard formats.
+
+### Residual Findings from Independent Review (Phase 2A.6.1)
+
+| Category | Path | Finding | Action |
+|---|---|---|---|
+| CREDENTIAL | `V2-Completa/quick_get_id.py` | Hardcoded Telegram bot token | Replaced with `os.getenv("TELEGRAM_BOT_TOKEN")` |
+| CREDENTIAL | `V2-Completa/get_my_id.py` | Hardcoded Telegram bot token | Replaced with `os.getenv("TELEGRAM_BOT_TOKEN")` |
+| CREDENTIAL | `V1/backend/tests/test_encryption_service.py` | Real LinkedIn password in test fixture | Replaced with synthetic `test-password-not-real` |
+| CREDENTIAL | `V1/backend/scripts/seed_admin_user.py` | Hardcoded `admin123` default password | Replaced with `os.getenv("ADMIN_PASSWORD")` |
+| CREDENTIAL | `V1/backend/bot/config/tenants/default/user_default-user.json` | Encrypted LinkedIn password (Fernet ciphertext) | Replaced with empty string |
+| PII | `V1/config/personals.py` + `V1/backend/bot/config/personals.py` | Full name, phone, address | Replaced with `os.getenv()` |
+| PII | `V2-Completa/config/personals.py` | Full name, phone, address | Replaced with `os.getenv()` |
+| PII | `V1/config/questions.py` + `V1/backend/bot/config/questions.py` | CPF, LinkedIn URL, local paths, employer, university, cover letter | Replaced with `os.getenv()` |
+| PII | `V2-Completa/config/questions.py` | CPF, LinkedIn URL, local paths, employer, university, cover letter | Replaced with `os.getenv()` |
+| PII | `V1/backend/scripts/seed_admin_user.py` | Full name, phone, address, CPF, LinkedIn URL, employer, university, salary, Windows paths, cover letter | Replaced with `os.getenv()` + safe defaults |
+| PII | `V1/backend/bot/config/tenants/default/user_default-user.json` | Full name, phone, address, salary, Windows paths | Replaced with empty/template values |
+| PII | `V1/backend/data/questions/questions_bank.json` + `questions_bank.json` | Phone, CPF, LinkedIn URL, full name, employer, university | Replaced with placeholder strings |
+| PII | `V1/backend/scripts/migrate_questions_from_csv.py` | Windows path with username | Replaced with relative path |
+| PII | `V2-Completa/VALIDACAO_FINAL_V2.md` + `INICIO_RAPIDO.md` | Name, phone, email | Replaced with placeholders |
+| PII | `V1/runAiBot.py`, `V1/backend/bot/runAiBot.py`, `V2-Completa/runBot.py` | University name | Replaced with `os.getenv()` / placeholder |
+| CONFIG | Multiple Python files | `${VAR}` shell-style interpolation (doesn't work in Python) | Replaced with `os.getenv()` calls |
+
+### Three-Scan Verification (Phase 2A.6.1)
+
+| Scan | Result |
+|---|---|
+| Gitleaks | CLEAN (0 findings) |
+| Targeted credential scan (passwords, tokens, encrypted blobs) | CLEAN |
+| PII scan (phone, CPF, address, local paths, employer, university) | CLEAN |
+
+### MVP PR #2 Final Updated
+
+| Field | Value |
+|---|---|
+| PR | [#2](https://github.com/LeonardoRFragoso/MVP-linkedin-bot/pull/2) |
+| Phase 2A.6 head SHA | `9a3896c3314d45f25e5917b22d5b78a1be5cedae` |
+| Phase 2A.6.1 head SHA | `3e7bc0c573b5b663c6401433468a3bb28fb17596` |
+| Files changed in second cleanup | 19 files, +470 lines, -1,077 lines |
+| Three-scan verification | ALL CLEAN |
+| **Final Classification** | **MERGE_READY** (awaiting Leonardo's approval — NOT merged) |
+
 ### Credentials Found in secrets.py (types only — no values)
 
 | Variable | Type |
