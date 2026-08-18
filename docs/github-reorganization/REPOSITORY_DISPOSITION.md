@@ -1,9 +1,10 @@
-# Repository Disposition — Phase 2A.10 (Visibility totals corrected Phase 2A.10.1, runtime state updated Phase 2A.11)
+# Repository Disposition — Phase 2A.10 (Visibility totals corrected Phase 2A.10.1, runtime state updated Phase 2A.11, history rewrite Batch 1 Phase 2A.12)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
 **Phase 2A.10.1 update:** 2026-08-18 (visibility totals reconciled against live GitHub metadata)
 **Phase 2A.11 update:** 2026-08-18 (Railway runtime state reconciled — only ProFlow active)
+**Phase 2A.12 Batch 1 update:** 2026-08-18 (history rewrite executed for Portfolio + AndaimesPini)
 **Operation:** Repository deletion batch (13 repositories deleted)
 
 > **CRITICAL:** This document records the intentional deletion of 13 repositories that no longer have strategic, portfolio, historical, or operational value. All 13 repositories were backed up locally (mirror clone + git bundle) before deletion. No credential values are listed.
@@ -146,3 +147,20 @@ Leonardo explicitly confirms that **the only project currently deployed on Railw
 |---|---|---|---|---|
 | base-corporativa | #1 | e1655bb3166fa120ecaffa8e8f35dfaf33b717ca | e40c90fe5e98609509ad6cf0d00406a3f92bbe60 | CLEAN |
 | Bot_IqOption | #5 | d3a248eee8be3979a6b96b784393f0a3b629bc69 | f26b29496dbb7e9c302d65252b1fdc0f956291a7 | CLEAN |
+
+## Phase 2A.12 Batch 1 — History Rewrite Record
+
+First actual history rewrite phase. Two repositories rewritten sequentially with immutable backups, pre-push integrity checks, and fresh-clone verification.
+
+| Repository | Pre-rewrite main SHA | Post-rewrite main SHA | Paths Removed | Backup | Bundle | Post-rewrite scan | Fork risk | GitHub support cleanup |
+|---|---|---|---|---|---|---|---|---|
+| Portfolio-LeonardoFragoso-React | 4d9fc8880cad0b69b6e35eaf59b54a1be6d869d3 | 2a067f9a058d5941274779b036f811e4202b2c57 | `public/Docs/cartao cnpj.pdf`, `public/Docs/contrato-social-cnpj.pdf`, `dist/Docs/cartao cnpj.pdf`, `dist/Docs/contrato-social-cnpj.pdf` | VERIFIED (76M mirror) | VERIFIED (4 refs) | PASS (gitleaks clean, PII absent) | 0 forks | YES (refs/pull/1/head retains old history) |
+| AndaimesPini_Project | 23c1a53d67378754ae6acb0e39753549f812f6e9 | be192a64116359a11e4619ae78a94686a0b7be41 | `database/db.sqlite3`, `database/db.sqlite3-shm`, `database/db.sqlite3-wal`, `*.sqlite_backup` (17 files) | VERIFIED (1.3M mirror) | VERIFIED (4 refs) | PASS (gitleaks clean, SQLite artifacts absent) | 0 forks | YES (refs/pull/1/head retains old history) |
+
+### Lifecycle status
+
+- REWRITE_COMPLETED = 2 (Portfolio-LeonardoFragoso-React, AndaimesPini_Project)
+- REWRITE_PENDING = 10
+- UPSTREAM_HISTORY_SANITIZED = YES for both completed repos
+- GLOBAL_ERASURE_UNPROVEN = YES for both (GitHub-managed PR refs retain old history)
+- GITHUB_SUPPORT_CLEANUP_REQUIRED = YES for both

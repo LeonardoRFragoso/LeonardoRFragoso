@@ -1,4 +1,4 @@
-# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.11)
+# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.12 Batch 1)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
@@ -6,7 +6,8 @@
 **Phase 2A.10 update:** 2026-08-18
 **Phase 2A.10.1 update:** 2026-08-18 (history-sanitization plan canonicalization & pre-rewrite gate)
 **Phase 2A.11 update:** 2026-08-18 (runtime gate closure, cleanup PR integration, pre-history-rewrite readiness)
-**Status:** READ-ONLY AUDIT — No credentials rotated by Devin. No history rewritten. No provider dashboards accessed.
+**Phase 2A.12 Batch 1 update:** 2026-08-18 (first history rewrite executed — Portfolio + AndaimesPini)
+**Status:** PARTIALLY EXECUTED — Batch 1 history rewrite complete. No credentials rotated by Devin. No provider dashboards accessed.
 
 > **CRITICAL:** Leonardo reports that exposed credentials have been manually changed. Devin cannot independently verify provider-side revocation or runtime validation. This document separates owner-reported actions from independently verified evidence. No credential values are listed.
 
@@ -322,16 +323,22 @@ PR states updated 2026-08-18 after Phase 2A.11 merges. base-corporativa PR #1 an
 | PayFlow-AI | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
 | FlowTrack | CLEAN | N/A | N/A | PENDING | N/A | **NO** | OWNER_HANDOFF_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE (PR #1) |
 | MVP-linkedin-bot | CLEAN | PENDING | PENDING | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE (PR #1) |
-| Portfolio-LeonardoFragoso-React | CLEAN | N/A (PII) | N/A | N/A | N/A | **YES** | None — PII removal IS the remediation |
-| AndaimesPini_Project | CLEAN | N/A (data) | N/A | N/A | N/A | **YES** | None — data artifact removal IS the remediation (current tree clean after PR #1 merge) |
+| Portfolio-LeonardoFragoso-React | CLEAN | N/A (PII) | N/A | N/A | N/A | **COMPLETED** | None — PII removal IS the remediation — HISTORY REWRITTEN Phase 2A.12 Batch 1 |
+| AndaimesPini_Project | CLEAN | N/A (data) | N/A | N/A | N/A | **COMPLETED** | None — data artifact removal IS the remediation — HISTORY REWRITTEN Phase 2A.12 Batch 1 |
 | LogiFlow | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
 | API_Analyze | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER, FORK_RISK (1 fork) |
 
 > **Phase 2A.10.1 correction:** Bet-IA-BOT was removed from this active readiness table (repository deleted in Phase 2A.10 — see HISTORY_SANITIZATION_PLAN.md DELETED_REPOSITORY_AUDIT_RECORD). AndaimesPini_Project was added (data artifact, current tree clean after security PR #1 merge, no credential rotation dependency → READY). This raises READY repositories from 1 to 2 and active candidates from 11 to 12.
 
-### Ready Repositories: 2 of 12
+### Completed Repositories: 2 of 12
 
-**Portfolio-LeonardoFragoso-React** and **AndaimesPini_Project** are READY for history sanitization (PII/data-only, current tree clean, no credential rotation dependency).
+**Portfolio-LeonardoFragoso-React** and **AndaimesPini_Project** have COMPLETED history sanitization (Phase 2A.12 Batch 1). PII/client-data artifacts permanently removed from all rewritten history. Upstream branches force-pushed. Fresh-clone verification passed. Gitleaks clean.
+
+> **GITHUB_SUPPORT_CLEANUP_REQUIRED = YES** for both repositories: old commits with sensitive artifacts remain reachable through GitHub-managed `refs/pull/1/head` refs. GitHub support should be contacted to garbage-collect these stale PR refs. Upstream history is sanitized; global erasure is NOT proven until GitHub cleans the PR refs.
+
+### Ready Repositories: 0 of 12
+
+No repositories are currently READY for history rewrite. The two previously-ready repos have been completed.
 
 ### Blocked Repositories: 10 of 12
 
