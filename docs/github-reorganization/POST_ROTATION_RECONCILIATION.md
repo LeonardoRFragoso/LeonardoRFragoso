@@ -1,4 +1,4 @@
-# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.12 Batch 1, Phase 2A.12.1, Phase 2A.13 Batch 2, Phase 2A.14 Batch 3)
+# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.12 Batch 1, Phase 2A.12.1, Phase 2A.13 Batch 2, Phase 2A.14 Batch 3, Phase 2A.15)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
@@ -10,7 +10,8 @@
 **Phase 2A.12.1 update:** 2026-08-18 (GitHub Support cleanup packet prepared for stale PR refs)
 **Phase 2A.13 Batch 2 update:** 2026-08-18 (owner attestation gate passed; history rewrite executed for FinanceControl, PayFlow-AI, LogiFlow, base-corporativa)
 **Phase 2A.14 Batch 3 update:** 2026-08-18 (owner attestation + session closure gate passed; history rewrite executed for API_Analyze, Bot_IqOption, MVP-linkedin-bot)
-**Status:** PARTIALLY EXECUTED — Batch 1 + Batch 2 + Batch 3 history rewrite complete (9 repos). GitHub Support cleanup PENDING_OWNER_SUBMISSION. No credentials rotated by Devin. No provider dashboards accessed.
+**Phase 2A.15 update:** 2026-08-18 (owner attestation + production redeploy authorization gate passed; ProFlow history rewrite executed with Railway + Vercel redeploy triggered and healthy)
+**Status:** PARTIALLY EXECUTED — Batch 1 + Batch 2 + Batch 3 + ProFlow history rewrite complete (10 repos). GitHub Support cleanup PENDING_OWNER_SUBMISSION. No credentials rotated by Devin. No provider dashboards accessed.
 
 > **CRITICAL:** Leonardo reports that exposed credentials have been manually changed. Devin cannot independently verify provider-side revocation or runtime validation. This document separates owner-reported actions from independently verified evidence. No credential values are listed.
 
@@ -115,6 +116,56 @@ Leonardo explicitly confirmed the following statement:
 
 - **Bot_IqOption:** discovered a real EC2 RSA private key in `bot_iqoption_v2/chaveEC2/bot-iq.pem` (historical only, 2 commits) not in the canonical plan's path-removal set; added it to path removal in a second filter pass. This is the same sensitive class as FinanceControl's EC2 key (item #18).
 - **MVP-linkedin-bot:** the canonical plan listed `cpf.pdf` and `perguntas.csv` but the full historical-only path scan revealed additional PII files: 7 CV PDFs (containing Leonardo's full name), Profile.pdf, resume.pdf, and 2 application history CSVs (all historical-only, absent from current tree). These were added to the path-removal set. One empty `.gitkeep` placeholder in `V1/logs/` was also removed as part of the logs directory cleanup (canonical plan explicitly calls for logs/ removal).
+
+## Phase 2A.15 — ProFlow Production-Safe History Sanitization Record
+
+**Attestation date:** 2026-08-18
+**Attestation method:** Explicit CONFIRMO response in Devin session (no secret values requested or provided).
+
+Leonardo explicitly confirmed the following statements:
+
+> "I confirm that the old exposed credentials under my ownership identified for ProFlow were revoked, invalidated, replaced or otherwise made unusable. The replacement credentials required by the current ProFlow production deployment are already configured in Railway and the production application is operating with the replacement credentials."
+
+> "Rewriting ProFlow main may trigger a Railway production redeployment even though the current source tree is intended to remain semantically identical. Do you authorize proceeding with the force-push and possible production redeploy?" → CONFIRMO / AUTORIZO
+
+### Evidence classification applied
+
+| Repository | Credential Items | Prior Classification | New Classification | PROVIDER_VERIFIED? |
+|---|---|---|---|---|
+| ProFlow | #1-#7 (Django SECRET_KEY, OpenAI, Google OAuth, GitHub OAuth, MP access token, MP client secret, MP webhook secret) | OWNER_REPORTED | **OWNER_ATTESTED_COMPLETED** | NO |
+
+> **Evidence model preserved:** OWNER_ATTESTED_COMPLETED means Leonardo explicitly states the old exposed credentials are no longer usable and replacement credentials are configured in Railway. It does NOT mean Devin independently verified provider dashboards or Railway variable values. PROVIDER_VERIFIED was NOT used. No provider dashboards were accessed. No credentials were rotated by Devin. No Railway variables were modified.
+
+### Open PR gate resolution
+
+| PR | Classification | Action | Authorization |
+|---|---|---|---|
+| PR #2 (copilot/add-mercado-pago-subscription, 1 commit) | STALE_EQUIVALENT_TO_MAIN — only 7 genuinely new files (task JSONs, test file, logos), no useful unique application work | Closed | Proven equivalence (0 effective diff against main for useful work) |
+| PR #1 (copilot/eldest-turtle, 1 commit, 92 new source files) | UNIQUE_WORK_PRESERVED — substantial unique application work (MP subscription, badges, payments, AI engine, auth) | Remained open; branch force-pushed with unique work preserved | No closure needed — branch rewrite preserved all 92 new source files |
+
+### Production safety record
+
+| Metric | Before | After |
+|---|---|---|
+| Frontend (www.proflow.pro) | HTTP 200 (HEALTHY) | HTTP 200 (HEALTHY) |
+| API (api.proflow.pro) | HTTP 404 (normal — no root view) | HTTP 404 (normal — no root view) |
+| Deployed commit | 390ea2b6ef (= main HEAD) | 514aed8a38 (= rewritten main HEAD) |
+| Railway deploy triggered | — | YES (railway-app[bot], 514aed8a38, 21:43:28Z) |
+| Vercel deploy triggered | — | YES (vercel[bot] Production, 514aed8a38, 21:44:04Z) |
+| CI workflow | failure (pre-existing) | failure (pre-existing — not caused by rewrite) |
+| Regression detected | — | NO (HEALTHY → HEALTHY) |
+
+### History rewrite results
+
+| Repository | Method | Secrets/Paths Purged | Source Integrity | Test/Build | Fresh-Clone Verify | Post-Scan | Stale PR Refs | Fork Risk | Global Erasure |
+|---|---|---|---|---|---|---|---|---|---|
+| ProFlow | --invert-paths (3 paths) + --replace-text (1 MP access token) | 3 paths (RAILWAY_ENV_FINAL.txt, DEPLOY_CHECKLIST.md, MP_PRODUCTION_VALIDATION.md) + 1 MP access token (APP_USR-<REDACTED_MP_TOKEN>, 24 chars) from backend/config/settings/dev.py + Docs/MP_PRODUCTION_VALIDATION.md history | PASS (1012 files, identical blob SHAs; Docs/MP_PRODUCTION_VALIDATION.md preserved in current tree) | PASS (Django 4.2.7 syntax check, frontend npm build SUCCESS in 10.79s) | PASS (main=514aed8, 1012 files, all secrets purged) | PASS (18 gitleaks findings, all false positives) | YES (refs/pull/2-9/head; PR #1 ref updated by branch force-push) | NO (0 forks) | NO |
+
+### Scope discoveries beyond the canonical plan
+
+- **MP_PRODUCTION_VALIDATION.md (root-level):** discovered a real MP access token (`APP_USR-<REDACTED_MP_TOKEN>-...`) in a historical root-level `MP_PRODUCTION_VALIDATION.md` file not listed in the canonical plan's path-removal set (canonical plan only listed `RAILWAY_ENV_FINAL.txt` and `DEPLOY_CHECKLIST.md`). Added `MP_PRODUCTION_VALIDATION.md` (root-level) to path removal. The same MP access token also appeared in `backend/config/settings/dev.py` and `Docs/MP_PRODUCTION_VALIDATION.md` history — redacted via --replace-text.
+- **Docs/MP_PRODUCTION_VALIDATION.md (current tree):** this file exists in the current tree and contains only the MP public key (`APP_USR-fcc88887-...`, UUID format = public key, NOT a secret) and env var name references. It was NOT removed from the current tree — only the MP access token in its history was redacted via --replace-text. An initial filter attempt incorrectly removed it via --invert-paths; the filter was redone correctly.
+- **MP public key APP_USR-fcc88887:** appears in 1135 historical files including current-tree source code (`backend/config/settings/dev.py`, `frontend/src/views/wallet/PaymentCards.vue`). This is a Mercado Pago **public key** (UUID format), NOT a secret — it is designed for frontend use. It was intentionally NOT redacted to preserve source integrity.
 
 ## Current-Tree Rescan Results
 

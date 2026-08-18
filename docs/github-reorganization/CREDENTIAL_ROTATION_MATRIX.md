@@ -6,6 +6,7 @@
 **Phase 2A.11 update:** 2026-08-18 (runtime gate closure, cleanup PR integration)
 **Phase 2A.13 Batch 2 update:** 2026-08-18 (owner attestation gate passed; items #8-#17, #18, #28, #37 upgraded OWNER_REPORTED → OWNER_ATTESTED_COMPLETED; history rewritten for base-corporativa, FinanceControl, PayFlow-AI, LogiFlow)
 **Phase 2A.14 Batch 3 update:** 2026-08-18 (owner attestation + session closure gate passed; items #21-#27, #31-#32, #38-#41 upgraded OWNER_REPORTED → OWNER_ATTESTED_COMPLETED / OWNER_ATTESTED_SESSION_INVALIDATED; history rewritten for API_Analyze, Bot_IqOption, MVP-linkedin-bot)
+**Phase 2A.15 update:** 2026-08-18 (owner attestation + production redeploy authorization gate passed; items #1-#7 upgraded OWNER_REPORTED → OWNER_ATTESTED_COMPLETED; ProFlow history rewritten with Railway + Vercel redeploy triggered and healthy)
 **Status:** ACTIVE — Leonardo must perform all rotations manually. OWNER_ATTESTED_COMPLETED items have owner attestation that old credentials are unusable, but provider dashboards were NOT independently verified (NOT PROVIDER_VERIFIED).
 
 > **CRITICAL:** No credential values are listed in this document. All credentials committed to Git must be treated as COMPROMISED regardless of whether the repository is now private or the file was removed from the current tree. Removing a file, making a repo private, or rewriting history does NOT make a credential safe — rotation/revocation at the provider is required.
@@ -36,13 +37,13 @@
 
 | # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Django | Application secret key (SECRET_KEY) | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `SECRET_KEY` | Verify Django session cookies invalidated; users re-login | Yes — generate new secret, update Railway env var, redeploy |
-| 2 | OpenAI | API key (sk-proj-...) | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `OPENAI_API_KEY` | Verify AI features still work | Yes — revoke key in OpenAI dashboard, create new key, update Railway env var |
-| 3 | Google | OAuth client secret (GOCSPX-...) | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `GOOGLE_OAUTH_CLIENT_SECRET` | Verify Google login still works | Yes — reset OAuth client secret in Google Cloud Console, update Railway env var |
-| 4 | GitHub | OAuth client secret | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `GITHUB_OAUTH_CLIENT_SECRET` | Verify GitHub login still works | Yes — generate new OAuth app secret in GitHub Developer Settings, update Railway env var |
-| 5 | Mercado Pago | Access token (APP_USR-...) | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue token in Mercado Pago developer dashboard, update Railway env var |
-| 6 | Mercado Pago | Client secret | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `MERCADOPAGO_CLIENT_SECRET` | Verify payment authentication works | Yes — rotate in Mercado Pago dashboard, update Railway env var |
-| 7 | Mercado Pago | Webhook secret | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | NOT_STARTED | Railway (ProFlow production) | `MERCADOPAGO_WEBHOOK_SECRET` | Verify webhook signature validation works | Yes — regenerate webhook secret in MP dashboard, update Railway env var |
+| 1 | Django | Application secret key (SECRET_KEY) | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | OWNER_ATTESTED_COMPLETED | Railway (ProFlow production; history rewritten Phase 2A.15) | `SECRET_KEY` | Verify Django session cookies invalidated; users re-login | Yes — generate new secret, update Railway env var, redeploy |
+| 2 | OpenAI | API key (sk-proj-...) | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | OWNER_ATTESTED_COMPLETED | Railway (ProFlow production; history rewritten Phase 2A.15) | `OPENAI_API_KEY` | Verify AI features still work | Yes — revoke key in OpenAI dashboard, create new key, update Railway env var |
+| 3 | Google | OAuth client secret (GOCSPX-...) | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | OWNER_ATTESTED_COMPLETED | Railway (ProFlow production; history rewritten Phase 2A.15) | `GOOGLE_OAUTH_CLIENT_SECRET` | Verify Google login still works | Yes — reset OAuth client secret in Google Cloud Console, update Railway env var |
+| 4 | GitHub | OAuth client secret | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | OWNER_ATTESTED_COMPLETED | Railway (ProFlow production; history rewritten Phase 2A.15) | `GITHUB_OAUTH_CLIENT_SECRET` | Verify GitHub login still works | Yes — generate new OAuth app secret in GitHub Developer Settings, update Railway env var |
+| 5 | Mercado Pago | Access token (APP_USR-...) | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | OWNER_ATTESTED_COMPLETED | Railway (ProFlow production; history rewritten Phase 2A.15) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue token in Mercado Pago developer dashboard, update Railway env var |
+| 6 | Mercado Pago | Client secret | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | OWNER_ATTESTED_COMPLETED | Railway (ProFlow production; history rewritten Phase 2A.15) | `MERCADOPAGO_CLIENT_SECRET` | Verify payment authentication works | Yes — rotate in Mercado Pago dashboard, update Railway env var |
+| 7 | Mercado Pago | Webhook secret | `RAILWAY_ENV_FINAL.txt`, `DEPLOY_CHECKLIST.md` | No | Yes | Yes | OWNER_ATTESTED_COMPLETED | Railway (ProFlow production; history rewritten Phase 2A.15) | `MERCADOPAGO_WEBHOOK_SECRET` | Verify webhook signature validation works | Yes — regenerate webhook secret in MP dashboard, update Railway env var |
 
 ### base-corporativa
 
@@ -331,13 +332,13 @@ Each item now has the following additional classifications:
 
 | # | Evidence Level | Current Tree | Primary Readiness State |
 |---|---|---|---|
-| 1 | OWNER_REPORTED | CLEAN (PR #8 + #9 merged) | WAITING_OWNER_ATTESTATION |
-| 2 | OWNER_REPORTED | CLEAN (PR #8 + #9 merged) | WAITING_OWNER_ATTESTATION |
-| 3 | OWNER_REPORTED | CLEAN (PR #8 + #9 merged) | WAITING_OWNER_ATTESTATION |
-| 4 | OWNER_REPORTED | CLEAN (PR #8 + #9 merged) | WAITING_OWNER_ATTESTATION |
-| 5 | OWNER_REPORTED | CLEAN (PR #9 merged — MP creds removed) | WAITING_OWNER_ATTESTATION |
-| 6 | OWNER_REPORTED | CLEAN (PR #8 + #9 merged) | WAITING_OWNER_ATTESTATION |
-| 7 | OWNER_REPORTED | CLEAN (PR #8 + #9 merged) | WAITING_OWNER_ATTESTATION |
+| 1 | OWNER_ATTESTED_COMPLETED | CLEAN (PR #8 + #9 merged; history rewritten Phase 2A.15) | COMPLETED |
+| 2 | OWNER_ATTESTED_COMPLETED | CLEAN (PR #8 + #9 merged; history rewritten Phase 2A.15) | COMPLETED |
+| 3 | OWNER_ATTESTED_COMPLETED | CLEAN (PR #8 + #9 merged; history rewritten Phase 2A.15) | COMPLETED |
+| 4 | OWNER_ATTESTED_COMPLETED | CLEAN (PR #8 + #9 merged; history rewritten Phase 2A.15) | COMPLETED |
+| 5 | OWNER_ATTESTED_COMPLETED | CLEAN (PR #9 merged — MP creds removed; history rewritten Phase 2A.15) | COMPLETED |
+| 6 | OWNER_ATTESTED_COMPLETED | CLEAN (PR #8 + #9 merged; history rewritten Phase 2A.15) | COMPLETED |
+| 7 | OWNER_ATTESTED_COMPLETED | CLEAN (PR #8 + #9 merged; history rewritten Phase 2A.15) | COMPLETED |
 | 8 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
 | 9 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
 | 10 | OWNER_REPORTED | CLEAN (PR #1 merged Phase 2A.11) | WAITING_OWNER_ATTESTATION |
