@@ -1,10 +1,23 @@
-# Git History Sanitization Plan — Phase 2A
+# Git History Sanitization Plan — Phase 2A (Updated Phase 2A.7)
 
 **Account:** LeonardoRFragoso
 **Phase 2A date:** 2026-08-17
+**Phase 2A.7 update:** 2026-08-18
 **Status:** PLAN ONLY — **DO NOT EXECUTE without Leonardo's explicit per-repo authorization**
 
 > **CRITICAL:** History rewriting is DESTRUCTIVE and irreversible. It rewrites all commit SHAs, breaks forks, breaks open PRs, and requires force-push. This document is a PLAN only. No history rewrite has been performed or will be performed without explicit authorization.
+
+## Phase 2A.7 Update — Factual Dependency Changes
+
+1. **MVP-linkedin-bot PR #2 has been MERGED** (merge SHA: `c2afbcd5`). Current tree is clean. History sanitization is still needed for the original credential/PII commits.
+2. **Two additional compromised credentials discovered** in Phase 2A.6.1: Telegram bot token (item 40) and LinkedIn password (item 41). These must be added to the history sanitization scope for MVP-linkedin-bot.
+3. **Four env-dependent PRs reclassified** based on runtime evidence (see `CREDENTIAL_RUNTIME_REALITY_AUDIT.md`):
+   - base-corporativa: BLOCKED_ACTIVE_PRODUCTION — merge after env vars set
+   - Digital-Signage-Platform: OWNER_HANDOFF_BEFORE_MERGE — notify ICTSI first
+   - FlowTrack: OWNER_HANDOFF_BEFORE_MERGE — notify ICTSI first
+   - Bot_IqOption: NEEDS_MANUAL_CONFIRMATION — Railway deployments stale but auto-deploy state unconfirmed
+4. **Former-employer systems (ICTSI/iTracker)**: History sanitization for Digital-Signage-Platform and FlowTrack should only proceed after OWNER_HANDOFF is completed and ICTSI has confirmed credential rotation.
+5. **Credential rotation status unchanged**: 0 of 41 items rotated. History sanitization remains blocked until rotation is underway.
 
 ## Important Principles
 
