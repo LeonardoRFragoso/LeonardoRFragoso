@@ -1,7 +1,8 @@
-# Credential Rotation Matrix — Phase 2A
+# Credential Rotation Matrix — Phase 2A (Updated Phase 2A.7)
 
 **Account:** LeonardoRFragoso
 **Phase 2A date:** 2026-08-17
+**Phase 2A.7 update:** 2026-08-18
 **Status:** ACTIVE — Leonardo must perform all rotations manually
 
 > **CRITICAL:** No credential values are listed in this document. All credentials committed to Git must be treated as COMPROMISED regardless of whether the repository is now private or the file was removed from the current tree. Removing a file, making a repo private, or rewriting history does NOT make a credential safe — rotation/revocation at the provider is required.
@@ -186,3 +187,125 @@ For each production credential rotated:
 - [ ] Status updated in this matrix to ROTATED → REVOKED → VALIDATED
 
 **Do NOT update this matrix with credential values. Only update the status field.**
+
+---
+
+## Phase 2A.7 Update — Runtime Reality Reclassification
+
+**Date:** 2026-08-18
+**Reference:** See `CREDENTIAL_RUNTIME_REALITY_AUDIT.md` for full evidence and `CREDENTIAL_EXECUTION_RUNBOOK.md` for execution steps.
+
+### New Columns Added
+
+Each item now has the following additional classifications:
+
+| Column | Description |
+|---|---|
+| TYPE | CREDENTIAL, SESSION, PII, LOCAL_APP_SECRET, EMPLOYER_SECRET |
+| PROJECT_RUNTIME_STATUS | ACTIVE_PRODUCTION, ACTIVE_DEVELOPMENT, INACTIVE, ARCHIVED_IN_PRACTICE |
+| REMEDIATION_CLASS | See allowed values below |
+| OWNER | Leonardo, ICTSI/iTracker, or UNKNOWN |
+| ACTIVE_DEPLOYMENT | YES / NO / STALE |
+| NEXT_MANUAL_ACTION | Specific next step |
+
+### Allowed Remediation Classes
+
+- ROTATE_AND_REDEPLOY — Create new credential, deploy, verify, revoke old
+- REVOKE_ONLY — Just revoke at provider, no replacement needed
+- INVALIDATE_SESSION — Terminate active sessions
+- CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS — Change password + terminate sessions
+- OWNER_HANDOFF — Notify owner (former employer), do not rotate independently
+- GENERATE_NEW_LOCAL_SECRET — Generate new app-internal secret if redeploying
+- REMOVE_PII_FROM_HISTORY — PII to be purged from git history after credential rotation
+- NOT_APPLICABLE — Not a real credential or not in use
+- ALREADY_INVALIDATED_WITH_EVIDENCE — Confirmed already invalid
+- UNKNOWN_REQUIRES_MANUAL_CHECK — Needs manual verification
+
+### Updated Summary Table
+
+| # | Repo | Provider | Type | TYPE | PROJECT_RUNTIME_STATUS | REMEDIATION_CLASS | OWNER | ACTIVE_DEPLOYMENT | NEXT_MANUAL_ACTION |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | ProFlow | Django | SECRET_KEY | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Generate new secret, update Railway, redeploy |
+| 2 | ProFlow | OpenAI | API key | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke old key, create new, update Railway |
+| 3 | ProFlow | Google | OAuth secret | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Reset OAuth secret in Google Cloud Console |
+| 4 | ProFlow | GitHub | OAuth secret | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Generate new OAuth secret in GitHub |
+| 5 | ProFlow | Mercado Pago | Access token | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke and reissue in MP dashboard |
+| 6 | ProFlow | Mercado Pago | Client secret | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Rotate in MP dashboard |
+| 7 | ProFlow | Mercado Pago | Webhook secret | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Regenerate in MP dashboard |
+| 8 | base-corporativa | Cloudflare R2 | Access key | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Create new R2 token, revoke old, update Railway |
+| 9 | base-corporativa | Cloudflare R2 | Secret key | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Rotate alongside access key |
+| 10 | base-corporativa | Mercado Pago | Access token | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke and reissue in MP dashboard |
+| 11 | base-corporativa | Mercado Pago | Public key | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Rotate in MP dashboard |
+| 12 | base-corporativa | Melhor Envio | Client ID | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Check if rotatable or needs re-registration |
+| 13 | base-corporativa | Melhor Envio | Client secret | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Rotate in Melhor Envio dashboard |
+| 14 | base-corporativa | Melhor Envio | API token | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke and reissue in Melhor Envio dashboard |
+| 15 | base-corporativa | PostgreSQL | Database URL | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Rotate DB password in Railway |
+| 16 | base-corporativa | Django | Superuser password | CREDENTIAL | ACTIVE_PRODUCTION | CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS | Leonardo | YES | Change via manage.py changepassword |
+| 17 | base-corporativa | SendGrid | API key | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke old, create new, update Railway |
+| 18 | FinanceControl | AWS EC2 | RSA private key | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | NO | Check if EC2 active; if not, no action |
+| 19 | Digital-Signage | MySQL | DB credentials | EMPLOYER_SECRET | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI/iTracker | NO | Notify ICTSI IT/security |
+| 20 | Digital-Signage | Application | JWT secret | LOCAL_APP_SECRET | ARCHIVED_IN_PRACTICE | GENERATE_NEW_LOCAL_SECRET | ICTSI/iTracker | NO | If decommissioned: no action; if running: handoff |
+| 21 | Bot_IqOption | Mercado Pago | Access token | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | STALE | Revoke in MP dashboard |
+| 22 | Bot_IqOption | Mercado Pago | Client secret | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | STALE | Revoke in MP dashboard |
+| 23 | Bot_IqOption | Mercado Pago | Public key | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | STALE | Revoke in MP dashboard |
+| 24 | Bot_IqOption | Mercado Pago | Client ID | CREDENTIAL | INACTIVE | UNKNOWN_REQUIRES_MANUAL_CHECK | Leonardo | STALE | Check if client ID needs rotation |
+| 25 | Bot_IqOption | Django/App | SECRET_KEY | LOCAL_APP_SECRET | INACTIVE | GENERATE_NEW_LOCAL_SECRET | Leonardo | STALE | Generate new if redeploying |
+| 26 | Bot_IqOption | IQ Option | JWT session tokens (197) | SESSION | INACTIVE | INVALIDATE_SESSION | Leonardo | STALE | Terminate all IQ Option sessions |
+| 27 | Bot_IqOption | Application | Per-user API key files | CREDENTIAL | INACTIVE | UNKNOWN_REQUIRES_MANUAL_CHECK | Leonardo | STALE | Regenerate if auth system supports it |
+| 28 | PayFlow-AI | Twilio | Auth token | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke in Twilio console, create new |
+| 29 | FlowTrack | Application | SECRET_KEY | LOCAL_APP_SECRET | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI | NO | Notify ICTSI; if decommissioned: no action |
+| 30 | FlowTrack | Application | Session/CSRF tokens (179) | SESSION | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI | NO | Notify ICTSI; if decommissioned: sessions expired |
+| 31 | MVP-linkedin-bot | Google Chrome | Browser session tokens | SESSION | INACTIVE | INVALIDATE_SESSION | Leonardo | NO | Sign out of all Chrome/Google sessions |
+| 32 | MVP-linkedin-bot | LinkedIn | Session data in logs | SESSION | INACTIVE | CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS | Leonardo | NO | Sign out of all LinkedIn sessions, change password |
+| 33 | MVP-linkedin-bot | CPF | PII | PII | INACTIVE | REMOVE_PII_FROM_HISTORY | Leonardo | NO | History sanitization after credential rotation |
+| 34 | Bet-IA-BOT | API-Football | API key | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | NO | Revoke in API-Football dashboard |
+| 35 | Portfolio | CNPJ card PDF | PII | PII | ACTIVE_PRODUCTION | REMOVE_PII_FROM_HISTORY | Leonardo | YES | History sanitization (repo was PUBLIC) |
+| 36 | Portfolio | Articles of association PDF | PII | PII | ACTIVE_PRODUCTION | REMOVE_PII_FROM_HISTORY | Leonardo | YES | History sanitization (repo was PUBLIC) |
+| 37 | LogiFlow | Evolution API | API key | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Rotate key, update Vercel env var |
+| 38 | API_Analyze | News API | API key | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | NO | Revoke if real in News API dashboard |
+| 39 | API_Analyze | Alpha Vantage | API key | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | NO | Revoke if real in Alpha Vantage dashboard |
+| 40 | MVP-linkedin-bot | Telegram | Bot token | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | NO | Revoke via @BotFather, create new token |
+| 41 | MVP-linkedin-bot | LinkedIn | Password (plaintext + encrypted) | CREDENTIAL | INACTIVE | CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS | Leonardo | NO | Change LinkedIn password, invalidate sessions |
+
+### Updated Totals
+
+#### By Type
+
+| Type | Count |
+|---|---|
+| CREDENTIALS (third-party service) | 25 |
+| SESSIONS | 6 |
+| PII | 3 (grouped: +7 additional PII items in MVP-linkedin-bot) |
+| LOCAL_APP_SECRETS | 3 |
+| EMPLOYER_SECRETS | 4 (items 19, 20, 29, 30 — overlap with LOCAL_APP_SECRETS) |
+| **Total unique items** | **41** |
+
+#### By Remediation Class
+
+| Remediation Class | Count |
+|---|---|
+| ROTATE_AND_REDEPLOY | 17 |
+| REVOKE_ONLY | 8 |
+| INVALIDATE_SESSION | 2 |
+| CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS | 3 |
+| OWNER_HANDOFF | 4 |
+| GENERATE_NEW_LOCAL_SECRET | 3 |
+| REMOVE_PII_FROM_HISTORY | 3 (+7 grouped) |
+| UNKNOWN_REQUIRES_MANUAL_CHECK | 2 |
+| NOT_APPLICABLE | 0 |
+| ALREADY_INVALIDATED_WITH_EVIDENCE | 0 |
+
+#### By Project Runtime Status
+
+| Runtime Status | Credential Items |
+|---|---|
+| ACTIVE_PRODUCTION | 25 |
+| INACTIVE | 12 |
+| ARCHIVED_IN_PRACTICE | 4 |
+
+#### By Owner
+
+| Owner | Items |
+|---|---|
+| Leonardo | 37 |
+| ICTSI/iTracker | 4 |
