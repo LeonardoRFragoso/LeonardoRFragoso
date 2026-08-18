@@ -1,4 +1,4 @@
-# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.12 Batch 1)
+# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.12 Batch 1, Phase 2A.12.1)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
@@ -7,7 +7,8 @@
 **Phase 2A.10.1 update:** 2026-08-18 (history-sanitization plan canonicalization & pre-rewrite gate)
 **Phase 2A.11 update:** 2026-08-18 (runtime gate closure, cleanup PR integration, pre-history-rewrite readiness)
 **Phase 2A.12 Batch 1 update:** 2026-08-18 (first history rewrite executed — Portfolio + AndaimesPini)
-**Status:** PARTIALLY EXECUTED — Batch 1 history rewrite complete. No credentials rotated by Devin. No provider dashboards accessed.
+**Phase 2A.12.1 update:** 2026-08-18 (GitHub Support cleanup packet prepared for stale PR refs)
+**Status:** PARTIALLY EXECUTED — Batch 1 history rewrite complete. GitHub Support cleanup PENDING_OWNER_SUBMISSION. No credentials rotated by Devin. No provider dashboards accessed.
 
 > **CRITICAL:** Leonardo reports that exposed credentials have been manually changed. Devin cannot independently verify provider-side revocation or runtime validation. This document separates owner-reported actions from independently verified evidence. No credential values are listed.
 
@@ -334,7 +335,16 @@ PR states updated 2026-08-18 after Phase 2A.11 merges. base-corporativa PR #1 an
 
 **Portfolio-LeonardoFragoso-React** and **AndaimesPini_Project** have COMPLETED history sanitization (Phase 2A.12 Batch 1). PII/client-data artifacts permanently removed from all rewritten history. Upstream branches force-pushed. Fresh-clone verification passed. Gitleaks clean.
 
+#### Post-Rewrite Remediation States (Phase 2A.12.1)
+
+| Repository | UPSTREAM_HISTORY_SANITIZED | GITHUB_MANAGED_STALE_REFS | GITHUB_SUPPORT_REQUEST | GLOBAL_ERASURE_PROVEN |
+|---|---|---|---|---|
+| Portfolio-LeonardoFragoso-React | YES | YES (refs/pull/1/head → old SHA 1b9da04) | PENDING_OWNER_SUBMISSION | NO |
+| AndaimesPini_Project | YES | YES (refs/pull/1/head → old SHA b66dd80) | PENDING_OWNER_SUBMISSION | NO |
+
 > **GITHUB_SUPPORT_CLEANUP_REQUIRED = YES** for both repositories: old commits with sensitive artifacts remain reachable through GitHub-managed `refs/pull/1/head` refs. GitHub support should be contacted to garbage-collect these stale PR refs. Upstream history is sanitized; global erasure is NOT proven until GitHub cleans the PR refs.
+>
+> **Phase 2A.12.1:** Support request drafts prepared in `GITHUB_SUPPORT_CLEANUP_PACKET.md`. Leonardo will submit manually. No support request submitted automatically.
 
 ### Ready Repositories: 0 of 12
 

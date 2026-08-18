@@ -1,4 +1,4 @@
-# Git History Sanitization Plan — Phase 2A (Canonicalized Phase 2A.10.1, updated Phase 2A.11, Phase 2A.12 Batch 1)
+# Git History Sanitization Plan — Phase 2A (Canonicalized Phase 2A.10.1, updated Phase 2A.11, Phase 2A.12 Batch 1, Phase 2A.12.1)
 
 **Account:** LeonardoRFragoso
 **Phase 2A date:** 2026-08-17
@@ -9,7 +9,8 @@
 **Phase 2A.10.1 update:** 2026-08-18 (history-sanitization plan canonicalization & pre-rewrite gate)
 **Phase 2A.11 update:** 2026-08-18 (runtime gate closure, cleanup PR integration, pre-history-rewrite readiness)
 **Phase 2A.12 Batch 1 update:** 2026-08-18 (first history rewrite executed — Portfolio + AndaimesPini)
-**Status:** PARTIALLY EXECUTED — Batch 1 complete (2 repos). Remaining 10 repos still PLAN ONLY.
+**Phase 2A.12.1 update:** 2026-08-18 (GitHub Support cleanup packet prepared for stale PR refs)
+**Status:** PARTIALLY EXECUTED — Batch 1 complete (2 repos). Remaining 10 repos still PLAN ONLY. GitHub Support cleanup PENDING_OWNER_SUBMISSION.
 
 > **CRITICAL:** History rewriting is DESTRUCTIVE and irreversible. It rewrites all commit SHAs, breaks forks, breaks open PRs, and requires force-push. This document is a PLAN only. No history rewrite has been performed or will be performed without explicit authorization.
 
@@ -61,8 +62,8 @@ Allowed values:
 | FlowTrack | PRIVATE | YES | CLEAN | SESSIONS (item 30) + LOCAL_APP_SECRET (item 29) | ICTSI/iTracker | N/A | PENDING | PENDING | N/A | OPEN (PR #1, head bb1c040) | LOW (0 forks; was public) | YES | NO | OWNER_HANDOFF_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE |
 | Bot_IqOption | PRIVATE | NO (always private) | CLEAN (PR #5 merged Phase 2A.11) | CREDENTIALS (items 21-25, 27) + SESSIONS (item 26) | Leonardo | PENDING | PENDING | N/A | CLEARED (NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED) | NONE (PR #5 merged) | NONE (private, 0 forks) | YES | NO | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER |
 | MVP-linkedin-bot | PRIVATE | NO (always private) | CLEAN | SESSIONS (items 31, 32, 41) + CREDENTIAL (item 40) + PII (item 33) | Leonardo | PENDING | PENDING | N/A | N/A | OPEN (PR #1, head 8acdcc3) | NONE (private, 0 forks) | YES | NO | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE |
-| Portfolio-LeonardoFragoso-React | PUBLIC | YES (is public) | CLEAN | PII (items 35-36) | Leonardo | N/A (PII) | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | **COMPLETED** | NONE — PII removal IS the remediation — **HISTORY REWRITTEN Phase 2A.12 Batch 1** |
-| AndaimesPini_Project | PRIVATE | YES | CLEAN | CLIENT_BUSINESS_DATA (SQLite DB; not in credential matrix) | Leonardo | N/A (data, not credentials) | N/A | N/A | N/A | NONE | LOW (0 forks; was public) | YES | **COMPLETED** | NONE — data artifact removal IS the remediation — **HISTORY REWRITTEN Phase 2A.12 Batch 1** |
+| Portfolio-LeonardoFragoso-React | PUBLIC | YES (is public) | CLEAN | PII (items 35-36) | Leonardo | N/A (PII) | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | **COMPLETED** | NONE — PII removal IS the remediation — **HISTORY REWRITTEN Phase 2A.12 Batch 1** — UPSTREAM_HISTORY_SANITIZED=YES, GITHUB_MANAGED_STALE_REFS=YES (refs/pull/1/head), GITHUB_SUPPORT_REQUEST=PENDING_OWNER_SUBMISSION, GLOBAL_ERASURE_PROVEN=NO |
+| AndaimesPini_Project | PRIVATE | YES | CLEAN | CLIENT_BUSINESS_DATA (SQLite DB; not in credential matrix) | Leonardo | N/A (data, not credentials) | N/A | N/A | N/A | NONE | LOW (0 forks; was public) | YES | **COMPLETED** | NONE — data artifact removal IS the remediation — **HISTORY REWRITTEN Phase 2A.12 Batch 1** — UPSTREAM_HISTORY_SANITIZED=YES, GITHUB_MANAGED_STALE_REFS=YES (refs/pull/1/head), GITHUB_SUPPORT_REQUEST=PENDING_OWNER_SUBMISSION, GLOBAL_ERASURE_PROVEN=NO |
 | PayFlow-AI | PUBLIC | YES (is public) | CLEAN | CREDENTIAL (item 28, Twilio auth token) | Leonardo | PENDING | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | NO | OWNER_ATTESTATION_BLOCKER |
 | LogiFlow | PUBLIC | YES (is public) | CLEAN | CREDENTIAL (item 37, Evolution API key) | Leonardo | PENDING | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | NO | OWNER_ATTESTATION_BLOCKER |
 | API_Analyze | PUBLIC | YES (is public) | CLEAN | CREDENTIALS (items 38-39, News API + Alpha Vantage keys) | Leonardo | PENDING | N/A | N/A | N/A | NONE | HIGH (1 fork: kabann-1978/API_Analyze-B3) | YES | NO | OWNER_ATTESTATION_BLOCKER, FORK_RISK |
