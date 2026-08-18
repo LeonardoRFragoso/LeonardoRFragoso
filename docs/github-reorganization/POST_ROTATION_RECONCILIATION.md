@@ -1,4 +1,4 @@
-# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.12 Batch 1, Phase 2A.12.1, Phase 2A.13 Batch 2, Phase 2A.14 Batch 3, Phase 2A.15)
+# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.12 Batch 1, Phase 2A.12.1, Phase 2A.13 Batch 2, Phase 2A.14 Batch 3, Phase 2A.15, Phase 2A.16 Security Closure)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
@@ -11,7 +11,8 @@
 **Phase 2A.13 Batch 2 update:** 2026-08-18 (owner attestation gate passed; history rewrite executed for FinanceControl, PayFlow-AI, LogiFlow, base-corporativa)
 **Phase 2A.14 Batch 3 update:** 2026-08-18 (owner attestation + session closure gate passed; history rewrite executed for API_Analyze, Bot_IqOption, MVP-linkedin-bot)
 **Phase 2A.15 update:** 2026-08-18 (owner attestation + production redeploy authorization gate passed; ProFlow history rewrite executed with Railway + Vercel redeploy triggered and healthy)
-**Status:** PARTIALLY EXECUTED — Batch 1 + Batch 2 + Batch 3 + ProFlow history rewrite complete (10 repos). GitHub Support cleanup PENDING_OWNER_SUBMISSION. No credentials rotated by Devin. No provider dashboards accessed.
+**Phase 2A.16 update:** 2026-08-18 (Phase 2A security closure — Digital-Signage-Platform and FlowTrack formally deferred as DEFERRED_EXTERNAL_OWNER_HANDOFF; PERSONAL_PORTFOLIO_SECURITY_GATE=PASS; PHASE_2B_ALLOWED=YES)
+**Status:** PHASE 2A COMPLETE — All authorized Leonardo-owned remediation within Phase 2A scope is complete. Two former-employer repositories (Digital-Signage-Platform, FlowTrack) remain intentionally deferred pending external-owner handoff. GitHub Support cleanup PENDING_OWNER_SUBMISSION. No credentials rotated by Devin. No provider dashboards accessed.
 
 > **CRITICAL:** Leonardo reports that exposed credentials have been manually changed. Devin cannot independently verify provider-side revocation or runtime validation. This document separates owner-reported actions from independently verified evidence. No credential values are listed.
 
@@ -166,6 +167,50 @@ Leonardo explicitly confirmed the following statements:
 - **MP_PRODUCTION_VALIDATION.md (root-level):** discovered a real MP access token (`APP_USR-<REDACTED_MP_TOKEN>-...`) in a historical root-level `MP_PRODUCTION_VALIDATION.md` file not listed in the canonical plan's path-removal set (canonical plan only listed `RAILWAY_ENV_FINAL.txt` and `DEPLOY_CHECKLIST.md`). Added `MP_PRODUCTION_VALIDATION.md` (root-level) to path removal. The same MP access token also appeared in `backend/config/settings/dev.py` and `Docs/MP_PRODUCTION_VALIDATION.md` history — redacted via --replace-text.
 - **Docs/MP_PRODUCTION_VALIDATION.md (current tree):** this file exists in the current tree and contains only the MP public key (`APP_USR-fcc88887-...`, UUID format = public key, NOT a secret) and env var name references. It was NOT removed from the current tree — only the MP access token in its history was redacted via --replace-text. An initial filter attempt incorrectly removed it via --invert-paths; the filter was redone correctly.
 - **MP public key APP_USR-fcc88887:** appears in 1135 historical files including current-tree source code (`backend/config/settings/dev.py`, `frontend/src/views/wallet/PaymentCards.vue`). This is a Mercado Pago **public key** (UUID format), NOT a secret — it is designed for frontend use. It was intentionally NOT redacted to preserve source integrity.
+
+## Phase 2A.16 — Security Closure Final Summary
+
+**Date:** 2026-08-18
+**Phase:** 2A.16 (Security Closure, Former-Employer Deferral & Phase 2B Release Gate)
+
+### Final remediation accounting
+
+| Category | Count | Items |
+|---|---|---|
+| OWNER_COMPLETED (Leonardo-owned, history rewritten) | 10 repos | Portfolio-LeonardoFragoso-React, AndaimesPini_Project, FinanceControl, PayFlow-AI, LogiFlow, base-corporativa, API_Analyze, Bot_IqOption, MVP-linkedin-bot, ProFlow |
+| EXTERNAL_OWNER_DEFERRED (former-employer, NOT rewritten) | 2 repos | Digital-Signage-Platform (items #19, #20 — ICTSI/iTracker), FlowTrack (items #29, #30 — ICTSI/iTracker) |
+| GITHUB_SUPPORT_PENDING (stale PR ref cleanup) | 10 repos | All 10 completed repos — PENDING_OWNER_SUBMISSION |
+
+### Security matrix final accounting
+
+| Category | Items | Status |
+|---|---|---|
+| Leonardo-owned credentials (OWNER_ATTESTED_COMPLETED) | #1-#18, #21-#28, #37-#41 | OWNER_ATTESTED_COMPLETED (NOT PROVIDER_VERIFIED) |
+| Leonardo-owned sessions (OWNER_ATTESTED_SESSION_INVALIDATED) | #26, #31, #32 | OWNER_ATTESTED_SESSION_INVALIDATED (NOT PROVIDER_VERIFIED) |
+| Former-employer credentials (UNRESOLVED) | #19, #20 | OWNER_HANDOFF_BLOCKER — ICTSI/iTracker responsibility |
+| Former-employer sessions/secrets (UNRESOLVED) | #29, #30 | OWNER_HANDOFF_BLOCKER + SESSION_BLOCKER — ICTSI/iTracker responsibility |
+| PII (not a credential) | #33 | NOT_APPLICABLE — document removed from tree |
+| Deleted repo tombstone | #34 | DELETED_BY_OWNER — Bet-IA-BOT |
+| **TOTAL canonical IDs** | **41** | **Preserved — no renumbering, no deletion** |
+
+### Personal portfolio security gate
+
+**PERSONAL_PORTFOLIO_SECURITY_GATE = PASS**
+
+Rationale:
+- No known Leonardo-owned current-tree credential blockers: CONFIRMED (all 10 completed repos have CLEAN current trees)
+- No known Leonardo-owned runtime blockers: CONFIRMED (ProFlow Railway+Vercel redeploy healthy; all other repos have no active deployment or owner-attested inactive)
+- No pending history rewrite for Leonardo-owned repositories in canonical scope: CONFIRMED (PORTFOLIO_OWNED_HISTORY_PENDING = 0)
+- Client/former-employer repositories private: CONFIRMED (Digital-Signage-Platform = PRIVATE, FlowTrack = PRIVATE)
+- Unresolved third-party items explicitly deferred: CONFIRMED (items #19, #20, #29, #30 = DEFERRED_EXTERNAL_OWNER_HANDOFF)
+- No known secret value intentionally left in an eligible public showcase current tree: CONFIRMED (remaining gitleaks findings in completed repos are all proven false positives — placeholders, examples, truncated values)
+- GitHub-managed stale PR refs do NOT automatically fail this gate: UPSTREAM_HISTORY_SANITIZED = YES for all 10 completed repos; GITHUB_SUPPORT_CLEANUP_REQUIRED is separately tracked
+
+### Phase 2B authorization
+
+**PHASE_2B_ALLOWED = YES**
+
+Phase 2B may operate ONLY on repositories eligible for Leonardo's portfolio. Former-employer repos (Digital-Signage-Platform, FlowTrack) remain completely excluded. Phase 2B was NOT started in this phase.
 
 ## Current-Tree Rescan Results
 

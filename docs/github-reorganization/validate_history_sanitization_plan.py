@@ -302,6 +302,22 @@ def validate(rows: list[dict], totals: dict, detailed: list[str], live: bool) ->
         if not ok:
             errors.append(f"Active candidates not found on live GitHub: {missing_live}")
 
+    # 11. Phase 2A.16 security closure fields (optional — won't fail if absent
+    # for backward compatibility, but will validate values if present)
+    plan_text = PLAN_PATH.read_text()
+    if "PORTFOLIO_OWNED_HISTORY_PENDING" in plan_text:
+        m = re.search(r"PORTFOLIO_OWNED_HISTORY_PENDING\s*\|\s*(\d+)", plan_text)
+        if m and int(m.group(1)) != 0:
+            errors.append(f"PORTFOLIO_OWNED_HISTORY_PENDING={m.group(1)} != 0 (all Leonardo-owned repos complete)")
+    if "EXTERNAL_OWNER_DEFERRED" in plan_text:
+        m = re.search(r"EXTERNAL_OWNER_DEFERRED\s*\|\s*(\d+)", plan_text)
+        if m and int(m.group(1)) != 2:
+            errors.append(f"EXTERNAL_OWNER_DEFERRED={m.group(1)} != 2 (expected: Digital-Signage-Platform + FlowTrack)")
+    if "PERSONAL_PORTFOLIO_SECURITY_GATE" in plan_text:
+        m = re.search(r"PERSONAL_PORTFOLIO_SECURITY_GATE\s*\|\s*(\w+)", plan_text)
+        if m and m.group(1) != "PASS":
+            errors.append(f"PERSONAL_PORTFOLIO_SECURITY_GATE={m.group(1)} != PASS")
+
     # Report
     print("=" * 60)
     print("HISTORY SANITIZATION PLAN VALIDATOR (Phase 2A.12 Batch 1)")

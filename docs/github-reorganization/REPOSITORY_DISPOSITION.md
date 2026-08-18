@@ -8,6 +8,7 @@
 **Phase 2A.13 Batch 2 update:** 2026-08-18 (history rewrite executed for FinanceControl, PayFlow-AI, LogiFlow, base-corporativa after owner attestation gate)
 **Phase 2A.14 Batch 3 update:** 2026-08-18 (history rewrite executed for API_Analyze, Bot_IqOption, MVP-linkedin-bot after owner attestation + session closure gate)
 **Phase 2A.15 update:** 2026-08-18 (ProFlow production-safe history rewrite executed after owner attestation + production redeploy authorization gate; Railway + Vercel redeploy triggered and healthy)
+**Phase 2A.16 update:** 2026-08-18 (Phase 2A security closure — Digital-Signage-Platform and FlowTrack formally deferred as DEFERRED_EXTERNAL_OWNER_HANDOFF; PERSONAL_PORTFOLIO_SECURITY_GATE=PASS; PHASE_2B_ALLOWED=YES)
 **Operation:** Repository deletion batch (13 repositories deleted)
 
 > **CRITICAL:** This document records the intentional deletion of 13 repositories that no longer have strategic, portfolio, historical, or operational value. All 13 repositories were backed up locally (mirror clone + git bundle) before deletion. No credential values are listed.
@@ -257,3 +258,25 @@ Fourth history rewrite phase. ProFlow is the ONLY repository in Leonardo's accou
 - OWNER_ATTESTED_COMPLETED = YES for items #1-#7, #8-#17, #18, #21-#27, #28, #37, #38-#41 (NOT PROVIDER_VERIFIED)
 - OWNER_ATTESTED_SESSION_INVALIDATED = YES for items #26, #31, #32 (NOT PROVIDER_VERIFIED)
 - FORK_RISK = YES for API_Analyze (1 fork: kabann-1978/API_Analyze-B3 — NOT modified, may retain old secrets)
+
+## Phase 2A.16 — Security Closure & Former-Employer Deferral
+
+### Former-employer repository finalization
+
+| Repository | Classification | SECURITY_REMEDIATION_OWNER | LEONARDO_HISTORY_REWRITE_AUTHORIZED | PORTFOLIO_SHOWCASE_ELIGIBLE | PUBLIC_VISIBILITY_ALLOWED | Lifecycle | PR Status |
+|---|---|---|---|---|---|---|---|
+| Digital-Signage-Platform | FORMER_EMPLOYER_PRIVATE | ICTSI/iTracker | NO | NO | NO | DEFERRED_EXTERNAL_OWNER_HANDOFF | PR #4 OPEN, MERGEABLE — intentionally NOT merged |
+| FlowTrack | FORMER_EMPLOYER_PRIVATE | ICTSI/iTracker | NO | NO | NO | DEFERRED_EXTERNAL_OWNER_HANDOFF | PR #1 OPEN, MERGEABLE — intentionally NOT merged |
+
+> Both former-employer repos remain PRIVATE. They are NOT classified as ACTIVE_SHOWCASE_CANDIDATE. Their GitHub visibility was NOT modified (already private). Their PRs were NOT merged or closed. Their history was NOT rewritten. Their credentials/sessions were NOT rotated. DO_NOT_EXECUTE_WITHOUT_EXTERNAL_OWNER_AUTHORIZATION.
+
+### Final lifecycle status (Phase 2A complete)
+
+- REWRITE_COMPLETED = 10
+- DEFERRED_EXTERNAL_OWNER = 2 (Digital-Signage-Platform, FlowTrack)
+- PORTFOLIO_OWNED_HISTORY_PENDING = 0
+- BLOCKED_EXTERNAL_OWNER = 2
+- PERSONAL_PORTFOLIO_SECURITY_GATE = PASS
+- PHASE_2B_ALLOWED = YES
+- Canonical security items = 41 (preserved — no renumbering, no deletion)
+- Unresolved former-employer items: #19, #20, #29, #30 (EXTERNAL_OWNER_DEFERRED)
