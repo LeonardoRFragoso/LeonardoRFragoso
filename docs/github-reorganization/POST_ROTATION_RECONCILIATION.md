@@ -1,4 +1,4 @@
-# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.12 Batch 1, Phase 2A.12.1)
+# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.12 Batch 1, Phase 2A.12.1, Phase 2A.13 Batch 2)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
@@ -8,7 +8,8 @@
 **Phase 2A.11 update:** 2026-08-18 (runtime gate closure, cleanup PR integration, pre-history-rewrite readiness)
 **Phase 2A.12 Batch 1 update:** 2026-08-18 (first history rewrite executed — Portfolio + AndaimesPini)
 **Phase 2A.12.1 update:** 2026-08-18 (GitHub Support cleanup packet prepared for stale PR refs)
-**Status:** PARTIALLY EXECUTED — Batch 1 history rewrite complete. GitHub Support cleanup PENDING_OWNER_SUBMISSION. No credentials rotated by Devin. No provider dashboards accessed.
+**Phase 2A.13 Batch 2 update:** 2026-08-18 (owner attestation gate passed; history rewrite executed for FinanceControl, PayFlow-AI, LogiFlow, base-corporativa)
+**Status:** PARTIALLY EXECUTED — Batch 1 + Batch 2 history rewrite complete (6 repos). GitHub Support cleanup PENDING_OWNER_SUBMISSION. No credentials rotated by Devin. No provider dashboards accessed.
 
 > **CRITICAL:** Leonardo reports that exposed credentials have been manually changed. Devin cannot independently verify provider-side revocation or runtime validation. This document separates owner-reported actions from independently verified evidence. No credential values are listed.
 
@@ -26,6 +27,53 @@
 > **Phase 2A.9 Evidence Model Correction:** Absence of PROVIDER_VERIFIED must NOT automatically block history rewrite when OWNER_ATTESTED_COMPLETED is present and no contrary evidence exists. For production ROTATE_AND_REDEPLOY items, readiness requires: (1) OWNER_ATTESTED_COMPLETED for replacement + old credential revocation, (2) current tree clean, (3) no known runtime blocker. RUNTIME_VERIFIED is stronger evidence but not mandatory if Leonardo explicitly attests the production system is functioning. Never fabricate provider verification.
 
 > **Current Evidence Status:** Leonardo has stated credentials were changed (OWNER_REPORTED) but has NOT yet provided explicit per-item attestation of revocation (OWNER_ATTESTED_COMPLETED). When Leonardo provides explicit attestation, readiness states will be updated.
+
+## Phase 2A.13 Batch 2 — Owner Attestation Record
+
+**Attestation date:** 2026-08-18
+**Attestation method:** Explicit YES/CONFIRMED response in Devin session (no secret values requested or provided).
+
+Leonardo explicitly confirmed the following statement:
+
+> "I confirm that the old exposed credentials under my ownership for base-corporativa, FinanceControl, PayFlow-AI and LogiFlow were revoked, invalidated, replaced, or otherwise made unusable. Any replacement credentials required by active services are already configured. These repositories do not depend on an active Railway production deployment."
+
+### Evidence classification applied
+
+| Repository | Credential Items | Prior Classification | New Classification | PROVIDER_VERIFIED? |
+|---|---|---|---|---|
+| base-corporativa | #8-#17 (R2 access key, R2 secret key, MP access token, MP public key, Melhor Envio client ID/secret/token, DB URL, Django superuser password, SendGrid API key) | OWNER_REPORTED | **OWNER_ATTESTED_COMPLETED** | NO |
+| FinanceControl | #18 (AWS EC2 RSA private key) | OWNER_REPORTED | **OWNER_ATTESTED_COMPLETED** | NO |
+| PayFlow-AI | #28 (Twilio auth token) | OWNER_REPORTED | **OWNER_ATTESTED_COMPLETED** | NO |
+| LogiFlow | #37 (Evolution API key) | OWNER_REPORTED | **OWNER_ATTESTED_COMPLETED** | NO |
+
+> **Evidence model preserved:** OWNER_ATTESTED_COMPLETED means Leonardo explicitly states the old exposed credentials are no longer usable. It does NOT mean Devin independently verified provider dashboards. PROVIDER_VERIFIED was NOT used. No provider dashboards were accessed. No credentials were rotated by Devin. No sessions were invalidated by Devin.
+
+### Deployment-risk decisions (owner-authorized)
+
+| Repository | Deployment Integration | Risk Decision |
+|---|---|---|
+| base-corporativa | Railway deployment records present (30 records, historical; owner-attested not active production) | PROCEED — Railway risk owner-attested cleared |
+| FinanceControl | None identified | PROCEED — no deployment risk |
+| PayFlow-AI | Active Vercel production deployment (deployed 2026-08-18) | PROCEED — owner explicitly authorized force-push accepting Vercel redeploy side effect (attestation covered Railway; Vercel authorization was a separate explicit owner decision) |
+| LogiFlow | Active Vercel production deployments (4 projects, deployed 2026-08-18) | PROCEED — owner explicitly authorized force-push accepting Vercel redeploy side effect (same as PayFlow-AI) |
+
+### History rewrite results
+
+| Repository | Method | Secrets Purged | Source Integrity | Fresh-Clone Verify | Post-Scan | Stale PR Refs | Global Erasure |
+|---|---|---|---|---|---|---|---|
+| FinanceControl | --invert-paths (5 paths) | 5 paths (RSA key, 2 SQLite DBs, PDF) | PASS (341 files, identical blob SHAs) | PASS | PASS (1 benign historical README placeholder) | YES (refs/pull/1/head) | NO |
+| PayFlow-AI | --replace-text (2 Twilio token values) | 2 Twilio auth tokens (32-hex) | PASS (375 files, identical blob SHAs) | PASS | PASS (1 benign README placeholder SECRET_KEY) | YES (refs/pull/1/head) | NO |
+| LogiFlow | --replace-text (1 Evolution API key) | 1 Evolution API key (27 chars) | PASS (715 files, identical blob SHAs) | PASS | PASS (305 false positives: SuiteCRM DB IDs, SHAs, UUIDs, expired FB test token, current-tree placeholders) | YES (refs/pull/1/head) | NO |
+| base-corporativa | --invert-paths (3 env files) + --replace-text (6 secrets) | 3 paths + 6 secrets (R2 access key, R2 secret key, 3 env-file secrets, SendGrid API key) | PASS (584 files, identical blob SHAs) | PASS | PASS (3 current-tree placeholders in example docs) | YES (refs/pull/1/head) | NO |
+
+> All four repositories: UPSTREAM_HISTORY_SANITIZED=YES, GITHUB_MANAGED_STALE_REFS=YES, GITHUB_SUPPORT_CLEANUP_REQUIRED=YES, GLOBAL_ERASURE_PROVEN=NO. Stale `refs/pull/1/head` refs on GitHub still expose pre-rewrite commits; GitHub Support cleanup is required to dereference them and run server-side GC. See GITHUB_SUPPORT_CLEANUP_PACKET.md.
+
+### Scope discoveries beyond the canonical plan
+
+- **FinanceControl:** discovered an additional nested duplicate `backend/backend/db.sqlite3` (same sensitive SQLite class) not in the canonical plan; removed it alongside the planned `backend/db.sqlite3`.
+- **PayFlow-AI:** the canonical plan listed `README.md` for path purge, but audit revealed the README finding was a placeholder SECRET_KEY example (false positive) and the real Twilio token appeared in TWO distinct 32-hex values (an "incorrect" and a "correct" token) in `Docs/CORRIGIR_TOKEN.txt`; both were redacted via --replace-text (file preserved in current tree with placeholder).
+- **LogiFlow:** the canonical plan anticipated only Evolution API key + MP app ID; full-history gitleaks revealed 28 distinct values, but analysis showed 27 were current-tree documentation placeholders (SEU_TOKEN, sua-chave, abc123, JWT headers, etc.) and SuiteCRM DB record IDs/SHAs/UUIDs/an expired third-party Facebook SDK test token — all false positives. Only 1 real secret (Evolution API key) was absent from the current tree and was redacted. Redacting the 27 current-tree placeholders was forbidden by the source-integrity constraint (Part L).
+- **base-corporativa:** discovered a real SendGrid API key (`SG.` prefix) in a historical `backend/.env` file not listed in the canonical plan's path-removal set; added `backend/.env` to path removal and the SendGrid token to --replace-text.
 
 ## Current-Tree Rescan Results
 
