@@ -928,3 +928,75 @@ No Phase 2A state regressed.
 - No case studies created: YES
 - No pins modified: YES
 - Local test environments created in /tmp and cleaned up: YES
+
+---
+
+## Phase 2B.2 — Portfolio Curation Execution (2026-08-18)
+
+**Date:** 2026-08-18
+**Phase:** 2B.2 (Approved Portfolio Curation Execution)
+**Status:** EXECUTED — All approved mutations completed
+**Owner Approval:** Explicit owner approval received
+**Baseline:** Merged main `29e9593d2154fceedacd556d66226601f601059a` (PR #17)
+
+> This section records the execution of the approved Phase 2B portfolio curation plan. All mutations were explicitly authorized by the owner.
+
+### Execution Summary
+
+| Action | Count | Status |
+|---|---|---|
+| PUBLIC → PRIVATE visibility changes | 5 | EXECUTED |
+| Archives | 1 (SaaS) | EXECUTED |
+| README PRs (Top 6 + Go-API) | 7 | MERGED |
+| Profile README PR | 1 | MERGED |
+| Metadata updates (descriptions) | 6 | EXECUTED |
+| Topic updates | 6 | EXECUTED |
+| Homepage URL updates | 2 (verified demos only) | EXECUTED |
+| Pin changes | 0 | MANUAL_ACTION_REQUIRED (GitHub API limitation) |
+| Case studies created | 0 | DEFERRED |
+
+### Post-Execution Visibility Totals
+
+| Metric | Before | After |
+|---|---|---|
+| TOTAL | 30 | 30 |
+| PUBLIC | 15 | 10 |
+| PRIVATE | 15 | 20 |
+| ARCHIVED | 0 | 1 |
+
+### All PR Merge SHAs
+
+| Repository | PR # | Merge SHA |
+|---|---|---|
+| PayFlow-AI | #2 | `0d9bdf1875c9ddf2a2c3bee8aa530aab6c0fcc75` |
+| Pagae | #1 | `f89f6745019d34412b92856254e0e57c41d0f164` |
+| Legal-AI-Copilot | #1 | `76bc3631d57cc861da723dd30a499aa9f5a714e5` |
+| Oraculo | #1 | `5077e8e66677d605db569553f8ee2b5b2bb4c926` |
+| desafio-focon | #33 | `cde0fd86f1ae87b3628111090854334b33695649` |
+| LogiFlow | #2 | `128aa2cdaaafee72e88d81a8a8be79b83ca43983` |
+| Go-API-Gestao-de-Projetos-e-Tarefas | #1 | `fc008ba8416b14c37ebf608b47ba0de59bf80176` |
+| LeonardoRFragoso (profile) | #18 | `5eb4b655d70650b8f587daf986eb1b20a46df729` |
+
+### Validator Results (Post-Execution)
+
+| Validator | Result |
+|---|---|
+| validate_credential_matrix.py | PASS (41 IDs) |
+| validate_history_sanitization_plan.py --live | PASS (Phase 2A: 15/15 historical, Phase 2B: 10/20/1 live) |
+
+### Security Invariants (Post-Execution)
+
+- No repository deleted: YES
+- No history rewritten: YES
+- No force push: YES
+- Former-employer repositories untouched: YES (Digital-Signage-Platform, FlowTrack remain PRIVATE)
+- ProFlow production untouched: YES
+- No credentials modified: YES
+- No sessions modified: YES
+- No secret values printed: YES
+- No GitHub Support ticket submitted: YES
+- No private strategic repos made public: YES (ProFlow, DevPro remain PRIVATE)
+- No client/former-employer code exposed: YES
+- No production behavior altered: YES
+- No case studies created: YES (deferred)
+- No pins modified via API: YES (manual action required — GitHub API limitation)
