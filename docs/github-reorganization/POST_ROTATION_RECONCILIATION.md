@@ -1,8 +1,9 @@
-# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.9)
+# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.10)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
 **Phase 2A.9 update:** 2026-08-18
+**Phase 2A.10 update:** 2026-08-18
 **Status:** READ-ONLY AUDIT — No credentials rotated by Devin. No history rewritten. No provider dashboards accessed.
 
 > **CRITICAL:** Leonardo reports that exposed credentials have been manually changed. Devin cannot independently verify provider-side revocation or runtime validation. This document separates owner-reported actions from independently verified evidence. No credential values are listed.
@@ -41,7 +42,7 @@
 | PayFlow-AI | CLEAN | CLEAN (false positives: venv library files) | CLEAN | YES (PR #1) | Twilio token removed |
 | FlowTrack | CLEAN | CLEAN (false positive: .env.example placeholder) | CLEAN | NO (PR #1 open) | No credentials in current tree |
 | MVP-linkedin-bot | CLEAN | CLEAN (false positives: synthetic test fixtures, format strings) | CLEAN | YES (PR #2) | PII files (CPF, CVs, CSVs, screenshots) confirmed removed |
-| Bet-IA-BOT | CLEAN | CLEAN | CLEAN | YES (PR #1) | API-Football key removed |
+| Bet-IA-BOT | DELETED | N/A — repository deleted in Phase 2A.10 | N/A | N/A | Repository deleted by owner. Security audit trail preserved (item #34). |
 | Portfolio | CLEAN | CLEAN | CLEAN | YES (PR #1) | CNPJ/contrato social PDFs confirmed removed |
 | LogiFlow | CLEAN | CLEAN (Phase 2A.9: PR #1 merged, Evolution API key + MP app ID removed from docs) | CLEAN | YES (PR #1) | Current tree clean after Phase 2A.9 cleanup |
 | API_Analyze | CLEAN | CLEAN (Phase 2A.9: PR #1 merged, API keys replaced with placeholders, .gitignore added) | CLEAN | YES (PR #1) | Current tree clean after Phase 2A.9 cleanup |
@@ -151,11 +152,13 @@ No new credentials were committed during manual remediation. All findings were p
 | 40 | Telegram | Bot token | REVOKE_ONLY | OWNER_REPORTED | YES (removed from quick_get_id.py, get_my_id.py by PR #2) | N/A | N/A | CLEAN | WAITING_OWNER_ATTESTATION |
 | 41 | LinkedIn | Password | CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS | OWNER_REPORTED | YES (removed from test fixture + tenant JSON by PR #2) | N/A | N/A | CLEAN | WAITING_SESSION_INVALIDATION |
 
-### Item 34: Bet-IA-BOT (1 credential)
+### Item 34: Bet-IA-BOT (1 credential) — REPOSITORY DELETED
+
+> **Phase 2A.10:** Bet-IA-BOT repository was deleted by owner. History sanitization is NOT_APPLICABLE_REPOSITORY_DELETED. Canonical item #34 is preserved in the audit trail. Classification remains REVOKE_ONLY. Evidence state remains OWNER_REPORTED (repository deletion does NOT prove credential revocation).
 
 | # | Provider | Type | Remediation Class | Owner Report | GitHub Verified | Provider Verified | Runtime Verified | Current Tree | Readiness |
 |---|---|---|---|---|---|---|---|---|---|
-| 34 | API-Football | API key | REVOKE_ONLY | OWNER_REPORTED | YES (removed from test_new_api.py by PR #1) | N/A | N/A (inactive) | CLEAN | WAITING_OWNER_ATTESTATION |
+| 34 | API-Football | API key | REVOKE_ONLY | OWNER_REPORTED | N/A — repository deleted | N/A | N/A (inactive) | DELETED | NOT_APPLICABLE_REPOSITORY_DELETED |
 
 ### Items 35-36: Portfolio (2 PII items)
 
@@ -293,7 +296,7 @@ Phase 2A.8 erroneously reported "5 items waiting session invalidation" but the u
 | PayFlow-AI | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
 | FlowTrack | CLEAN | N/A | N/A | PENDING | N/A | **NO** | OWNER_HANDOFF_BLOCKER |
 | MVP-linkedin-bot | CLEAN | PENDING | PENDING | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER |
-| Bet-IA-BOT | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
+| Bet-IA-BOT | DELETED | N/A | N/A | N/A | N/A | **N/A** | NOT_APPLICABLE_REPOSITORY_DELETED |
 | Portfolio | CLEAN | N/A (PII) | N/A | N/A | N/A | **YES** | None — PII removal IS the remediation |
 | LogiFlow | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
 | API_Analyze | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
@@ -305,7 +308,7 @@ Only **Portfolio-LeonardoFragoso-React** is READY for history sanitization (PII-
 ### Blocked Repositories: 11 of 12
 
 All other repositories are BLOCKED. The most common blocker is OWNER_ATTESTATION_BLOCKER — Leonardo has stated credentials were changed (OWNER_REPORTED) but has not yet provided explicit per-item attestation of revocation (OWNER_ATTESTED_COMPLETED). When Leonardo provides explicit attestation, the following repos would become READY (assuming no other blockers):
-- **ProFlow, FinanceControl, PayFlow-AI, Bet-IA-BOT, LogiFlow, API_Analyze** — would become READY with OWNER_ATTESTED_COMPLETED (current tree already clean, no other blockers)
+- **ProFlow, FinanceControl, PayFlow-AI, LogiFlow, API_Analyze** — would become READY with OWNER_ATTESTED_COMPLETED (current tree already clean, no other blockers)
 - **MVP-linkedin-bot** — would need OWNER_ATTESTED_COMPLETED + SESSION_BLOCKER resolved
 - **base-corporativa** — would need OWNER_ATTESTED_COMPLETED + CURRENT_TREE_BLOCKER (PR #1 merge) + RUNTIME_BLOCKER resolved
 - **Bot_IqOption** — would need OWNER_ATTESTED_COMPLETED + CURRENT_TREE_BLOCKER (PR #5 merge) + SESSION_BLOCKER + RUNTIME_BLOCKER resolved

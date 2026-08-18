@@ -1,13 +1,22 @@
-# Git History Sanitization Plan — Phase 2A (Updated Phase 2A.9)
+# Git History Sanitization Plan — Phase 2A (Updated Phase 2A.10)
 
 **Account:** LeonardoRFragoso
 **Phase 2A date:** 2026-08-17
 **Phase 2A.7 update:** 2026-08-18
 **Phase 2A.8 update:** 2026-08-18
 **Phase 2A.9 update:** 2026-08-18
+**Phase 2A.10 update:** 2026-08-18
 **Status:** PLAN ONLY — **DO NOT EXECUTE without Leonardo's explicit per-repo authorization**
 
 > **CRITICAL:** History rewriting is DESTRUCTIVE and irreversible. It rewrites all commit SHAs, breaks forks, breaks open PRs, and requires force-push. This document is a PLAN only. No history rewrite has been performed or will be performed without explicit authorization.
+
+## Phase 2A.10 Update — Repository Deletion Batch
+
+13 repositories were deleted by owner (see `REPOSITORY_DISPOSITION.md`). One of these (Bet-IA-BOT) participated in the canonical security audit:
+
+- **Bet-IA-BOT:** DELETED_BY_OWNER. History sanitization status changed to NOT_APPLICABLE_REPOSITORY_DELETED (GitHub repository no longer exists). Canonical item #34 (API-Football API key, REVOKE_ONLY) is preserved in the audit trail. Repository deletion does NOT prove credential revocation — the evidence state remains OWNER_REPORTED.
+
+The remaining 11 repositories in the history sanitization plan are unchanged.
 
 ## Phase 2A.9 Update — Current-Tree Final Closure & Evidence Model Correction
 
@@ -36,17 +45,17 @@ Phase 2A.9 corrects the evidence model. Absence of PROVIDER_VERIFIED is NOT a bl
 | PayFlow-AI | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
 | FlowTrack | CLEAN | N/A | N/A | PENDING | N/A | **NO** | OWNER_HANDOFF_BLOCKER |
 | MVP-linkedin-bot | CLEAN | PENDING | PENDING | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER |
-| Bet-IA-BOT | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
+| Bet-IA-BOT | DELETED | N/A | N/A | N/A | N/A | **N/A** | NOT_APPLICABLE_REPOSITORY_DELETED — repository deleted by owner in Phase 2A.10 |
 | Portfolio | CLEAN | N/A (PII) | N/A | N/A | N/A | **YES** | None — PII removal IS the remediation |
 | LogiFlow | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
 | API_Analyze | CLEAN | PENDING | N/A | N/A | N/A | **NO** | OWNER_ATTESTATION_BLOCKER |
 
-### Ready Repositories: 1 of 12
+### Ready Repositories: 1 of 11 (Bet-IA-BOT excluded — deleted)
 
 Only **Portfolio-LeonardoFragoso-React** is READY for history sanitization.
 
 ### Repositories that would become READY with OWNER_ATTESTED_COMPLETED:
-- ProFlow, FinanceControl, PayFlow-AI, Bet-IA-BOT, LogiFlow, API_Analyze (current tree clean, no other blockers)
+- ProFlow, FinanceControl, PayFlow-AI, LogiFlow, API_Analyze (current tree clean, no other blockers)
 
 ### Phase 2A.8 Update — Post-Rotation Reconciliation (preserved)
 
