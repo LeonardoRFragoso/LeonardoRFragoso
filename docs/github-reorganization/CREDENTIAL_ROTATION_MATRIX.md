@@ -5,6 +5,7 @@
 **Phase 2A.7 update:** 2026-08-18
 **Phase 2A.11 update:** 2026-08-18 (runtime gate closure, cleanup PR integration)
 **Phase 2A.13 Batch 2 update:** 2026-08-18 (owner attestation gate passed; items #8-#17, #18, #28, #37 upgraded OWNER_REPORTED → OWNER_ATTESTED_COMPLETED; history rewritten for base-corporativa, FinanceControl, PayFlow-AI, LogiFlow)
+**Phase 2A.14 Batch 3 update:** 2026-08-18 (owner attestation + session closure gate passed; items #21-#27, #31-#32, #38-#41 upgraded OWNER_REPORTED → OWNER_ATTESTED_COMPLETED / OWNER_ATTESTED_SESSION_INVALIDATED; history rewritten for API_Analyze, Bot_IqOption, MVP-linkedin-bot)
 **Status:** ACTIVE — Leonardo must perform all rotations manually. OWNER_ATTESTED_COMPLETED items have owner attestation that old credentials are unusable, but provider dashboards were NOT independently verified (NOT PROVIDER_VERIFIED).
 
 > **CRITICAL:** No credential values are listed in this document. All credentials committed to Git must be treated as COMPROMISED regardless of whether the repository is now private or the file was removed from the current tree. Removing a file, making a repo private, or rewriting history does NOT make a credential safe — rotation/revocation at the provider is required.
@@ -75,13 +76,13 @@
 
 | # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 21 | Mercado Pago | Production access token | `bot_iqoption_v2/backend/.env`, `RAILWAY_ENV_COMPLETE.txt` | No | Yes | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue in MP dashboard, update Railway env var |
-| 22 | Mercado Pago | Production client secret | `.env`, `RAILWAY_ENV_COMPLETE.txt`, `.env.example` (real value!), `RAILWAY_ENV_TEMPLATE.md` (real value!) | No | Yes | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | `MERCADOPAGO_CLIENT_SECRET` | Verify payment auth works | Yes — rotate in MP dashboard, update Railway env var |
-| 23 | Mercado Pago | Public key | `.env` | No | Yes | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | `MERCADOPAGO_PUBLIC_KEY` | Verify frontend rendering works | Yes — rotate in MP dashboard, update Railway env var |
-| 24 | Mercado Pago | Client ID | `.env` | No | Yes | Likely | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | `MERCADOPAGO_CLIENT_ID` | Verify OAuth flow works | Yes — check if client ID needs rotation or just the secret |
-| 25 | Application | Django/app secret key | `RAILWAY_ENV_COMPLETE.txt` | No | Yes | Yes | NOT_STARTED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | `SECRET_KEY` | Verify session validation works | Yes — generate new secret, update Railway env var |
-| 26 | IQ Option API | JWT trading session tokens (197 tokens) | `bot_iqoption_v2/backend/bot_iqoption.log` | No | Yes | Yes — sessions are compromised | NOT_STARTED | IQ Option trading sessions (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | N/A (session tokens, not env vars) | Verify trading sessions terminated; new sessions require re-authentication | Yes — terminate all active IQ Option sessions. These are runtime session tokens, not static credentials. Re-authentication will create new tokens. |
-| 27 | Application | Per-user API key files | `bot_iqoption_v2/backend/keys/user_2_key.key`, `user_3_key.key`, `user_4_key.key` | No | Yes | Yes | NOT_STARTED | Per-user authentication (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged) | N/A (key files) | Verify user authentication still works after key regeneration | Yes — regenerate per-user keys if the authentication system supports it. If keys are derived from user passwords, password resets may be needed. |
+| 21 | Mercado Pago | Production access token | `bot_iqoption_v2/backend/.env`, `RAILWAY_ENV_COMPLETE.txt` | No | Yes | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged; history rewritten Phase 2A.14 Batch 3) | `MERCADOPAGO_ACCESS_TOKEN` | Verify payment flow works | Yes — revoke and reissue in MP dashboard, update Railway env var |
+| 22 | Mercado Pago | Production client secret | `.env`, `RAILWAY_ENV_COMPLETE.txt`, `.env.example` (real value!), `RAILWAY_ENV_TEMPLATE.md` (real value!) | No | Yes | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged; history rewritten Phase 2A.14 Batch 3) | `MERCADOPAGO_CLIENT_SECRET` | Verify payment auth works | Yes — rotate in MP dashboard, update Railway env var |
+| 23 | Mercado Pago | Public key | `.env` | No | Yes | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged; history rewritten Phase 2A.14 Batch 3) | `MERCADOPAGO_PUBLIC_KEY` | Verify frontend rendering works | Yes — rotate in MP dashboard, update Railway env var |
+| 24 | Mercado Pago | Client ID | `.env` | No | Yes | Likely | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged; history rewritten Phase 2A.14 Batch 3) | `MERCADOPAGO_CLIENT_ID` | Verify OAuth flow works | Yes — check if client ID needs rotation or just the secret |
+| 25 | Application | Django/app secret key | `RAILWAY_ENV_COMPLETE.txt` | No | Yes | Yes | OWNER_ATTESTED_COMPLETED | None (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged; history rewritten Phase 2A.14 Batch 3) | `SECRET_KEY` | Verify session validation works | Yes — generate new secret, update Railway env var |
+| 26 | IQ Option API | JWT trading session tokens (197 tokens) | `bot_iqoption_v2/backend/bot_iqoption.log` | No | Yes | Yes — sessions are compromised | OWNER_ATTESTED_SESSION_INVALIDATED | IQ Option trading sessions (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged; history rewritten Phase 2A.14 Batch 3) | N/A (session tokens, not env vars) | Verify trading sessions terminated; new sessions require re-authentication | Yes — terminate all active IQ Option sessions. These are runtime session tokens, not static credentials. Re-authentication will create new tokens. |
+| 27 | Application | Per-user API key files | `bot_iqoption_v2/backend/keys/user_2_key.key`, `user_3_key.key`, `user_4_key.key` | No | Yes | Yes | OWNER_ATTESTED_COMPLETED | Per-user authentication (no active Railway deployment — OWNER_ATTESTED Phase 2A.11; PR #5 merged; history rewritten Phase 2A.14 Batch 3) | N/A (key files) | Verify user authentication still works after key regeneration | Yes — regenerate per-user keys if the authentication system supports it. If keys are derived from user passwords, password resets may be needed. |
 
 ---
 
@@ -104,8 +105,8 @@
 
 | # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 31 | Google Chrome | Browser session tokens (policy_recovery_token, receiver_id_hash_token, hex_encoded_hmac_key) | `Auto_job_applier_linkedIn/V1/chrome_profile_linkedin_bot/`, `V2-Completa/chrome_profile_linkedin_bot/` | Yes | Yes | Yes — Chrome/Google session compromised | NOT_STARTED | Chrome browser profile | N/A (browser session) | Verify Chrome sync/sign-in requires re-authentication | Yes — sign out of Chrome/Google in all sessions. Re-authenticate. The committed Chrome profile allows session hijacking. |
-| 32 | LinkedIn | Session data in logs | `Auto_job_applier_linkedIn/V1/logs/log.txt` | Yes | Yes | Yes — LinkedIn session data exposed | NOT_STARTED | LinkedIn account | N/A (session data) | Verify LinkedIn account security | Yes — sign out of all LinkedIn sessions (Settings → Security → Sessions). Change LinkedIn password if any auth tokens were exposed. Enable 2FA if not already. |
+| 31 | Google Chrome | Browser session tokens (policy_recovery_token, receiver_id_hash_token, hex_encoded_hmac_key) | `Auto_job_applier_linkedIn/V1/chrome_profile_linkedin_bot/`, `V2-Completa/chrome_profile_linkedin_bot/` | Yes | Yes | Yes — Chrome/Google session compromised | OWNER_ATTESTED_SESSION_INVALIDATED | Chrome browser profile (history rewritten Phase 2A.14 Batch 3) | N/A (browser session) | Verify Chrome sync/sign-in requires re-authentication | Yes — sign out of Chrome/Google in all sessions. Re-authenticate. The committed Chrome profile allows session hijacking. |
+| 32 | LinkedIn | Session data in logs | `Auto_job_applier_linkedIn/V1/logs/log.txt` | Yes | Yes | Yes — LinkedIn session data exposed | OWNER_ATTESTED_SESSION_INVALIDATED | LinkedIn account (history rewritten Phase 2A.14 Batch 3) | N/A (session data) | Verify LinkedIn account security | Yes — sign out of all LinkedIn sessions (Settings → Security → Sessions). Change LinkedIn password if any auth tokens were exposed. Enable 2FA if not already. |
 | 33 | Personal | CPF (Brazilian national ID) | `cpf.pdf` | Yes | Yes | N/A — not a credential but PII | NOT_APPLICABLE | N/A | N/A | N/A | No rotation needed — document removed from tree. Consider identity monitoring. |
 
 ### Bet-IA-BOT
@@ -135,8 +136,8 @@
 
 | # | Provider | Credential Type | Location | Current Tree | History | Rotation Required | Rotation Status | Deployment(s) Affected | Env Vars Affected | Post-Rotation Validation | Manual Action Required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 38 | News API | API key | `V2/backend/.env.example` | Yes | Yes | Yes (if real — 32-char hex, not placeholder) | NOT_STARTED | None (no deployment) | `NEWS_API_KEY` | N/A — no active deployment | Yes — rotate key in News API dashboard if real. Replace .env.example with placeholder. |
-| 39 | Alpha Vantage | API key | `V2/backend/.env.example` | Yes | Yes | Yes (if real — not placeholder pattern) | NOT_STARTED | None (no deployment) | `ALPHA_VANTAGE_API_KEY` | N/A — no active deployment | Yes — rotate key in Alpha Vantage dashboard if real. Replace .env.example with placeholder. |
+| 38 | News API | API key | `V2/backend/.env.example` | Yes | Yes | Yes (if real — 32-char hex, not placeholder) | OWNER_ATTESTED_COMPLETED | None (no deployment; history rewritten Phase 2A.14 Batch 3) | `NEWS_API_KEY` | N/A — no active deployment | Yes — rotate key in News API dashboard if real. Replace .env.example with placeholder. |
+| 39 | Alpha Vantage | API key | `V2/backend/.env.example` | Yes | Yes | Yes (if real — not placeholder pattern) | OWNER_ATTESTED_COMPLETED | None (no deployment; history rewritten Phase 2A.14 Batch 3) | `ALPHA_VANTAGE_API_KEY` | N/A — no active deployment | Yes — rotate key in Alpha Vantage dashboard if real. Replace .env.example with placeholder. |
 
 ---
 
@@ -369,8 +370,8 @@ Each item now has the following additional classifications:
 | 37 | OWNER_REPORTED | CLEAN (PR #1 merged — Phase 2A.9) | WAITING_OWNER_ATTESTATION |
 | 38 | OWNER_REPORTED | CLEAN (PR #1 merged — Phase 2A.9) | WAITING_OWNER_ATTESTATION |
 | 39 | OWNER_REPORTED | CLEAN (PR #1 merged — Phase 2A.9) | WAITING_OWNER_ATTESTATION |
-| 40 | OWNER_REPORTED | CLEAN (PR #2 merged) | WAITING_OWNER_ATTESTATION |
-| 41 | OWNER_REPORTED | CLEAN (PR #2 merged) | WAITING_SESSION_INVALIDATION |
+| 40 | OWNER_ATTESTED_COMPLETED | CLEAN (PR #2 merged; history rewritten Phase 2A.14 Batch 3) | COMPLETED |
+| 41 | OWNER_ATTESTED_SESSION_INVALIDATED | CLEAN (PR #2 merged; history rewritten Phase 2A.14 Batch 3) | COMPLETED |
 
 ### Reconciliation Totals (Phase 2A.9 Corrected)
 

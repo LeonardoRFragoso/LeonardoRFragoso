@@ -301,6 +301,101 @@ The old commits reachable through `refs/pull/1/head` still contain the removed e
 
 ---
 
+## Repository 7: API_Analyze
+
+### Support Eligibility Packet
+
+| Field | Value |
+|---|---|
+| REPOSITORY | LeonardoRFragoso/API_Analyze |
+| UPSTREAM_REWRITE_STATUS | COMPLETED (Phase 2A.14 Batch 3) |
+| FORK_COUNT | 1 (kabann-1978/API_Analyze-B3 — NOT modified, may retain old secrets) |
+| AFFECTED_PR_COUNT | 1 |
+| AFFECTED_PR_NUMBERS | #1 |
+| STALE_GITHUB_MANAGED_REFS | `refs/pull/1/head` (points to old SHA `c58e8c906e3d315c54b2bb7227f60279de681467`) |
+| LFS_ORPHANED | NO |
+| CURRENT_OWNER_BRANCH_SCAN | PASS (API key values not reachable from main or security/remove-api-keys-from-env-example) |
+| GLOBAL_ERASURE | NOT_YET_PROVEN (fork risk + stale PR ref) |
+| SUPPORT_REQUEST_REQUIRED | YES |
+
+### Ref Map (from git-filter-repo)
+
+| Old SHA | New SHA | Ref |
+|---|---|---|
+| `e521658aa32c2fa568e6190a08ac26a6013315af` | `6b3beb4e2624ad9e2bc66c1836d1a4d9aa5a44e0` | refs/heads/main |
+| `c58e8c906e3d315c54b2bb7227f60279de681467` | `8e18ba6d5b921d6a8b1d130bdc4167524d1be3d0` | refs/heads/security/remove-api-keys-from-env-example |
+| `c58e8c906e3d315c54b2bb7227f60279de681467` | `8e18ba6d5b921d6a8b1d130bdc4167524d1be3d0` | refs/pull/1/head (rewritten locally, NOT pushed) |
+
+### Sensitive material still reachable via stale PR ref
+
+The old commits reachable through `refs/pull/1/head` still contain the real News API key and Alpha Vantage API key values that were redacted from `V2/backend/.env.example` history. No credential values are listed here. Additionally, fork `kabann-1978/API_Analyze-B3` may retain the old secret values in its history.
+
+---
+
+## Repository 8: Bot_IqOption
+
+### Support Eligibility Packet
+
+| Field | Value |
+|---|---|
+| REPOSITORY | LeonardoRFragoso/Bot_IqOption |
+| UPSTREAM_REWRITE_STATUS | COMPLETED (Phase 2A.14 Batch 3) |
+| FORK_COUNT | 0 |
+| AFFECTED_PR_COUNT | 1 |
+| AFFECTED_PR_NUMBERS | #5 |
+| STALE_GITHUB_MANAGED_REFS | `refs/pull/5/head` (points to old SHA `d3a248eee8be3979a6b96b784393f0a3b629bc69`) |
+| LFS_ORPHANED | NO |
+| CURRENT_OWNER_BRANCH_SCAN | PASS (MP secret, JWT tokens, RSA key, and sensitive paths not reachable from main or any of 5 owner-managed branches) |
+| GLOBAL_ERASURE | NOT_YET_PROVEN |
+| SUPPORT_REQUEST_REQUIRED | YES |
+
+### Ref Map (from git-filter-repo)
+
+| Old SHA | New SHA | Ref |
+|---|---|---|
+| `f26b29496dbb7e9c302d65252b1fdc0f956291a7` | `4b24fd33923ade683a8e6ba5dda59b356c42489d` | refs/heads/main |
+| `d3a248eee8be3979a6b96b784393f0a3b629bc69` | `6d982ab47632d591bb7424810d25c94ad40c7eff` | refs/heads/security/remove-versioned-secrets |
+| `d3a248eee8be3979a6b96b784393f0a3b629bc69` | `6d982ab47632d591bb7424810d25c94ad40c7eff` | refs/pull/5/head (rewritten locally, NOT pushed) |
+
+### Sensitive material still reachable via stale PR ref
+
+The old commits reachable through `refs/pull/5/head` still contain the removed sensitive files (`.env`, `RAILWAY_ENV_COMPLETE.txt`, `bot_iqoption.log` with 197 JWT session tokens, `keys/` directory, `db.sqlite3`, `venv/`, `bot-iq.pem` EC2 RSA private key) and the MERCADOPAGO_CLIENT_SECRET value that was redacted from history. No credential values are listed here.
+
+---
+
+## Repository 9: MVP-linkedin-bot
+
+### Support Eligibility Packet
+
+| Field | Value |
+|---|---|
+| REPOSITORY | LeonardoRFragoso/MVP-linkedin-bot |
+| UPSTREAM_REWRITE_STATUS | COMPLETED (Phase 2A.14 Batch 3) |
+| FORK_COUNT | 0 |
+| AFFECTED_PR_COUNT | 2 |
+| AFFECTED_PR_NUMBERS | #1 (closed), #2 (merged) |
+| STALE_GITHUB_MANAGED_REFS | `refs/pull/1/head` (old SHA `8acdcc36980d27a4684d62d7b5ff81582588c333`) + `refs/pull/2/head` (old SHA `3e7bc0c573b5b663c6401433468a3bb28fb17596`) |
+| LFS_ORPHANED | NO |
+| CURRENT_OWNER_BRANCH_SCAN | PASS (Chrome session tokens, LinkedIn session data, PII files, and sensitive directories not reachable from main, devin/fix branch, or security/remove-sensitive-artifacts) |
+| GLOBAL_ERASURE | NOT_YET_PROVEN |
+| SUPPORT_REQUEST_REQUIRED | YES |
+
+### Ref Map (from git-filter-repo)
+
+| Old SHA | New SHA | Ref |
+|---|---|---|
+| `c2afbcd5e35867bd585ed89ac1641d8a6430bf02` | `749ef218395628e28139a49aeaa61dee270802f6` | refs/heads/main |
+| `8acdcc36980d27a4684d62d7b5ff81582588c333` | `401fa5198797f33f9c0744b54b3acd6500b469e7` | refs/heads/devin/1781123382-fix-numeric-question-no-preposition |
+| `3e7bc0c573b5b663c6401433468a3bb28fb17596` | `344fa37d5410f972f98ef1444c94038a79d3a92b` | refs/heads/security/remove-sensitive-artifacts |
+| `8acdcc36980d27a4684d62d7b5ff81582588c333` | `401fa5198797f33f9c0744b54b3acd6500b469e7` | refs/pull/1/head (rewritten locally, NOT pushed) |
+| `3e7bc0c573b5b663c6401433468a3bb28fb17596` | `344fa37d5410f972f98ef1444c94038a79d3a92b` | refs/pull/2/head (rewritten locally, NOT pushed) |
+
+### Sensitive material still reachable via stale PR refs
+
+The old commits reachable through `refs/pull/1/head` and `refs/pull/2/head` still contain the removed Chrome profile directories (with browser session tokens), LinkedIn session data in logs, PII files (cpf.pdf, CV PDFs, application history CSVs), and venv directories. No credential values, PII contents, or session data are listed here.
+
+---
+
 ## Summary
 
 | Repository | Upstream Sanitized | Forks | Affected PRs | LFS | Owner Branch Scan | Global Erasure | Support Required |
@@ -311,6 +406,9 @@ The old commits reachable through `refs/pull/1/head` still contain the removed e
 | PayFlow-AI | YES | 0 | 1 (#1) | NO | PASS | NOT_YET_PROVEN | YES |
 | LogiFlow | YES | 0 | 1 (#1) | NO | PASS | NOT_YET_PROVEN | YES |
 | base-corporativa | YES | 0 | 1 (#1) | NO | PASS | NOT_YET_PROVEN | YES |
+| API_Analyze | YES | 1 (kabann-1978/API_Analyze-B3) | 1 (#1) | NO | PASS | NOT_YET_PROVEN (fork risk) | YES |
+| Bot_IqOption | YES | 0 | 1 (#5) | NO | PASS | NOT_YET_PROVEN | YES |
+| MVP-linkedin-bot | YES | 0 | 2 (#1 closed, #2 merged) | NO | PASS | NOT_YET_PROVEN | YES |
 
 ### Post-Submission Tracking
 
@@ -322,5 +420,8 @@ The old commits reachable through `refs/pull/1/head` still contain the removed e
 | PayFlow-AI | PENDING_OWNER_SUBMISSION | — | — | — |
 | LogiFlow | PENDING_OWNER_SUBMISSION | — | — | — |
 | base-corporativa | PENDING_OWNER_SUBMISSION | — | — | — |
+| API_Analyze | PENDING_OWNER_SUBMISSION | — | — | — |
+| Bot_IqOption | PENDING_OWNER_SUBMISSION | — | — | — |
+| MVP-linkedin-bot | PENDING_OWNER_SUBMISSION | — | — | — |
 
 > **Note:** After GitHub Support confirms cleanup, update this table and change `GITHUB_SUPPORT_REQUEST` from `PENDING_OWNER_SUBMISSION` to `COMPLETED` in the central documentation. At that point, `GLOBAL_ERASURE` may be upgraded to `PROVEN` if GitHub confirms all stale objects have been garbage-collected.
