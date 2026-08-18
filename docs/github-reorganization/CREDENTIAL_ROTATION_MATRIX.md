@@ -201,7 +201,7 @@ Each item now has the following additional classifications:
 
 | Column | Description |
 |---|---|
-| TYPE | CREDENTIAL, SESSION, PII, LOCAL_APP_SECRET, EMPLOYER_SECRET |
+| TYPE | CREDENTIAL, SESSION, PII, LOCAL_APP_SECRET |
 | PROJECT_RUNTIME_STATUS | ACTIVE_PRODUCTION, ACTIVE_DEVELOPMENT, INACTIVE, ARCHIVED_IN_PRACTICE |
 | REMEDIATION_CLASS | See allowed values below |
 | OWNER | Leonardo, ICTSI/iTracker, or UNKNOWN |
@@ -243,8 +243,8 @@ Each item now has the following additional classifications:
 | 16 | base-corporativa | Django | Superuser password | CREDENTIAL | ACTIVE_PRODUCTION | CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS | Leonardo | YES | Change via manage.py changepassword |
 | 17 | base-corporativa | SendGrid | API key | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke old, create new, update Railway |
 | 18 | FinanceControl | AWS EC2 | RSA private key | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | NO | Check if EC2 active; if not, no action |
-| 19 | Digital-Signage | MySQL | DB credentials | EMPLOYER_SECRET | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI/iTracker | NO | Notify ICTSI IT/security |
-| 20 | Digital-Signage | Application | JWT secret | LOCAL_APP_SECRET | ARCHIVED_IN_PRACTICE | GENERATE_NEW_LOCAL_SECRET | ICTSI/iTracker | NO | If decommissioned: no action; if running: handoff |
+| 19 | Digital-Signage | MySQL | DB credentials | CREDENTIAL | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI/iTracker | NO | Notify ICTSI IT/security |
+| 20 | Digital-Signage | Application | JWT secret | LOCAL_APP_SECRET | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI/iTracker | NO | Notify ICTSI; if decommissioned: no action; if running: handoff |
 | 21 | Bot_IqOption | Mercado Pago | Access token | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | STALE | Revoke in MP dashboard |
 | 22 | Bot_IqOption | Mercado Pago | Client secret | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | STALE | Revoke in MP dashboard |
 | 23 | Bot_IqOption | Mercado Pago | Public key | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | STALE | Revoke in MP dashboard |
@@ -267,45 +267,51 @@ Each item now has the following additional classifications:
 | 40 | MVP-linkedin-bot | Telegram | Bot token | CREDENTIAL | INACTIVE | REVOKE_ONLY | Leonardo | NO | Revoke via @BotFather, create new token |
 | 41 | MVP-linkedin-bot | LinkedIn | Password (plaintext + encrypted) | CREDENTIAL | INACTIVE | CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS | Leonardo | NO | Change LinkedIn password, invalidate sessions |
 
-### Updated Totals
+### Updated Totals (computed by validate_credential_matrix.py)
 
-#### By Type
+> **Invariant:** All totals are computed programmatically from the 41 canonical rows by `validate_credential_matrix.py`. Do NOT hand-maintain totals independently. Run `python3 validate_credential_matrix.py` after any edit to verify arithmetic.
+
+#### By Type (sum = 41)
 
 | Type | Count |
 |---|---|
-| CREDENTIALS (third-party service) | 25 |
-| SESSIONS | 6 |
-| PII | 3 (grouped: +7 additional PII items in MVP-linkedin-bot) |
-| LOCAL_APP_SECRETS | 3 |
-| EMPLOYER_SECRETS | 4 (items 19, 20, 29, 30 — overlap with LOCAL_APP_SECRETS) |
-| **Total unique items** | **41** |
+| CREDENTIAL | 31 |
+| SESSION | 4 |
+| LOCAL_APP_SECRET | 3 |
+| PII | 3 |
+| **Total** | **41** |
 
-#### By Remediation Class
+#### By Remediation Class (sum = 41)
 
 | Remediation Class | Count |
 |---|---|
-| ROTATE_AND_REDEPLOY | 17 |
+| ROTATE_AND_REDEPLOY | 18 |
 | REVOKE_ONLY | 8 |
 | INVALIDATE_SESSION | 2 |
 | CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS | 3 |
 | OWNER_HANDOFF | 4 |
-| GENERATE_NEW_LOCAL_SECRET | 3 |
-| REMOVE_PII_FROM_HISTORY | 3 (+7 grouped) |
+| GENERATE_NEW_LOCAL_SECRET | 1 |
+| REMOVE_PII_FROM_HISTORY | 3 |
 | UNKNOWN_REQUIRES_MANUAL_CHECK | 2 |
 | NOT_APPLICABLE | 0 |
 | ALREADY_INVALIDATED_WITH_EVIDENCE | 0 |
+| **Total** | **41** |
 
-#### By Project Runtime Status
+#### By Project Runtime Status (sum = 41)
 
-| Runtime Status | Credential Items |
-|---|---|
-| ACTIVE_PRODUCTION | 25 |
-| INACTIVE | 12 |
-| ARCHIVED_IN_PRACTICE | 4 |
+| Runtime Status | Total Items | Credentials | Sessions | Local App Secrets | PII |
+|---|---|---|---|---|---|
+| ACTIVE_PRODUCTION | 21 | 19 | 0 | 0 | 2 |
+| INACTIVE | 16 | 12 | 2 | 1 | 1 |
+| ARCHIVED_IN_PRACTICE | 4 | 1 | 1 | 2 | 0 |
+| **Total** | **41** | **31** | **4** | **3** | **3** |
 
-#### By Owner
+#### By Owner (sum = 41)
 
 | Owner | Items |
 |---|---|
 | Leonardo | 37 |
 | ICTSI/iTracker | 4 |
+| **Total** | **41** |
+
+> **Note:** Items 29 and 30 list OWNER as "ICTSI" (short form for ICTSI/iTracker). The validator normalizes both forms. Total ICTSI-owned items = 4 (items 19, 20, 29, 30).

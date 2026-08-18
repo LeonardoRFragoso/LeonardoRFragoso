@@ -15,7 +15,7 @@
    - base-corporativa: BLOCKED_ACTIVE_PRODUCTION — merge after env vars set
    - Digital-Signage-Platform: OWNER_HANDOFF_BEFORE_MERGE — notify ICTSI first
    - FlowTrack: OWNER_HANDOFF_BEFORE_MERGE — notify ICTSI first
-   - Bot_IqOption: MERGE_READY_NO_ACTIVE_DEPLOY — project inactive
+   - Bot_IqOption: NEEDS_MANUAL_CONFIRMATION — Railway deployments stale but auto-deploy state unconfirmed
 4. **Former-employer systems (ICTSI/iTracker)**: History sanitization for Digital-Signage-Platform and FlowTrack should only proceed after OWNER_HANDOFF is completed and ICTSI has confirmed credential rotation.
 5. **Credential rotation status unchanged**: 0 of 41 items rotated. History sanitization remains blocked until rotation is underway.
 

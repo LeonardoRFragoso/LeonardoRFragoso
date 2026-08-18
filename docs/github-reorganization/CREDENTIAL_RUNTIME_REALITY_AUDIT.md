@@ -62,7 +62,7 @@ For each item, evidence was gathered from:
 | 17 | base-corporativa | SendGrid | API key | Yes | No | PRIVATE | ACTIVE_PRODUCTION | Yes (Railway) | ROTATE_AND_REDEPLOY | HIGH | Email sending in production |
 | 18 | FinanceControl | AWS EC2 | RSA private key | Yes | Yes | PRIVATE | INACTIVE | No | REVOKE_ONLY | MEDIUM | No active deployments; check if EC2 instance still running; keypair permanently compromised |
 | 19 | Digital-Signage-Platform | MySQL | DB credentials | Yes | Yes | PRIVATE | ARCHIVED_IN_PRACTICE | No | OWNER_HANDOFF | HIGH | Former employer (ICTSI/iTracker) infrastructure; Leonardo should NOT rotate employer's DB without authorization |
-| 20 | Digital-Signage-Platform | Application | JWT secret key | Yes | Yes | PRIVATE | ARCHIVED_IN_PRACTICE | No | GENERATE_NEW_LOCAL_SECRET | MEDIUM | No active deployment; if system is decommissioned, no rotation needed; if still running at ICTSI, handoff |
+| 20 | Digital-Signage-Platform | Application | JWT secret key | Yes | Yes | PRIVATE | ARCHIVED_IN_PRACTICE | No | OWNER_HANDOFF | HIGH | Former employer (ICTSI/iTracker) system; Leonardo must NOT rotate independently; notify ICTSI; if decommissioned, no action needed |
 | 21 | Bot_IqOption | Mercado Pago | Production access token | Yes | Yes | PRIVATE | INACTIVE | Stale (Railway) | REVOKE_ONLY | MEDIUM | Railway deployments stale (last 2026-06-11); no recent activity; revoke token if service not in use |
 | 22 | Bot_IqOption | Mercado Pago | Production client secret | Yes | Yes | PRIVATE | INACTIVE | Stale (Railway) | REVOKE_ONLY | MEDIUM | Same as above |
 | 23 | Bot_IqOption | Mercado Pago | Public key | Yes | Yes | PRIVATE | INACTIVE | Stale (Railway) | REVOKE_ONLY | MEDIUM | Same as above |
@@ -99,58 +99,79 @@ For each item, evidence was gathered from:
 
 ### LOCAL_APP_SECRETS (Application-internal secrets, not third-party)
 
-| # | Repo | Type | Current Tree | History | Project Status | Remediation Class | Evidence |
-|---|---|---|---|---|---|---|---|
-| 20 | Digital-Signage-Platform | JWT secret key | Yes | Yes | ARCHIVED_IN_PRACTICE | GENERATE_NEW_LOCAL_SECRET | If system still running at ICTSI, handoff; if decommissioned, no action |
-| 25 | Bot_IqOption | Django/app SECRET_KEY | Yes | Yes | INACTIVE | GENERATE_NEW_LOCAL_SECRET | Generate new secret only if redeploying |
-| 29 | FlowTrack | Weak fallback SECRET_KEY | Yes | Yes | ARCHIVED_IN_PRACTICE | GENERATE_NEW_LOCAL_SECRET | If system still running at ICTSI, handoff; if decommissioned, no action |
+| # | Repo | Type | Current Tree | History | Project Status | Remediation Class | Owner | Evidence |
+|---|---|---|---|---|---|---|---|---|
+| 20 | Digital-Signage-Platform | JWT secret key | Yes | Yes | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI/iTracker | Former employer system; Leonardo must NOT rotate independently; notify ICTSI; if decommissioned, no action needed |
+| 25 | Bot_IqOption | Django/app SECRET_KEY | Yes | Yes | INACTIVE | GENERATE_NEW_LOCAL_SECRET | Leonardo | Generate new secret only if redeploying |
+| 29 | FlowTrack | Weak fallback SECRET_KEY | Yes | Yes | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI/iTracker | Former employer system; Leonardo must NOT rotate independently; notify ICTSI; if decommissioned, no action needed |
 
-### THIRD_PARTY/EMPLOYER_SECRETS (Former employer infrastructure)
+> **Note on item #20:** Phase 2A.7 originally classified this as GENERATE_NEW_LOCAL_SECRET. This was corrected in Phase 2A.7.1 to OWNER_HANDOFF because the owner is ICTSI/iTracker. Leonardo must not independently generate or rotate an employer-owned production secret. The handoff may later result in: (a) owner rotates it, (b) owner confirms system decommissioned, or (c) no action required.
 
-| # | Repo | Provider | Type | Owner | Remediation Class | Evidence |
-|---|---|---|---|---|---|---|
-| 19 | Digital-Signage-Platform | MySQL (iTracker) | DB credentials | ICTSI/iTracker | OWNER_HANDOFF | Former employer DB; Leonardo should NOT rotate without authorization; notify ICTSI IT/security |
-| 20 | Digital-Signage-Platform | Application | JWT secret | ICTSI/iTracker (if still running) | OWNER_HANDOFF | If system still running at ICTSI; if decommissioned, GENERATE_NEW_LOCAL_SECRET |
-| 29 | FlowTrack | Application | SECRET_KEY | ICTSI (Porto do Rio) | OWNER_HANDOFF | Description: "em produção no Porto do Rio de Janeiro (ICTSI)"; if still running, ICTSI owns this |
-| 30 | FlowTrack | Application | Session/CSRF tokens | ICTSI (Porto do Rio) | OWNER_HANDOFF | If system still running at ICTSI; if decommissioned, sessions likely expired |
+> **Note on item #29:** Same rationale as item #20. FlowTrack is an ICTSI system. OWNER_HANDOFF, not GENERATE_NEW_LOCAL_SECRET.
+
+> **Note on item #19:** TYPE is CREDENTIAL (not EMPLOYER_SECRET — ownership is expressed via OWNER column, not TYPE). OWNER = ICTSI/iTracker. REMEDIATION_CLASS = OWNER_HANDOFF.
+
+> **Note on item #30:** TYPE is SESSION. OWNER = ICTSI/iTracker. REMEDIATION_CLASS = OWNER_HANDOFF.
 
 ---
 
-## Totals
+## Totals (computed by validate_credential_matrix.py)
 
-### By Type
+> **Invariant:** All totals are computed programmatically from the 41 canonical rows in `CREDENTIAL_ROTATION_MATRIX.md`. Run `python3 validate_credential_matrix.py` to verify.
+
+### By Type (sum = 41)
 
 | Type | Count |
 |---|---|
-| CREDENTIALS (third-party service) | 25 |
-| SESSIONS (session/browser/auth tokens) | 6 |
-| PII (personal data, not credentials) | 7+ (grouped) |
-| LOCAL_APP_SECRETS | 3 |
-| THIRD_PARTY/EMPLOYER_SECRETS | 4 |
-| **Total items** | **41+ (PII grouped)** |
+| CREDENTIAL | 31 |
+| SESSION | 4 |
+| LOCAL_APP_SECRET | 3 |
+| PII | 3 |
+| **Total** | **41** |
 
-### By Remediation Class
+### By Remediation Class (sum = 41)
 
 | Remediation Class | Count |
 |---|---|
-| ROTATE_AND_REDEPLOY | 17 |
+| ROTATE_AND_REDEPLOY | 18 |
 | REVOKE_ONLY | 8 |
 | INVALIDATE_SESSION | 2 |
 | CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS | 3 |
 | OWNER_HANDOFF | 4 |
-| GENERATE_NEW_LOCAL_SECRET | 3 |
-| REMOVE_PII_FROM_HISTORY | 7+ (grouped) |
-| UNKNOWN_REQUIRES_MANUAL_CHECK | 1 |
+| GENERATE_NEW_LOCAL_SECRET | 1 |
+| REMOVE_PII_FROM_HISTORY | 3 |
+| UNKNOWN_REQUIRES_MANUAL_CHECK | 2 |
 | NOT_APPLICABLE | 0 |
 | ALREADY_INVALIDATED_WITH_EVIDENCE | 0 |
+| **Total** | **41** |
 
-### By Project Runtime Status
+### By Project Runtime Status (sum = 41)
 
-| Runtime Status | Repos | Credential Items |
-|---|---|---|
-| ACTIVE_PRODUCTION | ProFlow, PayFlow-AI, LogiFlow, Portfolio, AndaimesPini, base-corporativa | 25 |
-| INACTIVE | FinanceControl, Bet-IA-BOT, MVP-linkedin-bot, Bot_IqOption, API_Analyze | 12 |
-| ARCHIVED_IN_PRACTICE | Digital-Signage-Platform, FlowTrack | 4 |
+| Runtime Status | Total Items | Credentials | Sessions | Local App Secrets | PII |
+|---|---|---|---|---|---|
+| ACTIVE_PRODUCTION | 21 | 19 | 0 | 0 | 2 |
+| INACTIVE | 16 | 12 | 2 | 1 | 1 |
+| ARCHIVED_IN_PRACTICE | 4 | 1 | 1 | 2 | 0 |
+| **Total** | **41** | **31** | **4** | **3** | **3** |
+
+### By Owner (sum = 41)
+
+| Owner | Items |
+|---|---|
+| Leonardo | 37 |
+| ICTSI/iTracker | 4 |
+| **Total** | **41** |
+
+### Additional PII Observations (not part of the 41 canonical items)
+
+The following PII items were identified during the MVP-linkedin-bot audit but are documented as grouped observations, NOT as individual canonical items. They do not affect the 41-item arithmetic:
+
+- Full name, phone, address, salary, cover letter (in personals.py, questions.py, seed scripts, JSON configs)
+- 6 CV/resume PDFs
+- 4 application history CSVs
+- 26 debug screenshots
+
+These are all classified as REMOVE_PII_FROM_HISTORY and will be addressed during history sanitization (after credential rotation).
 
 ---
 
@@ -210,7 +231,7 @@ For each item, evidence was gathered from:
 | Are required values replacements for exposed credentials | YES — MP tokens, SECRET_KEY, session tokens |
 | Is project inactive | YES — last real commit 2026-06-11; no recent activity |
 | Client/former employer | NO — appears to be Leonardo's personal trading bot |
-| **Classification** | **MERGE_READY_NO_ACTIVE_DEPLOY** — project appears inactive; if Railway deployment is stale/disabled, merging is safe; if Railway auto-deploys, set env vars first or disable Railway webhook |
+| **Classification** | **NEEDS_MANUAL_CONFIRMATION** — Railway deployments exist but are stale (last 2026-06-11). A stale deployment does NOT prove GitHub auto-deploy is disabled. Leonardo must manually confirm one of: (a) Railway project deleted, (b) Railway service disabled, (c) GitHub integration/auto-deploy disabled, or (d) production branch is not main. Do NOT merge until confirmed. |
 
 ---
 
