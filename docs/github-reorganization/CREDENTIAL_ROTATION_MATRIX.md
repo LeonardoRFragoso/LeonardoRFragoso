@@ -360,7 +360,7 @@ Each item now has the following additional classifications:
 | 31 | OWNER_REPORTED | CLEAN (PR #2 merged) | WAITING_SESSION_INVALIDATION |
 | 32 | OWNER_REPORTED | CLEAN (PR #2 merged) | WAITING_SESSION_INVALIDATION |
 | 33 | NOT_APPLICABLE (PII) | CLEAN (PR #2 merged) | READY_FOR_HISTORY_SANITIZATION |
-| 34 | OWNER_REPORTED | CLEAN (PR #1 merged) | WAITING_OWNER_ATTESTATION |
+| 34 | OWNER_REPORTED | DELETED (repository deleted Phase 2A.10) | NOT_APPLICABLE_REPOSITORY_DELETED |
 | 35 | NOT_APPLICABLE (PII) | CLEAN (PR #1 merged) | READY_FOR_HISTORY_SANITIZATION |
 | 36 | NOT_APPLICABLE (PII) | CLEAN (PR #1 merged) | READY_FOR_HISTORY_SANITIZATION |
 | 37 | OWNER_REPORTED | CLEAN (PR #1 merged — Phase 2A.9) | WAITING_OWNER_ATTESTATION |
@@ -382,18 +382,20 @@ Each item now has the following additional classifications:
 
 | Current Tree Status | Count |
 |---|---|
-| CLEAN | 24 |
+| CLEAN | 23 |
+| DELETED (repository deleted Phase 2A.10) | 1 |
 | EXPOSURE (PR #1 not merged — base-corporativa) | 10 |
 | EXPOSURE (PR #5 not merged — Bot_IqOption) | 7 |
 
 | Primary Readiness State | Count |
 |---|---|
 | READY_FOR_HISTORY_SANITIZATION | 3 |
-| WAITING_OWNER_ATTESTATION | 14 |
+| WAITING_OWNER_ATTESTATION | 13 |
 | CURRENT_TREE_BLOCKER + WAITING_OWNER_ATTESTATION | 16 |
 | CURRENT_TREE_BLOCKER + WAITING_SESSION_INVALIDATION | 1 |
 | WAITING_SESSION_INVALIDATION | 3 |
 | WAITING_OWNER_HANDOFF | 4 |
+| NOT_APPLICABLE_REPOSITORY_DELETED | 1 |
 | **Total** | **41** |
 
 > **Invariant:** SUM(PRIMARY_READINESS_COUNTS) == 41. Each canonical ID 1..41 has exactly ONE primary readiness state.
