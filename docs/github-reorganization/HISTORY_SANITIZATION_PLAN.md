@@ -1,4 +1,4 @@
-# Git History Sanitization Plan — Phase 2A (Canonicalized Phase 2A.10.1, updated Phase 2A.11)
+# Git History Sanitization Plan — Phase 2A (Canonicalized Phase 2A.10.1, updated Phase 2A.11, Phase 2A.12 Batch 1)
 
 **Account:** LeonardoRFragoso
 **Phase 2A date:** 2026-08-17
@@ -8,7 +8,8 @@
 **Phase 2A.10 update:** 2026-08-18
 **Phase 2A.10.1 update:** 2026-08-18 (history-sanitization plan canonicalization & pre-rewrite gate)
 **Phase 2A.11 update:** 2026-08-18 (runtime gate closure, cleanup PR integration, pre-history-rewrite readiness)
-**Status:** PLAN ONLY — **DO NOT EXECUTE without Leonardo's explicit per-repo authorization**
+**Phase 2A.12 Batch 1 update:** 2026-08-18 (first history rewrite executed — Portfolio + AndaimesPini)
+**Status:** PARTIALLY EXECUTED — Batch 1 complete (2 repos). Remaining 10 repos still PLAN ONLY.
 
 > **CRITICAL:** History rewriting is DESTRUCTIVE and irreversible. It rewrites all commit SHAs, breaks forks, breaks open PRs, and requires force-push. This document is a PLAN only. No history rewrite has been performed or will be performed without explicit authorization.
 
@@ -60,20 +61,21 @@ Allowed values:
 | FlowTrack | PRIVATE | YES | CLEAN | SESSIONS (item 30) + LOCAL_APP_SECRET (item 29) | ICTSI/iTracker | N/A | PENDING | PENDING | N/A | OPEN (PR #1, head bb1c040) | LOW (0 forks; was public) | YES | NO | OWNER_HANDOFF_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE |
 | Bot_IqOption | PRIVATE | NO (always private) | CLEAN (PR #5 merged Phase 2A.11) | CREDENTIALS (items 21-25, 27) + SESSIONS (item 26) | Leonardo | PENDING | PENDING | N/A | CLEARED (NO_ACTIVE_RAILWAY_DEPLOYMENT_OWNER_ATTESTED) | NONE (PR #5 merged) | NONE (private, 0 forks) | YES | NO | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER |
 | MVP-linkedin-bot | PRIVATE | NO (always private) | CLEAN | SESSIONS (items 31, 32, 41) + CREDENTIAL (item 40) + PII (item 33) | Leonardo | PENDING | PENDING | N/A | N/A | OPEN (PR #1, head 8acdcc3) | NONE (private, 0 forks) | YES | NO | OWNER_ATTESTATION_BLOCKER, SESSION_BLOCKER, OPEN_PR_GATE |
-| Portfolio-LeonardoFragoso-React | PUBLIC | YES (is public) | CLEAN | PII (items 35-36) | Leonardo | N/A (PII) | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | YES | NONE — PII removal IS the remediation |
-| AndaimesPini_Project | PRIVATE | YES | CLEAN | CLIENT_BUSINESS_DATA (SQLite DB; not in credential matrix) | Leonardo | N/A (data, not credentials) | N/A | N/A | N/A | NONE | LOW (0 forks; was public) | YES | YES | NONE — data artifact removal IS the remediation; PR #1 merged, current tree clean |
+| Portfolio-LeonardoFragoso-React | PUBLIC | YES (is public) | CLEAN | PII (items 35-36) | Leonardo | N/A (PII) | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | **COMPLETED** | NONE — PII removal IS the remediation — **HISTORY REWRITTEN Phase 2A.12 Batch 1** |
+| AndaimesPini_Project | PRIVATE | YES | CLEAN | CLIENT_BUSINESS_DATA (SQLite DB; not in credential matrix) | Leonardo | N/A (data, not credentials) | N/A | N/A | N/A | NONE | LOW (0 forks; was public) | YES | **COMPLETED** | NONE — data artifact removal IS the remediation — **HISTORY REWRITTEN Phase 2A.12 Batch 1** |
 | PayFlow-AI | PUBLIC | YES (is public) | CLEAN | CREDENTIAL (item 28, Twilio auth token) | Leonardo | PENDING | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | NO | OWNER_ATTESTATION_BLOCKER |
 | LogiFlow | PUBLIC | YES (is public) | CLEAN | CREDENTIAL (item 37, Evolution API key) | Leonardo | PENDING | N/A | N/A | N/A | NONE | LOW (0 forks; is public) | YES | NO | OWNER_ATTESTATION_BLOCKER |
 | API_Analyze | PUBLIC | YES (is public) | CLEAN | CREDENTIALS (items 38-39, News API + Alpha Vantage keys) | Leonardo | PENDING | N/A | N/A | N/A | NONE | HIGH (1 fork: kabann-1978/API_Analyze-B3) | YES | NO | OWNER_ATTESTATION_BLOCKER, FORK_RISK |
 
-### Readiness counts (computed from the canonical table — Phase 2A.11 updated)
+### Readiness counts (computed from the canonical table — Phase 2A.12 Batch 1 updated)
 
 | Metric | Value |
 |---|---|
 | ACTIVE_REWRITE_CANDIDATES | 12 |
-| REWRITE_READY | 2 (Portfolio-LeonardoFragoso-React, AndaimesPini_Project) |
+| REWRITE_COMPLETED | 2 (Portfolio-LeonardoFragoso-React, AndaimesPini_Project) |
+| REWRITE_READY | 0 |
 | REWRITE_BLOCKED | 10 |
-| READY + BLOCKED | 12 (= ACTIVE_REWRITE_CANDIDATES) |
+| COMPLETED + READY + BLOCKED | 12 (= ACTIVE_REWRITE_CANDIDATES) |
 | DELETED_REWRITE_NA | 1 (Bet-IA-BOT — see audit record) |
 
 ### Blocker counts (repositories; a repo may carry multiple blockers — Phase 2A.11 updated)
@@ -619,7 +621,7 @@ If forks exist, the fork owners would need to delete their forks or have their h
 **Blocked: 10**
 **History rewrites performed in Phase 2A: 0** (PLAN ONLY — awaiting authorization)
 
-### Account-level totals (live, Phase 2A.11 updated)
+### Account-level totals (live, Phase 2A.12 Batch 1 updated)
 
 | Metric | Value |
 |---|---|
@@ -628,7 +630,8 @@ If forks exist, the fork owners would need to delete their forks or have their h
 | PRIVATE_REPOS | 15 |
 | ACTIVE_REWRITE_CANDIDATES | 12 |
 | DELETED_REWRITE_NA | 1 (Bet-IA-BOT) |
-| REWRITE_READY | 2 |
+| REWRITE_COMPLETED | 2 (Portfolio-LeonardoFragoso-React, AndaimesPini_Project — Phase 2A.12 Batch 1) |
+| REWRITE_READY | 0 |
 | REWRITE_BLOCKED | 10 |
 | OWNER_ATTESTATION_BLOCKED (repos) | 8 |
 | SESSION_BLOCKED (repos) | 3 |

@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 """
-History Sanitization Plan Validator (Phase 2A.10.1)
+History Sanitization Plan Validator (Phase 2A.12 Batch 1)
 
 Parses HISTORY_SANITIZATION_PLAN.md and validates:
 - No duplicate active repository rows in the Canonical Rewrite Table
 - Deleted repositories are NOT counted as executable rewrite targets
 - All active rewrite targets still exist on GitHub (live API check, optional)
 - Active target total matches the detailed per-repository plan count
-- READY + BLOCKED == active rewrite candidate count
+- COMPLETED + READY + BLOCKED == active rewrite candidate count
 - Visibility totals == account repository count (30)
 - Bet-IA-BOT lifecycle is DELETED_BY_OWNER
 - Bet-IA-BOT rewrite status is N/A (not an executable target)
 - Canonical security matrix still contains 41 IDs (delegates to
   validate_credential_matrix.py parse logic)
+- Completed repos are not counted as READY or BLOCKED
 
 Usage:
     python3 validate_history_sanitization_plan.py            # offline (no GitHub API)
@@ -39,7 +40,7 @@ EXPECTED_ACTIVE_CANDIDATES = 12  # do not hardcode if live evidence contradicts
 EXPECTED_CREDENTIAL_IDS = 41
 
 ALLOWED_REWRITE_REQUIRED = {"YES", "NO", "N/A_REPOSITORY_DELETED"}
-ALLOWED_REWRITE_READY = {"YES", "NO", "N/A"}
+ALLOWED_REWRITE_READY = {"YES", "NO", "N/A", "COMPLETED"}
 
 # The 12 canonical active candidates (used to cross-check the parsed table)
 CANONICAL_ACTIVE_CANDIDATES = {
@@ -85,6 +86,8 @@ def parse_canonical_table(path: Path) -> list[dict]:
             if len(cells) != len(headers):
                 # Not a matching row — could be a different table; stop
                 break
+            # Strip markdown bold markers from cell values
+            cells = [c.replace("**", "") for c in cells]
             rows.append(dict(zip(headers, cells)))
     return rows
 
@@ -252,11 +255,15 @@ def validate(rows: list[dict], totals: dict, detailed: list[str], live: bool) ->
         if r["REWRITE_REQUIRED"] != "YES":
             errors.append(f"{r['REPOSITORY']}: active candidate must have REWRITE_REQUIRED=YES, got '{r['REWRITE_REQUIRED']}'")
 
-    # 6. READY + BLOCKED == active candidate count
+    # 6. COMPLETED + READY + BLOCKED == active candidate count
+    completed = sum(1 for r in rows if r["REWRITE_READY"] == "COMPLETED")
     ready = sum(1 for r in rows if r["REWRITE_READY"] == "YES")
     blocked = sum(1 for r in rows if r["REWRITE_READY"] == "NO")
-    if ready + blocked != active_count:
-        errors.append(f"READY({ready}) + BLOCKED({blocked}) != active count({active_count})")
+    if completed + ready + blocked != active_count:
+        errors.append(f"COMPLETED({completed}) + READY({ready}) + BLOCKED({blocked}) != active count({active_count})")
+    # Completed repos must not also be counted as READY or BLOCKED
+    if completed > 0 and ready + blocked + completed != active_count:
+        errors.append(f"Completed repos overlap with READY/BLOCKED counts")
 
     # 7. Visibility totals == account repository count
     acct_total = totals.get("ACCOUNT_TOTAL_REPOS")
@@ -297,13 +304,14 @@ def validate(rows: list[dict], totals: dict, detailed: list[str], live: bool) ->
 
     # Report
     print("=" * 60)
-    print("HISTORY SANITIZATION PLAN VALIDATOR (Phase 2A.10.1)")
+    print("HISTORY SANITIZATION PLAN VALIDATOR (Phase 2A.12 Batch 1)")
     print("=" * 60)
     print()
     print(f"Active candidates parsed: {active_count}")
+    print(f"  COMPLETED: {completed}")
     print(f"  READY: {ready}")
     print(f"  BLOCKED: {blocked}")
-    print(f"  READY + BLOCKED = {ready + blocked}")
+    print(f"  COMPLETED + READY + BLOCKED = {completed + ready + blocked}")
     print()
     print(f"Visibility totals: PUBLIC={pub}, PRIVATE={priv}, TOTAL={acct_total}")
     print()
