@@ -8,9 +8,11 @@ validates that:
 - No duplicate IDs
 - Each item has exactly one TYPE from: CREDENTIAL, SESSION, LOCAL_APP_SECRET, PII
 - Each item has exactly one REMEDIATION_CLASS from the allowed set
-- Each item has a valid OWNER
+- Each item has a valid OWNER (normalized)
 - Each item has a valid PROJECT_RUNTIME_STATUS
 - All totals sum to 41
+- Typed "Updated Totals" tables in the markdown agree with computed row totals
+- OWNER_HANDOFF consistency: ICTSI-owned items must have OWNER_HANDOFF
 
 Usage:
     python3 validate_credential_matrix.py
@@ -25,8 +27,8 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-VALID_TYPES = {"CREDENTIAL", "SESSION", "LOCAL_APP_SECRET", "PII"}
-VALID_REMEDIATION_CLASSES = {
+VALID_TYPES = ["CREDENTIAL", "SESSION", "LOCAL_APP_SECRET", "PII"]
+VALID_REMEDIATION_CLASSES = [
     "ROTATE_AND_REDEPLOY",
     "REVOKE_ONLY",
     "INVALIDATE_SESSION",
@@ -37,24 +39,47 @@ VALID_REMEDIATION_CLASSES = {
     "NOT_APPLICABLE",
     "ALREADY_INVALIDATED_WITH_EVIDENCE",
     "UNKNOWN_REQUIRES_MANUAL_CHECK",
-}
-VALID_OWNERS = {"Leonardo", "ICTSI/iTracker", "ICTSI", "UNKNOWN"}
-VALID_RUNTIME_STATUSES = {
+]
+VALID_RUNTIME_STATUSES = [
     "ACTIVE_PRODUCTION",
     "ACTIVE_DEVELOPMENT",
     "INACTIVE",
     "ARCHIVED_IN_PRACTICE",
+]
+
+# Owner alias normalization — all shorthand forms map to canonical values
+OWNER_ALIASES = {
+    "ICTSI": "ICTSI/iTracker",
+    "iTracker": "ICTSI/iTracker",
+    "ICTSI/iTracker": "ICTSI/iTracker",
+    "Leonardo": "Leonardo",
+    "UNKNOWN": "UNKNOWN",
 }
+CANONICAL_OWNERS = ["Leonardo", "ICTSI/iTracker", "UNKNOWN"]
+
 EXPECTED_ITEM_COUNT = 41
+EXPECTED_COLUMN_COUNT = 10  # #, Repo, Provider, Type_desc, TYPE, RUNTIME, REMEDIATION, OWNER, ACTIVE_DEPLOY, NEXT_ACTION
+
+
+def normalize_owner(raw: str) -> str:
+    """Normalize owner string to canonical form."""
+    return OWNER_ALIASES.get(raw, raw)
 
 
 def parse_matrix(filepath: str) -> list[dict]:
-    """Parse the markdown table and return list of item dicts."""
+    """Parse the markdown table and return list of item dicts.
+
+    Uses robust parsing that preserves empty cells between separators.
+    Fails on malformed rows rather than silently skipping them.
+    """
     content = Path(filepath).read_text()
     lines = content.split("\n")
     items = []
     in_table = False
-    for line in lines:
+    line_num = 0
+
+    for i, line in enumerate(lines):
+        line_num = i + 1
         # Detect the start of the Updated Summary Table
         if "| # | Repo" in line:
             in_table = True
@@ -66,16 +91,27 @@ def parse_matrix(filepath: str) -> list[dict]:
             # End of table
             if not line.startswith("|"):
                 break
-            # Parse row
-            cells = [c.strip() for c in line.split("|")]
-            # Remove empty first/last from leading/trailing |
-            cells = [c for c in cells if c != ""]
-            if len(cells) < 9:
-                continue
+
+            # Robust parsing: split on | and take inner cells (drop leading/trailing empty)
+            raw_cells = line.split("|")
+            # raw_cells[0] is empty (before first |), raw_cells[-1] is empty (after last |)
+            cells = [c.strip() for c in raw_cells[1:-1]]
+
+            # Validate exact column count
+            if len(cells) != EXPECTED_COLUMN_COUNT:
+                raise ValueError(
+                    f"Line {line_num}: expected {EXPECTED_COLUMN_COUNT} columns, "
+                    f"got {len(cells)}. Row content: {line[:80]}..."
+                )
+
+            # Parse ID — must be an integer
             try:
                 item_id = int(cells[0])
             except ValueError:
-                continue
+                raise ValueError(
+                    f"Line {line_num}: first column is not an integer: '{cells[0]}'"
+                )
+
             items.append({
                 "id": item_id,
                 "repo": cells[1],
@@ -84,17 +120,62 @@ def parse_matrix(filepath: str) -> list[dict]:
                 "type": cells[4],
                 "runtime_status": cells[5],
                 "remediation_class": cells[6],
-                "owner": cells[7],
+                "owner_raw": cells[7],
+                "owner": normalize_owner(cells[7]),
                 "active_deployment": cells[8],
-                "next_action": cells[9] if len(cells) > 9 else "",
+                "next_action": cells[9],
             })
+
     return items
 
 
-def validate(items: list[dict]) -> bool:
+def parse_typed_totals(filepath: str) -> dict[str, dict[str, int]]:
+    """Parse the 'Updated Totals' tables from the markdown to get hand-typed totals.
+
+    Returns dict with keys 'type', 'remediation', 'runtime', 'owner',
+    each mapping to a dict of {label: count}.
+    """
+    content = Path(filepath).read_text()
+    lines = content.split("\n")
+    typed = {"type": {}, "remediation": {}, "runtime": {}, "owner": {}}
+    current_section = None
+
+    for line in lines:
+        # Detect section headers (check all, not elif, since headers can follow each other)
+        if "#### By Type (sum" in line:
+            current_section = "type"
+            continue
+        elif "#### By Remediation Class (sum" in line:
+            current_section = "remediation"
+            continue
+        elif "#### By Project Runtime Status (sum" in line:
+            current_section = "runtime"
+            continue
+        elif "#### By Owner (sum" in line:
+            current_section = "owner"
+            continue
+
+        if current_section:
+            if line.startswith("|---|"):
+                continue
+            if not line.startswith("|"):
+                # End of this table — keep current_section so next header can reset it
+                continue
+            raw_cells = line.split("|")
+            cells = [c.strip() for c in raw_cells[1:-1]]
+            if len(cells) >= 2 and cells[0] not in ("Type", "Remediation Class", "Runtime Status", "Owner", "**Total**"):
+                try:
+                    count = int(cells[1])
+                    typed[current_section][cells[0]] = count
+                except ValueError:
+                    pass
+
+    return typed
+
+
+def validate(items: list[dict], typed_totals: dict) -> bool:
     """Run all validations. Returns True if all pass."""
     errors = []
-    warnings = []
 
     # Check count
     if len(items) != EXPECTED_ITEM_COUNT:
@@ -127,10 +208,10 @@ def validate(items: list[dict]) -> bool:
                 f"Item {item['id']}: invalid REMEDIATION_CLASS '{item['remediation_class']}'. "
                 f"Must be one of {VALID_REMEDIATION_CLASSES}"
             )
-        if item["owner"] not in VALID_OWNERS:
+        if item["owner"] not in CANONICAL_OWNERS:
             errors.append(
-                f"Item {item['id']}: invalid OWNER '{item['owner']}'. "
-                f"Must be one of {VALID_OWNERS}"
+                f"Item {item['id']}: invalid OWNER '{item['owner_raw']}' (normalized: '{item['owner']}'). "
+                f"Must be one of {CANONICAL_OWNERS}"
             )
         if item["runtime_status"] not in VALID_RUNTIME_STATUSES:
             errors.append(
@@ -138,13 +219,21 @@ def validate(items: list[dict]) -> bool:
                 f"Must be one of {VALID_RUNTIME_STATUSES}"
             )
 
-    # Compute totals
+    # Check OWNER_HANDOFF consistency: items with OWNER=ICTSI/iTracker must have OWNER_HANDOFF
+    for item in items:
+        if item["owner"] == "ICTSI/iTracker" and item["remediation_class"] != "OWNER_HANDOFF":
+            errors.append(
+                f"Item {item['id']}: OWNER is '{item['owner']}' but REMEDIATION_CLASS is "
+                f"'{item['remediation_class']}'. Former-employer items must be OWNER_HANDOFF."
+            )
+
+    # Compute totals from row data
     type_counts = Counter(item["type"] for item in items)
     remediation_counts = Counter(item["remediation_class"] for item in items)
     owner_counts = Counter(item["owner"] for item in items)
     runtime_counts = Counter(item["runtime_status"] for item in items)
 
-    # Check invariants
+    # Check invariants — all sums must equal EXPECTED_ITEM_COUNT
     type_sum = sum(type_counts.values())
     remediation_sum = sum(remediation_counts.values())
     owner_sum = sum(owner_counts.values())
@@ -159,13 +248,25 @@ def validate(items: list[dict]) -> bool:
     if runtime_sum != EXPECTED_ITEM_COUNT:
         errors.append(f"RUNTIME_STATUS totals sum to {runtime_sum}, expected {EXPECTED_ITEM_COUNT}")
 
-    # Check OWNER_HANDOFF consistency: items with OWNER=ICTSI should have OWNER_HANDOFF
-    for item in items:
-        if "ICTSI" in item["owner"] and item["remediation_class"] != "OWNER_HANDOFF":
-            errors.append(
-                f"Item {item['id']}: OWNER is '{item['owner']}' but REMEDIATION_CLASS is "
-                f"'{item['remediation_class']}'. Former-employer items must be OWNER_HANDOFF."
-            )
+    # Cross-check: sum of all runtime status categories = 41 (dynamic, not hardcoded)
+    if runtime_sum != EXPECTED_ITEM_COUNT:
+        errors.append(
+            f"Runtime cross-check failed: dynamic sum {runtime_sum} != {EXPECTED_ITEM_COUNT}"
+        )
+
+    # Validate typed totals match computed totals
+    for section, computed in [("type", type_counts), ("remediation", remediation_counts),
+                               ("runtime", runtime_counts), ("owner", owner_counts)]:
+        typed = typed_totals.get(section, {})
+        for label, typed_count in typed.items():
+            # Normalize owner labels in typed totals too
+            normalized_label = normalize_owner(label) if section == "owner" else label
+            computed_count = computed.get(normalized_label, computed.get(label, 0))
+            if typed_count != computed_count:
+                errors.append(
+                    f"Typed total mismatch in '{section}' section: "
+                    f"'{label}' typed as {typed_count} but computed from rows as {computed_count}"
+                )
 
     # Print results
     print("=" * 60)
@@ -177,25 +278,25 @@ def validate(items: list[dict]) -> bool:
     print()
 
     print("--- TYPE Totals ---")
-    for t in sorted(VALID_TYPES):
+    for t in VALID_TYPES:
         print(f"  {t}: {type_counts.get(t, 0)}")
     print(f"  SUM: {type_sum}")
     print()
 
     print("--- REMEDIATION_CLASS Totals ---")
-    for r in sorted(VALID_REMEDIATION_CLASSES):
+    for r in VALID_REMEDIATION_CLASSES:
         print(f"  {r}: {remediation_counts.get(r, 0)}")
     print(f"  SUM: {remediation_sum}")
     print()
 
-    print("--- OWNER Totals ---")
-    for o in sorted(VALID_OWNERS):
+    print("--- OWNER Totals (normalized) ---")
+    for o in CANONICAL_OWNERS:
         print(f"  {o}: {owner_counts.get(o, 0)}")
     print(f"  SUM: {owner_sum}")
     print()
 
     print("--- RUNTIME_STATUS Totals ---")
-    for s in sorted(VALID_RUNTIME_STATUSES):
+    for s in VALID_RUNTIME_STATUSES:
         print(f"  {s}: {runtime_counts.get(s, 0)}")
     print(f"  SUM: {runtime_sum}")
     print()
@@ -204,25 +305,38 @@ def validate(items: list[dict]) -> bool:
     active_items = [item for item in items if item["runtime_status"] == "ACTIVE_PRODUCTION"]
     active_type_counts = Counter(item["type"] for item in active_items)
     print("--- ACTIVE_PRODUCTION by TYPE ---")
-    for t in sorted(VALID_TYPES):
+    for t in VALID_TYPES:
         print(f"  {t}: {active_type_counts.get(t, 0)}")
     print(f"  ACTIVE_PRODUCTION_TOTAL: {len(active_items)}")
     print()
 
-    # INACTIVE by subtype
-    inactive_items = [item for item in items if item["runtime_status"] == "INACTIVE"]
-    print(f"  INACTIVE_TOTAL: {len(inactive_items)}")
-
-    # ARCHIVED_IN_PRACTICE by subtype
-    archived_items = [item for item in items if item["runtime_status"] == "ARCHIVED_IN_PRACTICE"]
-    print(f"  ARCHIVED_IN_PRACTICE_TOTAL: {len(archived_items)}")
+    # All runtime status totals
+    for status in VALID_RUNTIME_STATUSES:
+        status_items = [item for item in items if item["runtime_status"] == status]
+        print(f"  {status}_TOTAL: {len(status_items)}")
     print()
 
-    # Cross-check: ACTIVE + INACTIVE + ARCHIVED = 41
-    cross_sum = len(active_items) + len(inactive_items) + len(archived_items)
-    print(f"  Cross-check: {len(active_items)} + {len(inactive_items)} + {len(archived_items)} = {cross_sum}")
-    if cross_sum != EXPECTED_ITEM_COUNT:
-        errors.append(f"Runtime cross-check failed: {cross_sum} != {EXPECTED_ITEM_COUNT}")
+    # Dynamic cross-check
+    print(f"  Dynamic cross-check: sum of all runtime categories = {runtime_sum}")
+    if runtime_sum == EXPECTED_ITEM_COUNT:
+        print(f"  ✓ Matches expected {EXPECTED_ITEM_COUNT}")
+    else:
+        print(f"  ✗ MISMATCH: {runtime_sum} != {EXPECTED_ITEM_COUNT}")
+    print()
+
+    # Typed totals consistency check
+    print("--- Typed Totals Consistency Check ---")
+    typed_ok = True
+    for section, computed in [("type", type_counts), ("remediation", remediation_counts),
+                               ("runtime", runtime_counts), ("owner", owner_counts)]:
+        typed = typed_totals.get(section, {})
+        for label, typed_count in typed.items():
+            normalized_label = normalize_owner(label) if section == "owner" else label
+            computed_count = computed.get(normalized_label, computed.get(label, 0))
+            status = "✓" if typed_count == computed_count else "✗"
+            if typed_count != computed_count:
+                typed_ok = False
+            print(f"  {status} {section}.{label}: typed={typed_count}, computed={computed_count}")
     print()
 
     if errors:
@@ -247,6 +361,11 @@ if __name__ == "__main__":
     if not matrix_path.exists():
         print(f"ERROR: {matrix_path} not found")
         sys.exit(1)
-    items = parse_matrix(str(matrix_path))
-    success = validate(items)
+    try:
+        items = parse_matrix(str(matrix_path))
+    except ValueError as e:
+        print(f"PARSE ERROR: {e}")
+        sys.exit(1)
+    typed_totals = parse_typed_totals(str(matrix_path))
+    success = validate(items, typed_totals)
     sys.exit(0 if success else 1)

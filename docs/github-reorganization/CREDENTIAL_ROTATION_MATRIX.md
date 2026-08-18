@@ -253,8 +253,8 @@ Each item now has the following additional classifications:
 | 26 | Bot_IqOption | IQ Option | JWT session tokens (197) | SESSION | INACTIVE | INVALIDATE_SESSION | Leonardo | STALE | Terminate all IQ Option sessions |
 | 27 | Bot_IqOption | Application | Per-user API key files | CREDENTIAL | INACTIVE | UNKNOWN_REQUIRES_MANUAL_CHECK | Leonardo | STALE | Regenerate if auth system supports it |
 | 28 | PayFlow-AI | Twilio | Auth token | CREDENTIAL | ACTIVE_PRODUCTION | ROTATE_AND_REDEPLOY | Leonardo | YES | Revoke in Twilio console, create new |
-| 29 | FlowTrack | Application | SECRET_KEY | LOCAL_APP_SECRET | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI | NO | Notify ICTSI; if decommissioned: no action |
-| 30 | FlowTrack | Application | Session/CSRF tokens (179) | SESSION | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI | NO | Notify ICTSI; if decommissioned: sessions expired |
+| 29 | FlowTrack | Application | SECRET_KEY | LOCAL_APP_SECRET | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI/iTracker | NO | Notify ICTSI/iTracker; if decommissioned: no action |
+| 30 | FlowTrack | Application | Session/CSRF tokens (179) | SESSION | ARCHIVED_IN_PRACTICE | OWNER_HANDOFF | ICTSI/iTracker | NO | Notify ICTSI/iTracker; if decommissioned: sessions expired |
 | 31 | MVP-linkedin-bot | Google Chrome | Browser session tokens | SESSION | INACTIVE | INVALIDATE_SESSION | Leonardo | NO | Sign out of all Chrome/Google sessions |
 | 32 | MVP-linkedin-bot | LinkedIn | Session data in logs | SESSION | INACTIVE | CHANGE_PASSWORD_AND_INVALIDATE_SESSIONS | Leonardo | NO | Sign out of all LinkedIn sessions, change password |
 | 33 | MVP-linkedin-bot | CPF | PII | PII | INACTIVE | REMOVE_PII_FROM_HISTORY | Leonardo | NO | History sanitization after credential rotation |
@@ -313,5 +313,3 @@ Each item now has the following additional classifications:
 | Leonardo | 37 |
 | ICTSI/iTracker | 4 |
 | **Total** | **41** |
-
-> **Note:** Items 29 and 30 list OWNER as "ICTSI" (short form for ICTSI/iTracker). The validator normalizes both forms. Total ICTSI-owned items = 4 (items 19, 20, 29, 30).
