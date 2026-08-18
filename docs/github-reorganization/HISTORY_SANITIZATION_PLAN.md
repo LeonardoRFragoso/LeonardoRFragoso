@@ -1,23 +1,54 @@
-# Git History Sanitization Plan — Phase 2A (Updated Phase 2A.7)
+# Git History Sanitization Plan — Phase 2A (Updated Phase 2A.8)
 
 **Account:** LeonardoRFragoso
 **Phase 2A date:** 2026-08-17
 **Phase 2A.7 update:** 2026-08-18
+**Phase 2A.8 update:** 2026-08-18
 **Status:** PLAN ONLY — **DO NOT EXECUTE without Leonardo's explicit per-repo authorization**
 
 > **CRITICAL:** History rewriting is DESTRUCTIVE and irreversible. It rewrites all commit SHAs, breaks forks, breaks open PRs, and requires force-push. This document is a PLAN only. No history rewrite has been performed or will be performed without explicit authorization.
 
-## Phase 2A.7 Update — Factual Dependency Changes
+## Phase 2A.8 Update — Post-Rotation Reconciliation
+
+Leonardo reports exposed credentials have been manually changed. Post-rotation reconciliation (see `POST_ROTATION_RECONCILIATION.md`) determined:
+
+1. **3 of 41 items READY for history sanitization** (PII items: 33, 35, 36 — removal IS the remediation)
+2. **38 of 41 items still BLOCKED** for one or more reasons:
+   - Provider-side revocation not independently verified (OWNER_REPORTED only)
+   - Current-tree exposure not cleaned (PRs not merged or not created)
+   - Session invalidation not independently verified
+   - Owner handoff to ICTSI not completed
+3. **Only Portfolio-LeonardoFragoso-React is READY** for history sanitization (PII-only, current tree clean)
+4. **11 of 12 repositories are BLOCKED** — see per-repository table below
+
+### Per-Repository History Sanitization Readiness
+
+| Repository | Current Tree | History Sanitization | Blocker |
+|---|---|---|---|
+| ProFlow | EXPOSURE in docs | **BLOCKED** | Docs files still contain SendGrid/MP credentials; follow-up cleanup PR needed |
+| base-corporativa | EXPOSURE (PR #1 open) | **BLOCKED** | PR #1 not merged; old credentials still in current tree |
+| FinanceControl | CLEAN | **BLOCKED** | Provider-side revocation of EC2 key not verified |
+| Digital-Signage-Platform | CLEAN | **BLOCKED** | Owner handoff to ICTSI not completed |
+| Bot_IqOption | EXPOSURE (PR #5 open) | **BLOCKED** | PR #5 not merged; Railway auto-deploy unconfirmed; old credentials still in current tree |
+| PayFlow-AI | CLEAN | **BLOCKED** | Provider-side revocation of Twilio token not verified |
+| FlowTrack | CLEAN | **BLOCKED** | Owner handoff to ICTSI not completed |
+| MVP-linkedin-bot | CLEAN | **BLOCKED** | Session invalidation not independently verified; provider revocation not verified |
+| Bet-IA-BOT | CLEAN | **BLOCKED** | Provider-side revocation of API-Football key not verified |
+| Portfolio | CLEAN | **READY** | PII removal IS the remediation; current tree clean; history rewrite can proceed for PII only |
+| LogiFlow | EXPOSURE (no PR) | **BLOCKED** | No cleanup PR created; Evolution API key still in 5 docs files |
+| API_Analyze | EXPOSURE (no PR) | **BLOCKED** | No cleanup PR created; API keys still in .env.example |
+
+### Phase 2A.7 Update — Factual Dependency Changes (preserved)
 
 1. **MVP-linkedin-bot PR #2 has been MERGED** (merge SHA: `c2afbcd5`). Current tree is clean. History sanitization is still needed for the original credential/PII commits.
 2. **Two additional compromised credentials discovered** in Phase 2A.6.1: Telegram bot token (item 40) and LinkedIn password (item 41). These must be added to the history sanitization scope for MVP-linkedin-bot.
 3. **Four env-dependent PRs reclassified** based on runtime evidence (see `CREDENTIAL_RUNTIME_REALITY_AUDIT.md`):
-   - base-corporativa: BLOCKED_ACTIVE_PRODUCTION — merge after env vars set
+   - base-corporativa: MERGE_READY_AFTER_ROTATION (conditional) — merge after Leonardo confirms env vars set
    - Digital-Signage-Platform: OWNER_HANDOFF_BEFORE_MERGE — notify ICTSI first
    - FlowTrack: OWNER_HANDOFF_BEFORE_MERGE — notify ICTSI first
-   - Bot_IqOption: NEEDS_MANUAL_CONFIRMATION — Railway deployments stale but auto-deploy state unconfirmed
+   - Bot_IqOption: NEEDS_MANUAL_CONFIRMATION — Railway auto-deploy state unconfirmed
 4. **Former-employer systems (ICTSI/iTracker)**: History sanitization for Digital-Signage-Platform and FlowTrack should only proceed after OWNER_HANDOFF is completed and ICTSI has confirmed credential rotation.
-5. **Credential rotation status unchanged**: 0 of 41 items rotated. History sanitization remains blocked until rotation is underway.
+5. **Credential rotation status**: Leonardo reports credentials changed (OWNER_REPORTED). Provider-side revocation not independently verified by Devin.
 
 ## Important Principles
 

@@ -156,6 +156,10 @@ def parse_typed_totals(filepath: str) -> dict[str, dict[str, int]]:
             continue
 
         if current_section:
+            # Stop parsing current section if we hit a new header
+            if line.startswith("#"):
+                current_section = None
+                continue
             if line.startswith("|---|"):
                 continue
             if not line.startswith("|"):
@@ -163,7 +167,9 @@ def parse_typed_totals(filepath: str) -> dict[str, dict[str, int]]:
                 continue
             raw_cells = line.split("|")
             cells = [c.strip() for c in raw_cells[1:-1]]
-            if len(cells) >= 2 and cells[0] not in ("Type", "Remediation Class", "Runtime Status", "Owner", "**Total**"):
+            # Only parse tables with exactly 2 columns (label + count) to avoid
+            # picking up reconciliation tables with different structures
+            if len(cells) == 2 and cells[0] not in ("Type", "Remediation Class", "Runtime Status", "Owner", "**Total**"):
                 try:
                     count = int(cells[1])
                     typed[current_section][cells[0]] = count
