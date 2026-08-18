@@ -1,4 +1,4 @@
-# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.12 Batch 1, Phase 2A.12.1, Phase 2A.13 Batch 2)
+# Post-Rotation Reconciliation — Phase 2A.8 (Updated Phase 2A.12 Batch 1, Phase 2A.12.1, Phase 2A.13 Batch 2, Phase 2A.14 Batch 3)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
@@ -9,7 +9,8 @@
 **Phase 2A.12 Batch 1 update:** 2026-08-18 (first history rewrite executed — Portfolio + AndaimesPini)
 **Phase 2A.12.1 update:** 2026-08-18 (GitHub Support cleanup packet prepared for stale PR refs)
 **Phase 2A.13 Batch 2 update:** 2026-08-18 (owner attestation gate passed; history rewrite executed for FinanceControl, PayFlow-AI, LogiFlow, base-corporativa)
-**Status:** PARTIALLY EXECUTED — Batch 1 + Batch 2 history rewrite complete (6 repos). GitHub Support cleanup PENDING_OWNER_SUBMISSION. No credentials rotated by Devin. No provider dashboards accessed.
+**Phase 2A.14 Batch 3 update:** 2026-08-18 (owner attestation + session closure gate passed; history rewrite executed for API_Analyze, Bot_IqOption, MVP-linkedin-bot)
+**Status:** PARTIALLY EXECUTED — Batch 1 + Batch 2 + Batch 3 history rewrite complete (9 repos). GitHub Support cleanup PENDING_OWNER_SUBMISSION. No credentials rotated by Devin. No provider dashboards accessed.
 
 > **CRITICAL:** Leonardo reports that exposed credentials have been manually changed. Devin cannot independently verify provider-side revocation or runtime validation. This document separates owner-reported actions from independently verified evidence. No credential values are listed.
 
@@ -74,6 +75,46 @@ Leonardo explicitly confirmed the following statement:
 - **PayFlow-AI:** the canonical plan listed `README.md` for path purge, but audit revealed the README finding was a placeholder SECRET_KEY example (false positive) and the real Twilio token appeared in TWO distinct 32-hex values (an "incorrect" and a "correct" token) in `Docs/CORRIGIR_TOKEN.txt`; both were redacted via --replace-text (file preserved in current tree with placeholder).
 - **LogiFlow:** the canonical plan anticipated only Evolution API key + MP app ID; full-history gitleaks revealed 28 distinct values, but analysis showed 27 were current-tree documentation placeholders (SEU_TOKEN, sua-chave, abc123, JWT headers, etc.) and SuiteCRM DB record IDs/SHAs/UUIDs/an expired third-party Facebook SDK test token — all false positives. Only 1 real secret (Evolution API key) was absent from the current tree and was redacted. Redacting the 27 current-tree placeholders was forbidden by the source-integrity constraint (Part L).
 - **base-corporativa:** discovered a real SendGrid API key (`SG.` prefix) in a historical `backend/.env` file not listed in the canonical plan's path-removal set; added `backend/.env` to path removal and the SendGrid token to --replace-text.
+
+## Phase 2A.14 Batch 3 — Owner Attestation + Session Closure Record
+
+**Attestation date:** 2026-08-18
+**Attestation method:** Explicit CONFIRMO response in Devin session (no secret values requested or provided).
+
+Leonardo explicitly confirmed the following statement:
+
+> "I confirm that the old exposed credentials under my ownership for Bot_IqOption, MVP-linkedin-bot and API_Analyze were revoked, invalidated, replaced, or otherwise made unusable. I also confirm that the compromised IQ Option/browser/LinkedIn sessions identified by the audit were invalidated or expired, and that passwords were changed where required. None of these three repositories currently has an active Railway production deployment."
+
+### Evidence classification applied
+
+| Repository | Credential/Session Items | Prior Classification | New Classification | PROVIDER_VERIFIED? |
+|---|---|---|---|---|
+| Bot_IqOption | #21-#25 (MP credentials, SECRET_KEY), #26 (IQ Option JWT sessions), #27 (per-user keys) | OWNER_REPORTED | **OWNER_ATTESTED_COMPLETED** (#21-#25, #27) + **OWNER_ATTESTED_SESSION_INVALIDATED** (#26) | NO |
+| MVP-linkedin-bot | #31 (Chrome sessions), #32 (LinkedIn sessions), #33 (CPF PII), #40 (Telegram token), #41 (LinkedIn password) | OWNER_REPORTED | **OWNER_ATTESTED_SESSION_INVALIDATED** (#31, #32, #41) + **OWNER_ATTESTED_COMPLETED** (#40) | NO |
+| API_Analyze | #38 (News API key), #39 (Alpha Vantage key) | OWNER_REPORTED | **OWNER_ATTESTED_COMPLETED** | NO |
+
+> **Evidence model preserved:** OWNER_ATTESTED_COMPLETED and OWNER_ATTESTED_SESSION_INVALIDATED mean Leonardo explicitly states the old exposed credentials/sessions are no longer usable. They do NOT mean Devin independently verified provider dashboards or session state. PROVIDER_VERIFIED was NOT used. No provider dashboards were accessed. No credentials were rotated by Devin. No sessions were invalidated by Devin.
+
+### Open PR gate resolution
+
+| Repository | PR | Action | Authorization |
+|---|---|---|---|
+| MVP-linkedin-bot | PR #1 (fix numeric question in PT-BR, 1 unique commit 8acdcc36) | Closed by owner authorization | Leonardo explicitly chose to close PR #1; the fix commit is preserved in branch `devin/1781123382-fix-numeric-question-no-preposition` and can be re-applied after the rewrite |
+
+### History rewrite results
+
+| Repository | Method | Secrets/Paths Purged | Source Integrity | Fresh-Clone Verify | Post-Scan | Stale PR Refs | Fork Risk | Global Erasure |
+|---|---|---|---|---|---|---|---|---|
+| API_Analyze | --replace-text (2 API key values) | 2 API keys (News API 16-char, Alpha Vantage 32-hex) from V2/backend/.env.example history | PASS (210 files, identical blob SHAs) | PASS | PASS (0 gitleaks findings) | YES (refs/pull/1/head) | YES (1 fork: kabann-1978/API_Analyze-B3) | NO |
+| Bot_IqOption | --invert-paths (7 paths) + --replace-text (1 MP secret) | 7 paths (.env, RAILWAY_ENV_COMPLETE.txt, bot_iqoption.log, keys/, db.sqlite3, venv/, bot-iq.pem [scope discovery]) + 1 MP_CLIENT_SECRET + 197 JWT session tokens (in log) | PASS (295 files, identical blob SHAs) | PASS | PASS (0 gitleaks findings) | YES (refs/pull/5/head) | NO (0 forks) | NO |
+| MVP-linkedin-bot | --invert-paths (6 directories + 15 PII files) | 6 directories (3 chrome_profile, V1/logs, 2 venv) + 15 PII files (cpf.pdf, perguntas.csv, Profile.pdf, 7 CV PDFs, 2 application CSVs, resume.pdf) + 7 Chrome/LinkedIn session tokens | PASS (206 files; 1 empty .gitkeep placeholder removed as part of logs/ directory cleanup — canonical plan explicitly calls for logs/ removal) | PASS | PASS (0 gitleaks findings) | YES (refs/pull/1/head + refs/pull/2/head) | NO (0 forks) | NO |
+
+> All three repositories: UPSTREAM_HISTORY_SANITIZED=YES, GITHUB_MANAGED_STALE_REFS=YES, GITHUB_SUPPORT_CLEANUP_REQUIRED=YES, GLOBAL_ERASURE_PROVEN=NO. API_Analyze additionally has FORK_RISK=YES (1 fork not modified, may retain old secrets). Stale PR refs on GitHub still expose pre-rewrite commits; GitHub Support cleanup is required. See GITHUB_SUPPORT_CLEANUP_PACKET.md.
+
+### Scope discoveries beyond the canonical plan
+
+- **Bot_IqOption:** discovered a real EC2 RSA private key in `bot_iqoption_v2/chaveEC2/bot-iq.pem` (historical only, 2 commits) not in the canonical plan's path-removal set; added it to path removal in a second filter pass. This is the same sensitive class as FinanceControl's EC2 key (item #18).
+- **MVP-linkedin-bot:** the canonical plan listed `cpf.pdf` and `perguntas.csv` but the full historical-only path scan revealed additional PII files: 7 CV PDFs (containing Leonardo's full name), Profile.pdf, resume.pdf, and 2 application history CSVs (all historical-only, absent from current tree). These were added to the path-removal set. One empty `.gitkeep` placeholder in `V1/logs/` was also removed as part of the logs directory cleanup (canonical plan explicitly calls for logs/ removal).
 
 ## Current-Tree Rescan Results
 
