@@ -225,10 +225,15 @@ This correction is preserved in the audit trail as useful security-audit evidenc
 |---|---|
 | PR | [#2](https://github.com/LeonardoRFragoso/MVP-linkedin-bot/pull/2) |
 | Phase 2A.6 head SHA | `9a3896c3314d45f25e5917b22d5b78a1be5cedae` |
-| Phase 2A.6.1 head SHA | `3e7bc0c573b5b663c6401433468a3bb28fb17596` |
+| Phase 2A.6.1 head SHA (final sanitized) | `3e7bc0c573b5b663c6401433468a3bb28fb17596` |
 | Files changed in second cleanup | 19 files, +470 lines, -1,077 lines |
-| Three-scan verification | ALL CLEAN |
-| **Final Classification** | **MERGE_READY** (awaiting Leonardo's approval — NOT merged) |
+| Three-scan verification (pre-merge) | ALL CLEAN |
+| Merge method | Squash |
+| **Merge SHA** | `c2afbcd5e35867bd585ed89ac1641d8a6430bf02` |
+| Merged at | 2026-08-18T01:18:29Z |
+| Post-merge three-scan on main | ALL CLEAN |
+| Repository visibility | PRIVATE (unchanged) |
+| **Final Classification** | **MERGED_SECURITY_CLEANUP** |
 
 ### Credentials Found in secrets.py (types only — no values)
 
@@ -249,7 +254,7 @@ This correction is preserved in the audit trail as useful security-audit evidenc
 1. **Rotate LinkedIn password** — it was committed to git history and is considered compromised
 2. **Rotate Telegram bot token** — it was committed to git history and is considered compromised
 3. **Set environment variables** before deploying: `LINKEDIN_USERNAME`, `LINKEDIN_PASSWORD`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_ALLOWED_USERS` (see `.env.example` for full list)
-4. **Review and merge PR #2** after verifying the residual cleanup is correct
+4. ~~Review and merge PR #2~~ — **MERGED in Phase 2A.7** (merge SHA: `c2afbcd5`)
 
 ---
 
