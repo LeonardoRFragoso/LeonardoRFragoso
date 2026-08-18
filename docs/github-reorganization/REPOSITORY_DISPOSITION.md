@@ -1,7 +1,8 @@
-# Repository Disposition — Phase 2A.10
+# Repository Disposition — Phase 2A.10 (Visibility totals corrected Phase 2A.10.1)
 
 **Account:** LeonardoRFragoso
 **Date:** 2026-08-18
+**Phase 2A.10.1 update:** 2026-08-18 (visibility totals reconciled against live GitHub metadata)
 **Operation:** Repository deletion batch (13 repositories deleted)
 
 > **CRITICAL:** This document records the intentional deletion of 13 repositories that no longer have strategic, portfolio, historical, or operational value. All 13 repositories were backed up locally (mirror clone + git bundle) before deletion. No credential values are listed.
@@ -106,6 +107,17 @@ The following 30 repositories remain in the account. Final portfolio showcase ra
 | Deleted | 13 |
 | After deletion | 30 |
 | Delta | -13 |
+
+## Visibility Totals (live, reconciled Phase 2A.10.1)
+
+> **Phase 2A.10.1 correction:** Visibility totals below are recomputed from live GitHub repository metadata on 2026-08-18 (`gh repo list LeonardoRFragoso --limit 100 --json name,visibility`). The earlier Phase 2A.10 report value of 16 public / 14 private is STALE and must not be trusted. The invariant `PUBLIC + PRIVATE = 30` holds.
+
+| Metric | Value |
+|---|---|
+| ACCOUNT_TOTAL_REPOS | 30 |
+| PUBLIC_REPOS | 15 |
+| PRIVATE_REPOS | 15 |
+| PUBLIC + PRIVATE | 30 |
 
 ## Backup Location
 
