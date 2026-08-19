@@ -410,3 +410,47 @@ Fourth history rewrite phase. ProFlow is the ONLY repository in Leonardo's accou
 |---|---|
 | validate_credential_matrix.py | PASS (41 IDs) |
 | validate_history_sanitization_plan.py --live | PASS (Phase 2A: 15/15 historical, Phase 2B: 10/20/1 live) |
+
+---
+
+## Phase 2C — Final Technical Polish (2026-08-18)
+
+**Operation:** Final technical polish — CI fixes, case study creation, profile QA, demo verification.
+
+### CI Fixes
+
+| Repository | PR # | Merge SHA | Fix | CI After |
+|---|---|---|---|---|
+| PayFlow-AI | #3 | `188f8222962361335dec5e58a3226866aea49ac2` | docker-compose v1→v2, Node 18→20, .env creation | ALL PASS |
+| Legal-AI-Copilot | #2 | `96c5ca8b730bdf7a8cc1650c9e25160c96a8ddcb` | pyjwt 2.8.1→2.9.0, argon2-cffi added, DATABASE_URL async | Backend FAIL (langchain compat), Frontend PASS |
+
+### Case Study Repositories Created
+
+| Repository | Visibility | Description | Topics | Homepage |
+|---|---|---|---|---|
+| proflow-case-study | PUBLIC | SaaS engineering case study: ProFlow | saas, django, vue, postgresql, redis, software-architecture, case-study | https://www.proflow.pro/ |
+| devpro-case-study | PUBLIC | Case study: DevPro autonomous dev orchestrator | ai-agents, developer-tools, orchestration, python, software-architecture, case-study | N/A |
+
+### Profile README Update
+
+| Repository | PR # | Merge SHA | Change |
+|---|---|---|---|
+| LeonardoRFragoso | #20 | `d5af0fee2230cc675ef55f6a5922a1f97bd46819` | Integrate case study links for ProFlow and DevPro |
+
+### Post-Phase 2C Visibility Totals
+
+| Metric | Phase 2B.2 | Phase 2C |
+|---|---|---|
+| TOTAL | 30 | 32 (2 case study repos added) |
+| PUBLIC | 10 | 12 |
+| PRIVATE | 20 | 20 |
+| ARCHIVED | 1 | 1 |
+
+### Demo Verification (Phase 2C)
+
+| URL | HTTP | Health |
+|---|---|---|
+| https://desafio-focon.vercel.app/ | 200 | HEALTHY |
+| https://logi-flow-wuhp.vercel.app/ | 200 | HEALTHY |
+| https://www.proflow.pro/ | 200 | HEALTHY |
+| https://portfolio-leonardo-fragoso-react.vercel.app/ | 200 | HEALTHY |

@@ -44,9 +44,12 @@ EXPECTED_CREDENTIAL_IDS = 41
 # The Phase 2A values above (15/15) are the HISTORICAL baseline preserved
 # in HISTORY_SANITIZATION_PLAN.md. The values below reflect the CURRENT
 # live account state after Phase 2B.2 visibility changes were executed.
-PHASE_2B_EXPECTED_PUBLIC = 10
+# Phase 2C added 2 public case study repos (proflow-case-study,
+# devpro-case-study), bringing public from 10→12 and total from 30→32.
+PHASE_2B_EXPECTED_PUBLIC = 12
 PHASE_2B_EXPECTED_PRIVATE = 20
 PHASE_2B_EXPECTED_ARCHIVED = 1
+PHASE_2C_EXPECTED_TOTAL = 32
 
 ALLOWED_REWRITE_REQUIRED = {"YES", "NO", "N/A_REPOSITORY_DELETED"}
 ALLOWED_REWRITE_READY = {"YES", "NO", "N/A", "COMPLETED"}
@@ -241,7 +244,7 @@ def check_live_visibility_phase2b() -> tuple[bool, dict]:
         archived = sum(1 for r in repos if r.get("isArchived") is True)
         counts = {"total": total, "public": public, "private": private, "archived": archived}
         ok = (
-            total == EXPECTED_ACCOUNT_TOTAL
+            total == PHASE_2C_EXPECTED_TOTAL
             and public == PHASE_2B_EXPECTED_PUBLIC
             and private == PHASE_2B_EXPECTED_PRIVATE
             and archived == PHASE_2B_EXPECTED_ARCHIVED
@@ -352,11 +355,11 @@ def validate(rows: list[dict], totals: dict, detailed: list[str], live: bool) ->
         if not ok_2b:
             if counts_2b:
                 errors.append(
-                    f"Phase 2B live state mismatch: "
+                    f"Phase 2C live state mismatch: "
                     f"PUBLIC={counts_2b.get('public')} (expected {PHASE_2B_EXPECTED_PUBLIC}), "
                     f"PRIVATE={counts_2b.get('private')} (expected {PHASE_2B_EXPECTED_PRIVATE}), "
                     f"ARCHIVED={counts_2b.get('archived')} (expected {PHASE_2B_EXPECTED_ARCHIVED}), "
-                    f"TOTAL={counts_2b.get('total')} (expected {EXPECTED_ACCOUNT_TOTAL})"
+                    f"TOTAL={counts_2b.get('total')} (expected {PHASE_2C_EXPECTED_TOTAL})"
                 )
             else:
                 errors.append("Phase 2B live visibility check failed (could not fetch counts)")
@@ -400,7 +403,7 @@ def validate(rows: list[dict], totals: dict, detailed: list[str], live: bool) ->
     if live:
         print("Live GitHub existence check: performed")
         if counts_2b:
-            print(f"Phase 2B live state: PUBLIC={counts_2b.get('public')}, "
+            print(f"Phase 2C live state: PUBLIC={counts_2b.get('public')}, "
                   f"PRIVATE={counts_2b.get('private')}, "
                   f"ARCHIVED={counts_2b.get('archived')}, "
                   f"TOTAL={counts_2b.get('total')}")
