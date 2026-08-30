@@ -1,10 +1,10 @@
-![Header](https://capsule-render.vercel.app/api?type=waving&color=0:0f172a,100:2563eb&height=190&section=header&text=Leonardo%20Fragoso&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Python%20Backend%20%7C%20Full%20Stack%20%7C%20IA%20Aplicada&descAlignY=58&descSize=18)
+![Header](https://capsule-render.vercel.app/api?type=waving&color=0:0f172a,100:2563eb&height=190&section=header&text=Leonardo%20Fragoso&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Full%20Stack%20Pleno%20%7C%20Focon%20Engenharia%20%7C%20TI%20%7C%20IA%20Aplicada&descAlignY=58&descSize=18)
 
 <div align="center">
 
-### Desenvolvedor Python Backend / Full Stack • SaaS • Automação • IA Aplicada
+### Desenvolvedor Full Stack Pleno @ Focon Engenharia • Responsável por TI • Software Engineering • IA Aplicada
 
-Desenvolvo **sistemas corporativos, APIs, plataformas SaaS, automações e soluções com Inteligência Artificial**, atuando da arquitetura e regras de negócio até testes, integrações, deploy e evolução do produto.
+Atuo no desenvolvimento e evolução de **sistemas corporativos, APIs, aplicações Full Stack, integrações, automações e soluções com Inteligência Artificial**, conectando Engenharia de Software, infraestrutura e necessidades reais do negócio.
 
 [![Portfólio](https://img.shields.io/badge/Portfólio-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white)](https://portfolio-leonardo-fragoso-react.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/leonardorfragoso/)
@@ -15,77 +15,107 @@ Desenvolvo **sistemas corporativos, APIs, plataformas SaaS, automações e solu�
 
 ---
 
-## 👨‍💻 Sobre mim
+# 👨‍💻 Sobre mim
 
-Sou **Desenvolvedor de Software com foco em Python Backend**, com mais de **3 anos de experiência** em desenvolvimento backend, aplicações Full Stack, sistemas corporativos, automação e integração de Inteligência Artificial.
+Não comecei minha carreira como desenvolvedor.
 
-Minha principal área de atuação está no ecossistema **Python, Django, FastAPI, PostgreSQL e Redis**, desenvolvendo APIs, plataformas SaaS, sistemas multi-tenant, processamento assíncrono, integrações, automações e aplicações orientadas a regras de negócio.
+Antes de escrever código, trabalhei com **operações, suporte, infraestrutura e gestão de TI**. Essa experiência moldou a forma como enxergo tecnologia: software só gera valor quando resolve problemas reais, melhora processos e sustenta a operação do negócio.
 
-Também trabalho no frontend com **React, Vue.js e TypeScript**, o que me permite participar da construção de produtos de ponta a ponta, desde a modelagem do banco e arquitetura do backend até interfaces, integrações, CI/CD e deploy.
+Atualmente atuo como **Desenvolvedor Full Stack Pleno na Focon Engenharia**, sendo também responsável pelo **setor de TI da empresa**.
 
-Tenho experiência profissional com **sistemas utilizados em ambientes corporativos e operacionais reais**, incluindo aplicações voltadas a logística, operações, gestão, automação financeira, dashboards, integrações e ferramentas internas.
+Minha atuação envolve desenvolvimento, manutenção e evolução de sistemas corporativos, além da organização e amadurecimento do ambiente tecnológico da empresa, conectando **Engenharia de Software, infraestrutura, automação, segurança e necessidades do negócio**.
 
-Além do desenvolvimento tradicional, trabalho com **IA aplicada a produtos**, utilizando LLMs, RAG, agentes, busca semântica, NL2SQL, automações inteligentes e fluxos com revisão humana.
+Trabalho no ciclo completo de desenvolvimento:
 
-Minha experiência anterior com **infraestrutura, suporte e gestão de TI** também influencia diretamente minha forma de desenvolver software: não penso apenas no código, mas no ambiente completo em que a aplicação será utilizada.
+**Requisitos → Regras de negócio → Arquitetura → Backend → Frontend → Integrações → Testes → Deploy → Monitoramento → Evolução contínua**
 
-> **Entender o problema → modelar o domínio → definir a arquitetura → desenvolver → testar → publicar → monitorar → evoluir.**
+Antes da Focon, na **iTracker (Grupo ICTSI)**, participei do desenvolvimento e evolução de sistemas utilizados em operação portuária privada de grande porte, atuando desde a análise de requisitos até implantação e sustentação em produção.
+
+Além da atuação corporativa, desenvolvo **produtos SaaS, automações e soluções com IA aplicada**. Paralelamente, estou estruturando a **Fundativa**, minha software house, com foco em desenvolvimento de sistemas, produtos digitais, automação, IA aplicada e evolução contínua de software para empresas.
+
+> **Tecnologia não é apenas código. É arquitetura, operação, segurança, usuários, processos e resultado para o negócio.**
 
 ---
 
-## 🎯 Principais áreas de atuação
+# 🎯 Momento profissional atual
 
-### Backend Engineering
+## 🏗️ Focon Engenharia
 
-- Desenvolvimento de APIs REST
-- Arquitetura de aplicações backend
-- Sistemas orientados a domínio e regras de negócio
-- Autenticação, autorização e RBAC
-- Arquiteturas multi-tenant
-- Processamento assíncrono e background jobs
-- Filas, workers e tarefas agendadas
-- Webhooks e integrações com APIs externas
-- Sistemas em tempo real com WebSockets
-- Integrações financeiras e de pagamentos
+### Desenvolvedor Full Stack Pleno | Responsável pelo Setor de TI
+
+Atuo no desenvolvimento, manutenção e evolução dos sistemas corporativos da Focon Engenharia e na estruturação tecnológica da área de TI.
+
+Principais frentes de atuação:
+
+- Desenvolvimento de aplicações Full Stack
+- Arquitetura e evolução de sistemas internos
+- APIs REST e integrações
 - Modelagem e evolução de bancos de dados
-- Migrações e versionamento de schema
+- Automação de processos empresariais
+- Autenticação, autorização e controle de acesso
+- Infraestrutura e ambientes de desenvolvimento/produção
+- Deploy, observabilidade e continuidade operacional
+- Segurança e organização do ambiente tecnológico
+- Levantamento de requisitos com áreas de negócio
+- Planejamento técnico de novas aplicações
+- Evolução dos processos e da autonomia da área de TI
 
-### Full Stack & Product Engineering
+**Tecnologias e áreas**
 
+`Python` `FastAPI` `Django` `React` `Next.js` `Vue.js` `TypeScript` `PostgreSQL` `Supabase` `Redis` `Docker` `REST APIs` `Cloud` `DevOps` `IA Aplicada`
+
+---
+
+# 🎯 Principais áreas de atuação
+
+## Backend Engineering
+
+- APIs REST
+- Python, Django e FastAPI
+- Arquiteturas orientadas a domínio e regras de negócio
+- Autenticação, autorização e RBAC
+- Sistemas multi-tenant
+- Webhooks e integrações externas
+- Processamento assíncrono
+- Filas, workers e tarefas agendadas
+- WebSockets e comunicação em tempo real
+- Modelagem e evolução de bancos de dados
+
+## Full Stack & Product Engineering
+
+- React, Next.js, Vue.js e TypeScript
 - Plataformas SaaS
 - Sistemas corporativos
 - Dashboards administrativos
-- Portais para clientes e usuários
-- Sistemas internos
-- Fluxos de autenticação e onboarding
-- Interfaces responsivas
+- Portais internos e externos
 - Integração frontend/backend
 - Construção de produtos do banco ao deploy
+- Evolução contínua de aplicações em produção
 
-### Inteligência Artificial Aplicada
+## Infraestrutura, DevOps & TI
 
-- Integração com LLMs
+- Linux e Docker
+- CI/CD
+- Cloud e deploy
+- Redes e ambientes
+- Monitoramento e disponibilidade
+- Segurança
+- Continuidade operacional
+- Organização de processos de TI
+- Integração entre desenvolvimento e infraestrutura
+
+## Inteligência Artificial Aplicada
+
+- LLMs
 - Retrieval-Augmented Generation — RAG
 - Agentes de IA
 - Workflows multiagente
 - NL2SQL
 - Busca vetorial e semântica
-- Sistemas de recuperação de conhecimento
 - Structured Outputs
-- Guardrails e validação de respostas
+- Guardrails
 - Human-in-the-loop
-- Automação de processos com IA
-
-### Automação
-
-- Automação de processos empresariais
-- Integração entre sistemas
-- Web automation
-- Processamento e transformação de dados
-- Rotinas operacionais
-- RPA
-- Jobs assíncronos e agendados
-- Extração e consolidação de informações
+- Automação inteligente de processos
 
 ---
 
@@ -96,18 +126,11 @@ Minha experiência anterior com **infraestrutura, suporte e gestão de TI** tamb
 <p>
 <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/>
 <img src="https://img.shields.io/badge/Django-092E20?style=flat-square&logo=django&logoColor=white"/>
-<img src="https://img.shields.io/badge/Django_REST_Framework-A30000?style=flat-square&logo=django&logoColor=white"/>
 <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white"/>
-<img src="https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white"/>
 <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white"/>
-<img src="https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white"/>
 </p>
 
-**Principal:** Python · Django · Django REST Framework · FastAPI · Flask  
-**Complementar:** Node.js · Express · PHP · Laravel  
-**Arquitetura:** REST APIs · Webhooks · Service Layer · Repository Pattern · Arquitetura orientada a domínio
-
----
+`Python` `Django` `Django REST Framework` `FastAPI` `Flask` `Node.js` `REST APIs` `Webhooks`
 
 ## Frontend
 
@@ -116,14 +139,9 @@ Minha experiência anterior com **infraestrutura, suporte e gestão de TI** tamb
 <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white"/>
 <img src="https://img.shields.io/badge/Vue.js-35495E?style=flat-square&logo=vuedotjs&logoColor=4FC08D"/>
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white"/>
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"/>
-<img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white"/>
-<img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white"/>
 </p>
 
-React · Next.js · Vue.js · TypeScript · JavaScript · Vite · Pinia · Tailwind CSS
-
----
+`React` `Next.js` `Vue.js` `TypeScript` `JavaScript` `Vite` `Pinia` `Tailwind CSS`
 
 ## Banco de Dados, Cache & Busca
 
@@ -131,199 +149,60 @@ React · Next.js · Vue.js · TypeScript · JavaScript · Vite · Pinia · Tailw
 <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white"/>
 <img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white"/>
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white"/>
-<img src="https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white"/>
 </p>
 
-PostgreSQL · Redis · MySQL · MariaDB · SQLite · FAISS · DuckDB · OpenSearch
+`PostgreSQL` `Redis` `MySQL` `MariaDB` `SQLite` `FAISS` `DuckDB` `OpenSearch`
 
----
+## Assíncrono & Realtime
 
-## Assíncrono, Realtime & Workflows Distribuídos
-
-<p>
-<img src="https://img.shields.io/badge/Celery-37814A?style=flat-square&logo=celery&logoColor=white"/>
-<img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white"/>
-<img src="https://img.shields.io/badge/WebSockets-010101?style=flat-square"/>
-</p>
-
-Celery · Redis · Redis Streams · Django Channels · WebSockets · Background Workers · Task Queues · Scheduled Jobs · Event-driven Workflows
-
----
-
-## Inteligência Artificial
-
-<p>
-<img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white"/>
-<img src="https://img.shields.io/badge/Anthropic_Claude-D97757?style=flat-square"/>
-<img src="https://img.shields.io/badge/RAG-2563EB?style=flat-square"/>
-<img src="https://img.shields.io/badge/AI_Agents-7C3AED?style=flat-square"/>
-<img src="https://img.shields.io/badge/Vector_Search-059669?style=flat-square"/>
-</p>
-
-OpenAI API · Anthropic Claude · LLMs · RAG · Embeddings · Vector Search · AI Agents · Multi-Agent Systems · NL2SQL · Knowledge Graphs · Langflow · Structured Outputs · Guardrails
-
----
-
-## Automação & Dados
-
-Python Automation · Selenium · Pandas · NumPy · Streamlit · Web Scraping · RPA · Data Processing · ETL
-
----
+`Celery` `Redis Streams` `Django Channels` `WebSockets` `Background Workers` `Task Queues` `Scheduled Jobs`
 
 ## DevOps, Cloud & Infraestrutura
 
 <p>
 <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white"/>
 <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black"/>
-<img src="https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=nginx&logoColor=white"/>
 <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white"/>
 <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white"/>
 <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white"/>
 </p>
 
-Docker · Linux · Nginx · GitHub Actions · CI/CD · AWS · Railway · Vercel · Supabase · Deploy em produção
+`Docker` `Linux` `Nginx` `GitHub Actions` `CI/CD` `AWS` `Railway` `Vercel` `Supabase`
 
----
+## Inteligência Artificial
+
+`OpenAI API` `Anthropic Claude` `LLMs` `RAG` `Embeddings` `Vector Search` `AI Agents` `Multi-Agent Systems` `NL2SQL` `Knowledge Graphs` `Structured Outputs` `Guardrails`
 
 ## Testes & Qualidade
 
-pytest · Vitest · Playwright · Testes Unitários · Testes de Integração · Testes E2E · API Testing · CI Pipelines · Static Analysis · Security Scanning
-
-Vejo testes automatizados como parte da arquitetura e da segurança de evolução de um sistema, principalmente em aplicações com regras de negócio complexas.
+`pytest` `Vitest` `Playwright` `Testes Unitários` `Testes de Integração` `Testes E2E` `API Testing` `Static Analysis` `Security Scanning`
 
 ---
 
-# 🚀 Projetos em Destaque
-
-## 💳 PayFlow AI
-
-### Plataforma financeira conversacional com IA
-
-[![Repositório](https://img.shields.io/badge/Repositório-PayFlow--AI-181717?style=flat-square&logo=github)](https://github.com/LeonardoRFragoso/PayFlow-AI)
-
-SaaS financeiro que combina conversação via WhatsApp, Inteligência Artificial, automações e fluxos financeiros.
-
-**Destaques**
-
-- Backend em FastAPI
-- Frontend em Next.js
-- PostgreSQL + Redis
-- Integração com OpenAI
-- Integração com Twilio / WhatsApp
-- Workflows financeiros
-- Processamento assíncrono
-- Mais de **600 testes automatizados no backend**
-
-**Stack**
-
-`FastAPI` `Next.js` `PostgreSQL` `Redis` `OpenAI` `Twilio`
-
----
-
-## 🏦 Pagae
-
-### SaaS financeiro com arquitetura orientada a domínio
-
-[![Repositório](https://img.shields.io/badge/Repositório-Pagae-181717?style=flat-square&logo=github)](https://github.com/LeonardoRFragoso/Pagae)
-
-Aplicação Django estruturada para separar claramente domínio, serviços e persistência.
-
-**Destaques**
-
-- Arquitetura orientada a domínio
-- 10 aplicações de negócio
-- Repository Pattern
-- Service Layer
-- APIs com Django REST Framework
-- Processamento em background
-- Redis + Celery
-- CI automatizado
-- Testes automatizados
-
-**Stack**
-
-`Django` `DRF` `PostgreSQL` `Redis` `Celery` `Vue.js`
-
----
-
-## ⚖️ Legal AI Copilot
-
-### Análise de contratos jurídicos com Inteligência Artificial
-
-[![Repositório](https://img.shields.io/badge/Repositório-Legal--AI--Copilot-181717?style=flat-square&logo=github)](https://github.com/LeonardoRFragoso/Legal-AI-Copilot)
-
-Plataforma de análise jurídica que combina arquitetura backend tradicional com fluxos de IA.
-
-**Destaques**
-
-- Controle de acesso baseado em papéis
-- Máquina de estados para revisão humana
-- Roteamento entre agentes de IA
-- Retrieval-Augmented Generation
-- Guardrails
-- Structured Outputs
-- Fluxos Human-in-the-loop
-- Mais de **170 testes automatizados**
-
-**Stack**
-
-`FastAPI` `React` `TypeScript` `OpenAI` `RAG`
-
----
-
-## 🔮 Oráculo
-
-### Plataforma de analytics e conhecimento com IA
-
-[![Repositório](https://img.shields.io/badge/Repositório-Oraculo-181717?style=flat-square&logo=github)](https://github.com/LeonardoRFragoso/Oraculo)
-
-Plataforma projetada para permitir interação com dados e conhecimento empresarial através de linguagem natural.
-
-**Destaques**
-
-- Natural Language to SQL
-- RAG híbrido
-- Recuperação semântica
-- Knowledge Graph
-- Agentes com capacidade de executar ações
-- Workflows analíticos
-- Busca vetorial
-- Redis
-- PostgreSQL
-
-**Stack**
-
-`FastAPI` `React` `PostgreSQL` `Redis` `FAISS` `DuckDB` `RAG`
-
----
+# 🚀 Projetos em destaque
 
 ## 🏗️ FoconFlow
 
-### Sistema de gestão de apontamentos e rentabilidade de projetos
+### Gestão de apontamentos e rentabilidade de projetos
 
 [![Repositório](https://img.shields.io/badge/Repositório-desafio--focon-181717?style=flat-square&logo=github)](https://github.com/LeonardoRFragoso/desafio-focon)
 [![Demo](https://img.shields.io/badge/Live-Demo-000000?style=flat-square&logo=vercel)](https://desafio-focon.vercel.app/)
 
-Aplicação Full Stack desenvolvida inicialmente como desafio técnico para uma empresa de engenharia e posteriormente evoluída como produto.
+Aplicação Full Stack desenvolvida inicialmente como desafio técnico e evoluída como produto para gestão de projetos, horas e indicadores financeiros.
 
 **Destaques**
 
 - Autenticação por perfis
 - Row Level Security
-- Gestão de projetos
-- Gestão de membros
-- Apontamentos de horas
-- Aprovação e rejeição de apontamentos
+- Gestão de projetos e membros
+- Apontamentos e aprovação de horas
 - Dashboards financeiros
-- Receita, custo de mão de obra, resultado e margem
-- Histórico e filtros
+- Receita, custos, resultado e margem
 - Migrações automatizadas
 - CI/CD
 - Testes de comportamento e E2E
 
-**Stack**
-
-`React` `TypeScript` `Supabase` `PostgreSQL` `Vite` `Tailwind CSS`
+**Stack:** `React` `TypeScript` `Supabase` `PostgreSQL` `Vite` `Tailwind CSS`
 
 ---
 
@@ -335,199 +214,120 @@ Aplicação Full Stack desenvolvida inicialmente como desafio técnico para uma 
 
 Plataforma logística que combina fluxos comerciais, operacionais e financeiros.
 
-**Destaques**
+**Destaques:** arquitetura multi-tenant, CRM, gestão operacional, workflows de transporte, fluxos fiscais, processamento assíncrono e cache.
 
-- Arquitetura multi-tenant
-- CRM
-- Gestão operacional
-- Workflows de transporte
-- Fluxos fiscais
-- Processamento assíncrono
-- Cache com Redis
-- Backend e frontend integrados
-
-**Stack**
-
-`FastAPI` `Vue.js` `PostgreSQL` `Redis` `Celery`
+**Stack:** `FastAPI` `Vue.js` `PostgreSQL` `Redis` `Celery`
 
 ---
 
-# 🧪 Outros projetos e estudos de engenharia
+## 💳 PayFlow AI
 
-Meu GitHub também possui projetos em outras áreas de desenvolvimento:
+### Plataforma financeira conversacional com IA
 
-### Monitoramento & Observabilidade
+[![Repositório](https://img.shields.io/badge/Repositório-PayFlow--AI-181717?style=flat-square&logo=github)](https://github.com/LeonardoRFragoso/PayFlow-AI)
 
-[**Plataforma de Monitoramento de Sistemas e APIs**](https://github.com/LeonardoRFragoso/Plataforma-de-Monitoramento-de-Sistemas-e-APIs)
+SaaS financeiro que combina conversação via WhatsApp, Inteligência Artificial, automações e fluxos financeiros.
 
-Projeto voltado ao acompanhamento de disponibilidade, saúde e comportamento de sistemas e APIs.
-
-### Backend com Go
-
-[**Go API — Gestão de Projetos e Tarefas**](https://github.com/LeonardoRFragoso/Go-API-Gestao-de-Projetos-e-Tarefas)
-
-API para gestão de projetos e tarefas utilizada para aprofundamento do ecossistema Go.
-
-### IA & Automação
-
-[**vigil-ai**](https://github.com/LeonardoRFragoso/vigil-ai)
-
-Experimentação com monitoramento e automação inteligente utilizando Inteligência Artificial.
+**Stack:** `FastAPI` `Next.js` `PostgreSQL` `Redis` `OpenAI` `Twilio`
 
 ---
 
-# 🏢 Produtos e Sistemas em Produção
+## ⚖️ Legal AI Copilot
 
-Alguns dos meus trabalhos mais relevantes possuem código-fonte privado por envolverem produtos próprios, clientes ou sistemas corporativos.
+### Análise de contratos com Inteligência Artificial
+
+[![Repositório](https://img.shields.io/badge/Repositório-Legal--AI--Copilot-181717?style=flat-square&logo=github)](https://github.com/LeonardoRFragoso/Legal-AI-Copilot)
+
+Plataforma com RBAC, revisão humana, agentes, RAG, guardrails e Structured Outputs.
+
+**Stack:** `FastAPI` `React` `TypeScript` `OpenAI` `RAG`
+
+---
+
+## 🔮 Oráculo
+
+### Analytics e conhecimento empresarial com IA
+
+[![Repositório](https://img.shields.io/badge/Repositório-Oraculo-181717?style=flat-square&logo=github)](https://github.com/LeonardoRFragoso/Oraculo)
+
+Plataforma para interação com dados e conhecimento empresarial através de linguagem natural, combinando NL2SQL, RAG híbrido, Knowledge Graph e agentes.
+
+**Stack:** `FastAPI` `React` `PostgreSQL` `Redis` `FAISS` `DuckDB` `RAG`
+
+---
+
+# 🏢 Produtos e sistemas em produção
 
 ## 🚀 ProFlow
 
-### SaaS em produção para freelancers
+### SaaS para freelancers
 
 [![Produto](https://img.shields.io/badge/Live-proflow.pro-2563EB?style=flat-square&logo=googlechrome&logoColor=white)](https://www.proflow.pro/)
 [![Case Study](https://img.shields.io/badge/Case_Study-GitHub-181717?style=flat-square&logo=github)](https://github.com/LeonardoRFragoso/proflow-case-study)
 
-O ProFlow é um SaaS desenvolvido para centralizar a operação de freelancers.
+Produto SaaS que centraliza projetos, clientes, propostas, pagamentos, gestão financeira, automações e recursos assistidos por IA.
 
-A plataforma reúne:
-
-- Projetos
-- Clientes
-- Propostas
-- Pagamentos
-- Gestão financeira
-- Recursos assistidos por IA
-- OAuth
-- Tarefas assíncronas
-- Comunicação em tempo real
-- Automações periódicas
-
-### Arquitetura
-
-`Django REST Framework` · `Vue.js` · `PostgreSQL` · `Redis` · `Celery` · `Django Channels` · `WebSockets` · `OpenAI` · `Mercado Pago` · `OAuth`
-
-Esse projeto representa minha atuação em **Product Engineering de ponta a ponta**: arquitetura, backend, frontend, infraestrutura, integrações, deploy e evolução contínua.
-
----
-
-## 🤖 DevPro
-
-### Orquestrador autônomo de desenvolvimento de software
-
-[![Case Study](https://img.shields.io/badge/Case_Study-GitHub-181717?style=flat-square&logo=github)](https://github.com/LeonardoRFragoso/devpro-case-study)
-
-Projeto de pesquisa e desenvolvimento voltado à coordenação de diferentes agentes e ferramentas ao longo do ciclo de desenvolvimento de software.
-
-O sistema explora:
-
-- Executores de desenvolvimento com IA
-- Revisores automatizados
-- Integração com GitHub
-- Pull Requests
-- Pipelines de CI
-- Reconciliação de estado
-- Feedback humano
-- Arquitetura multi-executor
-- Orquestração de agentes
-
-**Áreas envolvidas**
-
-`Software Architecture` · `AI Agents` · `Developer Tooling` · `GitHub Automation` · `LLM Orchestration`
+**Arquitetura:** `Django REST Framework` · `Vue.js` · `PostgreSQL` · `Redis` · `Celery` · `Django Channels` · `WebSockets` · `OpenAI` · `Mercado Pago` · `OAuth`
 
 ---
 
 ## 🎓 Plataforma de Cursos — WR Consultoria
 
-Plataforma Full Stack para gestão de treinamentos e alunos.
+Plataforma Full Stack para gestão de treinamentos e alunos, incluindo cursos, turmas, aulas, matrículas, vídeos, controle de acesso, conclusão de treinamento, certificados e dashboard administrativo.
 
-Principais recursos desenvolvidos:
-
-- Cursos
-- Turmas
-- Aulas
-- Matrículas
-- Gestão de alunos
-- Vídeos e conteúdo educacional
-- Controle de acesso
-- Conclusão de treinamento
-- Emissão de certificados
-- Dashboard administrativo
-
-**Stack**
-
-`FastAPI` · `SQLAlchemy` · `Alembic` · `Vue.js` · `Pinia` · `Vite`
+**Stack:** `FastAPI` · `SQLAlchemy` · `Alembic` · `Vue.js` · `Pinia` · `Vite`
 
 ---
 
-## 🌐 WR Consultoria — Site e Ecossistema Digital
+## 🌐 WR Consultoria — Ecossistema Digital
 
-Também atuei na modernização e evolução do ecossistema digital de uma empresa de consultoria.
-
-O trabalho envolveu:
-
-- WordPress e Elementor
-- Desenvolvimento de plugin próprio
-- Correções de layout e navegação
-- SEO técnico
-- Conteúdo institucional
-- Páginas de serviços
-- FAQ
-- Blog
-- Integrações de Analytics
-- Google Site Kit
-- Pixel e ferramentas de marketing
-- Migrações idempotentes
-- Deploy em Hostinger
-- Manutenção e evolução do ambiente
-
-Essa experiência reforçou minha capacidade de atuar também em **sistemas legados e ambientes que não utilizam uma stack puramente baseada em código moderno**.
+Atuação na modernização e evolução do ambiente digital da empresa, envolvendo desenvolvimento web, SEO técnico, integrações de Analytics, automações, deploy, manutenção e evolução contínua.
 
 ---
 
-# 🏭 Experiência Profissional
+# 🏢 Empreendedorismo & produtos próprios
 
-## Desenvolvimento de Sistemas Corporativos
+## Fundativa
 
-Minha experiência profissional inclui desenvolvimento e manutenção de sistemas utilizados em **ambientes corporativos e operacionais reais**, inclusive em operações portuárias e logísticas.
+Estou estruturando a **Fundativa** como software house voltada a empresas que precisam construir, modernizar ou evoluir seus sistemas.
 
-Já trabalhei em aplicações relacionadas a:
+Áreas de atuação planejadas:
 
+- Desenvolvimento de sistemas sob medida
+- Plataformas SaaS
+- Integrações e APIs
+- Automação de processos
+- IA aplicada ao negócio
+- Manutenção e evolução contínua de software
+
+O objetivo é combinar **engenharia de software, produto, infraestrutura e visão de negócio** para construir soluções sustentáveis e evolutivas.
+
+---
+
+# 🏭 Experiência profissional
+
+## Focon Engenharia
+
+### Desenvolvedor Full Stack Pleno | Responsável pelo Setor de TI
+
+Atuação atual no desenvolvimento e evolução dos sistemas internos e na estruturação da área de TI, integrando desenvolvimento de software, infraestrutura, segurança, automação e necessidades de negócio.
+
+---
+
+## iTracker — Grupo ICTSI
+
+Atuei no desenvolvimento e evolução de sistemas utilizados em ambiente portuário e logístico real, participando desde análise de requisitos até implantação e sustentação em produção.
+
+Essa experiência consolidou minha atuação com:
+
+- Sistemas corporativos
 - Operações logísticas
-- Controle de processos
-- Sistemas internos
-- Dashboards gerenciais
-- Automação financeira
-- Gestão de informações
-- Comunicação corporativa
-- Digital Signage
-- Integrações com sistemas externos
-- Processamento de dados
-- Automação de tarefas operacionais
-
-Essa experiência me ensinou que um sistema de produção precisa considerar muito mais do que código:
-
-**Regra de negócio · Usuários · Segurança · Confiabilidade · Performance · Infraestrutura · Manutenção · Suporte**
-
----
-
-## Infraestrutura & Gestão de TI
-
-Antes de concentrar minha carreira em desenvolvimento de software, também trabalhei com **infraestrutura, suporte técnico e gestão de TI**.
-
-Essa experiência influencia diretamente minha abordagem como desenvolvedor.
-
-Ao construir uma aplicação, penso também em:
-
-- Infraestrutura
-- Rede
-- Segurança
-- Banco de dados
-- Autenticação
-- Deploy
-- Monitoramento
-- Usuários
-- Disponibilidade
-- Continuidade operacional
+- Integrações
+- Dashboards
+- Automação de processos
+- Bancos de dados
+- Ambientes de produção
+- Suporte à operação
 
 ---
 
@@ -549,71 +349,19 @@ Deploy, segurança, observabilidade, manutenção e suporte fazem parte do ciclo
 
 Uso testes como mecanismo de segurança para evolução do sistema, principalmente em aplicações com regras de negócio importantes.
 
-### Automatizar quando fizer sentido
-
-Processos repetitivos, manuais ou sujeitos a erro são bons candidatos a automação.
-
 ### IA precisa gerar valor real
 
 Prefiro aplicar Inteligência Artificial dentro de fluxos controlados, com contexto, validação, guardrails e supervisão humana quando necessário.
 
 ---
 
-# 🔧 Meu fluxo de desenvolvimento
-
-```text
-Problema de negócio
-        ↓
-Entendimento do domínio
-        ↓
-Definição de requisitos
-        ↓
-Arquitetura
-        ↓
-Modelagem do banco
-        ↓
-Design das APIs
-        ↓
-Implementação Backend
-        ↓
-Integração Frontend
-        ↓
-Testes Automatizados
-        ↓
-CI/CD
-        ↓
-Deploy
-        ↓
-Monitoramento
-        ↓
-Evolução contínua
-```
-
----
-
-# 📚 Formação & Aprendizado Contínuo
+# 📚 Formação & aprendizado contínuo
 
 🎓 **Graduação Tecnológica em Gestão da Tecnologia da Informação**
 
-Minha formação complementar e meus estudos estão concentrados principalmente em:
+Estudos e evolução contínua em:
 
-- Python
-- Django
-- FastAPI
-- Engenharia de Software
-- Arquitetura Backend
-- Desenvolvimento Full Stack
-- Análise de Dados
-- Inteligência Artificial
-- LLMs
-- RAG
-- Agentes de IA
-- SaaS
-- Cloud
-- DevOps
-- Automação
-
-Também possuo formações complementares em **Python, Django e Análise de Dados com Python**.
+`Engenharia de Software` · `Arquitetura` · `Python` · `Django` · `FastAPI` · `Full Stack` · `Cloud` · `DevOps` · `IA Aplicada` · `LLMs` · `RAG` · `Agentes de IA` · `SaaS` · `Automação`
 
 ---
 
@@ -627,15 +375,13 @@ Também possuo formações complementares em **Python, Django e Análise de Dado
 
 </div>
 
-> As estatísticas de linguagens consideram apenas a composição dos repositórios públicos e não representam toda a minha experiência profissional ou técnica.
+> As estatísticas consideram apenas a composição dos repositórios públicos e não representam toda a minha experiência profissional ou técnica.
 
 ---
 
-# 🤝 Vamos conversar?
+# 🤝 Contato
 
-Tenho interesse principalmente em oportunidades e projetos relacionados a:
-
-**Python Backend · Desenvolvimento Full Stack · Engenharia de Software · SaaS · APIs · Automação · Sistemas Corporativos · IA Aplicada**
+Atualmente meu foco está em **Engenharia de Software Full Stack, arquitetura de sistemas, liderança técnica, DevOps, infraestrutura e IA aplicada**, contribuindo para a evolução tecnológica da Focon Engenharia e para a construção de produtos e negócios próprios.
 
 <div align="center">
 
@@ -651,8 +397,8 @@ Tenho interesse principalmente em oportunidades e projetos relacionados a:
 
 <div align="center">
 
-### Backend-first. Visão de produto. IA aplicada.
+### Full Stack. Visão de produto. Responsabilidade por TI. IA aplicada.
 
-**Construindo software para resolver problemas reais de negócio e operação.**
+**Construindo tecnologia para resolver problemas reais de negócio e operação.**
 
 </div>
